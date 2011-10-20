@@ -4,12 +4,8 @@ module Origin
     module ElemMatch
 
       def elem_match(criterion = nil)
-        clone.tap do |query|
-          if criterion
-            criterion.each_pair do |field, expr|
-              query.selector.store(field, "$elemMatch" => expr)
-            end
-          end
+        assimilate(criterion) do |query, field, value|
+          query.selector.store(field, "$elemMatch" => value)
         end
       end
 

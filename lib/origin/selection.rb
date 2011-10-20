@@ -3,6 +3,7 @@ require "origin/selection/all"
 require "origin/selection/and"
 require "origin/selection/between"
 require "origin/selection/elem_match"
+require "origin/selection/exists"
 require "origin/selection/key"
 
 module Origin
@@ -14,7 +15,7 @@ module Origin
     include Selection::And
     include Selection::Between
     include Selection::ElemMatch
-    # include Selection::Exists
+    include Selection::Exists
     # include Selection::Gt
     # include Selection::Gte
     # include Selection::In

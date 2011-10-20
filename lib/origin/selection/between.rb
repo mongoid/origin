@@ -4,15 +4,11 @@ module Origin
     module Between
 
       def between(criterion = nil)
-        clone.tap do |query|
-          if criterion
-            criterion.each_pair do |field, range|
-              query.selector.store(
-                field,
-                { "$gte" => range.min, "$lte" => range.max }
-              )
-            end
-          end
+        assimilate(criterion) do |query, field, value|
+          query.selector.store(
+            field,
+            { "$gte" => value.min, "$lte" => value.max }
+          )
         end
       end
     end
