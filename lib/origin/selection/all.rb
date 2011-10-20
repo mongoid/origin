@@ -7,7 +7,7 @@ module Origin
         clone.tap do |query|
           if criterion
             criterion.each_pair do |field, values|
-              query.selector.overwrite(field, { "$all" => values })
+              query.selector.store(field, { "$all" => values })
             end
           end
         end

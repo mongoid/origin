@@ -1,5 +1,6 @@
 # encoding: utf-8
 require "origin/selection/all"
+require "origin/selection/and"
 require "origin/selection/key"
 
 module Origin
@@ -8,7 +9,7 @@ module Origin
   # from Mongoid 2 into it's own gem.
   module Selection
     include Selection::All
-    # include Selection::And
+    include Selection::And
     # include Selection::Between
     # include Selection::ElemMatch
     # include Selection::Exists
