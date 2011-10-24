@@ -12,7 +12,7 @@ module Origin
       ::Symbol.class_eval do
 
         def all
-          Key.new(self.to_s, "$all")
+          Key.new(self, "$all")
         end
       end
     end

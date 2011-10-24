@@ -1,18 +1,18 @@
 # encoding: utf-8
 module Origin
   module Selection
-    module Exists
+    module Lt
 
-      def exists(criterion = nil)
+      def lt(criterion = nil)
         assimilate(criterion) do |query, field, value|
-          query.selector.store(field, "$exists" => value)
+          query.selector.store(field, { "$lt" => value })
         end
       end
 
       ::Symbol.class_eval do
 
-        def exists
-          Key.new(self, "$exists")
+        def lt
+          Key.new(self, "$lt")
         end
       end
     end

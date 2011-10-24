@@ -1,17 +1,17 @@
 require "spec_helper"
 
-describe Origin::Selection::Exists do
+describe Origin::Selection::Gte do
 
   let(:query) do
     Origin::Query.new
   end
 
-  describe "#exists" do
+  describe "#gte" do
 
     context "when provided no criterion" do
 
       let(:selection) do
-        query.exists
+        query.gte
       end
 
       it "does not add any criterion" do
@@ -30,7 +30,7 @@ describe Origin::Selection::Exists do
     context "when provided nil" do
 
       let(:selection) do
-        query.exists(nil)
+        query.gte(nil)
       end
 
       it "does not add any criterion" do
@@ -46,15 +46,15 @@ describe Origin::Selection::Exists do
       end
     end
 
-    context "when provided a criterion" do
+    context "when provided a single criterion" do
 
       let(:selection) do
-        query.exists(:users => true)
+        query.gte(:field => 10)
       end
 
-      it "adds the $exists expression" do
+      it "adds the $gte selector" do
         selection.selector.should eq({
-          :users => { "$exists" => true }
+          :field => { "$gte" => 10 }
         })
       end
 
@@ -63,21 +63,18 @@ describe Origin::Selection::Exists do
       end
     end
 
-    context "when providing multiple criteria" do
+    context "when provided multiple criterion" do
 
-      context "when the fields differ" do
+      context "when the criterion are for different fields" do
 
         let(:selection) do
-          query.exists(
-            :users => true,
-            :comments => true
-          )
+          query.gte(:first => 10, :second => 15)
         end
 
-        it "adds the $exists expression" do
+        it "adds the $gte selectors" do
           selection.selector.should eq({
-            :users => { "$exists" => true },
-            :comments => { "$exists" => true }
+            :first => { "$gte" => 10 },
+            :second => { "$gte" => 15 }
           })
         end
 
@@ -86,18 +83,15 @@ describe Origin::Selection::Exists do
         end
       end
 
-      context "when the fields are the same" do
+      context "when the criterion are on the same field" do
 
         let(:selection) do
-          query.exists(
-            :users => true,
-            :users => true
-          )
+          query.gte(:first => 10, :first => 15)
         end
 
-        it "overrides the $exists expression" do
+        it "overwrites the first $gte selector" do
           selection.selector.should eq({
-            :users => { "$exists" => true }
+            :first => { "$gte" => 15 }
           })
         end
 
@@ -107,20 +101,18 @@ describe Origin::Selection::Exists do
       end
     end
 
-    context "when chaining multiple criteria" do
+    context "when chaining the criterion" do
 
-      context "when the fields differ" do
+      context "when the criterion are for different fields" do
 
         let(:selection) do
-          query.
-            exists(:users => true).
-            exists(:comments => true)
+          query.gte(:first => 10).gte(:second => 15)
         end
 
-        it "adds the $exists expression" do
+        it "adds the $gte selectors" do
           selection.selector.should eq({
-            :users => { "$exists" => true },
-            :comments => { "$exists" => true }
+            :first => { "$gte" => 10 },
+            :second => { "$gte" => 15 }
           })
         end
 
@@ -129,17 +121,15 @@ describe Origin::Selection::Exists do
         end
       end
 
-      context "when the fields are the same" do
+      context "when the criterion are on the same field" do
 
         let(:selection) do
-          query.
-            exists(:users => true).
-            exists(:users => true)
+          query.gte(:first => 10).gte(:first => 15)
         end
 
-        it "overrides the $exists expression" do
+        it "overwrites the first $gte selector" do
           selection.selector.should eq({
-            :users => { "$exists" => true }
+            :first => { "$gte" => 15 }
           })
         end
 
@@ -152,10 +142,10 @@ describe Origin::Selection::Exists do
 
   describe Symbol do
 
-    describe "#exists" do
+    describe "#gte" do
 
       let(:key) do
-        :field.exists
+        :field.gte
       end
 
       it "returns a selecton key" do
@@ -166,8 +156,8 @@ describe Origin::Selection::Exists do
         key.name.should eq(:field)
       end
 
-      it "sets the operator as $exists" do
-        key.operator.should eq("$exists")
+      it "sets the operator as $gte" do
+        key.operator.should eq("$gte")
       end
     end
   end

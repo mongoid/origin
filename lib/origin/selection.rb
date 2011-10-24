@@ -4,7 +4,11 @@ require "origin/selection/and"
 require "origin/selection/between"
 require "origin/selection/elem_match"
 require "origin/selection/exists"
+require "origin/selection/gt"
+require "origin/selection/gte"
 require "origin/selection/key"
+require "origin/selection/lt"
+require "origin/selection/lte"
 
 module Origin
 
@@ -16,11 +20,11 @@ module Origin
     include Selection::Between
     include Selection::ElemMatch
     include Selection::Exists
-    # include Selection::Gt
-    # include Selection::Gte
+    include Selection::Gt
+    include Selection::Gte
     # include Selection::In
-    # include Selection::Lt
-    # include Selection::Lte
+    include Selection::Lt
+    include Selection::Lte
     # include Selection::Mod
     # include Selection::Ne
     # include Selection::Nin

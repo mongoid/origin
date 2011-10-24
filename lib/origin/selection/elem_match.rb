@@ -12,7 +12,7 @@ module Origin
       ::Symbol.class_eval do
 
         def elem_match
-          Key.new(self.to_s, "$elemMatch")
+          Key.new(self, "$elemMatch")
         end
       end
     end

@@ -163,7 +163,7 @@ describe Origin::Selection::ElemMatch do
       end
 
       it "sets the name as the key" do
-        key.name.should eq("field")
+        key.name.should eq(:field)
       end
 
       it "sets the operator as $elemMatch" do
