@@ -9,6 +9,7 @@ require "origin/selection/gte"
 require "origin/selection/key"
 require "origin/selection/lt"
 require "origin/selection/lte"
+require "origin/selection/type"
 
 module Origin
 
@@ -31,7 +32,7 @@ module Origin
     # include Selection::Nor
     # include Selection::Or
     # include Selection::Size
-    # include Selection::Type
+    include Selection::Type
     # include Selection::Where
   end
 end
