@@ -4,9 +4,7 @@ module Origin
     module Type
 
       def type(criterion = nil)
-        assimilate(criterion) do |query, field, value|
-          query.selector.store(field, { "$type" => value })
-        end
+        override(criterion, "$type")
       end
 
       ::Symbol.class_eval do

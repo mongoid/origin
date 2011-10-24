@@ -4,9 +4,7 @@ module Origin
     module Exists
 
       def exists(criterion = nil)
-        assimilate(criterion) do |query, field, value|
-          query.selector.store(field, "$exists" => value)
-        end
+        override(criterion, "$exists")
       end
 
       ::Symbol.class_eval do

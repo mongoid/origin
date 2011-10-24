@@ -4,9 +4,7 @@ module Origin
     module Gt
 
       def gt(criterion = nil)
-        assimilate(criterion) do |query, field, value|
-          query.selector.store(field, { "$gt" => value })
-        end
+        override(criterion, "$gt")
       end
 
       ::Symbol.class_eval do

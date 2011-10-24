@@ -4,9 +4,7 @@ module Origin
     module ElemMatch
 
       def elem_match(criterion = nil)
-        assimilate(criterion) do |query, field, value|
-          query.selector.store(field, "$elemMatch" => value)
-        end
+        override(criterion, "$elemMatch")
       end
 
       ::Symbol.class_eval do

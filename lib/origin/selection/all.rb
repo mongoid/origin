@@ -4,9 +4,7 @@ module Origin
     module All
 
       def all(criterion = nil)
-        assimilate(criterion) do |query, field, value|
-          query.selector.store(field, { "$all" => value })
-        end
+        override(criterion, "$all")
       end
 
       ::Symbol.class_eval do

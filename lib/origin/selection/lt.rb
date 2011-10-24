@@ -4,9 +4,7 @@ module Origin
     module Lt
 
       def lt(criterion = nil)
-        assimilate(criterion) do |query, field, value|
-          query.selector.store(field, { "$lt" => value })
-        end
+        override(criterion, "$lt")
       end
 
       ::Symbol.class_eval do

@@ -9,6 +9,8 @@ require "origin/selection/gte"
 require "origin/selection/key"
 require "origin/selection/lt"
 require "origin/selection/lte"
+require "origin/selection/size"
+require "origin/selection/strategies"
 require "origin/selection/type"
 
 module Origin
@@ -16,23 +18,28 @@ module Origin
   # Origin is a DSL that sits on top of the MongoDB query language, extracted
   # from Mongoid 2 into it's own gem, and beautified.
   module Selection
-    include Selection::All
-    include Selection::And
-    include Selection::Between
-    include Selection::ElemMatch
-    include Selection::Exists
-    include Selection::Gt
-    include Selection::Gte
-    # include Selection::In
-    include Selection::Lt
-    include Selection::Lte
-    # include Selection::Mod
-    # include Selection::Ne
-    # include Selection::Nin
-    # include Selection::Nor
-    # include Selection::Or
-    # include Selection::Size
-    include Selection::Type
-    # include Selection::Where
+    # Include the strategies for override, intersection, and union of operators
+    # that use array values.
+    include Strategies
+
+    # Include all the individual operator modules.
+    include All
+    include And
+    include Between
+    include ElemMatch
+    include Exists
+    include Gt
+    include Gte
+    # include In
+    include Lt
+    include Lte
+    # include Mod
+    # include Ne
+    # include Nin
+    # include Nor
+    # include Or
+    include Size
+    include Type
+    # include Where
   end
 end
