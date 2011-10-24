@@ -4,7 +4,7 @@ module Origin
     module Lt
 
       def lt(criterion = nil)
-        override(criterion, "$lt")
+        override!(criterion, "$lt")
       end
 
       ::Symbol.class_eval do

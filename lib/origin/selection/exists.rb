@@ -4,7 +4,7 @@ module Origin
     module Exists
 
       def exists(criterion = nil)
-        override(criterion, "$exists")
+        override!(criterion, "$exists")
       end
 
       ::Symbol.class_eval do

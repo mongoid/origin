@@ -6,6 +6,7 @@ require "origin/selection/elem_match"
 require "origin/selection/exists"
 require "origin/selection/gt"
 require "origin/selection/gte"
+require "origin/selection/in"
 require "origin/selection/key"
 require "origin/selection/lt"
 require "origin/selection/lte"
@@ -30,7 +31,7 @@ module Origin
     include Exists
     include Gt
     include Gte
-    # include In
+    include In
     include Lt
     include Lte
     # include Mod

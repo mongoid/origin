@@ -1,12 +1,18 @@
 # encoding: utf-8
+require "origin/selection/strategies/intersect"
 require "origin/selection/strategies/override"
+require "origin/selection/strategies/union"
 
 module Origin
   module Selection
     module Strategies
-      # include Intersection
+      include Intersect
       include Override
-      # include Union
+      include Union
+
+      attr_accessor :strategy
+
+      private
 
       def assimilate(criterion = nil)
         clone.tap do |query|

@@ -4,7 +4,7 @@ module Origin
     module Size
 
       def with_size(criterion = nil)
-        override(criterion, "$size")
+        override!(criterion, "$size")
       end
 
       ::Symbol.class_eval do

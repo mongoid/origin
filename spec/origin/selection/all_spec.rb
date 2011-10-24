@@ -101,13 +101,6 @@ describe Origin::Selection::All do
       end
     end
 
-    context "when the criterion is not a hash" do
-
-      let(:selection) do
-        query.all(1)
-      end
-    end
-
     context "when chaining the criterion" do
 
       context "when the criterion are for different fields" do
