@@ -15,6 +15,7 @@ require "origin/selection/near"
 require "origin/selection/size"
 require "origin/selection/strategies"
 require "origin/selection/type"
+require "origin/selection/within_box"
 
 module Origin
 
@@ -46,5 +47,6 @@ module Origin
     include Size
     include Type
     # include Where
+    include WithinBox
   end
 end

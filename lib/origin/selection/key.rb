@@ -2,10 +2,10 @@
 module Origin
   module Selection
     class Key
-      attr_reader :name, :operator
+      attr_reader :name, :operator, :expanded
 
-      def initialize(name, operator)
-        @name, @operator = name, operator
+      def initialize(name, operator, expanded = nil)
+        @name, @operator, @expanded = name, operator, expanded
       end
 
       def specify(value)

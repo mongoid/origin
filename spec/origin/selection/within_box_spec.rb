@@ -1,17 +1,17 @@
 require "spec_helper"
 
-describe Origin::Selection::Near do
+describe Origin::Selection::WithinBox do
 
   let(:query) do
     Origin::Query.new
   end
 
-  describe "#near" do
+  describe "#within_box" do
 
     context "when provided no criterion" do
 
       let(:selection) do
-        query.near
+        query.within_box
       end
 
       it "does not add any criterion" do
@@ -30,7 +30,7 @@ describe Origin::Selection::Near do
     context "when provided nil" do
 
       let(:selection) do
-        query.near(nil)
+        query.within_box(nil)
       end
 
       it "does not add any criterion" do
@@ -49,12 +49,12 @@ describe Origin::Selection::Near do
     context "when provided a criterion" do
 
       let(:selection) do
-        query.near(:location => [ 20, 21 ])
+        query.within_box(:location => [[ 1, 10 ], [ 10, 1 ]])
       end
 
-      it "adds the $near expression" do
+      it "adds the $within expression" do
         selection.selector.should eq({
-          :location => { "$near" => [ 20, 21 ] }
+          :location => { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }}
         })
       end
 
@@ -68,16 +68,16 @@ describe Origin::Selection::Near do
       context "when the fields differ" do
 
         let(:selection) do
-          query.near(
-            :location => [ 20, 21 ],
-            :comments => [ 20, 21 ]
+          query.within_box(
+            :location => [[ 1, 10 ], [ 10, 1 ]],
+            :comments => [[ 1, 10 ], [ 10, 1 ]]
           )
         end
 
-        it "adds the $near expression" do
+        it "adds the $within expression" do
           selection.selector.should eq({
-            :location => { "$near" => [ 20, 21 ] },
-            :comments => { "$near" => [ 20, 21 ] }
+            :location => { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }},
+            :comments => { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }}
           })
         end
 
@@ -93,14 +93,14 @@ describe Origin::Selection::Near do
 
         let(:selection) do
           query.
-            near(:location => [ 20, 21 ]).
-            near(:comments => [ 20, 21 ])
+            within_box(:location => [[ 1, 10 ], [ 10, 1 ]]).
+            within_box(:comments => [[ 1, 10 ], [ 10, 1 ]])
         end
 
-        it "adds the $near expression" do
+        it "adds the $within expression" do
           selection.selector.should eq({
-            :location => { "$near" => [ 20, 21 ] },
-            :comments => { "$near" => [ 20, 21 ] }
+            :location => { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }},
+            :comments => { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }}
           })
         end
 
@@ -113,10 +113,10 @@ describe Origin::Selection::Near do
 
   describe Symbol do
 
-    describe "#near" do
+    describe "#within_box" do
 
       let(:key) do
-        :field.near
+        :field.within_box
       end
 
       it "returns a selecton key" do
@@ -127,8 +127,12 @@ describe Origin::Selection::Near do
         key.name.should eq(:field)
       end
 
-      it "sets the operator as $near" do
-        key.operator.should eq("$near")
+      it "sets the operator as $within" do
+        key.operator.should eq("$within")
+      end
+
+      it "sets the expanded operator as $box" do
+        key.expanded.should eq("$box")
       end
     end
   end

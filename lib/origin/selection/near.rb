@@ -16,4 +16,3 @@ module Origin
     end
   end
 end
-
