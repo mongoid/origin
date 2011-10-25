@@ -7,8 +7,8 @@ module Origin
         private
 
         def append!(criterion, operator)
-          assimilate(criterion) do |query, field, value|
-            query.selector.append!(field, operator, value)
+          assimilate(criterion) do |selector, field, value|
+            selector.append!(field, operator, value)
           end
         end
       end

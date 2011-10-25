@@ -19,6 +19,7 @@ require "origin/selection/or"
 require "origin/selection/size"
 require "origin/selection/strategies"
 require "origin/selection/type"
+require "origin/selection/where"
 require "origin/selection/within_box"
 require "origin/selection/within_circle"
 require "origin/selection/within_spherical_circle"
@@ -53,7 +54,7 @@ module Origin
     include Or
     include Size
     include Type
-    # include Where
+    include Where
     include WithinBox
     include WithinCircle
     include WithinSphericalCircle

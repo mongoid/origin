@@ -7,8 +7,8 @@ module Origin
         private
 
         def expanded!(criterion, outer, inner)
-          assimilate(criterion) do |query, field, value|
-            query.selector.override!(field, outer, { inner => value })
+          assimilate(criterion) do |selector, field, value|
+            selector.override!(field, outer, { inner => value })
           end
         end
       end

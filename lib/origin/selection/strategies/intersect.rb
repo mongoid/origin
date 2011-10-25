@@ -11,8 +11,8 @@ module Origin
         private
 
         def intersect!(criterion, operator)
-          assimilate(criterion) do |query, field, value|
-            query.selector.intersect!(field, operator, value)
+          assimilate(criterion) do |selector, field, value|
+            selector.intersect!(field, operator, value)
           end
         end
       end

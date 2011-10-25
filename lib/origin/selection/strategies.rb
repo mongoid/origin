@@ -24,7 +24,7 @@ module Origin
         clone.tap do |query|
           if criterion
             criterion.each_pair do |field, value|
-              yield(query, field, value)
+              yield(query.selector, field, value)
             end
           end
         end

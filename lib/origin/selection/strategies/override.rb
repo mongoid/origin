@@ -11,8 +11,8 @@ module Origin
         private
 
         def override!(criterion, operator)
-          assimilate(criterion) do |query, field, value|
-            query.selector.override!(field, operator, value)
+          assimilate(criterion) do |selector, field, value|
+            selector.override!(field, operator, value)
           end
         end
       end

@@ -11,8 +11,8 @@ module Origin
         private
 
         def union!(criterion, operator)
-          assimilate(criterion) do |query, field, value|
-            query.selector.union!(field, operator, value)
+          assimilate(criterion) do |selector, field, value|
+            selector.union!(field, operator, value)
           end
         end
       end

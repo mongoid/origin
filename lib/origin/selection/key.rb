@@ -9,7 +9,11 @@ module Origin
       end
 
       def specify(value)
-        { name => { operator => value } }
+        if expanded
+          { name => { operator => { expanded => value }}}
+        else
+          { name => { operator => value }}
+        end
       end
     end
   end

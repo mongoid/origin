@@ -104,26 +104,4 @@ describe Origin::Selection::MaxDistance do
       end
     end
   end
-
-  describe Symbol do
-
-    describe "#max_distance" do
-
-      let(:key) do
-        :field.max_distance
-      end
-
-      it "returns a selecton key" do
-        key.should be_a(Origin::Selection::Key)
-      end
-
-      it "sets the name as the key" do
-        key.name.should eq(:field)
-      end
-
-      it "sets the operator as $maxDistance" do
-        key.operator.should eq("$maxDistance")
-      end
-    end
-  end
 end
