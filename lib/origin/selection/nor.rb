@@ -1,10 +1,10 @@
 # encoding: utf-8
 module Origin
   module Selection
-    module Or
+    module Nor
 
-      def or(*criterion)
-        multi!(criterion, "$or")
+      def nor(*criterion)
+        multi!(criterion, "$nor")
       end
     end
   end

@@ -2,6 +2,7 @@
 require "origin/selection/strategies/append"
 require "origin/selection/strategies/expanded"
 require "origin/selection/strategies/intersect"
+require "origin/selection/strategies/multi"
 require "origin/selection/strategies/override"
 require "origin/selection/strategies/union"
 
@@ -11,6 +12,7 @@ module Origin
       include Append
       include Expanded
       include Intersect
+      include Multi
       include Override
       include Union
 

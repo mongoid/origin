@@ -1,17 +1,17 @@
 require "spec_helper"
 
-describe Origin::Selection::Or do
+describe Origin::Selection::Nor do
 
   let(:query) do
     Origin::Query.new
   end
 
-  describe "#or" do
+  describe "#nor" do
 
     context "when provided no criterion" do
 
       let(:selection) do
-        query.or
+        query.nor
       end
 
       it "does not add any criterion" do
@@ -30,7 +30,7 @@ describe Origin::Selection::Or do
     context "when provided nil" do
 
       let(:selection) do
-        query.or(nil)
+        query.nor(nil)
       end
 
       it "does not add any criterion" do
@@ -49,12 +49,12 @@ describe Origin::Selection::Or do
     context "when provided a single criterion" do
 
       let(:selection) do
-        query.or(:field => [ 1, 2 ])
+        query.nor(:field => [ 1, 2 ])
       end
 
-      it "adds the $or selector" do
+      it "adds the $nor selector" do
         selection.selector.should eq({
-          "$or" => [{ :field => [ 1, 2 ] }]
+          "$nor" => [{ :field => [ 1, 2 ] }]
         })
       end
 
@@ -65,15 +65,15 @@ describe Origin::Selection::Or do
 
     context "when provided multiple criterion" do
 
-      context "when the criterion are for different fields" do
+      context "when the criterion are fnor different fields" do
 
         let(:selection) do
-          query.or({ :first => [ 1, 2 ] }, { :second => [ 3, 4 ] })
+          query.nor({ :first => [ 1, 2 ] }, { :second => [ 3, 4 ] })
         end
 
-        it "adds the $or selector" do
+        it "adds the $nor selector" do
           selection.selector.should eq({
-            "$or" => [
+            "$nor" => [
               { :first => [ 1, 2 ] },
               { :second => [ 3, 4 ] }
             ]
@@ -88,12 +88,12 @@ describe Origin::Selection::Or do
       context "when the criterion are on the same field" do
 
         let(:selection) do
-          query.or({ :first => [ 1, 2 ] }, { :first => [ 3, 4 ] })
+          query.nor({ :first => [ 1, 2 ] }, { :first => [ 3, 4 ] })
         end
 
-        it "appends both $or expressions" do
+        it "appends both $nor expressions" do
           selection.selector.should eq({
-            "$or" => [
+            "$nor" => [
               { :first => [ 1, 2 ] },
               { :first => [ 3, 4 ] }
             ]
@@ -108,15 +108,15 @@ describe Origin::Selection::Or do
 
     context "when chaining the criterion" do
 
-      context "when the criterion are for different fields" do
+      context "when the criterion are fnor different fields" do
 
         let(:selection) do
-          query.or(:first => [ 1, 2 ]).or(:second => [ 3, 4 ])
+          query.nor(:first => [ 1, 2 ]).nor(:second => [ 3, 4 ])
         end
 
-        it "adds the $or selectors" do
+        it "adds the $nor selectors" do
           selection.selector.should eq({
-            "$or" => [
+            "$nor" => [
               { :first => [ 1, 2 ] },
               { :second => [ 3, 4 ] }
             ]
@@ -131,12 +131,12 @@ describe Origin::Selection::Or do
       context "when the criterion are on the same field" do
 
         let(:selection) do
-          query.or(:first => [ 1, 2 ]).or(:first => [ 3, 4 ])
+          query.nor(:first => [ 1, 2 ]).nor(:first => [ 3, 4 ])
         end
 
-        it "appends both $or expressions" do
+        it "appends both $nor expressions" do
           selection.selector.should eq({
-            "$or" => [
+            "$nor" => [
               { :first => [ 1, 2 ] },
               { :first => [ 3, 4 ] }
             ]

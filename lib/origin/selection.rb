@@ -13,6 +13,7 @@ require "origin/selection/lte"
 require "origin/selection/max_distance"
 require "origin/selection/near"
 require "origin/selection/near_sphere"
+require "origin/selection/nor"
 require "origin/selection/or"
 require "origin/selection/size"
 require "origin/selection/strategies"
@@ -47,7 +48,7 @@ module Origin
     include Near
     include NearSphere
     # include Nin
-    # include Nor
+    include Nor
     include Or
     include Size
     include Type
