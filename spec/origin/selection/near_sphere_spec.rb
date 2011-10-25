@@ -6,7 +6,7 @@ describe Origin::Selection::NearSphere do
     Origin::Query.new
   end
 
-  describe "#near" do
+  describe "#near_sphere" do
 
     context "when provided no criterion" do
 
@@ -113,7 +113,7 @@ describe Origin::Selection::NearSphere do
 
   describe Symbol do
 
-    describe "#near" do
+    describe "#near_sphere" do
 
       let(:key) do
         :field.near_sphere
