@@ -85,26 +85,6 @@ describe Origin::Selection::Exists do
           selection.should_not equal(query)
         end
       end
-
-      context "when the fields are the same" do
-
-        let(:selection) do
-          query.exists(
-            :users => true,
-            :users => true
-          )
-        end
-
-        it "overrides the $exists expression" do
-          selection.selector.should eq({
-            :users => { "$exists" => true }
-          })
-        end
-
-        it "returns a cloned query" do
-          selection.should_not equal(query)
-        end
-      end
     end
 
     context "when chaining multiple criteria" do

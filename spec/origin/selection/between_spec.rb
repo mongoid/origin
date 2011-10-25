@@ -82,23 +82,6 @@ describe Origin::Selection::Between do
           selection.should_not equal(query)
         end
       end
-
-      context "when the ranges are on the same field" do
-
-        let(:selection) do
-          query.between(:field => 1..10, :field => 5..7)
-        end
-
-        it "adds overrides the first expression" do
-          selection.selector.should eq({
-            :field => { "$gte" => 5, "$lte" => 7 }
-          })
-        end
-
-        it "returns a cloned query" do
-          selection.should_not equal(query)
-        end
-      end
     end
   end
 end

@@ -85,26 +85,6 @@ describe Origin::Selection::ElemMatch do
           selection.should_not equal(query)
         end
       end
-
-      context "when the fields are the same" do
-
-        let(:selection) do
-          query.elem_match(
-            :users => { :name => "value" },
-            :users => { :state => "new" }
-          )
-        end
-
-        it "overrides the $elemMatch expression" do
-          selection.selector.should eq({
-            :users => { "$elemMatch" => { :state => "new" }}
-          })
-        end
-
-        it "returns a cloned query" do
-          selection.should_not equal(query)
-        end
-      end
     end
 
     context "when chaining multiple criteria" do

@@ -82,23 +82,6 @@ describe Origin::Selection::Lt do
           selection.should_not equal(query)
         end
       end
-
-      context "when the criterion are on the same field" do
-
-        let(:selection) do
-          query.lt(:first => 10, :first => 15)
-        end
-
-        it "overwrites the first $lt selector" do
-          selection.selector.should eq({
-            :first => { "$lt" => 15 }
-          })
-        end
-
-        it "returns a cloned query" do
-          selection.should_not equal(query)
-        end
-      end
     end
 
     context "when chaining the criterion" do

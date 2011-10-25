@@ -82,23 +82,6 @@ describe Origin::Selection::All do
           selection.should_not equal(query)
         end
       end
-
-      context "when the criterion are on the same field" do
-
-        let(:selection) do
-          query.all(:first => [ 1, 2 ], :first => [ 3, 4 ])
-        end
-
-        it "overwrites the first $all selector" do
-          selection.selector.should eq({
-            :first => { "$all" => [ 3, 4 ] }
-          })
-        end
-
-        it "returns a cloned query" do
-          selection.should_not equal(query)
-        end
-      end
     end
 
     context "when chaining the criterion" do
