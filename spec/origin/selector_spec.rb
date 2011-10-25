@@ -2,6 +2,51 @@ require "spec_helper"
 
 describe Origin::Selector do
 
+  describe "#append!" do
+
+    let(:selector) do
+      described_class.new
+    end
+
+    context "when the field does not exist" do
+
+      let!(:append) do
+        selector.append!(:field, "$maxDistance", 10)
+      end
+
+      it "does not set the value" do
+        selector.should eq({})
+      end
+
+      it "returns nil" do
+        append.should eq(nil)
+      end
+    end
+
+    context "when the field exists" do
+
+      before do
+        selector[:field] = { "$near" => [ 20, 20 ] }
+      end
+
+      let!(:append) do
+        selector.append!(:field, "$maxDistance", 10)
+      end
+
+      it "appends the value to the selector" do
+        selector.should eq(
+          { :field => { "$near" => [ 20, 20 ], "$maxDistance" => 10 }}
+        )
+      end
+
+      it "returns the new value" do
+        append.should eq(
+          { "$near" => [ 20, 20 ], "$maxDistance" => 10 }
+        )
+      end
+    end
+  end
+
   describe "#intersect!" do
 
     let(:selector) do

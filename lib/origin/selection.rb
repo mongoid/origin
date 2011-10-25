@@ -10,6 +10,7 @@ require "origin/selection/in"
 require "origin/selection/key"
 require "origin/selection/lt"
 require "origin/selection/lte"
+require "origin/selection/max_distance"
 require "origin/selection/near"
 require "origin/selection/size"
 require "origin/selection/strategies"
@@ -35,6 +36,7 @@ module Origin
     include In
     include Lt
     include Lte
+    include MaxDistance
     # include Mod
     # include Ne
     include Near

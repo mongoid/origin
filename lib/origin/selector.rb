@@ -2,6 +2,13 @@
 module Origin
   class Selector < Hash
 
+    def append!(field, operator, value)
+      existing = self[field]
+      if existing
+        store(field, existing.merge({ operator => value }))
+      end
+    end
+
     def intersect!(field, operator, value)
       existing = current(field, operator)
       store(field, { operator => existing ? existing & value : value })

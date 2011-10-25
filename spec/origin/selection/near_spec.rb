@@ -49,12 +49,12 @@ describe Origin::Selection::Near do
     context "when provided a criterion" do
 
       let(:selection) do
-        query.near(:users => [ 20, 21 ])
+        query.near(:location => [ 20, 21 ])
       end
 
       it "adds the $near expression" do
         selection.selector.should eq({
-          :users => { "$near" => [ 20, 21 ] }
+          :location => { "$near" => [ 20, 21 ] }
         })
       end
 
@@ -69,14 +69,14 @@ describe Origin::Selection::Near do
 
         let(:selection) do
           query.near(
-            :users => [ 20, 21 ],
+            :location => [ 20, 21 ],
             :comments => [ 20, 21 ]
           )
         end
 
         it "adds the $near expression" do
           selection.selector.should eq({
-            :users => { "$near" => [ 20, 21 ] },
+            :location => { "$near" => [ 20, 21 ] },
             :comments => { "$near" => [ 20, 21 ] }
           })
         end
@@ -90,14 +90,14 @@ describe Origin::Selection::Near do
 
         let(:selection) do
           query.near(
-            :users => [ 20, 21 ],
-            :users => [ 20, 21 ]
+            :location => [ 20, 21 ],
+            :location => [ 20, 21 ]
           )
         end
 
         it "overrides the $near expression" do
           selection.selector.should eq({
-            :users => { "$near" => [ 20, 21 ] }
+            :location => { "$near" => [ 20, 21 ] }
           })
         end
 
@@ -113,13 +113,13 @@ describe Origin::Selection::Near do
 
         let(:selection) do
           query.
-            near(:users => [ 20, 21 ]).
+            near(:location => [ 20, 21 ]).
             near(:comments => [ 20, 21 ])
         end
 
         it "adds the $near expression" do
           selection.selector.should eq({
-            :users => { "$near" => [ 20, 21 ] },
+            :location => { "$near" => [ 20, 21 ] },
             :comments => { "$near" => [ 20, 21 ] }
           })
         end
@@ -133,13 +133,13 @@ describe Origin::Selection::Near do
 
         let(:selection) do
           query.
-            near(:users => [ 20, 21 ]).
-            near(:users => [ 20, 21 ])
+            near(:location => [ 20, 21 ]).
+            near(:location => [ 20, 21 ])
         end
 
         it "overrides the $near expression" do
           selection.selector.should eq({
-            :users => { "$near" => [ 20, 21 ] }
+            :location => { "$near" => [ 20, 21 ] }
           })
         end
 

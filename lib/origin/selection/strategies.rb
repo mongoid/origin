@@ -1,4 +1,5 @@
 # encoding: utf-8
+require "origin/selection/strategies/append"
 require "origin/selection/strategies/intersect"
 require "origin/selection/strategies/override"
 require "origin/selection/strategies/union"
@@ -6,6 +7,7 @@ require "origin/selection/strategies/union"
 module Origin
   module Selection
     module Strategies
+      include Append
       include Intersect
       include Override
       include Union
