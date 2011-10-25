@@ -12,10 +12,7 @@ module Origin
 
         def intersect!(criterion, operator)
           assimilate(criterion) do |query, field, value|
-            selector = query.selector
-            existing = selector[field]
-            selection = existing ? existing[operator] & value : value
-            selector.store(field, { operator => selection })
+            query.selector.intersect!(field, operator, value)
           end
         end
       end

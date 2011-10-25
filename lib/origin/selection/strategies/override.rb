@@ -12,7 +12,7 @@ module Origin
 
         def override!(criterion, operator)
           assimilate(criterion) do |query, field, value|
-            query.selector.store(field, { operator => value })
+            query.selector.override!(field, operator, value)
           end
         end
       end
