@@ -106,18 +106,72 @@ describe Origin::Selection::All do
 
       context "when the criterion are on the same field" do
 
-        let(:selection) do
-          query.all(:first => [ 1, 2 ]).all(:first => [ 3, 4 ])
+        context "when the strategy is the default (override)" do
+
+          let(:selection) do
+            query.all(:first => [ 1, 2 ]).all(:first => [ 3, 4 ])
+          end
+
+          it "overwrites the first $all selector" do
+            selection.selector.should eq({
+              :first => { "$all" => [ 3, 4 ] }
+            })
+          end
+
+          it "returns a cloned query" do
+            selection.should_not equal(query)
+          end
         end
 
-        it "overwrites the first $all selector" do
-          selection.selector.should eq({
-            :first => { "$all" => [ 3, 4 ] }
-          })
+        context "when the strategy is intersect" do
+
+          let(:selection) do
+            query.all(:first => [ 1, 2 ]).intersect.all(:first => [ 2, 3 ])
+          end
+
+          it "intersects the $all selectors" do
+            selection.selector.should eq({
+              :first => { "$all" => [ 2 ] }
+            })
+          end
+
+          it "returns a cloned query" do
+            selection.should_not equal(query)
+          end
         end
 
-        it "returns a cloned query" do
-          selection.should_not equal(query)
+        context "when the strategy is override" do
+
+          let(:selection) do
+            query.all(:first => [ 1, 2 ]).override.all(:first => [ 3, 4 ])
+          end
+
+          it "overwrites the first $all selector" do
+            selection.selector.should eq({
+              :first => { "$all" => [ 3, 4 ] }
+            })
+          end
+
+          it "returns a cloned query" do
+            selection.should_not equal(query)
+          end
+        end
+
+        context "when the strategy is union" do
+
+          let(:selection) do
+            query.all(:first => [ 1, 2 ]).union.all(:first => [ 3, 4 ])
+          end
+
+          it "unions the $all selectors" do
+            selection.selector.should eq({
+              :first => { "$all" => [ 1, 2, 3, 4 ] }
+            })
+          end
+
+          it "returns a cloned query" do
+            selection.should_not equal(query)
+          end
         end
       end
     end
