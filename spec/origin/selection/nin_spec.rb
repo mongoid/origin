@@ -1,17 +1,17 @@
 require "spec_helper"
 
-describe Origin::Selection::In do
+describe Origin::Selection::Nin do
 
   let(:query) do
     Origin::Query.new
   end
 
-  describe "#in" do
+  describe "#nin" do
 
     context "when provided no criterion" do
 
       let(:selection) do
-        query.in
+        query.nin
       end
 
       it "does not add any criterion" do
@@ -30,7 +30,7 @@ describe Origin::Selection::In do
     context "when provided nil" do
 
       let(:selection) do
-        query.in(nil)
+        query.nin(nil)
       end
 
       it "does not add any criterion" do
@@ -46,15 +46,15 @@ describe Origin::Selection::In do
       end
     end
 
-    context "when provided a single criterion" do
+    context "when provided a sningle criterion" do
 
       let(:selection) do
-        query.in(:field => [ 1, 2 ])
+        query.nin(:field => [ 1, 2 ])
       end
 
-      it "adds the $in selector" do
+      it "adds the $nin selector" do
         selection.selector.should eq({
-          :field => { "$in" => [ 1, 2 ] }
+          :field => { "$nin" => [ 1, 2 ] }
         })
       end
 
@@ -68,13 +68,13 @@ describe Origin::Selection::In do
       context "when the criterion are for different fields" do
 
         let(:selection) do
-          query.in(:first => [ 1, 2 ], :second => [ 3, 4 ])
+          query.nin(:first => [ 1, 2 ], :second => [ 3, 4 ])
         end
 
-        it "adds the $in selectors" do
+        it "adds the $nin selectors" do
           selection.selector.should eq({
-            :first => { "$in" => [ 1, 2 ] },
-            :second => { "$in" => [ 3, 4 ] }
+            :first => { "$nin" => [ 1, 2 ] },
+            :second => { "$nin" => [ 3, 4 ] }
           })
         end
 
@@ -84,18 +84,18 @@ describe Origin::Selection::In do
       end
     end
 
-    context "when chaining the criterion" do
+    context "when chaninning the criterion" do
 
       context "when the criterion are for different fields" do
 
         let(:selection) do
-          query.in(:first => [ 1, 2 ]).in(:second => [ 3, 4 ])
+          query.nin(:first => [ 1, 2 ]).nin(:second => [ 3, 4 ])
         end
 
-        it "adds the $in selectors" do
+        it "adds the $nin selectors" do
           selection.selector.should eq({
-            :first => { "$in" => [ 1, 2 ] },
-            :second => { "$in" => [ 3, 4 ] }
+            :first => { "$nin" => [ 1, 2 ] },
+            :second => { "$nin" => [ 3, 4 ] }
           })
         end
 
@@ -109,12 +109,12 @@ describe Origin::Selection::In do
         context "when the stretegy is the default (intersection)" do
 
           let(:selection) do
-            query.in(:first => [ 1, 2 ]).in(:first => [ 2, 3 ])
+            query.nin(:first => [ 1, 2 ]).nin(:first => [ 2, 3 ])
           end
 
-          it "intersects the $in selectors" do
+          it "intersects the $nin selectors" do
             selection.selector.should eq({
-              :first => { "$in" => [ 2 ] }
+              :first => { "$nin" => [ 2 ] }
             })
           end
 
@@ -126,12 +126,12 @@ describe Origin::Selection::In do
         context "when the stretegy is intersect" do
 
           let(:selection) do
-            query.in(:first => [ 1, 2 ]).intersect.in(:first => [ 2, 3 ])
+            query.nin(:first => [ 1, 2 ]).intersect.nin(:first => [ 2, 3 ])
           end
 
-          it "intersects the $in selectors" do
+          it "intersects the $nin selectors" do
             selection.selector.should eq({
-              :first => { "$in" => [ 2 ] }
+              :first => { "$nin" => [ 2 ] }
             })
           end
 
@@ -143,12 +143,12 @@ describe Origin::Selection::In do
         context "when the stretegy is override" do
 
           let(:selection) do
-            query.in(:first => [ 1, 2 ]).override.in(:first => [ 3, 4 ])
+            query.nin(:first => [ 1, 2 ]).override.nin(:first => [ 3, 4 ])
           end
 
-          it "overwrites the first $in selector" do
+          it "overwrites the first $nin selector" do
             selection.selector.should eq({
-              :first => { "$in" => [ 3, 4 ] }
+              :first => { "$nin" => [ 3, 4 ] }
             })
           end
 
@@ -160,12 +160,12 @@ describe Origin::Selection::In do
         context "when the stretegy is union" do
 
           let(:selection) do
-            query.in(:first => [ 1, 2 ]).union.in(:first => [ 3, 4 ])
+            query.nin(:first => [ 1, 2 ]).union.nin(:first => [ 3, 4 ])
           end
 
-          it "unions the $in selectors" do
+          it "unions the $nin selectors" do
             selection.selector.should eq({
-              :first => { "$in" => [ 1, 2, 3, 4 ] }
+              :first => { "$nin" => [ 1, 2, 3, 4 ] }
             })
           end
 
@@ -179,10 +179,10 @@ describe Origin::Selection::In do
 
   describe Symbol do
 
-    describe "#in" do
+    describe "#nin" do
 
       let(:key) do
-        :field.in
+        :field.nin
       end
 
       it "returns a selecton key" do
@@ -193,8 +193,8 @@ describe Origin::Selection::In do
         key.name.should eq(:field)
       end
 
-      it "sets the operator as $in" do
-        key.operator.should eq("$in")
+      it "sets the operator as $nin" do
+        key.operator.should eq("$nin")
       end
     end
   end
