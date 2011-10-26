@@ -46,6 +46,21 @@ describe Origin::Selection::Where do
       end
     end
 
+    context "when provided a string" do
+
+      let(:selection) do
+        query.where("this.value = 10")
+      end
+
+      it "adds the $where criterion" do
+        selection.selector.should eq({ "$where" => "this.value = 10" })
+      end
+
+      it "returns a cloned query" do
+        selection.should_not equal(query)
+      end
+    end
+
     context "when provided a single criterion" do
 
     end

@@ -11,7 +11,7 @@ module Origin
 
     def intersect!(field, operator, value)
       existing = current(field, operator)
-      store(field, { operator => existing ? existing & value : value })
+      store(field, { operator => existing ? (existing & value) : value })
     end
 
     def override!(field, operator, value)
