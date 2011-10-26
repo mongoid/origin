@@ -190,6 +190,19 @@ describe Origin::Selection::Where do
 
       context "when performing a $mod" do
 
+        let(:selection) do
+          query.where(:field.mod => [ 10, 1 ])
+        end
+
+        it "adds the $lte criterion" do
+          selection.selector.should eq(
+            { :field => { "$mod" => [ 10, 1 ]}}
+          )
+        end
+
+        it "returns a cloned query" do
+          selection.should_not eq(query)
+        end
       end
 
       context "when performing a $ne" do

@@ -1,17 +1,17 @@
 require "spec_helper"
 
-describe Origin::Selection::Exists do
+describe Origin::Selection::Mod do
 
   let(:query) do
     Origin::Query.new
   end
 
-  describe "#exists" do
+  describe "#mod" do
 
     context "when provided no criterion" do
 
       let(:selection) do
-        query.exists
+        query.mod
       end
 
       it "does not add any criterion" do
@@ -30,7 +30,7 @@ describe Origin::Selection::Exists do
     context "when provided nil" do
 
       let(:selection) do
-        query.exists(nil)
+        query.mod(nil)
       end
 
       it "does not add any criterion" do
@@ -49,12 +49,12 @@ describe Origin::Selection::Exists do
     context "when provided a criterion" do
 
       let(:selection) do
-        query.exists(:users => true)
+        query.mod(:value => [ 10, 1 ])
       end
 
-      it "adds the $exists expression" do
+      it "adds the $mod expression" do
         selection.selector.should eq({
-          :users => { "$exists" => true }
+          :value => { "$mod" => [ 10, 1 ] }
         })
       end
 
@@ -68,16 +68,16 @@ describe Origin::Selection::Exists do
       context "when the fields differ" do
 
         let(:selection) do
-          query.exists(
-            :users => true,
-            :comments => true
+          query.mod(
+            :value => [ 10, 1 ],
+            :comments => [ 10, 1 ]
           )
         end
 
-        it "adds the $exists expression" do
+        it "adds the $mod expression" do
           selection.selector.should eq({
-            :users => { "$exists" => true },
-            :comments => { "$exists" => true }
+            :value => { "$mod" => [ 10, 1 ] },
+            :comments => { "$mod" => [ 10, 1 ] }
           })
         end
 
@@ -93,14 +93,14 @@ describe Origin::Selection::Exists do
 
         let(:selection) do
           query.
-            exists(:users => true).
-            exists(:comments => true)
+            mod(:value => [ 10, 1 ]).
+            mod(:result => [ 10, 1 ])
         end
 
-        it "adds the $exists expression" do
+        it "adds the $mod expression" do
           selection.selector.should eq({
-            :users => { "$exists" => true },
-            :comments => { "$exists" => true }
+            :value => { "$mod" => [ 10, 1 ] },
+            :result => { "$mod" => [ 10, 1 ] }
           })
         end
 
@@ -113,10 +113,10 @@ describe Origin::Selection::Exists do
 
   describe Symbol do
 
-    describe "#exists" do
+    describe "#mod" do
 
       let(:key) do
-        :field.exists
+        :field.mod
       end
 
       it "returns a selecton key" do
@@ -127,8 +127,8 @@ describe Origin::Selection::Exists do
         key.name.should eq(:field)
       end
 
-      it "sets the operator as $exists" do
-        key.operator.should eq("$exists")
+      it "sets the operator as $mod" do
+        key.operator.should eq("$mod")
       end
     end
   end
