@@ -12,6 +12,7 @@ require "origin/selection/lt"
 require "origin/selection/lte"
 require "origin/selection/max_distance"
 require "origin/selection/mod"
+require "origin/selection/ne"
 require "origin/selection/near"
 require "origin/selection/near_sphere"
 require "origin/selection/nin"
@@ -47,7 +48,7 @@ module Origin
     include Lte
     include MaxDistance
     include Mod
-    # include Ne
+    include Ne
     include Near
     include NearSphere
     include Nin

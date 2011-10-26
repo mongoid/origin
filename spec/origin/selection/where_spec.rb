@@ -207,6 +207,19 @@ describe Origin::Selection::Where do
 
       context "when performing a $ne" do
 
+        let(:selection) do
+          query.where(:field.ne => 10)
+        end
+
+        it "adds the $ne criterion" do
+          selection.selector.should eq(
+            { :field => { "$ne" => 10 }}
+          )
+        end
+
+        it "returns a cloned query" do
+          selection.should_not eq(query)
+        end
       end
 
       context "when performing a $near" do
