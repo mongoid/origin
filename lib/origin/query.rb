@@ -4,12 +4,7 @@ require "origin/selector"
 
 module Origin
   class Query
-    # include Option::Explain
-    # include Option::Hint
-    # include Option::Only
-    # include Option::OrderBy
-    # include Option::Slice
-    # include Option::Without
+    include Option
     include Selection
 
     attr_reader :options, :selector
