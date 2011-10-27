@@ -59,6 +59,7 @@ module Origin
     include Where
     include WithinBox
     include WithinCircle
+    #include WithinPolygon
     include WithinSphericalCircle
   end
 end
