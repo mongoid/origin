@@ -1,4 +1,5 @@
 # encoding: utf-8
+require "origin/options"
 require "origin/selector"
 
 module Origin
@@ -11,20 +12,20 @@ module Origin
     # include Option::Without
     include Selection
 
-    attr_reader :selector
+    attr_reader :options, :selector
 
     def ==(other)
       return false unless other.is_a?(Query)
-      selector == other.selector
+      selector == other.selector && options == other.options
     end
 
     def initialize
-      @selector = Selector.new
+      @options, @selector = Options.new, Selector.new
       yield(self) if block_given?
     end
 
     def initialize_copy(other)
-      @selector = other.selector.dup
+      @options, @selector = other.options.dup, other.selector.dup
     end
   end
 end
