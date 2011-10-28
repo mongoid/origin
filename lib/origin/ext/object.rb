@@ -2,7 +2,10 @@
 class Object
 
   def _add(object)
-    return self if object == self
-    [ self, object ].flatten.uniq
+    object == self ? self : [ self, object ].flatten.uniq
+  end
+
+  def _intersect(object)
+    Array(self) & Array(object)
   end
 end

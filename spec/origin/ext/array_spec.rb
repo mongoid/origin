@@ -43,4 +43,46 @@ describe Array do
       pending "raises an error"
     end
   end
+
+  describe "#_intersect" do
+
+    context "when the other object is a non-enumerable" do
+
+      context "when the values intersect" do
+
+        it "returns an intersected array" do
+          [ 5, 6, 7 ]._intersect(6).should eq([ 6 ])
+        end
+      end
+
+      context "when the values do not intersect" do
+
+        it "returns an empty array" do
+          [ 5, 6, 7 ]._intersect(8).should be_empty
+        end
+      end
+    end
+
+    context "when the other object is an array" do
+
+      context "when the values intersect" do
+
+        it "returns an intersected array" do
+          [ 4, 5, 6 ]._intersect([ 6, 7 ]).should eq([ 6 ])
+        end
+      end
+
+      context "when values do not intersect" do
+
+        it "returns an empty array" do
+          [ 4, 5 ]._intersect([ 6, 7 ]).should be_empty
+        end
+      end
+    end
+
+    context "when the other object is a hash" do
+
+      pending "raises an error"
+    end
+  end
 end

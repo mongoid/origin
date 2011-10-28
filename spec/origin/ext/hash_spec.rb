@@ -122,4 +122,127 @@ describe Hash do
       end
     end
   end
+
+  describe "#_intersect" do
+
+    context "when the other object is a non-enumerable" do
+
+      pending "raises an error"
+    end
+
+    context "when the other object is an array" do
+
+      pending "raises an error"
+    end
+
+    context "when the other object is a hash" do
+
+      context "when a key matches" do
+
+        context "when the existing value is a non-enumerable" do
+
+          context "when the intersected value is non-enumerable" do
+
+            context "when the values intersect" do
+
+              let(:hash) do
+                { "$in" => 5 }
+              end
+
+              before do
+                hash._intersect({ "$in" => 5 })
+              end
+
+              it "sets the intersected array" do
+                hash.should eq({ "$in" => [ 5 ] })
+              end
+            end
+
+            context "when the values do not intersect" do
+
+              let(:hash) do
+                { "$in" => 5 }
+              end
+
+              before do
+                hash._intersect({ "$in" => 6 })
+              end
+
+              it "sets the empty array" do
+                hash.should eq({ "$in" => [] })
+              end
+            end
+          end
+        end
+
+        context "when the existing value is an array" do
+
+          context "when the values intersect" do
+
+            let(:hash) do
+              { "$in" => [ 5, 6 ] }
+            end
+
+            before do
+              hash._intersect({ "$in" => [ 6, 7 ] })
+            end
+
+            it "sets the intersected array" do
+              hash.should eq({ "$in" => [ 6 ] })
+            end
+          end
+
+          context "when the values do not intersect" do
+
+            let(:hash) do
+              { "$in" => [ 5, 6 ] }
+            end
+
+            before do
+              hash._intersect({ "$in" => [ 7, 8 ] })
+            end
+
+            it "sets the empty array" do
+              hash.should eq({ "$in" => [] })
+            end
+          end
+        end
+
+        context "when the existing value is a hash" do
+
+          let(:hash) do
+            { "$within" => { "$center" => [[ 1, 1 ], 10 ] }}
+          end
+
+          before do
+            hash._intersect({ "$within" => { "$center" => [[ 2, 2 ], 10 ] }})
+          end
+
+          it "merges the hash" do
+            hash.should eq({
+              "$within" => { "$center" => [[ 2, 2 ], 10 ] }
+            })
+          end
+        end
+      end
+
+      context "when a key does not match" do
+
+        let(:hash) do
+          { "$all" => [ 1, 2, 3 ] }
+        end
+
+        before do
+          hash._intersect({ "$in" => [ 1, 2 ] })
+        end
+
+        it "merges in the new hash" do
+          hash.should eq({
+            "$all" => [ 1, 2, 3 ],
+            "$in" => [ 1, 2 ]
+          })
+        end
+      end
+    end
+  end
 end
