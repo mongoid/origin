@@ -2,9 +2,9 @@
 module Origin
   module Selection
     module Strategies
-      module Append
+      module Add
 
-        def _append(criterion, operator)
+        def _add(criterion, operator)
           assimilate(criterion) do |selector, field, value|
             selector.store(
               field,

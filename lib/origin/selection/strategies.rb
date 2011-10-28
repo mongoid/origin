@@ -1,5 +1,5 @@
 # encoding: utf-8
-require "origin/selection/strategies/append"
+require "origin/selection/strategies/add"
 require "origin/selection/strategies/expanded"
 require "origin/selection/strategies/intersect"
 require "origin/selection/strategies/multi"
@@ -9,7 +9,7 @@ require "origin/selection/strategies/union"
 module Origin
   module Selection
     module Strategies
-      include Append
+      include Add
       include Expanded
       include Intersect
       include Multi
@@ -17,8 +17,6 @@ module Origin
       include Union
 
       attr_accessor :strategy
-
-      private
 
       def assimilate(criterion = nil)
         clone.tap do |query|
