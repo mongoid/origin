@@ -85,4 +85,39 @@ describe Object do
       pending "raises an error"
     end
   end
+
+  describe "#_union" do
+
+    context "when the other object is a non-enumerable" do
+
+      context "when the values are the same" do
+
+        it "returns an unioned array" do
+          5._union(5).should eq([ 5 ])
+        end
+      end
+
+      context "when the values are not the same" do
+
+        it "returns an empty array" do
+          5._union(6).should eq([ 5, 6 ])
+        end
+      end
+    end
+
+    context "when the other object is an array" do
+
+      context "when the values are not the same" do
+
+        it "returns an unioned array" do
+          5._union([ 5, 6 ]).should eq([ 5, 6 ])
+        end
+      end
+    end
+
+    context "when the other object is a hash" do
+
+      pending "raises an error"
+    end
+  end
 end

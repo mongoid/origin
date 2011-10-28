@@ -213,4 +213,92 @@ describe Hash do
       end
     end
   end
+
+  describe "#_union" do
+
+    context "when the other object is a non-enumerable" do
+
+      pending "raises an error"
+    end
+
+    context "when the other object is an array" do
+
+      pending "raises an error"
+    end
+
+    context "when the other object is a hash" do
+
+      context "when a key matches" do
+
+        context "when the existing value is a non-enumerable" do
+
+          context "when the unioned value is non-enumerable" do
+
+            context "when the values are the same" do
+
+              let(:hash) do
+                { "$in" => 5 }
+              end
+
+              before do
+                hash._union({ "$in" => 5 })
+              end
+
+              it "sets the unioned array" do
+                hash.should eq({ "$in" => [ 5 ] })
+              end
+            end
+
+            context "when the values are different" do
+
+              let(:hash) do
+                { "$in" => 5 }
+              end
+
+              before do
+                hash._union({ "$in" => 6 })
+              end
+
+              it "sets the empty array" do
+                hash.should eq({ "$in" => [ 5, 6 ] })
+              end
+            end
+          end
+        end
+
+        context "when the existing value is an array" do
+
+          let(:hash) do
+            { "$in" => [ 5, 6 ] }
+          end
+
+          before do
+            hash._union({ "$in" => [ 6, 7 ] })
+          end
+
+          it "sets the unioned array" do
+            hash.should eq({ "$in" => [ 5, 6, 7 ] })
+          end
+        end
+      end
+
+      context "when a key does not match" do
+
+        let(:hash) do
+          { "$all" => [ 1, 2, 3 ] }
+        end
+
+        before do
+          hash._union({ "$in" => [ 1, 2 ] })
+        end
+
+        it "merges in the new hash" do
+          hash.should eq({
+            "$all" => [ 1, 2, 3 ],
+            "$in" => [ 1, 2 ]
+          })
+        end
+      end
+    end
+  end
 end

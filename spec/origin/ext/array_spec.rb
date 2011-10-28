@@ -117,4 +117,30 @@ describe Array do
       end
     end
   end
+
+  describe "#_union" do
+
+    context "when the other object is a non-enumerable" do
+
+      it "returns an unioned array" do
+        [ 5, 6, 7 ]._union(6).should eq([ 5, 6, 7 ])
+      end
+    end
+
+    context "when the other object is an array" do
+
+      it "returns an unioned array" do
+        [ 4, 5, 6 ]._union([ 6, 7 ]).should eq([ 4, 5, 6, 7 ])
+      end
+    end
+
+    context "when the other object is a hash" do
+
+      it "returns a hash with a unioned array" do
+        [ 4, 5 ]._union({ "$in" => [ 5, 6 ] }).should eq(
+          { "$in" => [ 4, 5, 6 ] }
+        )
+      end
+    end
+  end
 end

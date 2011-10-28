@@ -316,25 +316,6 @@ describe Origin::Selector do
           union.should eq({ "$in" => [ 1, 2, 3 ] })
         end
       end
-
-      context "when the field has a different operator" do
-
-        before do
-          selector[:field] = { "$all" => [ 1, 2 ] }
-        end
-
-        let!(:union) do
-          selector.union!(:field, "$in", [ 2, 3 ])
-        end
-
-        it "overrides the previous operator" do
-          selector.should eq({ :field => { "$in" => [ 2, 3 ]}})
-        end
-
-        it "returns the new value" do
-          union.should eq({ "$in" => [ 2, 3 ] })
-        end
-      end
     end
   end
 end

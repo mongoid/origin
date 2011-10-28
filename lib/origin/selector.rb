@@ -15,8 +15,7 @@ module Origin
     end
 
     def union!(field, operator, value)
-      existing = current(field, operator)
-      store(field, { operator => existing ? (existing + value).uniq : value })
+      store(field, self[field]._union({ operator => value }))
     end
 
     private

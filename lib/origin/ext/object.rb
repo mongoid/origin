@@ -13,4 +13,13 @@ class Object
       Array(self) & Array(object)
     end
   end
+
+  def _union(object)
+    if object.is_a?(Hash)
+      object[object.keys.first] = _union(object.values.first)
+      object
+    else
+      (Array(self) + Array(object)).uniq
+    end
+  end
 end

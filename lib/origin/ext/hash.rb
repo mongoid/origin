@@ -2,17 +2,23 @@
 class Hash
 
   def _add(object)
-    tap do |hash|
-      object.each_pair do |key, value|
-        hash.store(key, hash[key]._add(value))
-      end
-    end
+    apply_strategy(:_add, object)
   end
 
   def _intersect(object)
+    apply_strategy(:_intersect, object)
+  end
+
+  def _union(object)
+    apply_strategy(:_union, object)
+  end
+
+  private
+
+  def apply_strategy(strategy, object)
     tap do |hash|
       object.each_pair do |key, value|
-        hash.store(key, hash[key]._intersect(value))
+        hash.store(key, hash[key].send(strategy, value))
       end
     end
   end

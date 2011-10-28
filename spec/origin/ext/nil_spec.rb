@@ -34,4 +34,30 @@ describe NilClass do
       end
     end
   end
+
+  describe "#_union" do
+
+    context "when provided a non enumerable" do
+
+      it "returns the object" do
+        nil._union(1).should eq(1)
+      end
+    end
+
+    context "when provided an array" do
+
+      it "returns the array" do
+        nil._union([ 1, 2 ]).should eq([ 1, 2 ])
+      end
+    end
+
+    context "when provided a hash" do
+
+      it "returns the hash" do
+        nil._union({ "$in" => [ 1, 2 ] }).should eq(
+          { "$in" => [ 1, 2 ] }
+        )
+      end
+    end
+  end
 end
