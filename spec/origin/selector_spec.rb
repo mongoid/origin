@@ -18,8 +18,8 @@ describe Origin::Selector do
         selector.should eq({})
       end
 
-      it "returns nil" do
-        append.should eq(nil)
+      it "returns the attempted value" do
+        append.should eq({ "$maxDistance" => 10 })
       end
     end
 
@@ -39,10 +39,8 @@ describe Origin::Selector do
         )
       end
 
-      it "returns the new value" do
-        append.should eq(
-          { "$near" => [ 20, 20 ], "$maxDistance" => 10 }
-        )
+      it "returns the provided value" do
+        append.should eq({ "$maxDistance" => 10 })
       end
     end
   end

@@ -80,28 +80,5 @@ describe Origin::Selection::MaxDistance do
         end
       end
     end
-
-    context "when chaining multiple criteria" do
-
-      context "when the fields are the same" do
-
-        let(:selection) do
-          query.
-            near(:location => [ 1, 1 ]).
-            max_distance(:location => 50).
-            max_distance(:location => 10)
-        end
-
-        it "overrides the $maxDistance expression" do
-          selection.selector.should eq({
-            :location => { "$near" => [ 1, 1 ], "$maxDistance" => 10 }
-          })
-        end
-
-        it "returns a cloned query" do
-          selection.should_not equal(query)
-        end
-      end
-    end
   end
 end
