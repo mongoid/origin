@@ -4,7 +4,7 @@ module Origin
     module Nin
 
       def nin(criterion = nil)
-        send(strategy || :intersect!, criterion, "$nin")
+        send(strategy || :_intersect, criterion, "$nin")
       end
 
       ::Symbol.class_eval do

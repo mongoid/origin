@@ -4,7 +4,7 @@ module Origin
     module Mod
 
       def mod(criterion = nil)
-        override!(criterion, "$mod")
+        _override(criterion, "$mod")
       end
 
       ::Symbol.class_eval do

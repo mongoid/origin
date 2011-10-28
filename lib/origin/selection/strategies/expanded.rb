@@ -4,11 +4,9 @@ module Origin
     module Strategies
       module Expanded
 
-        private
-
-        def expanded!(criterion, outer, inner)
+        def _expanded(criterion, outer, inner)
           assimilate(criterion) do |selector, field, value|
-            selector.override!(field, outer, { inner => value })
+            selector.store(field, { outer => { inner => value }})
           end
         end
       end

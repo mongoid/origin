@@ -4,7 +4,7 @@ module Origin
     module Gt
 
       def gt(criterion = nil)
-        override!(criterion, "$gt")
+        _override(criterion, "$gt")
       end
 
       ::Symbol.class_eval do

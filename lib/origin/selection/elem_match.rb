@@ -4,7 +4,7 @@ module Origin
     module ElemMatch
 
       def elem_match(criterion = nil)
-        override!(criterion, "$elemMatch")
+        _override(criterion, "$elemMatch")
       end
 
       ::Symbol.class_eval do

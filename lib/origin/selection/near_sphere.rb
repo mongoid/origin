@@ -4,7 +4,7 @@ module Origin
     module NearSphere
 
       def near_sphere(criterion = nil)
-        override!(criterion, "$nearSphere")
+        _override(criterion, "$nearSphere")
       end
 
       ::Symbol.class_eval do

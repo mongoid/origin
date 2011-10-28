@@ -4,11 +4,12 @@ module Origin
     module Strategies
       module Append
 
-        private
-
-        def append!(criterion, operator)
+        def _append(criterion, operator)
           assimilate(criterion) do |selector, field, value|
-            selector.append!(field, operator, value)
+            selector.store(
+              field,
+              selector[field]._add({ operator => value })
+            )
           end
         end
       end

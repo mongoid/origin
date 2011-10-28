@@ -5,14 +5,15 @@ module Origin
       module Union
 
         def union
-          tap { |query| query.strategy = :union! }
+          tap { |query| query.strategy = :_union }
         end
 
-        private
-
-        def union!(criterion, operator)
+        def _union(criterion, operator)
           assimilate(criterion) do |selector, field, value|
-            selector.union!(field, operator, value)
+            selector.store(
+              field,
+              selector[field]._union({ operator => value })
+            )
           end
         end
       end

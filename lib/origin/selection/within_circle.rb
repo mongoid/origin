@@ -4,7 +4,7 @@ module Origin
     module WithinCircle
 
       def within_circle(criterion = nil)
-        expanded!(criterion, "$within", "$center")
+        _expanded(criterion, "$within", "$center")
       end
 
       ::Symbol.class_eval do

@@ -4,7 +4,7 @@ module Origin
     module MaxDistance
 
       def max_distance(criterion = nil)
-        append!(criterion, "$maxDistance")
+        _append(criterion, "$maxDistance")
       end
     end
   end

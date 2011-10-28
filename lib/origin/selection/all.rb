@@ -4,7 +4,7 @@ module Origin
     module All
 
       def all(criterion = nil)
-        send(strategy || :override!, criterion, "$all")
+        send(strategy || :_override, criterion, "$all")
       end
 
       ::Symbol.class_eval do
