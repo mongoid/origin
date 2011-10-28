@@ -40,7 +40,23 @@ describe Array do
 
     context "when the other object is a hash" do
 
-      pending "raises an error"
+      context "when all values are unique" do
+
+        it "returns a hash of both" do
+          [ 4, 5 ]._add({ "$in" => [ 6, 7 ] }).should eq(
+            { "$in" => [ 4, 5, 6, 7 ] }
+          )
+        end
+      end
+
+      context "when values are not unique" do
+
+        it "returns a unique array of both" do
+          [ 4, 5 ]._add({ "$in" => [ 5, 6, 7 ] }).should eq(
+            { "$in" => [ 4, 5, 6, 7 ] }
+          )
+        end
+      end
     end
   end
 
@@ -82,7 +98,23 @@ describe Array do
 
     context "when the other object is a hash" do
 
-      pending "raises an error"
+      context "when the values intersect" do
+
+        it "returns a hash of both" do
+          [ 4, 5 ]._intersect({ "$in" => [ 5, 6 ] }).should eq(
+            { "$in" => [ 5 ] }
+          )
+        end
+      end
+
+      context "when values do not intersect" do
+
+        it "returns an empty array" do
+          [ 4, 5 ]._intersect({ "$in" => [ 6, 7 ] }).should eq(
+            { "$in" => [] }
+          )
+        end
+      end
     end
   end
 end

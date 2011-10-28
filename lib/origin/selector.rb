@@ -3,12 +3,11 @@ module Origin
   class Selector < Hash
 
     def append!(field, operator, value)
-      self[field]._add({ operator => value })
+      store(field, self[field]._add({ operator => value }))
     end
 
     def intersect!(field, operator, value)
-      existing = current(field, operator)
-      store(field, { operator => existing ? (existing & value) : value })
+      store(field, self[field]._intersect({ operator => value }))
     end
 
     def override!(field, operator, value)

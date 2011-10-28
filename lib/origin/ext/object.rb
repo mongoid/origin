@@ -6,6 +6,11 @@ class Object
   end
 
   def _intersect(object)
-    Array(self) & Array(object)
+    if object.is_a?(Hash)
+      object[object.keys.first] = _intersect(object.values.first)
+      object
+    else
+      Array(self) & Array(object)
+    end
   end
 end

@@ -2,14 +2,18 @@
 class Hash
 
   def _add(object)
-    object.each_pair do |key, value|
-      store(key, self[key]._add(value))
+    tap do |hash|
+      object.each_pair do |key, value|
+        hash.store(key, hash[key]._add(value))
+      end
     end
   end
 
   def _intersect(object)
-    object.each_pair do |key, value|
-      store(key, self[key]._intersect(value))
+    tap do |hash|
+      object.each_pair do |key, value|
+        hash.store(key, hash[key]._intersect(value))
+      end
     end
   end
 end

@@ -13,8 +13,8 @@ describe NilClass do
 
     context "when provided a non enumerable" do
 
-      it "returns an array of the object" do
-        nil._intersect(1).should eq([ 1 ])
+      it "returns the object" do
+        nil._intersect(1).should eq(1)
       end
     end
 
@@ -22,6 +22,15 @@ describe NilClass do
 
       it "returns the array" do
         nil._intersect([ 1, 2 ]).should eq([ 1, 2 ])
+      end
+    end
+
+    context "when provided a hash" do
+
+      it "returns the hash" do
+        nil._intersect({ "$in" => [ 1, 2 ] }).should eq(
+          { "$in" => [ 1, 2 ] }
+        )
       end
     end
   end

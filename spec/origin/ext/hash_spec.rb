@@ -86,21 +86,6 @@ describe Hash do
             end
           end
         end
-
-        context "when the existing value is a hash" do
-
-          let(:hash) do
-            { "$within" => { "$center" => [[ 1, 1 ], 10 ] }}
-          end
-
-          before do
-            hash._add({ "$within" => { "$center" => [[ 2, 2 ], 10 ] }})
-          end
-
-          it "merges the hash" do
-            hash.should eq({ "$within" => { "$center" => [[ 2, 2 ], 10 ] }})
-          end
-        end
       end
 
       context "when a key does not match" do
@@ -205,23 +190,6 @@ describe Hash do
             it "sets the empty array" do
               hash.should eq({ "$in" => [] })
             end
-          end
-        end
-
-        context "when the existing value is a hash" do
-
-          let(:hash) do
-            { "$within" => { "$center" => [[ 1, 1 ], 10 ] }}
-          end
-
-          before do
-            hash._intersect({ "$within" => { "$center" => [[ 2, 2 ], 10 ] }})
-          end
-
-          it "merges the hash" do
-            hash.should eq({
-              "$within" => { "$center" => [[ 2, 2 ], 10 ] }
-            })
           end
         end
       end

@@ -64,21 +64,6 @@ describe Origin::Selection::MaxDistance do
           selection.should_not equal(query)
         end
       end
-
-      context "when a $near criterion does not exist on the same field" do
-
-        let(:selection) do
-          query.max_distance(:location => 50)
-        end
-
-        it "does not add the $maxDistance expression" do
-          selection.selector.should eq({})
-        end
-
-        it "returns a cloned query" do
-          selection.should_not equal(query)
-        end
-      end
     end
   end
 end

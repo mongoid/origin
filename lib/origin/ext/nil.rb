@@ -6,6 +6,6 @@ class NilClass
   end
 
   def _intersect(object)
-    Array(object)
+    object
   end
 end

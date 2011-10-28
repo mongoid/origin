@@ -14,8 +14,8 @@ describe Origin::Selector do
         selector.append!(:field, "$maxDistance", 10)
       end
 
-      it "does not set the value" do
-        selector.should eq({})
+      it "sets the value" do
+        selector.should eq({ :field => { "$maxDistance" => 10 }})
       end
 
       it "returns the attempted value" do
@@ -39,8 +39,8 @@ describe Origin::Selector do
         )
       end
 
-      it "returns the provided value" do
-        append.should eq({ "$maxDistance" => 10 })
+      it "returns the selector" do
+        append.should eq({ "$near" => [ 20, 20 ], "$maxDistance" => 10 })
       end
     end
   end
@@ -125,25 +125,6 @@ describe Origin::Selector do
 
         it "returns the new value" do
           intersect.should eq({ "$in" => [ 2 ] })
-        end
-      end
-
-      context "when the field has a different operator" do
-
-        before do
-          selector[:field] = { "$all" => [ 1, 2 ] }
-        end
-
-        let!(:intersect) do
-          selector.intersect!(:field, "$in", [ 2, 3 ])
-        end
-
-        it "overrides the previous operator" do
-          selector.should eq({ :field => { "$in" => [ 2, 3 ]}})
-        end
-
-        it "returns the new value" do
-          intersect.should eq({ "$in" => [ 2, 3 ] })
         end
       end
     end
