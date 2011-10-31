@@ -1,5 +1,6 @@
 # encoding: utf-8
 require "origin/option/hint"
+require "origin/option/no_timeout"
 require "origin/option/only"
 require "origin/option/without"
 
@@ -8,7 +9,6 @@ require "origin/option/without"
 # require "origin/option/limit"
 # require "origin/option/snapshot"
 # require "origin/option/batch_size"
-# require "origin/option/timeout"
 # require "origin/option/max_scan"
 # require "origin/option/show_disk_loc"
 # require "origin/option/return_key"
@@ -17,6 +17,7 @@ require "origin/option/without"
 module Origin
   module Option
     include Option::Hint
+    include Option::NoTimeout
     include Option::Only
     # include Option::OrderBy
     # include Option::Slice
