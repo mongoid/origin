@@ -18,12 +18,20 @@ module Origin
 
       attr_accessor :strategy
 
-      def assimilate(criterion = nil)
+      def selection(criterion = nil)
         clone.tap do |query|
           if criterion
             criterion.each_pair do |field, value|
               yield(query.selector, field, value)
             end
+          end
+        end
+      end
+
+      def option(*args)
+        clone.tap do |query|
+          unless args.compact.empty?
+            yield(query.options)
           end
         end
       end

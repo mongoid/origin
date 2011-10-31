@@ -5,7 +5,7 @@ module Origin
       module Add
 
         def _add(criterion, operator)
-          assimilate(criterion) do |selector, field, value|
+          selection(criterion) do |selector, field, value|
             selector.store(
               field,
               selector[field]._add({ operator => value })

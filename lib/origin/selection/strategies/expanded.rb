@@ -5,7 +5,7 @@ module Origin
       module Expanded
 
         def _expanded(criterion, outer, inner)
-          assimilate(criterion) do |selector, field, value|
+          selection(criterion) do |selector, field, value|
             selector.store(field, { outer => { inner => value }})
           end
         end

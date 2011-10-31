@@ -4,7 +4,7 @@ module Origin
     module Between
 
       def between(criterion = nil)
-        assimilate(criterion) do |selector, field, value|
+        selection(criterion) do |selector, field, value|
           selector.store(
             field,
             { "$gte" => value.min, "$lte" => value.max }

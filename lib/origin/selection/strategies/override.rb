@@ -9,7 +9,7 @@ module Origin
         end
 
         def _override(criterion, operator)
-          assimilate(criterion) do |selector, field, value|
+          selection(criterion) do |selector, field, value|
             selector.store(field, { operator => value })
           end
         end

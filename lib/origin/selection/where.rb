@@ -10,7 +10,7 @@ module Origin
       private
 
       def expr_query(criterion)
-        assimilate(criterion) do |selector, field, value|
+        selection(criterion) do |selector, field, value|
           if field.is_a?(Key)
             selector.merge!(field.specify(value))
           else

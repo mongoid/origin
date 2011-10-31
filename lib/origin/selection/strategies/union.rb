@@ -9,7 +9,7 @@ module Origin
         end
 
         def _union(criterion, operator)
-          assimilate(criterion) do |selector, field, value|
+          selection(criterion) do |selector, field, value|
             selector.store(
               field,
               selector[field]._union({ operator => value })
