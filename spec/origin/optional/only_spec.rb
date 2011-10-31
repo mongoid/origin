@@ -1,17 +1,17 @@
 require "spec_helper"
 
-describe Origin::Option::Hint do
+describe Origin::Optional::Only do
 
   let(:query) do
     Origin::Query.new
   end
 
-  describe "#hint" do
+  describe "#only" do
 
     context "when provided no options" do
 
       let(:selection) do
-        query.hint
+        query.only
       end
 
       it "does not add any options" do
@@ -30,7 +30,7 @@ describe Origin::Option::Hint do
     context "when provided nil" do
 
       let(:selection) do
-        query.hint(nil)
+        query.only(nil)
       end
 
       it "does not add any options" do
@@ -49,12 +49,12 @@ describe Origin::Option::Hint do
     context "when provided arguments" do
 
       let(:selection) do
-        query.hint(:first, :second)
+        query.only(:first, :second)
       end
 
       it "adds the field options" do
         selection.options.should eq(
-          { :hint => { :first => 1, :second => 1 }}
+          { :fields => { :first => 1, :second => 1 }}
         )
       end
 

@@ -1,12 +1,12 @@
 # encoding: utf-8
 module Origin
-  module Option
-    module Only
+  module Optional
+    module Hint
 
-      def only(*args)
+      def hint(*args)
         option(*args) do |options|
           options.store(
-            :fields, args.inject({}){ |sub, field| sub.tap { sub[field] = 1 }}
+            :hint, args.inject({}){ |sub, field| sub.tap { sub[field] = 1 }}
           )
         end
       end

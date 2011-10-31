@@ -4,7 +4,7 @@ require "origin/selector"
 
 module Origin
   class Query
-    include Option
+    include Optional
     include Selection
 
     attr_reader :options, :selector

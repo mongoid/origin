@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Origin::Option::NoTimeout do
+describe Origin::Optional::NoTimeout do
 
   let(:query) do
     Origin::Query.new

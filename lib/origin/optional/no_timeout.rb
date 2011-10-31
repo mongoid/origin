@@ -1,6 +1,6 @@
 # encoding: utf-8
 module Origin
-  module Option
+  module Optional
     module NoTimeout
 
       def no_timeout
