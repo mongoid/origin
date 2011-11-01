@@ -4,9 +4,7 @@ module Origin
     module NoTimeout
 
       def no_timeout
-        clone.tap do |query|
-          query.options.store(:timeout, false)
-        end
+        clone.tap { |query| query.options.store(:timeout, false) }
       end
     end
   end
