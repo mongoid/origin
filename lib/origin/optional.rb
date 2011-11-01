@@ -2,10 +2,10 @@
 require "origin/optional/hint"
 require "origin/optional/no_timeout"
 require "origin/optional/only"
+require "origin/optional/read"
 require "origin/optional/snapshot"
 require "origin/optional/without"
 
-# require "origin/optional/read"
 # require "origin/optional/skip"
 # require "origin/optional/limit"
 # require "origin/optional/batch_size"
@@ -19,8 +19,7 @@ module Origin
     include Hint
     include NoTimeout
     include Only
-    # include Optional::OrderBy
-    # include Optional::Slice
+    include Read
     include Snapshot
     include Without
   end
