@@ -27,15 +27,9 @@ require "origin/selection/within_circle"
 require "origin/selection/within_spherical_circle"
 
 module Origin
-
-  # The selection module is included to get all the behaviour for every MongoDB
-  # query operator.
   module Selection
-    # Include the strategies for override, intersection, and union of operators
-    # that use array values.
     include Strategies
 
-    # Include all the individual operator modules.
     include All
     include And
     include Between

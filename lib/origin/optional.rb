@@ -9,11 +9,10 @@ require "origin/optional/read"
 require "origin/optional/return_key"
 require "origin/optional/show_disk_loc"
 require "origin/optional/skip"
+require "origin/optional/slice"
 require "origin/optional/snapshot"
 require "origin/optional/transformer"
 require "origin/optional/without"
-
-# require "origin/optional/transformer"
 
 module Origin
   module Optional
@@ -27,6 +26,7 @@ module Origin
     include ReturnKey
     include ShowDiskLoc
     include Skip
+    include Slice
     include Snapshot
     include Transformer
     include Without
