@@ -4,9 +4,7 @@ module Origin
     module Limit
 
       def limit(value = nil)
-        clone.tap do |query|
-          query.options.store(:limit, value) if value
-        end
+        option(value) { |options| options.store(:limit, value) }
       end
     end
   end

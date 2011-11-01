@@ -4,9 +4,7 @@ module Origin
     module Read
 
       def read(node = nil)
-        clone.tap do |query|
-          query.options.store(:read, node) if node
-        end
+        option(node) { |options| options.store(:read, node) }
       end
     end
   end

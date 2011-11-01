@@ -4,9 +4,7 @@ module Origin
     module BatchSize
 
       def batch_size(value = nil)
-        clone.tap do |query|
-          query.options.store(:batch_size, value) if value
-        end
+        option(value) { |options| options.store(:batch_size, value) }
       end
     end
   end

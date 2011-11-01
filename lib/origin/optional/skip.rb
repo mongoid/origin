@@ -4,9 +4,7 @@ module Origin
     module Skip
 
       def skip(value = nil)
-        clone.tap do |query|
-          query.options.store(:skip, value) if value
-        end
+        option(value) { |options| options.store(:skip, value) }
       end
     end
   end
