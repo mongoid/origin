@@ -1,3 +1,5 @@
 # encoding: utf-8
-require "origin/queryable"
-require "origin/version"
+module Origin
+  autoload :Queryable, "origin/queryable"
+  autoload :Version, "origin/version"
+end

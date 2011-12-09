@@ -1,11 +1,13 @@
 # encoding: utf-8
 require "origin/ext"
-require "origin/optional"
-require "origin/options"
-require "origin/selection"
-require "origin/selector"
 
 module Origin
+
+  autoload :Optional, "origin/optional"
+  autoload :Options, "origin/options"
+  autoload :Selection, "origin/selection"
+  autoload :Selector, "origin/selector"
+
   module Queryable
     include Optional
     include Selection

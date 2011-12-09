@@ -1,21 +1,22 @@
 # encoding: utf-8
-require "origin/optional/batch_size"
-require "origin/optional/hint"
-require "origin/optional/limit"
-require "origin/optional/max_scan"
-require "origin/optional/no_timeout"
-require "origin/optional/only"
-require "origin/optional/read"
-require "origin/optional/return_key"
-require "origin/optional/show_disk_loc"
-require "origin/optional/skip"
-require "origin/optional/slice"
-require "origin/optional/snapshot"
-require "origin/optional/transformer"
-require "origin/optional/without"
-
 module Origin
   module Optional
+
+    autoload :BatchSize, "origin/optional/batch_size"
+    autoload :Hint, "origin/optional/hint"
+    autoload :Limit, "origin/optional/limit"
+    autoload :MaxScan, "origin/optional/max_scan"
+    autoload :NoTimeout, "origin/optional/no_timeout"
+    autoload :Only, "origin/optional/only"
+    autoload :Read, "origin/optional/read"
+    autoload :ReturnKey, "origin/optional/return_key"
+    autoload :ShowDiskLoc, "origin/optional/show_disk_loc"
+    autoload :Skip, "origin/optional/skip"
+    autoload :Slice, "origin/optional/slice"
+    autoload :Snapshot, "origin/optional/snapshot"
+    autoload :Transformer, "origin/optional/transformer"
+    autoload :Without, "origin/optional/without"
+
     include BatchSize
     include Hint
     include Limit
