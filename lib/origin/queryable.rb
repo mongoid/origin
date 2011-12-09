@@ -1,9 +1,12 @@
 # encoding: utf-8
+require "origin/ext"
+require "origin/optional"
 require "origin/options"
+require "origin/selection"
 require "origin/selector"
 
 module Origin
-  class Query
+  module Queryable
     include Optional
     include Selection
 
