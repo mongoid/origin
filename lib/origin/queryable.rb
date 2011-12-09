@@ -23,7 +23,7 @@ module Origin
     end
 
     def initialize_copy(other)
-      @options, @selector = other.options.dup, other.selector.dup
+      @options, @selector = other.options.deep_copy, other.selector.deep_copy
     end
   end
 end
