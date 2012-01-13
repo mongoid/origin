@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.rubyforge_project = "origin"
 
   s.add_development_dependency("rspec", ["~> 2.6"])
-  s.add_development_dependency("watchr", ["~> 0.6"])
+  s.add_development_dependency("guard-rspec", ["~> 0.6"])
 
   s.files = Dir.glob("lib/**/*") + %w(Rakefile)
   s.require_path = 'lib'
