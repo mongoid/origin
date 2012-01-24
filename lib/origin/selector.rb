@@ -21,7 +21,7 @@ module Origin
     def serialize(key, value)
       serializer = serializers[key]
       return value unless serializer
-      serializer.selectionize(value)
+      serializer.evolve(value)
     end
   end
 end

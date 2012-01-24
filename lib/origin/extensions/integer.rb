@@ -4,7 +4,7 @@ module Origin
     module Integer
       module ClassMethods
 
-        def selectionize(object)
+        def evolve(object)
           object.to_i
         end
       end

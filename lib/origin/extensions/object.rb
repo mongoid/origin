@@ -31,7 +31,7 @@ module Origin
 
       module ClassMethods
 
-        def selectionize(object)
+        def evolve(object)
           object
         end
       end

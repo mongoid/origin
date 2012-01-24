@@ -55,8 +55,8 @@ describe Origin::Selector do
       context "when serializers are provided" do
 
         class Field
-          def selectionize(object)
-            Integer.selectionize(object)
+          def evolve(object)
+            Integer.evolve(object)
           end
         end
 
