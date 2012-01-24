@@ -5,7 +5,7 @@ module Origin
     attr_reader :serializers
 
     def []=(key, value)
-      super(key, evolve(key, value))
+      super(key, evolve(serializers[key], value))
     end
 
     def initialize(serializers = nil)
@@ -13,13 +13,12 @@ module Origin
     end
 
     def store(key, value)
-      super(key, evolve(key, value))
+      super(key, evolve(serializers[key], value))
     end
 
     private
 
-    def evolve(key, value)
-      serializer = serializers[key]
+    def evolve(serializer, value)
       return value unless serializer
       case value
         when Hash then evolve_hash(serializer, value)
@@ -30,13 +29,13 @@ module Origin
 
     def evolve_array(serializer, value)
       value.map do |_value|
-        serializer.evolve(_value)
+        evolve(serializer, _value)
       end
     end
 
     def evolve_hash(serializer, value)
       value.each_pair do |operator, _value|
-        value[operator] = serializer.evolve(_value)
+        value[operator] = evolve(serializer, _value)
       end
     end
   end
