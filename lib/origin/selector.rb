@@ -34,8 +34,9 @@ module Origin
     end
 
     def evolve_hash(serializer, value)
-      value.each_pair do |operator, _value|
-        value[operator] = evolve(serializer, _value)
+      value.reduce({}) do |hash, (operator, _value)|
+        hash[operator] = evolve(serializer, _value)
+        hash
       end
     end
   end
