@@ -18,4 +18,12 @@ class Array
       self & Array(object)
     end
   end
+
+  def __deep_copy__
+    [].tap do |copy|
+      each do |value|
+        copy.push(value.__deep_copy__)
+      end
+    end
+  end
 end

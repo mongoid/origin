@@ -13,15 +13,10 @@ class Hash
     apply_strategy(:_union, object)
   end
 
-  def deep_copy
-    inject({}) do |copy, (key, value)|
-      copy.tap do |clone|
-        case value
-        when Array, String then clone.store(key, value.dup)
-        when Hash then clone.store(key, value.deep_copy)
-        else
-          clone.store(key, value)
-        end
+  def __deep_copy__
+    {}.tap do |copy|
+      each_pair do |key, value|
+        copy.store(key, value.__deep_copy__)
       end
     end
   end

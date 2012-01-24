@@ -22,4 +22,8 @@ class Object
       (Array(self) + Array(object)).uniq
     end
   end
+
+  def __deep_copy__
+    self
+  end
 end

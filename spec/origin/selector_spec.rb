@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe Origin::Selector do
 
-  describe "#deep_copy" do
+  describe "#__deep_copy__" do
 
     let(:value) do
       [ 1, 2, 3 ]
@@ -21,7 +21,7 @@ describe Origin::Selector do
     end
 
     let(:cloned) do
-      selector.deep_copy
+      selector.__deep_copy__
     end
 
     it "returns an equal copy" do

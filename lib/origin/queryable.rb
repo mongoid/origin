@@ -1,5 +1,5 @@
 # encoding: utf-8
-require "origin/ext"
+require "origin/extensions"
 
 module Origin
 
@@ -15,7 +15,7 @@ module Origin
     attr_reader :options, :selector
 
     def ==(other)
-      return false unless other.is_a?(Query)
+      return false unless other.is_a?(Queryable)
       selector == other.selector && options == other.options
     end
 
@@ -25,7 +25,7 @@ module Origin
     end
 
     def initialize_copy(other)
-      @options, @selector = other.options.deep_copy, other.selector.deep_copy
+      @options, @selector = other.options.__deep_copy__, other.selector.__deep_copy__
     end
   end
 end

@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe Origin::Options do
 
-  describe "#deep_copy" do
+  describe "#__deep_copy__" do
 
     let(:sort) do
       [[ :name, :asc ]]
@@ -17,7 +17,7 @@ describe Origin::Options do
     end
 
     let(:cloned) do
-      options.deep_copy
+      options.__deep_copy__
     end
 
     it "returns an equal copy" do
