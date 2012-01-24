@@ -74,6 +74,48 @@ describe Origin::Selector do
             selector["key"].should eq(5)
           end
         end
+
+        context "when the criterion is complex" do
+
+          context "when the field name is the key" do
+
+            context "when the criterion is an array" do
+
+              before do
+                selector.send(method, "key", [ "1", "2" ])
+              end
+
+              it "serializes the value" do
+                selector["key"].should eq([ 1, 2 ])
+              end
+            end
+
+            context "when the criterion is a hash" do
+
+              context "when the value is non enumerable" do
+
+                before do
+                  selector.send(method, "key", { "$gt" => "5" })
+                end
+
+                it "serializes the value" do
+                  selector["key"].should eq({ "$gt" => 5 })
+                end
+              end
+
+              context "when the value is enumerable" do
+
+                before do
+                  selector.send(method, "key", { "$in" => [ "1", "2" ] })
+                end
+
+                it "serializes the value" do
+                  selector["key"].should eq({ "$in" => [ 1, 2 ] })
+                end
+              end
+            end
+          end
+        end
       end
     end
   end

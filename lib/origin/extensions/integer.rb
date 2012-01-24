@@ -5,7 +5,7 @@ module Origin
       module ClassMethods
 
         def evolve(object)
-          object.to_i
+          object.is_a?(::Array) ? object.map(&:to_i) : object.to_i
         end
       end
     end
