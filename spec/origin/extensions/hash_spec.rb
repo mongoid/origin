@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe Hash do
 
-  describe "#_add" do
+  describe "#__add__" do
 
     context "when the other object is a non-enumerable" do
 
@@ -29,7 +29,7 @@ describe Hash do
               end
 
               before do
-                hash._add({ "$in" => 6 })
+                hash.__add__({ "$in" => 6 })
               end
 
               it "sets the new array" do
@@ -44,7 +44,7 @@ describe Hash do
               end
 
               before do
-                hash._add({ "$in" => 5 })
+                hash.__add__({ "$in" => 5 })
               end
 
               it "keeps the old value" do
@@ -63,7 +63,7 @@ describe Hash do
             end
 
             before do
-              hash._add({ "$in" => [ 7, 8 ] })
+              hash.__add__({ "$in" => [ 7, 8 ] })
             end
 
             it "sets the new array" do
@@ -78,7 +78,7 @@ describe Hash do
             end
 
             before do
-              hash._add({ "$in" => [ 6, 7 ] })
+              hash.__add__({ "$in" => [ 6, 7 ] })
             end
 
             it "sets a new unique array" do
@@ -95,7 +95,7 @@ describe Hash do
         end
 
         before do
-          hash._add({ "$in" => [ 1, 2 ] })
+          hash.__add__({ "$in" => [ 1, 2 ] })
         end
 
         it "merges in the new hash" do
@@ -108,7 +108,7 @@ describe Hash do
     end
   end
 
-  describe "#_intersect" do
+  describe "#__intersect__" do
 
     context "when the other object is a non-enumerable" do
 
@@ -135,7 +135,7 @@ describe Hash do
               end
 
               before do
-                hash._intersect({ "$in" => 5 })
+                hash.__intersect__({ "$in" => 5 })
               end
 
               it "sets the intersected array" do
@@ -150,7 +150,7 @@ describe Hash do
               end
 
               before do
-                hash._intersect({ "$in" => 6 })
+                hash.__intersect__({ "$in" => 6 })
               end
 
               it "sets the empty array" do
@@ -169,7 +169,7 @@ describe Hash do
             end
 
             before do
-              hash._intersect({ "$in" => [ 6, 7 ] })
+              hash.__intersect__({ "$in" => [ 6, 7 ] })
             end
 
             it "sets the intersected array" do
@@ -184,7 +184,7 @@ describe Hash do
             end
 
             before do
-              hash._intersect({ "$in" => [ 7, 8 ] })
+              hash.__intersect__({ "$in" => [ 7, 8 ] })
             end
 
             it "sets the empty array" do
@@ -201,7 +201,7 @@ describe Hash do
         end
 
         before do
-          hash._intersect({ "$in" => [ 1, 2 ] })
+          hash.__intersect__({ "$in" => [ 1, 2 ] })
         end
 
         it "merges in the new hash" do
@@ -214,7 +214,7 @@ describe Hash do
     end
   end
 
-  describe "#_union" do
+  describe "#__union__" do
 
     context "when the other object is a non-enumerable" do
 
@@ -241,7 +241,7 @@ describe Hash do
               end
 
               before do
-                hash._union({ "$in" => 5 })
+                hash.__union__({ "$in" => 5 })
               end
 
               it "sets the unioned array" do
@@ -256,7 +256,7 @@ describe Hash do
               end
 
               before do
-                hash._union({ "$in" => 6 })
+                hash.__union__({ "$in" => 6 })
               end
 
               it "sets the empty array" do
@@ -273,7 +273,7 @@ describe Hash do
           end
 
           before do
-            hash._union({ "$in" => [ 6, 7 ] })
+            hash.__union__({ "$in" => [ 6, 7 ] })
           end
 
           it "sets the unioned array" do
@@ -289,7 +289,7 @@ describe Hash do
         end
 
         before do
-          hash._union({ "$in" => [ 1, 2 ] })
+          hash.__union__({ "$in" => [ 1, 2 ] })
         end
 
         it "merges in the new hash" do

@@ -1,22 +1,22 @@
 # encoding: utf-8
 class Object
 
-  def _add(object)
+  def __add__(object)
     object == self ? self : [ self, object ].flatten.uniq
   end
 
-  def _intersect(object)
+  def __intersect__(object)
     if object.is_a?(Hash)
-      object[object.keys.first] = _intersect(object.values.first)
+      object[object.keys.first] = __intersect__(object.values.first)
       object
     else
       Array(self) & Array(object)
     end
   end
 
-  def _union(object)
+  def __union__(object)
     if object.is_a?(Hash)
-      object[object.keys.first] = _union(object.values.first)
+      object[object.keys.first] = __union__(object.values.first)
       object
     else
       (Array(self) + Array(object)).uniq

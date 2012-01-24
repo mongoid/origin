@@ -4,11 +4,11 @@ module Origin
     module Strategies
       module Add
 
-        def _add(criterion, operator)
+        def __add__(criterion, operator)
           selection(criterion) do |selector, field, value|
             selector.store(
               field,
-              selector[field]._add({ operator => value })
+              selector[field].__add__({ operator => value })
             )
           end
         end

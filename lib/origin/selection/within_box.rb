@@ -4,7 +4,7 @@ module Origin
     module WithinBox
 
       def within_box(criterion = nil)
-        _expanded(criterion, "$within", "$box")
+        __expanded__(criterion, "$within", "$box")
       end
 
       ::Symbol.class_eval do

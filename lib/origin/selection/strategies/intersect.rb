@@ -5,14 +5,14 @@ module Origin
       module Intersect
 
         def intersect
-          tap { |query| query.strategy = :_intersect }
+          tap { |query| query.strategy = :__intersect__ }
         end
 
-        def _intersect(criterion, operator)
+        def __intersect__(criterion, operator)
           selection(criterion) do |selector, field, value|
             selector.store(
               field,
-              selector[field]._intersect({ operator => value })
+              selector[field].__intersect__({ operator => value })
             )
           end
         end

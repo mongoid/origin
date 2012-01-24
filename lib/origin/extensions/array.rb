@@ -1,18 +1,18 @@
 # encoding: utf-8
 class Array
 
-  def _add(object)
+  def __add__(object)
     if object.is_a?(Hash)
-      object[object.keys.first] = _add(object.values.first)
+      object[object.keys.first] = __add__(object.values.first)
       object
     else
       concat(Array(object)).uniq
     end
   end
 
-  def _intersect(object)
+  def __intersect__(object)
     if object.is_a?(Hash)
-      object[object.keys.first] = _intersect(object.values.first)
+      object[object.keys.first] = __intersect__(object.values.first)
       object
     else
       self & Array(object)

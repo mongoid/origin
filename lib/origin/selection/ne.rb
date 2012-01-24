@@ -4,7 +4,7 @@ module Origin
     module Ne
 
       def ne(criterion = nil)
-        _override(criterion, "$ne")
+        __override__(criterion, "$ne")
       end
 
       ::Symbol.class_eval do

@@ -4,7 +4,7 @@ module Origin
     module In
 
       def in(criterion = nil)
-        send(strategy || :_intersect, criterion, "$in")
+        send(strategy || :__intersect__, criterion, "$in")
       end
 
       ::Symbol.class_eval do

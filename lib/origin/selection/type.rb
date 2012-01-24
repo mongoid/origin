@@ -4,7 +4,7 @@ module Origin
     module Type
 
       def type(criterion = nil)
-        _override(criterion, "$type")
+        __override__(criterion, "$type")
       end
 
       ::Symbol.class_eval do

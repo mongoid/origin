@@ -6,7 +6,7 @@ module Origin
 
         private
 
-        def multi!(criterion, operator)
+        def __multi__(criterion, operator)
           clone.tap do |query|
             sel = query.selector
             criterion.each do |expr|

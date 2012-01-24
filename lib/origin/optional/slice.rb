@@ -5,7 +5,7 @@ module Origin
 
       def slice(criterion = nil)
         option(criterion) do |options|
-          options._union(
+          options.__union__(
             :fields => criterion.inject({}) do |option, (field, val)|
               option.tap { |opt| opt.store(field, { "$slice" => val }) }
             end

@@ -5,10 +5,10 @@ module Origin
       module Override
 
         def override
-          tap { |query| query.strategy = :_override }
+          tap { |query| query.strategy = :__override__ }
         end
 
-        def _override(criterion, operator)
+        def __override__(criterion, operator)
           selection(criterion) do |selector, field, value|
             selector.store(field, { operator => value })
           end

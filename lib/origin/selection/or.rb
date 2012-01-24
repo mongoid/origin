@@ -4,7 +4,7 @@ module Origin
     module Or
 
       def or(*criterion)
-        multi!(criterion, "$or")
+        __multi__(criterion, "$or")
       end
     end
   end

@@ -4,7 +4,7 @@ module Origin
     module Near
 
       def near(criterion = nil)
-        _override(criterion, "$near")
+        __override__(criterion, "$near")
       end
 
       ::Symbol.class_eval do

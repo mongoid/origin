@@ -1,16 +1,16 @@
 # encoding: utf-8
 class Hash
 
-  def _add(object)
-    apply_strategy(:_add, object)
+  def __add__(object)
+    apply_strategy(:__add__, object)
   end
 
-  def _intersect(object)
-    apply_strategy(:_intersect, object)
+  def __intersect__(object)
+    apply_strategy(:__intersect__, object)
   end
 
-  def _union(object)
-    apply_strategy(:_union, object)
+  def __union__(object)
+    apply_strategy(:__union__, object)
   end
 
   def __deep_copy__

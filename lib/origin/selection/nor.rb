@@ -4,7 +4,7 @@ module Origin
     module Nor
 
       def nor(*criterion)
-        multi!(criterion, "$nor")
+        __multi__(criterion, "$nor")
       end
     end
   end

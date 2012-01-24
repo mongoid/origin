@@ -4,7 +4,7 @@ module Origin
     module Strategies
       module Expanded
 
-        def _expanded(criterion, outer, inner)
+        def __expanded__(criterion, outer, inner)
           selection(criterion) do |selector, field, value|
             selector.store(field, { outer => { inner => value }})
           end

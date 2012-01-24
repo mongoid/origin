@@ -4,7 +4,7 @@ module Origin
     module And
 
       def and(*criterion)
-        multi!(criterion, "$and")
+        __multi__(criterion, "$and")
       end
     end
   end
