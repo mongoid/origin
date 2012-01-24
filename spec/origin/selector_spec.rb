@@ -36,4 +36,45 @@ describe Origin::Selector do
       cloned[:field]["$in"].should_not equal(value)
     end
   end
+
+  [ :store, :[]= ].each do |method|
+
+    describe "##{method}" do
+
+      context "when no serializers are provided" do
+
+        let(:selector) do
+          described_class.new
+        end
+
+        it "does not serialize values" do
+          selector.send(method, "key", "5").should eq("5")
+        end
+      end
+
+      context "when serializers are provided" do
+
+        class Field
+          def selectionize(object)
+            Integer.selectionize(object)
+          end
+        end
+
+        let(:selector) do
+          described_class.new({ "key" => Field.new })
+        end
+
+        context "when the criterion is simple" do
+
+          before do
+            selector.send(method, "key", "5")
+          end
+
+          it "serializes the value" do
+            selector["key"].should eq(5)
+          end
+        end
+      end
+    end
+  end
 end
