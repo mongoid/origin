@@ -1,33 +1,34 @@
 # encoding: utf-8
+require "origin/selection/all"
+require "origin/selection/and"
+require "origin/selection/between"
+require "origin/selection/elem_match"
+require "origin/selection/exists"
+require "origin/selection/gt"
+require "origin/selection/gte"
+require "origin/selection/in"
+require "origin/selection/key"
+require "origin/selection/lt"
+require "origin/selection/lte"
+require "origin/selection/max_distance"
+require "origin/selection/mod"
+require "origin/selection/ne"
+require "origin/selection/near"
+require "origin/selection/near_sphere"
+require "origin/selection/nin"
+require "origin/selection/nor"
+require "origin/selection/or"
+require "origin/selection/size"
+require "origin/selection/strategies"
+require "origin/selection/type"
+require "origin/selection/where"
+require "origin/selection/within_box"
+require "origin/selection/within_circle"
+require "origin/selection/within_spherical_circle"
+
 module Origin
   module Selection
-
-    autoload :All, "origin/selection/all"
-    autoload :And, "origin/selection/and"
-    autoload :Between, "origin/selection/between"
-    autoload :ElemMatch, "origin/selection/elem_match"
-    autoload :Exists, "origin/selection/exists"
-    autoload :Gt, "origin/selection/gt"
-    autoload :Gte, "origin/selection/gte"
-    autoload :In, "origin/selection/in"
-    autoload :Key, "origin/selection/key"
-    autoload :Lt, "origin/selection/lt"
-    autoload :Lte, "origin/selection/lte"
-    autoload :MaxDistance, "origin/selection/max_distance"
-    autoload :Mod, "origin/selection/mod"
-    autoload :Ne, "origin/selection/ne"
-    autoload :Near, "origin/selection/near"
-    autoload :NearSphere, "origin/selection/near_sphere"
-    autoload :Nin, "origin/selection/nin"
-    autoload :Nor, "origin/selection/nor"
-    autoload :Or, "origin/selection/or"
-    autoload :Size, "origin/selection/size"
-    autoload :Strategies, "origin/selection/strategies"
-    autoload :Type, "origin/selection/type"
-    autoload :Where, "origin/selection/where"
-    autoload :WithinBox, "origin/selection/within_box"
-    autoload :WithinCircle, "origin/selection/within_circle"
-    autoload :WithinSphericalCircle, "origin/selection/within_spherical_circle"
+    include Strategies
 
     include All
     include And
@@ -48,7 +49,6 @@ module Origin
     include Nor
     include Or
     include Size
-    include Strategies
     include Type
     include Where
     include WithinBox
