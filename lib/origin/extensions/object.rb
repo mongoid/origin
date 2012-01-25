@@ -44,3 +44,6 @@ module Origin
     end
   end
 end
+
+::Object.__send__(:include, Origin::Extensions::Object)
+::Object.__send__(:extend, Origin::Extensions::Object::ClassMethods)

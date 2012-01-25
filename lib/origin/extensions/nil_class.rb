@@ -11,3 +11,5 @@ module Origin
     end
   end
 end
+
+::NilClass.__send__(:include, Origin::Extensions::NilClass)

@@ -31,3 +31,5 @@ module Origin
     end
   end
 end
+
+::Array.__send__(:include, Origin::Extensions::Array)

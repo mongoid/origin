@@ -11,3 +11,5 @@ module Origin
     end
   end
 end
+
+::Integer.__send__(:extend, Origin::Extensions::Integer::ClassMethods)

@@ -35,3 +35,5 @@ module Origin
     end
   end
 end
+
+::Hash.__send__(:include, Origin::Extensions::Hash)

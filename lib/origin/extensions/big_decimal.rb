@@ -14,3 +14,5 @@ module Origin
     end
   end
 end
+
+::BigDecimal.__send__(:extend, Origin::Extensions::BigDecimal::ClassMethods)
