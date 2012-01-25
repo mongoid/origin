@@ -7,6 +7,7 @@ module Origin
       module ClassMethods
 
         def evolve(object)
+          return object unless object
           object.to_s
         end
       end

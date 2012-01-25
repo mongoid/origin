@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Integer do
+describe Bignum do
 
   describe ".evolve" do
 
@@ -8,9 +8,9 @@ describe Integer do
 
       context "when the string is a number" do
 
-        context "when the string is an integer" do
+        context "when the string is an bignum" do
 
-          it "returns an integer" do
+          it "returns an bignum" do
             described_class.evolve("1").should eq(1)
           end
         end
@@ -34,9 +34,9 @@ describe Integer do
 
   context "when provided a number" do
 
-    context "when the number is an integer" do
+    context "when the number is an bignum" do
 
-      it "returns an integer" do
+      it "returns an bignum" do
         described_class.evolve(1).should eq(1)
       end
     end

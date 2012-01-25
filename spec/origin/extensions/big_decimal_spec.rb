@@ -21,5 +21,12 @@ describe BigDecimal do
         described_class.evolve("testing").should eq("testing")
       end
     end
+
+    context "when provided nil" do
+
+      it "returns nil" do
+        described_class.evolve(nil).should be_nil
+      end
+    end
   end
 end
