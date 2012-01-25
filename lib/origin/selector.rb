@@ -4,19 +4,32 @@ module Origin
 
     attr_reader :serializers
 
-    def []=(key, value)
-      super(key, evolve(serializers[key], value))
-    end
-
     def initialize(serializers = nil)
       @serializers = serializers || {}
     end
 
     def store(key, value)
-      super(key, evolve(serializers[key], value))
+      if and_or_selection?(key)
+        super(key, evolve_and_or(value))
+      else
+        super(key, evolve(serializers[key], value))
+      end
     end
+    alias :[]= :store
 
     private
+
+    def and_or_selection?(key)
+      [ "$and", "$or"].include?(key)
+    end
+
+    def evolve_and_or(value)
+      value.map do |val|
+        Hash[val.map do |_key, _value|
+          [ _key, evolve(serializers[_key], _value) ]
+        end]
+      end
+    end
 
     def evolve(serializer, value)
       return value unless serializer

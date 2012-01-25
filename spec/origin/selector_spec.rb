@@ -113,6 +113,40 @@ describe Origin::Selector do
                   selector["key"].should eq({ "$in" => [ 1, 2 ] })
                 end
               end
+
+              [ "$and", "$or" ].each do |operator|
+
+                context "when the criterion is a #{operator}" do
+
+                  context "when the individual criteria are simple" do
+
+                    before do
+                      selector.send(method, operator, [{ "key" => "1" }])
+                    end
+
+                    it "serializes the values" do
+                      selector[operator].should eq([{ "key" => 1 }])
+                    end
+                  end
+
+                  context "when the individual criteria are complex" do
+
+                    before do
+                      selector.send(
+                        method,
+                        operator,
+                        [{ "field" => "1" }, { "key" => { "$gt" => "2" }}]
+                      )
+                    end
+
+                    it "serializes the values" do
+                      selector[operator].should eq(
+                        [{ "field" => "1" }, { "key" => { "$gt" => 2 }}]
+                      )
+                    end
+                  end
+                end
+              end
             end
           end
         end
