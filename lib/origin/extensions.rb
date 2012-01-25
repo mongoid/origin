@@ -6,6 +6,7 @@ end
 require "origin/extensions/array"
 require "origin/extensions/big_decimal"
 require "origin/extensions/boolean"
+require "origin/extensions/float"
 require "origin/extensions/hash"
 require "origin/extensions/integer"
 require "origin/extensions/nil_class"
