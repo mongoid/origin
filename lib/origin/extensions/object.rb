@@ -34,6 +34,12 @@ module Origin
         def evolve(object)
           object
         end
+
+        private
+
+        def __numeric__(object)
+          object.to_s =~ /(^[-+]?[0-9]+$)|(\.0+)$/ ? object.to_i : Float(object)
+        end
       end
     end
   end

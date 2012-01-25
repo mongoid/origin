@@ -1,11 +1,13 @@
 # encoding: utf-8
+require "bigdecimal"
+
 module Origin
   module Extensions
-    module Integer
+    module BigDecimal
       module ClassMethods
 
         def evolve(object)
-          __numeric__(object) rescue object
+          object.to_s
         end
       end
     end
