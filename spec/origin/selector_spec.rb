@@ -29,11 +29,11 @@ describe Origin::Selector do
     end
 
     it "performs a deep copy" do
-      cloned[:field].should_not equal(selection)
+      cloned["field"].should_not equal(selection)
     end
 
     it "clones n levels deep" do
-      cloned[:field]["$in"].should_not equal(value)
+      cloned["field"]["$in"].should_not equal(value)
     end
   end
 
@@ -47,8 +47,32 @@ describe Origin::Selector do
           described_class.new
         end
 
-        it "does not serialize values" do
-          selector.send(method, "key", "5").should eq("5")
+        context "when provided a standard object" do
+
+          context "when the keys are strings" do
+
+            it "does not serialize values" do
+              selector.send(method, "key", "5").should eq("5")
+            end
+          end
+
+          context "when the keys are symbols" do
+
+            it "does not serialize values" do
+              selector.send(method, :key, "5").should eq("5")
+            end
+          end
+        end
+
+        context "when provided a range" do
+
+          before do
+            selector.send(method, "key", 1..3)
+          end
+
+          it "serializes the range" do
+            selector["key"].should eq({ "$gte" => 1, "$lte" => 3 })
+          end
         end
       end
 
@@ -66,12 +90,26 @@ describe Origin::Selector do
 
         context "when the criterion is simple" do
 
-          before do
-            selector.send(method, "key", "5")
+          context "when the key is a string" do
+
+            before do
+              selector.send(method, "key", "5")
+            end
+
+            it "serializes the value" do
+              selector["key"].should eq(5)
+            end
           end
 
-          it "serializes the value" do
-            selector["key"].should eq(5)
+          context "when the key is a symbol" do
+
+            before do
+              selector.send(method, :key, "5")
+            end
+
+            it "serializes the value" do
+              selector["key"].should eq(5)
+            end
           end
         end
 
@@ -81,12 +119,26 @@ describe Origin::Selector do
 
             context "when the criterion is an array" do
 
-              before do
-                selector.send(method, "key", [ "1", "2" ])
+              context "when the key is a string" do
+
+                before do
+                  selector.send(method, "key", [ "1", "2" ])
+                end
+
+                it "serializes the value" do
+                  selector["key"].should eq([ 1, 2 ])
+                end
               end
 
-              it "serializes the value" do
-                selector["key"].should eq([ 1, 2 ])
+              context "when the key is a symbol" do
+
+                before do
+                  selector.send(method, :key, [ "1", "2" ])
+                end
+
+                it "serializes the value" do
+                  selector["key"].should eq([ 1, 2 ])
+                end
               end
             end
 
@@ -94,23 +146,51 @@ describe Origin::Selector do
 
               context "when the value is non enumerable" do
 
-                before do
-                  selector.send(method, "key", { "$gt" => "5" })
+                context "when the key is a string" do
+
+                  before do
+                    selector.send(method, "key", { "$gt" => "5" })
+                  end
+
+                  it "serializes the value" do
+                    selector["key"].should eq({ "$gt" => 5 })
+                  end
                 end
 
-                it "serializes the value" do
-                  selector["key"].should eq({ "$gt" => 5 })
+                context "when the key is a symbol" do
+
+                  before do
+                    selector.send(method, :key, { "$gt" => "5" })
+                  end
+
+                  it "serializes the value" do
+                    selector["key"].should eq({ "$gt" => 5 })
+                  end
                 end
               end
 
               context "when the value is enumerable" do
 
-                before do
-                  selector.send(method, "key", { "$in" => [ "1", "2" ] })
+                context "when the key is a string" do
+
+                  before do
+                    selector.send(method, "key", { "$in" => [ "1", "2" ] })
+                  end
+
+                  it "serializes the value" do
+                    selector["key"].should eq({ "$in" => [ 1, 2 ] })
+                  end
                 end
 
-                it "serializes the value" do
-                  selector["key"].should eq({ "$in" => [ 1, 2 ] })
+                context "when the key is a symbol" do
+
+                  before do
+                    selector.send(method, :key, { "$in" => [ "1", "2" ] })
+                  end
+
+                  it "serializes the value" do
+                    selector["key"].should eq({ "$in" => [ 1, 2 ] })
+                  end
                 end
               end
 
@@ -120,29 +200,63 @@ describe Origin::Selector do
 
                   context "when the individual criteria are simple" do
 
-                    before do
-                      selector.send(method, operator, [{ "key" => "1" }])
+                    context "when the keys are strings" do
+
+                      before do
+                        selector.send(method, operator, [{ "key" => "1" }])
+                      end
+
+                      it "serializes the values" do
+                        selector[operator].should eq([{ "key" => 1 }])
+                      end
                     end
 
-                    it "serializes the values" do
-                      selector[operator].should eq([{ "key" => 1 }])
+                    context "when the keys are symbols" do
+
+                      before do
+                        selector.send(method, operator, [{ :key => "1" }])
+                      end
+
+                      it "serializes the values" do
+                        selector[operator].should eq([{ "key" => 1 }])
+                      end
                     end
                   end
 
                   context "when the individual criteria are complex" do
 
-                    before do
-                      selector.send(
-                        method,
-                        operator,
-                        [{ "field" => "1" }, { "key" => { "$gt" => "2" }}]
-                      )
+                    context "when the keys are strings" do
+
+                      before do
+                        selector.send(
+                          method,
+                          operator,
+                          [{ "field" => "1" }, { "key" => { "$gt" => "2" }}]
+                        )
+                      end
+
+                      it "serializes the values" do
+                        selector[operator].should eq(
+                          [{ "field" => "1" }, { "key" => { "$gt" => 2 }}]
+                        )
+                      end
                     end
 
-                    it "serializes the values" do
-                      selector[operator].should eq(
-                        [{ "field" => "1" }, { "key" => { "$gt" => 2 }}]
-                      )
+                    context "when the keys are symbols" do
+
+                      before do
+                        selector.send(
+                          method,
+                          operator,
+                          [{ :field => "1" }, { :key => { "$gt" => "2" }}]
+                        )
+                      end
+
+                      it "serializes the values" do
+                        selector[operator].should eq(
+                          [{ "field" => "1" }, { "key" => { "$gt" => 2 }}]
+                        )
+                      end
                     end
                   end
                 end

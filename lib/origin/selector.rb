@@ -9,34 +9,35 @@ module Origin
     end
 
     def store(key, value)
-      if and_or_selection?(key)
-        super(key, evolve_and_or(value))
+      normalized = key.to_s
+      if multi_selection?(normalized)
+        super(normalized, evolve_multi(value))
       else
-        super(key, evolve(serializers[key], value))
+        super(normalized, evolve(serializers[normalized], value))
       end
     end
     alias :[]= :store
 
     private
 
-    def and_or_selection?(key)
-      [ "$and", "$or"].include?(key)
+    def multi_selection?(key)
+      key =~ /\$and|\$or/
     end
 
-    def evolve_and_or(value)
+    def evolve_multi(value)
       value.map do |val|
         Hash[val.map do |_key, _value|
-          [ _key, evolve(serializers[_key], _value) ]
+          normalized = _key.to_s
+          [ normalized, evolve(serializers[normalized], _value) ]
         end]
       end
     end
 
     def evolve(serializer, value)
-      return value unless serializer
       case value
         when Hash then evolve_hash(serializer, value)
         when Array then evolve_array(serializer, value)
-        else serializer.evolve(value)
+        else (serializer || value.class).evolve(value)
       end
     end
 
