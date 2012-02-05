@@ -2,6 +2,23 @@ rvm:
   - 1.9.2
   - 1.9.3
   - ruby-head
-  - jruby
+  - jruby-19mode
+  - jruby-head
 env:
-  - JRUBY_OPTS="--1.9 --server"
+  - JRUBY_OPTS="--server -Xinvokedynamic.constants=true"
+  - RUBY_GC_MALLOC_LIMIT=60000000 RUBY_HEAP_FREE_MIN=100000 RUBY_HEAP_MIN_SLOTS=600000
+  -
+matrix:
+  exclude:
+    - rvm: 1.9.2
+      env: JRUBY_OPTS="--server -Xinvokedynamic.constants=true"
+    - rvm: 1.9.2
+      env: RUBY_GC_MALLOC_LIMIT=60000000 RUBY_HEAP_FREE_MIN=100000 RUBY_HEAP_MIN_SLOTS=600000
+    - rvm: 1.9.3
+      env: JRUBY_OPTS="--server -Xinvokedynamic.constants=true"
+    - rvm: ruby-head
+      env: JRUBY_OPTS="--server -Xinvokedynamic.constants=true"
+    - rvm: jruby-19mode
+      env: RUBY_GC_MALLOC_LIMIT=60000000 RUBY_HEAP_FREE_MIN=100000 RUBY_HEAP_MIN_SLOTS=600000
+    - rvm: jruby-head
+      env: RUBY_GC_MALLOC_LIMIT=60000000 RUBY_HEAP_FREE_MIN=100000 RUBY_HEAP_MIN_SLOTS=600000
