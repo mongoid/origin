@@ -1,11 +1,11 @@
 # encoding: utf-8
 require "origin/extensions"
-require "origin/selection"
+require "origin/selectable"
 require "origin/selector"
 
 module Origin
   module Queryable
-    include Selection
+    include Selectable
 
     attr_reader :selector
 
