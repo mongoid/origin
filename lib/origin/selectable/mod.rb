@@ -7,12 +7,7 @@ module Origin
         __override__(criterion, "$mod")
       end
 
-      ::Symbol.class_eval do
-
-        def mod
-          Key.new(self, "$mod")
-        end
-      end
+      ::Symbol.add_key(:mod, "$mod")
     end
   end
 end

@@ -7,12 +7,7 @@ module Origin
         __override__(criterion, "$gt")
       end
 
-      ::Symbol.class_eval do
-
-        def gt
-          Key.new(self, "$gt")
-        end
-      end
+      ::Symbol.add_key(:gt, "$gt")
     end
   end
 end

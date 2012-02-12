@@ -7,12 +7,7 @@ module Origin
         __override__(criterion, "$nearSphere")
       end
 
-      ::Symbol.class_eval do
-
-        def near_sphere
-          Key.new(self, "$nearSphere")
-        end
-      end
+      ::Symbol.add_key(:near_sphere, "$nearSphere")
     end
   end
 end

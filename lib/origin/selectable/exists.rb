@@ -7,12 +7,7 @@ module Origin
         __override__(criterion, "$exists")
       end
 
-      ::Symbol.class_eval do
-
-        def exists
-          Key.new(self, "$exists")
-        end
-      end
+      ::Symbol.add_key(:exists, "$exists")
     end
   end
 end

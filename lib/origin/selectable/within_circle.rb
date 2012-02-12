@@ -7,12 +7,7 @@ module Origin
         __expanded__(criterion, "$within", "$center")
       end
 
-      ::Symbol.class_eval do
-
-        def within_circle
-          Key.new(self, "$within", "$center")
-        end
-      end
+      ::Symbol.add_multi_key(:within_circle, "$within", "$center")
     end
   end
 end

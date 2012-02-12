@@ -7,12 +7,7 @@ module Origin
         __override__(criterion, "$elemMatch")
       end
 
-      ::Symbol.class_eval do
-
-        def elem_match
-          Key.new(self, "$elemMatch")
-        end
-      end
+      ::Symbol.add_key(:elem_match, "$elemMatch")
     end
   end
 end

@@ -7,12 +7,7 @@ module Origin
         __override__(criterion, "$type")
       end
 
-      ::Symbol.class_eval do
-
-        def type
-          Key.new(self, "$type")
-        end
-      end
+      ::Symbol.add_key(:type, "$type")
     end
   end
 end

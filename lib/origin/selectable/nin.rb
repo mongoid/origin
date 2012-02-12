@@ -7,12 +7,7 @@ module Origin
         send(strategy || :__intersect__, criterion, "$nin")
       end
 
-      ::Symbol.class_eval do
-
-        def nin
-          Key.new(self, "$nin")
-        end
-      end
+      ::Symbol.add_key(:nin, "$nin")
     end
   end
 end

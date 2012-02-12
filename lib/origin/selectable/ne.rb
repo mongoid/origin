@@ -7,12 +7,7 @@ module Origin
         __override__(criterion, "$ne")
       end
 
-      ::Symbol.class_eval do
-
-        def ne
-          Key.new(self, "$ne")
-        end
-      end
+      ::Symbol.add_key(:ne, "$ne")
     end
   end
 end

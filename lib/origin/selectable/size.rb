@@ -7,12 +7,7 @@ module Origin
         __override__(criterion, "$size")
       end
 
-      ::Symbol.class_eval do
-
-        def with_size
-          Key.new(self, "$size")
-        end
-      end
+      ::Symbol.add_key(:with_size, "$size")
     end
   end
 end

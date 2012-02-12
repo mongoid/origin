@@ -1,9 +1,5 @@
 # encoding: utf-8
-
-# Require all files in the selectable directory.
-Dir[ File.dirname(__FILE__) + "/selectable/*.rb" ].each do |file|
-  require file
-end
+require_all __FILE__, "selectable"
 
 module Origin
   module Selectable

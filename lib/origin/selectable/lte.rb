@@ -7,12 +7,7 @@ module Origin
         __override__(criterion, "$lte")
       end
 
-      ::Symbol.class_eval do
-
-        def lte
-          Key.new(self, "$lte")
-        end
-      end
+      ::Symbol.add_key(:lte, "$lte")
     end
   end
 end

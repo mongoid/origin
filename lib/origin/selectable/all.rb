@@ -7,12 +7,7 @@ module Origin
         send(strategy || :__override__, criterion, "$all")
       end
 
-      ::Symbol.class_eval do
-
-        def all
-          Key.new(self, "$all")
-        end
-      end
+      ::Symbol.add_key(:all, "$all")
     end
   end
 end

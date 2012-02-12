@@ -7,12 +7,7 @@ module Origin
         __override__(criterion, "$near")
       end
 
-      ::Symbol.class_eval do
-
-        def near
-          Key.new(self, "$near")
-        end
-      end
+      ::Symbol.add_key(:near, "$near")
     end
   end
 end
