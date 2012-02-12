@@ -5,12 +5,7 @@ module Origin
       module Add
 
         def __add__(criterion, operator)
-          selection(criterion) do |selector, field, value|
-            selector.store(
-              field,
-              selector[field].__add__({ operator => value })
-            )
-          end
+          with_strategy(:__add__, criterion, operator)
         end
       end
     end

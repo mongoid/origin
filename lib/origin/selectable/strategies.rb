@@ -28,11 +28,12 @@ module Origin
         end
       end
 
-      def option(*args)
-        clone.tap do |query|
-          unless args.compact.empty?
-            yield(query.options)
-          end
+      def with_strategy(strategy, criterion, operator)
+        selection(criterion) do |selector, field, value|
+          selector.store(
+            field,
+            selector[field].send(strategy, { operator => value })
+          )
         end
       end
     end

@@ -9,12 +9,7 @@ module Origin
         end
 
         def __union__(criterion, operator)
-          selection(criterion) do |selector, field, value|
-            selector.store(
-              field,
-              selector[field].__union__({ operator => value })
-            )
-          end
+          with_strategy(:__union__, criterion, operator)
         end
       end
     end

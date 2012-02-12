@@ -9,12 +9,7 @@ module Origin
         end
 
         def __intersect__(criterion, operator)
-          selection(criterion) do |selector, field, value|
-            selector.store(
-              field,
-              selector[field].__intersect__({ operator => value })
-            )
-          end
+          with_strategy(:__intersect__, criterion, operator)
         end
       end
     end
