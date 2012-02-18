@@ -9,6 +9,7 @@ module Origin
     end
 
     def store(key, value)
+      # @todo: Durran: Handle aliased fields here.
       normalized = key.to_s
       if multi_selection?(normalized)
         super(normalized, evolve_multi(value))

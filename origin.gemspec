@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project = "origin"
 
-  s.add_development_dependency("rspec", ["= 2.7"])
+  s.add_development_dependency("rspec", ["~> 2.8"])
   s.add_development_dependency("guard-rspec", ["~> 0.6"])
 
   s.files = Dir.glob("lib/**/*") + %w(Rakefile)
