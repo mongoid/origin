@@ -49,12 +49,12 @@ describe Origin::Selectable::Near do
     context "when provided a criterion" do
 
       let(:selection) do
-        query.near(:location => [ 20, 21 ])
+        query.near(location: [ 20, 21 ])
       end
 
       it "adds the $near expression" do
         selection.selector.should eq({
-          :location => { "$near" => [ 20, 21 ] }
+          location: { "$near" => [ 20, 21 ] }
         })
       end
 
@@ -69,15 +69,15 @@ describe Origin::Selectable::Near do
 
         let(:selection) do
           query.near(
-            :location => [ 20, 21 ],
-            :comments => [ 20, 21 ]
+            location: [ 20, 21 ],
+            comments: [ 20, 21 ]
           )
         end
 
         it "adds the $near expression" do
           selection.selector.should eq({
-            :location => { "$near" => [ 20, 21 ] },
-            :comments => { "$near" => [ 20, 21 ] }
+            location: { "$near" => [ 20, 21 ] },
+            comments: { "$near" => [ 20, 21 ] }
           })
         end
 
@@ -93,14 +93,14 @@ describe Origin::Selectable::Near do
 
         let(:selection) do
           query.
-            near(:location => [ 20, 21 ]).
-            near(:comments => [ 20, 21 ])
+            near(location: [ 20, 21 ]).
+            near(comments: [ 20, 21 ])
         end
 
         it "adds the $near expression" do
           selection.selector.should eq({
-            :location => { "$near" => [ 20, 21 ] },
-            :comments => { "$near" => [ 20, 21 ] }
+            location: { "$near" => [ 20, 21 ] },
+            comments: { "$near" => [ 20, 21 ] }
           })
         end
 

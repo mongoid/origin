@@ -49,12 +49,12 @@ describe Origin::Selectable::Exists do
     context "when provided a criterion" do
 
       let(:selection) do
-        query.exists(:users => true)
+        query.exists(users: true)
       end
 
       it "adds the $exists expression" do
         selection.selector.should eq({
-          :users => { "$exists" => true }
+          users: { "$exists" => true }
         })
       end
 
@@ -69,15 +69,15 @@ describe Origin::Selectable::Exists do
 
         let(:selection) do
           query.exists(
-            :users => true,
-            :comments => true
+            users: true,
+            comments: true
           )
         end
 
         it "adds the $exists expression" do
           selection.selector.should eq({
-            :users => { "$exists" => true },
-            :comments => { "$exists" => true }
+            users: { "$exists" => true },
+            comments: { "$exists" => true }
           })
         end
 
@@ -93,14 +93,14 @@ describe Origin::Selectable::Exists do
 
         let(:selection) do
           query.
-            exists(:users => true).
-            exists(:comments => true)
+            exists(users: true).
+            exists(comments: true)
         end
 
         it "adds the $exists expression" do
           selection.selector.should eq({
-            :users => { "$exists" => true },
-            :comments => { "$exists" => true }
+            users: { "$exists" => true },
+            comments: { "$exists" => true }
           })
         end
 

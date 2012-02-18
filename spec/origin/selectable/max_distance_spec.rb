@@ -51,12 +51,12 @@ describe Origin::Selectable::MaxDistance do
       context "when a $near criterion exists on the same field" do
 
         let(:selection) do
-          query.near(:location => [ 1, 1 ]).max_distance(:location => 50)
+          query.near(location: [ 1, 1 ]).max_distance(location: 50)
         end
 
         it "adds the $maxDistance expression" do
           selection.selector.should eq({
-            :location => { "$near" => [ 1, 1 ], "$maxDistance" => 50 }
+            location: { "$near" => [ 1, 1 ], "$maxDistance" => 50 }
           })
         end
 

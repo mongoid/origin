@@ -49,12 +49,12 @@ describe Origin::Selectable::Nin do
     context "when provided a sningle criterion" do
 
       let(:selection) do
-        query.nin(:field => [ 1, 2 ])
+        query.nin(field: [ 1, 2 ])
       end
 
       it "adds the $nin selector" do
         selection.selector.should eq({
-          :field => { "$nin" => [ 1, 2 ] }
+          field: { "$nin" => [ 1, 2 ] }
         })
       end
 
@@ -68,13 +68,13 @@ describe Origin::Selectable::Nin do
       context "when the criterion are for different fields" do
 
         let(:selection) do
-          query.nin(:first => [ 1, 2 ], :second => [ 3, 4 ])
+          query.nin(first: [ 1, 2 ], second: [ 3, 4 ])
         end
 
         it "adds the $nin selectors" do
           selection.selector.should eq({
-            :first => { "$nin" => [ 1, 2 ] },
-            :second => { "$nin" => [ 3, 4 ] }
+            first: { "$nin" => [ 1, 2 ] },
+            second: { "$nin" => [ 3, 4 ] }
           })
         end
 
@@ -89,13 +89,13 @@ describe Origin::Selectable::Nin do
       context "when the criterion are for different fields" do
 
         let(:selection) do
-          query.nin(:first => [ 1, 2 ]).nin(:second => [ 3, 4 ])
+          query.nin(first: [ 1, 2 ]).nin(second: [ 3, 4 ])
         end
 
         it "adds the $nin selectors" do
           selection.selector.should eq({
-            :first => { "$nin" => [ 1, 2 ] },
-            :second => { "$nin" => [ 3, 4 ] }
+            first: { "$nin" => [ 1, 2 ] },
+            second: { "$nin" => [ 3, 4 ] }
           })
         end
 
@@ -109,12 +109,12 @@ describe Origin::Selectable::Nin do
         context "when the stretegy is the default (intersection)" do
 
           let(:selection) do
-            query.nin(:first => [ 1, 2 ]).nin(:first => [ 2, 3 ])
+            query.nin(first: [ 1, 2 ]).nin(first: [ 2, 3 ])
           end
 
           it "intersects the $nin selectors" do
             selection.selector.should eq({
-              :first => { "$nin" => [ 2 ] }
+              first: { "$nin" => [ 2 ] }
             })
           end
 
@@ -126,12 +126,12 @@ describe Origin::Selectable::Nin do
         context "when the stretegy is intersect" do
 
           let(:selection) do
-            query.nin(:first => [ 1, 2 ]).intersect.nin(:first => [ 2, 3 ])
+            query.nin(first: [ 1, 2 ]).intersect.nin(first: [ 2, 3 ])
           end
 
           it "intersects the $nin selectors" do
             selection.selector.should eq({
-              :first => { "$nin" => [ 2 ] }
+              first: { "$nin" => [ 2 ] }
             })
           end
 
@@ -143,12 +143,12 @@ describe Origin::Selectable::Nin do
         context "when the stretegy is override" do
 
           let(:selection) do
-            query.nin(:first => [ 1, 2 ]).override.nin(:first => [ 3, 4 ])
+            query.nin(first: [ 1, 2 ]).override.nin(first: [ 3, 4 ])
           end
 
           it "overwrites the first $nin selector" do
             selection.selector.should eq({
-              :first => { "$nin" => [ 3, 4 ] }
+              first: { "$nin" => [ 3, 4 ] }
             })
           end
 
@@ -160,12 +160,12 @@ describe Origin::Selectable::Nin do
         context "when the stretegy is union" do
 
           let(:selection) do
-            query.nin(:first => [ 1, 2 ]).union.nin(:first => [ 3, 4 ])
+            query.nin(first: [ 1, 2 ]).union.nin(first: [ 3, 4 ])
           end
 
           it "unions the $nin selectors" do
             selection.selector.should eq({
-              :first => { "$nin" => [ 1, 2, 3, 4 ] }
+              first: { "$nin" => [ 1, 2, 3, 4 ] }
             })
           end
 

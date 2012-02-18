@@ -49,12 +49,12 @@ describe Origin::Selectable::ElemMatch do
     context "when provided a criterion" do
 
       let(:selection) do
-        query.elem_match(:users => { :name => "value" })
+        query.elem_match(users: { name: "value" })
       end
 
       it "adds the $elemMatch expression" do
         selection.selector.should eq({
-          :users => { "$elemMatch" => { :name => "value" }}
+          users: { "$elemMatch" => { name: "value" }}
         })
       end
 
@@ -69,15 +69,15 @@ describe Origin::Selectable::ElemMatch do
 
         let(:selection) do
           query.elem_match(
-            :users => { :name => "value" },
-            :comments => { :text => "value" }
+            users: { name: "value" },
+            comments: { text: "value" }
           )
         end
 
         it "adds the $elemMatch expression" do
           selection.selector.should eq({
-            :users => { "$elemMatch" => { :name => "value" }},
-            :comments => { "$elemMatch" => { :text => "value" }}
+            users: { "$elemMatch" => { name: "value" }},
+            comments: { "$elemMatch" => { text: "value" }}
           })
         end
 
@@ -93,14 +93,14 @@ describe Origin::Selectable::ElemMatch do
 
         let(:selection) do
           query.
-            elem_match(:users => { :name => "value" }).
-            elem_match(:comments => { :text => "value" })
+            elem_match(users: { name: "value" }).
+            elem_match(comments: { text: "value" })
         end
 
         it "adds the $elemMatch expression" do
           selection.selector.should eq({
-            :users => { "$elemMatch" => { :name => "value" }},
-            :comments => { "$elemMatch" => { :text => "value" }}
+            users: { "$elemMatch" => { name: "value" }},
+            comments: { "$elemMatch" => { text: "value" }}
           })
         end
 
@@ -113,13 +113,13 @@ describe Origin::Selectable::ElemMatch do
 
         let(:selection) do
           query.
-            elem_match(:users => { :name => "value" }).
-            elem_match(:users => { :state => "new" })
+            elem_match(users: { name: "value" }).
+            elem_match(users: { state: "new" })
         end
 
         it "overrides the $elemMatch expression" do
           selection.selector.should eq({
-            :users => { "$elemMatch" => { :state => "new" }}
+            users: { "$elemMatch" => { state: "new" }}
           })
         end
 

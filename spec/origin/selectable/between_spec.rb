@@ -49,12 +49,12 @@ describe Origin::Selectable::Between do
     context "when provided a single range" do
 
       let(:selection) do
-        query.between(:field => 1..10)
+        query.between(field: 1..10)
       end
 
       it "adds the $gte and $lte selectors" do
         selection.selector.should eq({
-          :field => { "$gte" => 1, "$lte" => 10 }
+          field: { "$gte" => 1, "$lte" => 10 }
         })
       end
 
@@ -68,13 +68,13 @@ describe Origin::Selectable::Between do
       context "when the ranges are on different fields" do
 
         let(:selection) do
-          query.between(:field => 1..10, :key => 5..7)
+          query.between(field: 1..10, key: 5..7)
         end
 
         it "adds the $gte and $lte selectors" do
           selection.selector.should eq({
-            :field => { "$gte" => 1, "$lte" => 10 },
-            :key => { "$gte" => 5, "$lte" => 7 }
+            field: { "$gte" => 1, "$lte" => 10 },
+            key: { "$gte" => 5, "$lte" => 7 }
           })
         end
 

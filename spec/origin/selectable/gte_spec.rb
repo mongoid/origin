@@ -49,12 +49,12 @@ describe Origin::Selectable::Gte do
     context "when provided a single criterion" do
 
       let(:selection) do
-        query.gte(:field => 10)
+        query.gte(field: 10)
       end
 
       it "adds the $gte selector" do
         selection.selector.should eq({
-          :field => { "$gte" => 10 }
+          field: { "$gte" => 10 }
         })
       end
 
@@ -68,13 +68,13 @@ describe Origin::Selectable::Gte do
       context "when the criterion are for different fields" do
 
         let(:selection) do
-          query.gte(:first => 10, :second => 15)
+          query.gte(first: 10, second: 15)
         end
 
         it "adds the $gte selectors" do
           selection.selector.should eq({
-            :first => { "$gte" => 10 },
-            :second => { "$gte" => 15 }
+            first: { "$gte" => 10 },
+            second: { "$gte" => 15 }
           })
         end
 
@@ -89,13 +89,13 @@ describe Origin::Selectable::Gte do
       context "when the criterion are for different fields" do
 
         let(:selection) do
-          query.gte(:first => 10).gte(:second => 15)
+          query.gte(first: 10).gte(second: 15)
         end
 
         it "adds the $gte selectors" do
           selection.selector.should eq({
-            :first => { "$gte" => 10 },
-            :second => { "$gte" => 15 }
+            first: { "$gte" => 10 },
+            second: { "$gte" => 15 }
           })
         end
 
@@ -107,12 +107,12 @@ describe Origin::Selectable::Gte do
       context "when the criterion are on the same field" do
 
         let(:selection) do
-          query.gte(:first => 10).gte(:first => 15)
+          query.gte(first: 10).gte(first: 15)
         end
 
         it "overwrites the first $gte selector" do
           selection.selector.should eq({
-            :first => { "$gte" => 15 }
+            first: { "$gte" => 15 }
           })
         end
 

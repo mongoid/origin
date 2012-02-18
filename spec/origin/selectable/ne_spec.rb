@@ -49,12 +49,12 @@ describe Origin::Selectable::Ne do
     context "when provided a criterion" do
 
       let(:selection) do
-        query.ne(:value => 10)
+        query.ne(value: 10)
       end
 
       it "adds the $ne expression" do
         selection.selector.should eq({
-          :value => { "$ne" => 10 }
+          value: { "$ne" => 10 }
         })
       end
 
@@ -69,15 +69,15 @@ describe Origin::Selectable::Ne do
 
         let(:selection) do
           query.ne(
-            :value => 10,
-            :comments => 10
+            value: 10,
+            comments: 10
           )
         end
 
         it "adds the $ne expression" do
           selection.selector.should eq({
-            :value => { "$ne" => 10 },
-            :comments => { "$ne" => 10 }
+            value: { "$ne" => 10 },
+            comments: { "$ne" => 10 }
           })
         end
 
@@ -93,14 +93,14 @@ describe Origin::Selectable::Ne do
 
         let(:selection) do
           query.
-            ne(:value => 10).
-            ne(:result => 10)
+            ne(value: 10).
+            ne(result: 10)
         end
 
         it "adds the $ne expression" do
           selection.selector.should eq({
-            :value => { "$ne" => 10 },
-            :result => { "$ne" => 10 }
+            value: { "$ne" => 10 },
+            result: { "$ne" => 10 }
           })
         end
 

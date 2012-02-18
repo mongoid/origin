@@ -49,12 +49,12 @@ describe Origin::Selectable::Lt do
     context "when provided a single criterion" do
 
       let(:selection) do
-        query.lt(:field => 10)
+        query.lt(field: 10)
       end
 
       it "adds the $lt selector" do
         selection.selector.should eq({
-          :field => { "$lt" => 10 }
+          field: { "$lt" => 10 }
         })
       end
 
@@ -68,13 +68,13 @@ describe Origin::Selectable::Lt do
       context "when the criterion are for different fields" do
 
         let(:selection) do
-          query.lt(:first => 10, :second => 15)
+          query.lt(first: 10, second: 15)
         end
 
         it "adds the $lt selectors" do
           selection.selector.should eq({
-            :first => { "$lt" => 10 },
-            :second => { "$lt" => 15 }
+            first: { "$lt" => 10 },
+            second: { "$lt" => 15 }
           })
         end
 
@@ -89,13 +89,13 @@ describe Origin::Selectable::Lt do
       context "when the criterion are for different fields" do
 
         let(:selection) do
-          query.lt(:first => 10).lt(:second => 15)
+          query.lt(first: 10).lt(second: 15)
         end
 
         it "adds the $lt selectors" do
           selection.selector.should eq({
-            :first => { "$lt" => 10 },
-            :second => { "$lt" => 15 }
+            first: { "$lt" => 10 },
+            second: { "$lt" => 15 }
           })
         end
 
@@ -107,12 +107,12 @@ describe Origin::Selectable::Lt do
       context "when the criterion are on the same field" do
 
         let(:selection) do
-          query.lt(:first => 10).lt(:first => 15)
+          query.lt(first: 10).lt(first: 15)
         end
 
         it "overwrites the first $lt selector" do
           selection.selector.should eq({
-            :first => { "$lt" => 15 }
+            first: { "$lt" => 15 }
           })
         end
 

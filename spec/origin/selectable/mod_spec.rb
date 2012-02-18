@@ -49,12 +49,12 @@ describe Origin::Selectable::Mod do
     context "when provided a criterion" do
 
       let(:selection) do
-        query.mod(:value => [ 10, 1 ])
+        query.mod(value: [ 10, 1 ])
       end
 
       it "adds the $mod expression" do
         selection.selector.should eq({
-          :value => { "$mod" => [ 10, 1 ] }
+          value: { "$mod" => [ 10, 1 ] }
         })
       end
 
@@ -69,15 +69,15 @@ describe Origin::Selectable::Mod do
 
         let(:selection) do
           query.mod(
-            :value => [ 10, 1 ],
-            :comments => [ 10, 1 ]
+            value: [ 10, 1 ],
+            comments: [ 10, 1 ]
           )
         end
 
         it "adds the $mod expression" do
           selection.selector.should eq({
-            :value => { "$mod" => [ 10, 1 ] },
-            :comments => { "$mod" => [ 10, 1 ] }
+            value: { "$mod" => [ 10, 1 ] },
+            comments: { "$mod" => [ 10, 1 ] }
           })
         end
 
@@ -93,14 +93,14 @@ describe Origin::Selectable::Mod do
 
         let(:selection) do
           query.
-            mod(:value => [ 10, 1 ]).
-            mod(:result => [ 10, 1 ])
+            mod(value: [ 10, 1 ]).
+            mod(result: [ 10, 1 ])
         end
 
         it "adds the $mod expression" do
           selection.selector.should eq({
-            :value => { "$mod" => [ 10, 1 ] },
-            :result => { "$mod" => [ 10, 1 ] }
+            value: { "$mod" => [ 10, 1 ] },
+            result: { "$mod" => [ 10, 1 ] }
           })
         end
 

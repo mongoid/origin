@@ -49,12 +49,12 @@ describe Origin::Selectable::Lte do
     context "when provided a single criterion" do
 
       let(:selection) do
-        query.lte(:field => 10)
+        query.lte(field: 10)
       end
 
       it "adds the $lte selector" do
         selection.selector.should eq({
-          :field => { "$lte" => 10 }
+          field: { "$lte" => 10 }
         })
       end
 
@@ -68,13 +68,13 @@ describe Origin::Selectable::Lte do
       context "when the criterion are for different fields" do
 
         let(:selection) do
-          query.lte(:first => 10, :second => 15)
+          query.lte(first: 10, second: 15)
         end
 
         it "adds the $lte selectors" do
           selection.selector.should eq({
-            :first => { "$lte" => 10 },
-            :second => { "$lte" => 15 }
+            first: { "$lte" => 10 },
+            second: { "$lte" => 15 }
           })
         end
 
@@ -89,13 +89,13 @@ describe Origin::Selectable::Lte do
       context "when the criterion are for different fields" do
 
         let(:selection) do
-          query.lte(:first => 10).lte(:second => 15)
+          query.lte(first: 10).lte(second: 15)
         end
 
         it "adds the $lte selectors" do
           selection.selector.should eq({
-            :first => { "$lte" => 10 },
-            :second => { "$lte" => 15 }
+            first: { "$lte" => 10 },
+            second: { "$lte" => 15 }
           })
         end
 
@@ -107,12 +107,12 @@ describe Origin::Selectable::Lte do
       context "when the criterion are on the same field" do
 
         let(:selection) do
-          query.lte(:first => 10).lte(:first => 15)
+          query.lte(first: 10).lte(first: 15)
         end
 
         it "overwrites the first $lte selector" do
           selection.selector.should eq({
-            :first => { "$lte" => 15 }
+            first: { "$lte" => 15 }
           })
         end
 

@@ -49,12 +49,12 @@ describe Origin::Selectable::NearSphere do
     context "when provided a criterion" do
 
       let(:selection) do
-        query.near_sphere(:location => [ 20, 21 ])
+        query.near_sphere(location: [ 20, 21 ])
       end
 
       it "adds the $nearSphere expression" do
         selection.selector.should eq({
-          :location => { "$nearSphere" => [ 20, 21 ] }
+          location: { "$nearSphere" => [ 20, 21 ] }
         })
       end
 
@@ -69,15 +69,15 @@ describe Origin::Selectable::NearSphere do
 
         let(:selection) do
           query.near_sphere(
-            :location => [ 20, 21 ],
-            :comments => [ 20, 21 ]
+            location: [ 20, 21 ],
+            comments: [ 20, 21 ]
           )
         end
 
         it "adds the $nearSphere expression" do
           selection.selector.should eq({
-            :location => { "$nearSphere" => [ 20, 21 ] },
-            :comments => { "$nearSphere" => [ 20, 21 ] }
+            location: { "$nearSphere" => [ 20, 21 ] },
+            comments: { "$nearSphere" => [ 20, 21 ] }
           })
         end
 
@@ -93,14 +93,14 @@ describe Origin::Selectable::NearSphere do
 
         let(:selection) do
           query.
-            near_sphere(:location => [ 20, 21 ]).
-            near_sphere(:comments => [ 20, 21 ])
+            near_sphere(location: [ 20, 21 ]).
+            near_sphere(comments: [ 20, 21 ])
         end
 
         it "adds the $nearSphere expression" do
           selection.selector.should eq({
-            :location => { "$nearSphere" => [ 20, 21 ] },
-            :comments => { "$nearSphere" => [ 20, 21 ] }
+            location: { "$nearSphere" => [ 20, 21 ] },
+            comments: { "$nearSphere" => [ 20, 21 ] }
           })
         end
 

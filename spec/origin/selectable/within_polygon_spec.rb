@@ -53,12 +53,12 @@ describe Origin::Selectable::WithinPolygon do
       end
 
       let(:selection) do
-        query.within_polygon(:location => polygon)
+        query.within_polygon(location: polygon)
       end
 
       it "adds the $within expression" do
         selection.selector.should eq({
-          :location => { "$within" => { "$polygon" => polygon }}
+          location: { "$within" => { "$polygon" => polygon }}
         })
       end
 
@@ -81,15 +81,15 @@ describe Origin::Selectable::WithinPolygon do
 
         let(:selection) do
           query.within_polygon(
-            :location => polygon_one,
-            :comments => polygon_two
+            location: polygon_one,
+            comments: polygon_two
           )
         end
 
         it "adds the $within expression" do
           selection.selector.should eq({
-            :location => { "$within" => { "$polygon" => polygon_one }},
-            :comments => { "$within" => { "$polygon" => polygon_two }}
+            location: { "$within" => { "$polygon" => polygon_one }},
+            comments: { "$within" => { "$polygon" => polygon_two }}
           })
         end
 
@@ -113,14 +113,14 @@ describe Origin::Selectable::WithinPolygon do
 
         let(:selection) do
           query.
-            within_polygon(:location => polygon_one).
-            within_polygon(:comments => polygon_two)
+            within_polygon(location: polygon_one).
+            within_polygon(comments: polygon_two)
         end
 
         it "adds the $within expression" do
           selection.selector.should eq({
-            :location => { "$within" => { "$polygon" => polygon_one }},
-            :comments => { "$within" => { "$polygon" => polygon_two }}
+            location: { "$within" => { "$polygon" => polygon_one }},
+            comments: { "$within" => { "$polygon" => polygon_two }}
           })
         end
 

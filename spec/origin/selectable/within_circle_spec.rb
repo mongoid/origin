@@ -49,12 +49,12 @@ describe Origin::Selectable::WithinCircle do
     context "when provided a criterion" do
 
       let(:selection) do
-        query.within_circle(:location => [[ 1, 10 ], 25 ])
+        query.within_circle(location: [[ 1, 10 ], 25 ])
       end
 
       it "adds the $within expression" do
         selection.selector.should eq({
-          :location => { "$within" => { "$center" => [[ 1, 10 ], 25 ] }}
+          location: { "$within" => { "$center" => [[ 1, 10 ], 25 ] }}
         })
       end
 
@@ -69,15 +69,15 @@ describe Origin::Selectable::WithinCircle do
 
         let(:selection) do
           query.within_circle(
-            :location => [[ 1, 10 ], 25 ],
-            :comments => [[ 1, 10 ], 25 ]
+            location: [[ 1, 10 ], 25 ],
+            comments: [[ 1, 10 ], 25 ]
           )
         end
 
         it "adds the $within expression" do
           selection.selector.should eq({
-            :location => { "$within" => { "$center" => [[ 1, 10 ], 25 ] }},
-            :comments => { "$within" => { "$center" => [[ 1, 10 ], 25 ] }}
+            location: { "$within" => { "$center" => [[ 1, 10 ], 25 ] }},
+            comments: { "$within" => { "$center" => [[ 1, 10 ], 25 ] }}
           })
         end
 
@@ -93,14 +93,14 @@ describe Origin::Selectable::WithinCircle do
 
         let(:selection) do
           query.
-            within_circle(:location => [[ 1, 10 ], 25 ]).
-            within_circle(:comments => [[ 1, 10 ], 25 ])
+            within_circle(location: [[ 1, 10 ], 25 ]).
+            within_circle(comments: [[ 1, 10 ], 25 ])
         end
 
         it "adds the $within expression" do
           selection.selector.should eq({
-            :location => { "$within" => { "$center" => [[ 1, 10 ], 25 ] }},
-            :comments => { "$within" => { "$center" => [[ 1, 10 ], 25 ] }}
+            location: { "$within" => { "$center" => [[ 1, 10 ], 25 ] }},
+            comments: { "$within" => { "$center" => [[ 1, 10 ], 25 ] }}
           })
         end
 

@@ -49,12 +49,12 @@ describe Origin::Selectable::In do
     context "when provided a single criterion" do
 
       let(:selection) do
-        query.in(:field => [ 1, 2 ])
+        query.in(field: [ 1, 2 ])
       end
 
       it "adds the $in selector" do
         selection.selector.should eq({
-          :field => { "$in" => [ 1, 2 ] }
+          field: { "$in" => [ 1, 2 ] }
         })
       end
 
@@ -68,13 +68,13 @@ describe Origin::Selectable::In do
       context "when the criterion are for different fields" do
 
         let(:selection) do
-          query.in(:first => [ 1, 2 ], :second => [ 3, 4 ])
+          query.in(first: [ 1, 2 ], second: [ 3, 4 ])
         end
 
         it "adds the $in selectors" do
           selection.selector.should eq({
-            :first => { "$in" => [ 1, 2 ] },
-            :second => { "$in" => [ 3, 4 ] }
+            first: { "$in" => [ 1, 2 ] },
+            second: { "$in" => [ 3, 4 ] }
           })
         end
 
@@ -89,13 +89,13 @@ describe Origin::Selectable::In do
       context "when the criterion are for different fields" do
 
         let(:selection) do
-          query.in(:first => [ 1, 2 ]).in(:second => [ 3, 4 ])
+          query.in(first: [ 1, 2 ]).in(second: [ 3, 4 ])
         end
 
         it "adds the $in selectors" do
           selection.selector.should eq({
-            :first => { "$in" => [ 1, 2 ] },
-            :second => { "$in" => [ 3, 4 ] }
+            first: { "$in" => [ 1, 2 ] },
+            second: { "$in" => [ 3, 4 ] }
           })
         end
 
@@ -109,12 +109,12 @@ describe Origin::Selectable::In do
         context "when the stretegy is the default (intersection)" do
 
           let(:selection) do
-            query.in(:first => [ 1, 2 ]).in(:first => [ 2, 3 ])
+            query.in(first: [ 1, 2 ]).in(first: [ 2, 3 ])
           end
 
           it "intersects the $in selectors" do
             selection.selector.should eq({
-              :first => { "$in" => [ 2 ] }
+              first: { "$in" => [ 2 ] }
             })
           end
 
@@ -126,12 +126,12 @@ describe Origin::Selectable::In do
         context "when the stretegy is intersect" do
 
           let(:selection) do
-            query.in(:first => [ 1, 2 ]).intersect.in(:first => [ 2, 3 ])
+            query.in(first: [ 1, 2 ]).intersect.in(first: [ 2, 3 ])
           end
 
           it "intersects the $in selectors" do
             selection.selector.should eq({
-              :first => { "$in" => [ 2 ] }
+              first: { "$in" => [ 2 ] }
             })
           end
 
@@ -143,12 +143,12 @@ describe Origin::Selectable::In do
         context "when the stretegy is override" do
 
           let(:selection) do
-            query.in(:first => [ 1, 2 ]).override.in(:first => [ 3, 4 ])
+            query.in(first: [ 1, 2 ]).override.in(first: [ 3, 4 ])
           end
 
           it "overwrites the first $in selector" do
             selection.selector.should eq({
-              :first => { "$in" => [ 3, 4 ] }
+              first: { "$in" => [ 3, 4 ] }
             })
           end
 
@@ -160,12 +160,12 @@ describe Origin::Selectable::In do
         context "when the stretegy is union" do
 
           let(:selection) do
-            query.in(:first => [ 1, 2 ]).union.in(:first => [ 3, 4 ])
+            query.in(first: [ 1, 2 ]).union.in(first: [ 3, 4 ])
           end
 
           it "unions the $in selectors" do
             selection.selector.should eq({
-              :first => { "$in" => [ 1, 2, 3, 4 ] }
+              first: { "$in" => [ 1, 2, 3, 4 ] }
             })
           end
 

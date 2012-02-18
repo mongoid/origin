@@ -49,12 +49,12 @@ describe Origin::Selectable::Type do
     context "when provided a single criterion" do
 
       let(:selection) do
-        query.type(:field => 10)
+        query.type(field: 10)
       end
 
       it "adds the $type selector" do
         selection.selector.should eq({
-          :field => { "$type" => 10 }
+          field: { "$type" => 10 }
         })
       end
 
@@ -68,13 +68,13 @@ describe Origin::Selectable::Type do
       context "when the criterion are for different fields" do
 
         let(:selection) do
-          query.type(:first => 10, :second => 15)
+          query.type(first: 10, second: 15)
         end
 
         it "adds the $type selectors" do
           selection.selector.should eq({
-            :first => { "$type" => 10 },
-            :second => { "$type" => 15 }
+            first: { "$type" => 10 },
+            second: { "$type" => 15 }
           })
         end
 
@@ -89,13 +89,13 @@ describe Origin::Selectable::Type do
       context "when the criterion are for different fields" do
 
         let(:selection) do
-          query.type(:first => 10).type(:second => 15)
+          query.type(first: 10).type(second: 15)
         end
 
         it "adds the $type selectors" do
           selection.selector.should eq({
-            :first => { "$type" => 10 },
-            :second => { "$type" => 15 }
+            first: { "$type" => 10 },
+            second: { "$type" => 15 }
           })
         end
 
@@ -107,12 +107,12 @@ describe Origin::Selectable::Type do
       context "when the criterion are on the same field" do
 
         let(:selection) do
-          query.type(:first => 10).type(:first => 15)
+          query.type(first: 10).type(first: 15)
         end
 
         it "overwrites the first $type selector" do
           selection.selector.should eq({
-            :first => { "$type" => 15 }
+            first: { "$type" => 15 }
           })
         end
 

@@ -78,7 +78,7 @@ describe Origin::Selectable::Where do
         end
 
         it "adds the $all criterion" do
-          selection.selector.should eq({ :field => { "$all" => [ 1, 2 ] }})
+          selection.selector.should eq({ field: { "$all" => [ 1, 2 ] }})
         end
 
         it "returns a cloned query" do
@@ -89,12 +89,12 @@ describe Origin::Selectable::Where do
       context "when performing an $elemMatch" do
 
         let(:selection) do
-          query.where(:field.elem_match => { :key => 1 })
+          query.where(:field.elem_match => { key: 1 })
         end
 
         it "adds the $elemMatch criterion" do
           selection.selector.should eq(
-            { :field => { "$elemMatch" => { :key => 1 } }}
+            { field: { "$elemMatch" => { key: 1 } }}
           )
         end
 
@@ -111,7 +111,7 @@ describe Origin::Selectable::Where do
 
         it "adds the $exists criterion" do
           selection.selector.should eq(
-            { :field => { "$exists" => true }}
+            { field: { "$exists" => true }}
           )
         end
 
@@ -128,7 +128,7 @@ describe Origin::Selectable::Where do
 
         it "adds the $gt criterion" do
           selection.selector.should eq(
-            { :field => { "$gt" => 10 }}
+            { field: { "$gt" => 10 }}
           )
         end
 
@@ -145,7 +145,7 @@ describe Origin::Selectable::Where do
 
         it "adds the $gte criterion" do
           selection.selector.should eq(
-            { :field => { "$gte" => 10 }}
+            { field: { "$gte" => 10 }}
           )
         end
 
@@ -161,7 +161,7 @@ describe Origin::Selectable::Where do
         end
 
         it "adds the $in criterion" do
-          selection.selector.should eq({ :field => { "$in" => [ 1, 2 ] }})
+          selection.selector.should eq({ field: { "$in" => [ 1, 2 ] }})
         end
 
         it "returns a cloned query" do
@@ -177,7 +177,7 @@ describe Origin::Selectable::Where do
 
         it "adds the $lt criterion" do
           selection.selector.should eq(
-            { :field => { "$lt" => 10 }}
+            { field: { "$lt" => 10 }}
           )
         end
 
@@ -194,7 +194,7 @@ describe Origin::Selectable::Where do
 
         it "adds the $lte criterion" do
           selection.selector.should eq(
-            { :field => { "$lte" => 10 }}
+            { field: { "$lte" => 10 }}
           )
         end
 
@@ -211,7 +211,7 @@ describe Origin::Selectable::Where do
 
         it "adds the $lte criterion" do
           selection.selector.should eq(
-            { :field => { "$mod" => [ 10, 1 ]}}
+            { field: { "$mod" => [ 10, 1 ]}}
           )
         end
 
@@ -228,7 +228,7 @@ describe Origin::Selectable::Where do
 
         it "adds the $ne criterion" do
           selection.selector.should eq(
-            { :field => { "$ne" => 10 }}
+            { field: { "$ne" => 10 }}
           )
         end
 
@@ -245,7 +245,7 @@ describe Origin::Selectable::Where do
 
         it "adds the $near criterion" do
           selection.selector.should eq(
-            { :field => { "$near" => [ 1, 1 ] }}
+            { field: { "$near" => [ 1, 1 ] }}
           )
         end
 
@@ -262,7 +262,7 @@ describe Origin::Selectable::Where do
 
         it "adds the $nearSphere criterion" do
           selection.selector.should eq(
-            { :field => { "$nearSphere" => [ 1, 1 ] }}
+            { field: { "$nearSphere" => [ 1, 1 ] }}
           )
         end
 
@@ -278,7 +278,7 @@ describe Origin::Selectable::Where do
         end
 
         it "adds the $nin criterion" do
-          selection.selector.should eq({ :field => { "$nin" => [ 1, 2 ] }})
+          selection.selector.should eq({ field: { "$nin" => [ 1, 2 ] }})
         end
 
         it "returns a cloned query" do
@@ -294,7 +294,7 @@ describe Origin::Selectable::Where do
 
         it "adds the $size criterion" do
           selection.selector.should eq(
-            { :field => { "$size" => 10 }}
+            { field: { "$size" => 10 }}
           )
         end
 
@@ -311,7 +311,7 @@ describe Origin::Selectable::Where do
 
         it "adds the $type criterion" do
           selection.selector.should eq(
-            { :field => { "$type" => 10 }}
+            { field: { "$type" => 10 }}
           )
         end
 
@@ -330,7 +330,7 @@ describe Origin::Selectable::Where do
 
           it "adds the $within and $center criterion" do
             selection.selector.should eq(
-              { :field => { "$within" => { "$center" => [[ 1, 1 ], 10 ]}}}
+              { field: { "$within" => { "$center" => [[ 1, 1 ], 10 ]}}}
             )
           end
 
@@ -347,7 +347,7 @@ describe Origin::Selectable::Where do
 
           it "adds the $within and $box criterion" do
             selection.selector.should eq(
-              { :field => { "$within" => { "$box" => [[ 1, 1 ], [ 1, 1 ]]}}}
+              { field: { "$within" => { "$box" => [[ 1, 1 ], [ 1, 1 ]]}}}
             )
           end
 

@@ -49,12 +49,12 @@ describe Origin::Selectable::Size do
     context "when provided a single criterion" do
 
       let(:selection) do
-        query.with_size(:field => 10)
+        query.with_size(field: 10)
       end
 
       it "adds the $size selector" do
         selection.selector.should eq({
-          :field => { "$size" => 10 }
+          field: { "$size" => 10 }
         })
       end
 
@@ -68,13 +68,13 @@ describe Origin::Selectable::Size do
       context "when the criterion are for different fields" do
 
         let(:selection) do
-          query.with_size(:first => 10, :second => 15)
+          query.with_size(first: 10, second: 15)
         end
 
         it "adds the $size selectors" do
           selection.selector.should eq({
-            :first => { "$size" => 10 },
-            :second => { "$size" => 15 }
+            first: { "$size" => 10 },
+            second: { "$size" => 15 }
           })
         end
 
@@ -89,13 +89,13 @@ describe Origin::Selectable::Size do
       context "when the criterion are for different fields" do
 
         let(:selection) do
-          query.with_size(:first => 10).with_size(:second => 15)
+          query.with_size(first: 10).with_size(second: 15)
         end
 
         it "adds the $size selectors" do
           selection.selector.should eq({
-            :first => { "$size" => 10 },
-            :second => { "$size" => 15 }
+            first: { "$size" => 10 },
+            second: { "$size" => 15 }
           })
         end
 
@@ -107,12 +107,12 @@ describe Origin::Selectable::Size do
       context "when the criterion are on the same field" do
 
         let(:selection) do
-          query.with_size(:first => 10).with_size(:first => 15)
+          query.with_size(first: 10).with_size(first: 15)
         end
 
         it "overwrites the first $size selector" do
           selection.selector.should eq({
-            :first => { "$size" => 15 }
+            first: { "$size" => 15 }
           })
         end
 

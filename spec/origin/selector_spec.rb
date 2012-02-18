@@ -214,7 +214,7 @@ describe Origin::Selector do
                     context "when the keys are symbols" do
 
                       before do
-                        selector.send(method, operator, [{ :key => "1" }])
+                        selector.send(method, operator, [{ key: "1" }])
                       end
 
                       it "serializes the values" do
@@ -248,7 +248,7 @@ describe Origin::Selector do
                         selector.send(
                           method,
                           operator,
-                          [{ :field => "1" }, { :key => { "$gt" => "2" }}]
+                          [{ field: "1" }, { key: { "$gt" => "2" }}]
                         )
                       end
 

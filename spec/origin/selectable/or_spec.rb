@@ -49,12 +49,12 @@ describe Origin::Selectable::Or do
     context "when provided a single criterion" do
 
       let(:selection) do
-        query.or(:field => [ 1, 2 ])
+        query.or(field: [ 1, 2 ])
       end
 
       it "adds the $or selector" do
         selection.selector.should eq({
-          "$or" => [{ :field => [ 1, 2 ] }]
+          "$or" => [{ field: [ 1, 2 ] }]
         })
       end
 
@@ -68,14 +68,14 @@ describe Origin::Selectable::Or do
       context "when the criterion are for different fields" do
 
         let(:selection) do
-          query.or({ :first => [ 1, 2 ] }, { :second => [ 3, 4 ] })
+          query.or({ first: [ 1, 2 ] }, { second: [ 3, 4 ] })
         end
 
         it "adds the $or selector" do
           selection.selector.should eq({
             "$or" => [
-              { :first => [ 1, 2 ] },
-              { :second => [ 3, 4 ] }
+              { first: [ 1, 2 ] },
+              { second: [ 3, 4 ] }
             ]
           })
         end
@@ -88,14 +88,14 @@ describe Origin::Selectable::Or do
       context "when the criterion are on the same field" do
 
         let(:selection) do
-          query.or({ :first => [ 1, 2 ] }, { :first => [ 3, 4 ] })
+          query.or({ first: [ 1, 2 ] }, { first: [ 3, 4 ] })
         end
 
         it "appends both $or expressions" do
           selection.selector.should eq({
             "$or" => [
-              { :first => [ 1, 2 ] },
-              { :first => [ 3, 4 ] }
+              { first: [ 1, 2 ] },
+              { first: [ 3, 4 ] }
             ]
           })
         end
@@ -111,14 +111,14 @@ describe Origin::Selectable::Or do
       context "when the criterion are for different fields" do
 
         let(:selection) do
-          query.or(:first => [ 1, 2 ]).or(:second => [ 3, 4 ])
+          query.or(first: [ 1, 2 ]).or(second: [ 3, 4 ])
         end
 
         it "adds the $or selectors" do
           selection.selector.should eq({
             "$or" => [
-              { :first => [ 1, 2 ] },
-              { :second => [ 3, 4 ] }
+              { first: [ 1, 2 ] },
+              { second: [ 3, 4 ] }
             ]
           })
         end
@@ -131,14 +131,14 @@ describe Origin::Selectable::Or do
       context "when the criterion are on the same field" do
 
         let(:selection) do
-          query.or(:first => [ 1, 2 ]).or(:first => [ 3, 4 ])
+          query.or(first: [ 1, 2 ]).or(first: [ 3, 4 ])
         end
 
         it "appends both $or expressions" do
           selection.selector.should eq({
             "$or" => [
-              { :first => [ 1, 2 ] },
-              { :first => [ 3, 4 ] }
+              { first: [ 1, 2 ] },
+              { first: [ 3, 4 ] }
             ]
           })
         end

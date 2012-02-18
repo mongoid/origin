@@ -49,12 +49,12 @@ describe Origin::Selectable::Nor do
     context "when provided a single criterion" do
 
       let(:selection) do
-        query.nor(:field => [ 1, 2 ])
+        query.nor(field: [ 1, 2 ])
       end
 
       it "adds the $nor selector" do
         selection.selector.should eq({
-          "$nor" => [{ :field => [ 1, 2 ] }]
+          "$nor" => [{ field: [ 1, 2 ] }]
         })
       end
 
@@ -68,14 +68,14 @@ describe Origin::Selectable::Nor do
       context "when the criterion are fnor different fields" do
 
         let(:selection) do
-          query.nor({ :first => [ 1, 2 ] }, { :second => [ 3, 4 ] })
+          query.nor({ first: [ 1, 2 ] }, { second: [ 3, 4 ] })
         end
 
         it "adds the $nor selector" do
           selection.selector.should eq({
             "$nor" => [
-              { :first => [ 1, 2 ] },
-              { :second => [ 3, 4 ] }
+              { first: [ 1, 2 ] },
+              { second: [ 3, 4 ] }
             ]
           })
         end
@@ -88,14 +88,14 @@ describe Origin::Selectable::Nor do
       context "when the criterion are on the same field" do
 
         let(:selection) do
-          query.nor({ :first => [ 1, 2 ] }, { :first => [ 3, 4 ] })
+          query.nor({ first: [ 1, 2 ] }, { first: [ 3, 4 ] })
         end
 
         it "appends both $nor expressions" do
           selection.selector.should eq({
             "$nor" => [
-              { :first => [ 1, 2 ] },
-              { :first => [ 3, 4 ] }
+              { first: [ 1, 2 ] },
+              { first: [ 3, 4 ] }
             ]
           })
         end
@@ -111,14 +111,14 @@ describe Origin::Selectable::Nor do
       context "when the criterion are fnor different fields" do
 
         let(:selection) do
-          query.nor(:first => [ 1, 2 ]).nor(:second => [ 3, 4 ])
+          query.nor(first: [ 1, 2 ]).nor(second: [ 3, 4 ])
         end
 
         it "adds the $nor selectors" do
           selection.selector.should eq({
             "$nor" => [
-              { :first => [ 1, 2 ] },
-              { :second => [ 3, 4 ] }
+              { first: [ 1, 2 ] },
+              { second: [ 3, 4 ] }
             ]
           })
         end
@@ -131,14 +131,14 @@ describe Origin::Selectable::Nor do
       context "when the criterion are on the same field" do
 
         let(:selection) do
-          query.nor(:first => [ 1, 2 ]).nor(:first => [ 3, 4 ])
+          query.nor(first: [ 1, 2 ]).nor(first: [ 3, 4 ])
         end
 
         it "appends both $nor expressions" do
           selection.selector.should eq({
             "$nor" => [
-              { :first => [ 1, 2 ] },
-              { :first => [ 3, 4 ] }
+              { first: [ 1, 2 ] },
+              { first: [ 3, 4 ] }
             ]
           })
         end

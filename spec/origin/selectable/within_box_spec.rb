@@ -49,12 +49,12 @@ describe Origin::Selectable::WithinBox do
     context "when provided a criterion" do
 
       let(:selection) do
-        query.within_box(:location => [[ 1, 10 ], [ 10, 1 ]])
+        query.within_box(location: [[ 1, 10 ], [ 10, 1 ]])
       end
 
       it "adds the $within expression" do
         selection.selector.should eq({
-          :location => { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }}
+          location: { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }}
         })
       end
 
@@ -69,15 +69,15 @@ describe Origin::Selectable::WithinBox do
 
         let(:selection) do
           query.within_box(
-            :location => [[ 1, 10 ], [ 10, 1 ]],
-            :comments => [[ 1, 10 ], [ 10, 1 ]]
+            location: [[ 1, 10 ], [ 10, 1 ]],
+            comments: [[ 1, 10 ], [ 10, 1 ]]
           )
         end
 
         it "adds the $within expression" do
           selection.selector.should eq({
-            :location => { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }},
-            :comments => { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }}
+            location: { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }},
+            comments: { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }}
           })
         end
 
@@ -93,14 +93,14 @@ describe Origin::Selectable::WithinBox do
 
         let(:selection) do
           query.
-            within_box(:location => [[ 1, 10 ], [ 10, 1 ]]).
-            within_box(:comments => [[ 1, 10 ], [ 10, 1 ]])
+            within_box(location: [[ 1, 10 ], [ 10, 1 ]]).
+            within_box(comments: [[ 1, 10 ], [ 10, 1 ]])
         end
 
         it "adds the $within expression" do
           selection.selector.should eq({
-            :location => { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }},
-            :comments => { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }}
+            location: { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }},
+            comments: { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }}
           })
         end
 
