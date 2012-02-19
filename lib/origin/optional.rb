@@ -13,6 +13,7 @@ module Origin
     include ShowDiskLoc
     include Skip
     include Slice
+    include Sorting
     include Snapshot
     include Without
 
