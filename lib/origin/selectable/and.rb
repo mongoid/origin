@@ -6,6 +6,7 @@ module Origin
       def and(*criterion)
         __multi__(criterion, "$and")
       end
+      alias :all_of :and
     end
   end
 end

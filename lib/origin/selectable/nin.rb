@@ -6,6 +6,7 @@ module Origin
       def nin(criterion = nil)
         send(strategy || :__intersect__, criterion, "$nin")
       end
+      alias :not_in :nin
 
       ::Symbol.add_key(:nin, "$nin")
     end
