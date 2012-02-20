@@ -36,9 +36,9 @@ module Origin
             hash.tap { |_hash| _hash.merge!(value.as_sorting_options) }
           end
         when Array
-          ::Hash[self]
+          ::Hash[self].as_sorting_options
         else
-          ::Hash[[ self ]]
+          ::Hash[[ self ]].as_sorting_options
         end
       end
     end

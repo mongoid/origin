@@ -10,27 +10,10 @@ describe Origin::Optional::OrderBy do
 
     context "when provided a hash" do
 
-      let(:selection) do
-        query.order_by(field_one: 1, field_two: -1)
-      end
-
-      it "adds the sorting criteria" do
-        selection.options.should eq(
-          { :sort => { field_one: 1, field_two: -1 }}
-        )
-      end
-
-      it "returns a cloned query" do
-        selection.should_not equal(query)
-      end
-    end
-
-    context "when provided an array" do
-
-      context "when the array is multi-dimensional" do
+      context "when the hash has integer values" do
 
         let(:selection) do
-          query.order_by([[ :field_one, 1 ],[ :field_two, -1 ]])
+          query.order_by(field_one: 1, field_two: -1)
         end
 
         it "adds the sorting criteria" do
@@ -41,6 +24,97 @@ describe Origin::Optional::OrderBy do
 
         it "returns a cloned query" do
           selection.should_not equal(query)
+        end
+      end
+
+      context "when the hash has symbol values" do
+
+        let(:selection) do
+          query.order_by(field_one: :asc, field_two: :desc)
+        end
+
+        it "adds the sorting criteria" do
+          selection.options.should eq(
+            { :sort => { field_one: 1, field_two: -1 }}
+          )
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
+      end
+
+      context "when the hash has string values" do
+
+        let(:selection) do
+          query.order_by(field_one: "asc", field_two: "desc")
+        end
+
+        it "adds the sorting criteria" do
+          selection.options.should eq(
+            { :sort => { field_one: 1, field_two: -1 }}
+          )
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
+      end
+    end
+
+    context "when provided an array" do
+
+      context "when the array is multi-dimensional" do
+
+        context "when the arrays have integer values" do
+
+          let(:selection) do
+            query.order_by([[ :field_one, 1 ],[ :field_two, -1 ]])
+          end
+
+          it "adds the sorting criteria" do
+            selection.options.should eq(
+              { :sort => { field_one: 1, field_two: -1 }}
+            )
+          end
+
+          it "returns a cloned query" do
+            selection.should_not equal(query)
+          end
+        end
+
+        context "when the arrays have symbol values" do
+
+          let(:selection) do
+            query.order_by([[ :field_one, :asc ],[ :field_two, :desc ]])
+          end
+
+          it "adds the sorting criteria" do
+            selection.options.should eq(
+              { :sort => { field_one: 1, field_two: -1 }}
+            )
+          end
+
+          it "returns a cloned query" do
+            selection.should_not equal(query)
+          end
+        end
+
+        context "when the arrays have string values" do
+
+          let(:selection) do
+            query.order_by([[ :field_one, "asc" ],[ :field_two, "desc" ]])
+          end
+
+          it "adds the sorting criteria" do
+            selection.options.should eq(
+              { :sort => { field_one: 1, field_two: -1 }}
+            )
+          end
+
+          it "returns a cloned query" do
+            selection.should_not equal(query)
+          end
         end
       end
 
@@ -66,18 +140,55 @@ describe Origin::Optional::OrderBy do
 
       context "when the values are arrays" do
 
-        let(:selection) do
-          query.order_by([ :field_one, 1 ],[ :field_two, -1 ])
+        context "when the values have integer directions" do
+
+          let(:selection) do
+            query.order_by([ :field_one, 1 ],[ :field_two, -1 ])
+          end
+
+          it "adds the sorting criteria" do
+            selection.options.should eq(
+              { :sort => { field_one: 1, field_two: -1 }}
+            )
+          end
+
+          it "returns a cloned query" do
+            selection.should_not equal(query)
+          end
         end
 
-        it "adds the sorting criteria" do
-          selection.options.should eq(
-            { :sort => { field_one: 1, field_two: -1 }}
-          )
+        context "when the values have symbol directions" do
+
+          let(:selection) do
+            query.order_by([ :field_one, :asc ],[ :field_two, :desc ])
+          end
+
+          it "adds the sorting criteria" do
+            selection.options.should eq(
+              { :sort => { field_one: 1, field_two: -1 }}
+            )
+          end
+
+          it "returns a cloned query" do
+            selection.should_not equal(query)
+          end
         end
 
-        it "returns a cloned query" do
-          selection.should_not equal(query)
+        context "when the values have string directions" do
+
+          let(:selection) do
+            query.order_by([ :field_one, "asc" ],[ :field_two, "desc" ])
+          end
+
+          it "adds the sorting criteria" do
+            selection.options.should eq(
+              { :sort => { field_one: 1, field_two: -1 }}
+            )
+          end
+
+          it "returns a cloned query" do
+            selection.should_not equal(query)
+          end
         end
       end
 

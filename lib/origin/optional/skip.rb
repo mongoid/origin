@@ -6,6 +6,7 @@ module Origin
       def skip(value = nil)
         option(value) { |options| options.store(:skip, value) }
       end
+      alias :offset :skip
     end
   end
 end

@@ -23,7 +23,13 @@ module Origin
         end
       end
 
-      def as_sorting_options; self; end
+      def as_sorting_options
+        tap do |hash|
+          hash.each_pair do |key, value|
+            hash.store(key, value.to_direction)
+          end
+        end
+      end
 
       private
 
