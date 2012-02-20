@@ -28,6 +28,19 @@ module Origin
           end
         end
       end
+
+      def as_sorting_options
+        case first
+        when Selectable::Key
+          inject({}) do |hash, value|
+            hash.tap { |_hash| _hash.merge!(value.as_sorting_options) }
+          end
+        when Array
+          ::Hash[self]
+        else
+          ::Hash[[ self ]]
+        end
+      end
     end
   end
 end

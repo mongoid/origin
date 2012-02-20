@@ -3,17 +3,19 @@ require_all __FILE__, "optional"
 
 module Origin
   module Optional
+    include Ascending
     include BatchSize
+    include Descending
     include Hint
     include Limit
     include MaxScan
     include NoTimeout
     include Only
+    include OrderBy
     include ReturnKey
     include ShowDiskLoc
     include Skip
     include Slice
-    include Sorting
     include Snapshot
     include Without
 

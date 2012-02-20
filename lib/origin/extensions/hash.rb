@@ -23,6 +23,8 @@ module Origin
         end
       end
 
+      def as_sorting_options; self; end
+
       private
 
       def apply_strategy(strategy, object)

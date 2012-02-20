@@ -15,6 +15,10 @@ module Origin
           { name => { operator => value }}
         end
       end
+
+      def as_sorting_options
+        { name => operator }
+      end
     end
   end
 end
