@@ -6,14 +6,11 @@ module Origin
     include Ascending
     include BatchSize
     include Descending
-    include Hint
     include Limit
     include MaxScan
     include NoTimeout
     include Only
     include OrderBy
-    include ReturnKey
-    include ShowDiskLoc
     include Skip
     include Slice
     include Snapshot
