@@ -40,9 +40,11 @@ module Origin
     # @example Initialize the queryable.
     #   Origin::Queryable.new
     #
+    # @param [ Hash ] serializers The optional field serializers.
+    #
     # @since 1.0.0
-    def initialize
-      @options, @selector = Options.new, Selector.new
+    def initialize(serializers = nil)
+      @options, @selector = Options.new, Selector.new(serializers)
       yield(self) if block_given?
     end
 

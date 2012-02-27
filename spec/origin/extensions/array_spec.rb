@@ -118,6 +118,33 @@ describe Array do
     end
   end
 
+  describe "__deep_copy__" do
+
+    let(:inner) do
+      [ 3, 4 ]
+    end
+
+    let(:array) do
+      [ 1, 2, inner ]
+    end
+
+    let(:copy) do
+      array.__deep_copy__
+    end
+
+    it "returns an equal array" do
+      copy.should eq(array)
+    end
+
+    it "returns a copy" do
+      copy.should_not equal(array)
+    end
+
+    it "deep copies the elements" do
+      copy[2].should_not equal(inner)
+    end
+  end
+
   describe "#__union__" do
 
     context "when the other object is a non-enumerable" do
@@ -140,6 +167,28 @@ describe Array do
         [ 4, 5 ].__union__({ "$in" => [ 5, 6 ] }).should eq(
           { "$in" => [ 4, 5, 6 ] }
         )
+      end
+    end
+  end
+
+  describe "#as_sorting_options" do
+
+    context "when the first element is an array" do
+
+      context "when the array is multi-dimensional" do
+
+        context "when the arrays have integer values" do
+
+          let(:selection) do
+            [[ :field_one, 1 ],[ :field_two, -1 ]]
+          end
+
+          it "returns the sorting criteria" do
+            selection.as_sorting_options.should eq(
+              { field_one: 1, field_two: -1 }
+            )
+          end
+        end
       end
     end
   end
