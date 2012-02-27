@@ -31,8 +31,7 @@ module Origin
     # @since 1.0.0
     def ==(other)
       return false unless other.is_a?(Queryable)
-      selector == other.selector &&
-        options == other.options
+      selector == other.selector && options == other.options
     end
 
     # Initialize the new queryable. Will yield itself to the block if a block

@@ -48,7 +48,19 @@ module Origin
 
     private
 
+    # Evolves a multi-list selection, like an $and or $or criterion, and
+    # performs the necessary serialization.
+    #
     # @api private
+    #
+    # @example Evolve the multi-selection.
+    #   selector.evolve_multi([{ field: "value" }])
+    #
+    # @param [ Array<Hash> ] The multi-selection.
+    #
+    # @return [ Array<Hash> ] The serialized values.
+    #
+    # @since 1.0.0
     def evolve_multi(value)
       value.map do |val|
         Hash[val.map do |key, _value|
@@ -59,7 +71,19 @@ module Origin
       end
     end
 
+    # Evolve a single key selection with various types of values.
+    #
     # @api private
+    #
+    # @example Evolve a simple selection.
+    #   selector.evolve(field, 5)
+    #
+    # @param [ Object ] serializer The optional serializer for the field.
+    # @param [ Object ] value The value to serialize.
+    #
+    # @return [ Object ] The serialized object.
+    #
+    # @since 1.0.0
     def evolve(serializer, value)
       case value
         when Hash then evolve_hash(serializer, value)
@@ -68,14 +92,38 @@ module Origin
       end
     end
 
+    # Evolve a single key selection with array values.
+    #
     # @api private
+    #
+    # @example Evolve a simple selection.
+    #   selector.evolve(field, [ 1, 2, 3 ])
+    #
+    # @param [ Object ] serializer The optional serializer for the field.
+    # @param [ Array<Object> ] value The array to serialize.
+    #
+    # @return [ Object ] The serialized array.
+    #
+    # @since 1.0.0
     def evolve_array(serializer, value)
       value.map do |_value|
         evolve(serializer, _value)
       end
     end
 
+    # Evolve a single key selection with hash values.
+    #
     # @api private
+    #
+    # @example Evolve a simple selection.
+    #   selector.evolve(field, { "$gt" => 5 })
+    #
+    # @param [ Object ] serializer The optional serializer for the field.
+    # @param [ Hash ] value The hash to serialize.
+    #
+    # @return [ Object ] The serialized hash.
+    #
+    # @since 1.0.0
     def evolve_hash(serializer, value)
       value.reduce({}) do |hash, (operator, _value)|
         hash[operator] = evolve(serializer, _value)
@@ -83,12 +131,37 @@ module Origin
       end
     end
 
+    # Determines if the selection is a multi-select, like an $and or $or
+    # selection.
+    #
     # @api private
+    #
+    # @example Is the selection a multi-select?
+    #   selector.multi_selection?("$and")
+    #
+    # @param [ String ] key The key to check.
+    #
+    # @return [ true, false ] If the key is for a multi-select.
+    #
+    # @since 1.0.0
     def multi_selection?(key)
       key =~ /\$and|\$or/
     end
 
+    # Get the normalized value for the key. If localization is in play the
+    # current locale will be appended to the key in MongoDB dot notation.
+    #
     # @api private
+    #
+    # @example Get the normalized key name.
+    #   selector.normalized_key("field", serializer)
+    #
+    # @param [ String ] name The name of the field.
+    # @param [ Object ] serializer The optional field serializer.
+    #
+    # @return [ String ] The normalized key.
+    #
+    # @since 1.0.0
     def normalized_key(name, serializer)
       serializer && serializer.localized? ? "#{name}.#{::I18n.locale}" : name
     end
