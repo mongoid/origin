@@ -1,5 +1,10 @@
 # encoding: utf-8
-require_all __FILE__, "strategies"
+require "origin/selectable/strategies/add"
+require "origin/selectable/strategies/expanded"
+require "origin/selectable/strategies/intersect"
+require "origin/selectable/strategies/multi"
+require "origin/selectable/strategies/override"
+require "origin/selectable/strategies/union"
 
 module Origin
   module Selectable

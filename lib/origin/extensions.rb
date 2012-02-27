@@ -3,12 +3,15 @@ unless defined?(Boolean)
   class Boolean; end
 end
 
-module Kernel
-  def require_all(current, files)
-    Dir[ File.join(File.dirname(current), files, "*.rb") ].each do |file|
-      require file
-    end
-  end
-end
-
-require_all __FILE__, "extensions"
+require "origin/extensions/array"
+require "origin/extensions/big_decimal"
+require "origin/extensions/boolean"
+require "origin/extensions/float"
+require "origin/extensions/hash"
+require "origin/extensions/integer"
+require "origin/extensions/nil_class"
+require "origin/extensions/object"
+require "origin/extensions/range"
+require "origin/extensions/set"
+require "origin/extensions/string"
+require "origin/extensions/symbol"
