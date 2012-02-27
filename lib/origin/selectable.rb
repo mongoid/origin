@@ -1,7 +1,37 @@
 # encoding: utf-8
-require_all __FILE__, "selectable"
+require "origin/selectable/all"
+require "origin/selectable/and"
+require "origin/selectable/between"
+require "origin/selectable/elem_match"
+require "origin/selectable/exists"
+require "origin/selectable/gt"
+require "origin/selectable/gte"
+require "origin/selectable/in"
+require "origin/selectable/key"
+require "origin/selectable/lt"
+require "origin/selectable/lte"
+require "origin/selectable/max_distance"
+require "origin/selectable/mod"
+require "origin/selectable/ne"
+require "origin/selectable/near"
+require "origin/selectable/near_sphere"
+require "origin/selectable/nin"
+require "origin/selectable/nor"
+require "origin/selectable/or"
+require "origin/selectable/size"
+require "origin/selectable/strategies"
+require "origin/selectable/type"
+require "origin/selectable/where"
+require "origin/selectable/within_box"
+require "origin/selectable/within_circle"
+require "origin/selectable/within_polygon"
+require "origin/selectable/within_spherical_circle"
 
 module Origin
+
+  # An origin queryable is selectable, in that it has the ability to select
+  # document from the database. The selectable module brings all functionality
+  # to the queryable that has to do with building MongoDB selectors.
   module Selectable
     include Strategies
 
@@ -31,8 +61,20 @@ module Origin
     include WithinPolygon
     include WithinSphericalCircle
 
+    # @attribute [r] selector The query selector.
     attr_reader :selector
 
+    # Take the provided criterion and store it as a selection in the query
+    # selector.
+    #
+    # @example Store the selection.
+    #   selectable.selection({ field: "value" })
+    #
+    # @param [ Hash ] criterion The selection to store.
+    #
+    # @return [ Queryable ] The cloned queryable.
+    #
+    # @since 1.0.0
     def selection(criterion = nil)
       clone.tap do |query|
         if criterion
