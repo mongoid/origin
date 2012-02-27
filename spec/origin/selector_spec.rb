@@ -78,184 +78,389 @@ describe Origin::Selector do
 
       context "when serializers are provided" do
 
-        class Field
-          def evolve(object)
-            Integer.evolve(object)
-          end
-        end
+        context "when the serializer is not localized" do
 
-        let(:selector) do
-          described_class.new({ "key" => Field.new })
-        end
-
-        context "when the criterion is simple" do
-
-          context "when the key is a string" do
-
-            before do
-              selector.send(method, "key", "5")
+          class Field
+            def evolve(object)
+              Integer.evolve(object)
             end
 
-            it "serializes the value" do
-              selector["key"].should eq(5)
+            def localized?
+              false
             end
           end
 
-          context "when the key is a symbol" do
-
-            before do
-              selector.send(method, :key, "5")
-            end
-
-            it "serializes the value" do
-              selector["key"].should eq(5)
-            end
+          let(:selector) do
+            described_class.new({ "key" => Field.new })
           end
-        end
 
-        context "when the criterion is complex" do
+          context "when the criterion is simple" do
 
-          context "when the field name is the key" do
+            context "when the key is a string" do
 
-            context "when the criterion is an array" do
-
-              context "when the key is a string" do
-
-                before do
-                  selector.send(method, "key", [ "1", "2" ])
-                end
-
-                it "serializes the value" do
-                  selector["key"].should eq([ 1, 2 ])
-                end
+              before do
+                selector.send(method, "key", "5")
               end
 
-              context "when the key is a symbol" do
-
-                before do
-                  selector.send(method, :key, [ "1", "2" ])
-                end
-
-                it "serializes the value" do
-                  selector["key"].should eq([ 1, 2 ])
-                end
+              it "serializes the value" do
+                selector["key"].should eq(5)
               end
             end
 
-            context "when the criterion is a hash" do
+            context "when the key is a symbol" do
 
-              context "when the value is non enumerable" do
+              before do
+                selector.send(method, :key, "5")
+              end
+
+              it "serializes the value" do
+                selector["key"].should eq(5)
+              end
+            end
+          end
+
+          context "when the criterion is complex" do
+
+            context "when the field name is the key" do
+
+              context "when the criterion is an array" do
 
                 context "when the key is a string" do
 
                   before do
-                    selector.send(method, "key", { "$gt" => "5" })
+                    selector.send(method, "key", [ "1", "2" ])
                   end
 
                   it "serializes the value" do
-                    selector["key"].should eq({ "$gt" => 5 })
+                    selector["key"].should eq([ 1, 2 ])
                   end
                 end
 
                 context "when the key is a symbol" do
 
                   before do
-                    selector.send(method, :key, { "$gt" => "5" })
+                    selector.send(method, :key, [ "1", "2" ])
                   end
 
                   it "serializes the value" do
-                    selector["key"].should eq({ "$gt" => 5 })
+                    selector["key"].should eq([ 1, 2 ])
                   end
                 end
               end
 
-              context "when the value is enumerable" do
+              context "when the criterion is a hash" do
+
+                context "when the value is non enumerable" do
+
+                  context "when the key is a string" do
+
+                    before do
+                      selector.send(method, "key", { "$gt" => "5" })
+                    end
+
+                    it "serializes the value" do
+                      selector["key"].should eq({ "$gt" => 5 })
+                    end
+                  end
+
+                  context "when the key is a symbol" do
+
+                    before do
+                      selector.send(method, :key, { "$gt" => "5" })
+                    end
+
+                    it "serializes the value" do
+                      selector["key"].should eq({ "$gt" => 5 })
+                    end
+                  end
+                end
+
+                context "when the value is enumerable" do
+
+                  context "when the key is a string" do
+
+                    before do
+                      selector.send(method, "key", { "$in" => [ "1", "2" ] })
+                    end
+
+                    it "serializes the value" do
+                      selector["key"].should eq({ "$in" => [ 1, 2 ] })
+                    end
+                  end
+
+                  context "when the key is a symbol" do
+
+                    before do
+                      selector.send(method, :key, { "$in" => [ "1", "2" ] })
+                    end
+
+                    it "serializes the value" do
+                      selector["key"].should eq({ "$in" => [ 1, 2 ] })
+                    end
+                  end
+                end
+
+                [ "$and", "$or" ].each do |operator|
+
+                  context "when the criterion is a #{operator}" do
+
+                    context "when the individual criteria are simple" do
+
+                      context "when the keys are strings" do
+
+                        before do
+                          selector.send(method, operator, [{ "key" => "1" }])
+                        end
+
+                        it "serializes the values" do
+                          selector[operator].should eq([{ "key" => 1 }])
+                        end
+                      end
+
+                      context "when the keys are symbols" do
+
+                        before do
+                          selector.send(method, operator, [{ key: "1" }])
+                        end
+
+                        it "serializes the values" do
+                          selector[operator].should eq([{ "key" => 1 }])
+                        end
+                      end
+                    end
+
+                    context "when the individual criteria are complex" do
+
+                      context "when the keys are strings" do
+
+                        before do
+                          selector.send(
+                            method,
+                            operator,
+                            [{ "field" => "1" }, { "key" => { "$gt" => "2" }}]
+                          )
+                        end
+
+                        it "serializes the values" do
+                          selector[operator].should eq(
+                            [{ "field" => "1" }, { "key" => { "$gt" => 2 }}]
+                          )
+                        end
+                      end
+
+                      context "when the keys are symbols" do
+
+                        before do
+                          selector.send(
+                            method,
+                            operator,
+                            [{ field: "1" }, { key: { "$gt" => "2" }}]
+                          )
+                        end
+
+                        it "serializes the values" do
+                          selector[operator].should eq(
+                            [{ "field" => "1" }, { "key" => { "$gt" => 2 }}]
+                          )
+                        end
+                      end
+                    end
+                  end
+                end
+              end
+            end
+          end
+        end
+
+        context "when the serializer is localized" do
+
+          class LocalizedField
+            def evolve(object)
+              Integer.evolve(object)
+            end
+
+            def localized?
+              true
+            end
+          end
+
+          let(:selector) do
+            described_class.new({ "key" => LocalizedField.new })
+          end
+
+          before do
+            ::I18n.locale = :de
+          end
+
+          context "when the criterion is simple" do
+
+            context "when the key is a string" do
+
+              before do
+                selector.send(method, "key", "5")
+              end
+
+              it "serializes the value" do
+                selector["key.de"].should eq(5)
+              end
+            end
+
+            context "when the key is a symbol" do
+
+              before do
+                selector.send(method, :key, "5")
+              end
+
+              it "serializes the value" do
+                selector["key.de"].should eq(5)
+              end
+            end
+          end
+
+          context "when the criterion is complex" do
+
+            context "when the field name is the key" do
+
+              context "when the criterion is an array" do
 
                 context "when the key is a string" do
 
                   before do
-                    selector.send(method, "key", { "$in" => [ "1", "2" ] })
+                    selector.send(method, "key", [ "1", "2" ])
                   end
 
                   it "serializes the value" do
-                    selector["key"].should eq({ "$in" => [ 1, 2 ] })
+                    selector["key.de"].should eq([ 1, 2 ])
                   end
                 end
 
                 context "when the key is a symbol" do
 
                   before do
-                    selector.send(method, :key, { "$in" => [ "1", "2" ] })
+                    selector.send(method, :key, [ "1", "2" ])
                   end
 
                   it "serializes the value" do
-                    selector["key"].should eq({ "$in" => [ 1, 2 ] })
+                    selector["key.de"].should eq([ 1, 2 ])
                   end
                 end
               end
 
-              [ "$and", "$or" ].each do |operator|
+              context "when the criterion is a hash" do
 
-                context "when the criterion is a #{operator}" do
+                context "when the value is non enumerable" do
 
-                  context "when the individual criteria are simple" do
+                  context "when the key is a string" do
 
-                    context "when the keys are strings" do
-
-                      before do
-                        selector.send(method, operator, [{ "key" => "1" }])
-                      end
-
-                      it "serializes the values" do
-                        selector[operator].should eq([{ "key" => 1 }])
-                      end
+                    before do
+                      selector.send(method, "key", { "$gt" => "5" })
                     end
 
-                    context "when the keys are symbols" do
-
-                      before do
-                        selector.send(method, operator, [{ key: "1" }])
-                      end
-
-                      it "serializes the values" do
-                        selector[operator].should eq([{ "key" => 1 }])
-                      end
+                    it "serializes the value" do
+                      selector["key.de"].should eq({ "$gt" => 5 })
                     end
                   end
 
-                  context "when the individual criteria are complex" do
+                  context "when the key is a symbol" do
 
-                    context "when the keys are strings" do
+                    before do
+                      selector.send(method, :key, { "$gt" => "5" })
+                    end
 
-                      before do
-                        selector.send(
-                          method,
-                          operator,
-                          [{ "field" => "1" }, { "key" => { "$gt" => "2" }}]
-                        )
+                    it "serializes the value" do
+                      selector["key.de"].should eq({ "$gt" => 5 })
+                    end
+                  end
+                end
+
+                context "when the value is enumerable" do
+
+                  context "when the key is a string" do
+
+                    before do
+                      selector.send(method, "key", { "$in" => [ "1", "2" ] })
+                    end
+
+                    it "serializes the value" do
+                      selector["key.de"].should eq({ "$in" => [ 1, 2 ] })
+                    end
+                  end
+
+                  context "when the key is a symbol" do
+
+                    before do
+                      selector.send(method, :key, { "$in" => [ "1", "2" ] })
+                    end
+
+                    it "serializes the value" do
+                      selector["key.de"].should eq({ "$in" => [ 1, 2 ] })
+                    end
+                  end
+                end
+
+                [ "$and", "$or" ].each do |operator|
+
+                  context "when the criterion is a #{operator}" do
+
+                    context "when the individual criteria are simple" do
+
+                      context "when the keys are strings" do
+
+                        before do
+                          selector.send(method, operator, [{ "key" => "1" }])
+                        end
+
+                        it "serializes the values" do
+                          selector[operator].should eq([{ "key.de" => 1 }])
+                        end
                       end
 
-                      it "serializes the values" do
-                        selector[operator].should eq(
-                          [{ "field" => "1" }, { "key" => { "$gt" => 2 }}]
-                        )
+                      context "when the keys are symbols" do
+
+                        before do
+                          selector.send(method, operator, [{ key: "1" }])
+                        end
+
+                        it "serializes the values" do
+                          selector[operator].should eq([{ "key.de" => 1 }])
+                        end
                       end
                     end
 
-                    context "when the keys are symbols" do
+                    context "when the individual criteria are complex" do
 
-                      before do
-                        selector.send(
-                          method,
-                          operator,
-                          [{ field: "1" }, { key: { "$gt" => "2" }}]
-                        )
+                      context "when the keys are strings" do
+
+                        before do
+                          selector.send(
+                            method,
+                            operator,
+                            [{ "field" => "1" }, { "key" => { "$gt" => "2" }}]
+                          )
+                        end
+
+                        it "serializes the values" do
+                          selector[operator].should eq(
+                            [{ "field" => "1" }, { "key.de" => { "$gt" => 2 }}]
+                          )
+                        end
                       end
 
-                      it "serializes the values" do
-                        selector[operator].should eq(
-                          [{ "field" => "1" }, { "key" => { "$gt" => 2 }}]
-                        )
+                      context "when the keys are symbols" do
+
+                        before do
+                          selector.send(
+                            method,
+                            operator,
+                            [{ field: "1" }, { key: { "$gt" => "2" }}]
+                          )
+                        end
+
+                        it "serializes the values" do
+                          selector[operator].should eq(
+                            [{ "field" => "1" }, { "key.de" => { "$gt" => 2 }}]
+                          )
+                        end
                       end
                     end
                   end

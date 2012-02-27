@@ -16,6 +16,8 @@ module Origin
     include Snapshot
     include Without
 
+    attr_reader :options
+
     def option(*args)
       clone.tap do |query|
         unless args.compact.empty?

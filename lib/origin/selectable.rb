@@ -30,5 +30,17 @@ module Origin
     include WithinCircle
     include WithinPolygon
     include WithinSphericalCircle
+
+    attr_reader :selector
+
+    def selection(criterion = nil)
+      clone.tap do |query|
+        if criterion
+          criterion.each_pair do |field, value|
+            yield(query.selector, field, value)
+          end
+        end
+      end
+    end
   end
 end
