@@ -1,8 +1,14 @@
 # encoding: utf-8
 module Origin
   module Selectable
+
+    # Provides behaviour for $where or standard selection.
     module Where
 
+      #
+      # @return [ Queryable ] The cloned queryable.
+      #
+      # @since 1.0.0
       def where(criterion = nil)
         criterion.is_a?(String) ? js_query(criterion) : expr_query(criterion)
       end

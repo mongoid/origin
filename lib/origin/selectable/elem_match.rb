@@ -28,7 +28,7 @@ module Origin
       # Add the key to symbol for where matching.
       #
       # @example Execute an $elemMatch in a where query.
-      #   Queryable.where(:field.elem_match => { name: "value" })
+      #   queryable.where(:field.elem_match => { name: "value" })
       #
       # @since 1.0.0
       ::Symbol.add_key(:elem_match, "$elemMatch")

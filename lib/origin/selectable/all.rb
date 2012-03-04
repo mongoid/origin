@@ -23,7 +23,7 @@ module Origin
       # Add the key to symbol for where matching.
       #
       # @example Execute an $all in a where query.
-      #   Queryable.where(:field.all => [ 1, 2 ])
+      #   queryable.where(:field.all => [ 1, 2 ])
       #
       # @since 1.0.0
       ::Symbol.add_key(:all, "$all")
