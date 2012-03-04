@@ -74,6 +74,25 @@ describe Origin::Selector do
             selector["key"].should eq({ "$gte" => 1, "$lte" => 3 })
           end
         end
+
+        context "when providing an array" do
+
+          let(:big_one) do
+            BigDecimal.new("1.2321")
+          end
+
+          let(:big_two) do
+            BigDecimal.new("4.2222")
+          end
+
+          before do
+            selector.send(method, "key", [ big_one, big_two ])
+          end
+
+          it "serializes each element in the array" do
+            selector["key"].should eq([ big_one.to_s, big_two.to_s ])
+          end
+        end
       end
 
       context "when serializers are provided" do
