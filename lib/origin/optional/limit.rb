@@ -4,7 +4,7 @@ module Origin
     module Limit
 
       def limit(value = nil)
-        option(value) { |options| options.store(:limit, value) }
+        option(value) { |options| options.store(:limit, value.to_i) }
       end
     end
   end

@@ -4,7 +4,7 @@ module Origin
     module Skip
 
       def skip(value = nil)
-        option(value) { |options| options.store(:skip, value) }
+        option(value) { |options| options.store(:skip, value.to_i) }
       end
       alias :offset :skip
     end

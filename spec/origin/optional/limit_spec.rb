@@ -48,16 +48,49 @@ describe Origin::Optional::Limit do
 
     context "when provided arguments" do
 
-      let(:selection) do
-        query.limit(10)
+      context "when the argument is an integer" do
+
+        let(:selection) do
+          query.limit(10)
+        end
+
+        it "adds the field options" do
+          selection.options.should eq({ :limit => 10 })
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
       end
 
-      it "adds the field options" do
-        selection.options.should eq({ :limit => 10 })
+      context "when the argument is a float" do
+
+        let(:selection) do
+          query.limit(10.25)
+        end
+
+        it "adds the field options as an integer" do
+          selection.options.should eq({ :limit => 10 })
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
       end
 
-      it "returns a cloned query" do
-        selection.should_not equal(query)
+      context "when the argument is a string" do
+
+        let(:selection) do
+          query.limit("10")
+        end
+
+        it "adds the field options as an integer" do
+          selection.options.should eq({ :limit => 10 })
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
       end
     end
   end
