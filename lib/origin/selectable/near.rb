@@ -5,6 +5,12 @@ module Origin
     # Provides behaviour for $near selection.
     module Near
 
+      # Adds a $near criterion to a geo selection.
+      #
+      # @example Add the $near selection.
+      #   queryable.near(location: [ 23.1, 12.1 ])
+      #
+      # @param [ Hash ] criterion The field/location pair.
       #
       # @return [ Queryable ] The cloned queryable.
       #

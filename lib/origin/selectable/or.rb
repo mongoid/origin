@@ -5,6 +5,12 @@ module Origin
     # Provides behaviour for $or selection.
     module Or
 
+      # Adds $or selection to the queryable.
+      #
+      # @example Add the $or selection.
+      #   queryable.or(field: 1, field: 2)
+      #
+      # @param [ Array ] criterion An array of hash criterion.
       #
       # @return [ Queryable ] The cloned queryable.
       #

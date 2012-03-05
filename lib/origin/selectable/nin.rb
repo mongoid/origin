@@ -5,6 +5,15 @@ module Origin
     # Provides behaviour for $nin selection.
     module Nin
 
+      # Adds the $nin selection to the queryable.
+      #
+      # @example Add $nin selection on an array.
+      #   queryable.nin(age: [ 1, 2, 3 ])
+      #
+      # @example Add $nin selection on a range.
+      #   queryable.nin(age: 18..24)
+      #
+      # @param [ Hash ] criterion The field/value criterion pairs.
       #
       # @return [ Queryable ] The cloned queryable.
       #

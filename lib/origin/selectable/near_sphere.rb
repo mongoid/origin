@@ -5,6 +5,12 @@ module Origin
     # Provides behaviour for $nearSphere selection.
     module NearSphere
 
+      # Adds a $nearSphere criterion to a geo selection.
+      #
+      # @example Add the $nearSphere selection.
+      #   queryable.near_sphere(location: [ 23.1, 12.1 ])
+      #
+      # @param [ Hash ] criterion The field/location pair.
       #
       # @return [ Queryable ] The cloned queryable.
       #

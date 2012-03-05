@@ -5,6 +5,12 @@ module Origin
     # Provides behaviour for $nor selection.
     module Nor
 
+      # Adds $nor selection to the queryable.
+      #
+      # @example Add the $nor selection.
+      #   queryable.nor(field: 1, field: 2)
+      #
+      # @param [ Array ] criterion An array of hash criterion.
       #
       # @return [ Queryable ] The cloned queryable.
       #

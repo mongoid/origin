@@ -5,6 +5,12 @@ module Origin
     # Provides behaviour for $maxDistance selection.
     module MaxDistance
 
+      # Add a $maxDistance selection to the queryable.
+      #
+      # @example Add the $maxDistance selection.
+      #   queryable.max_distance(location: 10)
+      #
+      # @param [ Hash ] criterion The field/distance pairs.
       #
       # @return [ Queryable ] The cloned queryable.
       #

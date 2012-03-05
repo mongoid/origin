@@ -5,6 +5,12 @@ module Origin
     # Provides behaviour for $mod selection.
     module Mod
 
+      # Adds $mod selection to the queryable.
+      #
+      # @example Add the $mod selection.
+      #   queryable.mod(field: [ 10, 1 ])
+      #
+      # @param [ Hash ] criterion The field/mod selections.
       #
       # @return [ Queryable ] The cloned queryable.
       #

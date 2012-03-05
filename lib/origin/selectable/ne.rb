@@ -5,6 +5,12 @@ module Origin
     # Provides behaviour for $ne selection.
     module Ne
 
+      # Adds $ne selection to the queryable.
+      #
+      # @example Query for a value $ne to something.
+      #   queryable.ne(field: 10)
+      #
+      # @param [ Hash ] criterion The field/ne selections.
       #
       # @return [ Queryable ] The cloned queryable.
       #
