@@ -16,7 +16,7 @@ module Origin
       #
       # @since 1.0.0
       def all(criterion = nil)
-        send(strategy || :__override__, criterion, "$all")
+        send(strategy || :__override__, with_array_values(criterion), "$all")
       end
       alias :all_in :all
 

@@ -48,18 +48,55 @@ describe Origin::Selectable::All do
 
     context "when provided a single criterion" do
 
-      let(:selection) do
-        query.all(field: [ 1, 2 ])
+      context "when providing an array" do
+
+        let(:selection) do
+          query.all(field: [ 1, 2 ])
+        end
+
+        it "adds the $all selector" do
+          selection.selector.should eq({
+            field: { "$all" => [ 1, 2 ] }
+          })
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
       end
 
-      it "adds the $all selector" do
-        selection.selector.should eq({
-          field: { "$all" => [ 1, 2 ] }
-        })
+      context "when providing a range" do
+
+        let(:selection) do
+          query.all(field: 1..3)
+        end
+
+        it "adds the $all selector with converted range" do
+          selection.selector.should eq({
+            field: { "$all" => [ 1, 2, 3 ] }
+          })
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
       end
 
-      it "returns a cloned query" do
-        selection.should_not equal(query)
+      context "when providing a single value" do
+
+        let(:selection) do
+          query.all(field: 1)
+        end
+
+        it "adds the $all selector with wrapped value" do
+          selection.selector.should eq({
+            field: { "$all" => [ 1 ] }
+          })
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
       end
     end
 
