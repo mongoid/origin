@@ -5,6 +5,12 @@ module Origin
     # Provides behaviour for $gte selection.
     module Gte
 
+      # Add the $gte criterion to the selector.
+      #
+      # @example Add the $gte criterion.
+      #   queryable.gte(age: 60)
+      #
+      # @param [ Hash ] criterion The field/value pairs to check.
       #
       # @return [ Queryable ] The cloned queryable.
       #

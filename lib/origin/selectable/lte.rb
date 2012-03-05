@@ -5,6 +5,12 @@ module Origin
     # Provides behaviour for $lte selection.
     module Lte
 
+      # Add the $lte criterion to the selector.
+      #
+      # @example Add the $lte criterion.
+      #   queryable.lte(age: 60)
+      #
+      # @param [ Hash ] criterion The field/value pairs to check.
       #
       # @return [ Queryable ] The cloned queryable.
       #
