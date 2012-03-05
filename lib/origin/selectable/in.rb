@@ -5,6 +5,15 @@ module Origin
     # Provides behaviour for $in selection.
     module In
 
+      # Adds the $in selection to the queryable.
+      #
+      # @example Add $in selection on an array.
+      #   queryable.in(age: [ 1, 2, 3 ])
+      #
+      # @example Add $in selection on a range.
+      #   queryable.in(age: 18..24)
+      #
+      # @param [ Hash ] criterion The field/value criterion pairs.
       #
       # @return [ Queryable ] The cloned queryable.
       #
