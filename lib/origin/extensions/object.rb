@@ -29,6 +29,10 @@ module Origin
         self
       end
 
+      def in_friendly
+        [ self ]
+      end
+
       module ClassMethods
 
         def evolve(object)

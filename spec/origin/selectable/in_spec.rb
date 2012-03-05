@@ -48,18 +48,55 @@ describe Origin::Selectable::In do
 
     context "when provided a single criterion" do
 
-      let(:selection) do
-        query.in(field: [ 1, 2 ])
+      context "when providing an array" do
+
+        let(:selection) do
+          query.in(field: [ 1, 2 ])
+        end
+
+        it "adds the $in selector" do
+          selection.selector.should eq({
+            field: { "$in" => [ 1, 2 ] }
+          })
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
       end
 
-      it "adds the $in selector" do
-        selection.selector.should eq({
-          field: { "$in" => [ 1, 2 ] }
-        })
+      context "when providing a range" do
+
+        let(:selection) do
+          query.in(field: 1..3)
+        end
+
+        it "adds the $in selector with converted range" do
+          selection.selector.should eq({
+            field: { "$in" => [ 1, 2, 3 ] }
+          })
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
       end
 
-      it "returns a cloned query" do
-        selection.should_not equal(query)
+      context "when providing a single value" do
+
+        let(:selection) do
+          query.in(field: 1)
+        end
+
+        it "adds the $in selector with wrapped value" do
+          selection.selector.should eq({
+            field: { "$in" => [ 1 ] }
+          })
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
       end
     end
 
@@ -68,7 +105,7 @@ describe Origin::Selectable::In do
       context "when the criterion are for different fields" do
 
         let(:selection) do
-          query.in(first: [ 1, 2 ], second: [ 3, 4 ])
+          query.in(first: [ 1, 2 ], second: 3..4)
         end
 
         it "adds the $in selectors" do

@@ -2,6 +2,11 @@
 module Origin
   module Extensions
     module Range
+
+      def in_friendly
+        to_a
+      end
+
       module ClassMethods
 
         def evolve(object)
@@ -13,4 +18,5 @@ module Origin
   end
 end
 
+::Range.__send__(:include, Origin::Extensions::Range)
 ::Range.__send__(:extend, Origin::Extensions::Range::ClassMethods)

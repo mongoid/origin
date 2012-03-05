@@ -81,6 +81,10 @@ module Origin
           ::Hash[[ self ]].as_sorting_options
         end
       end
+
+      def in_friendly
+        self
+      end
     end
   end
 end
