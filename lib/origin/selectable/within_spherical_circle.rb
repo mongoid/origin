@@ -5,6 +5,12 @@ module Origin
     # Provides behaviour for $within/$centerSphere selection.
     module WithinSphericalCircle
 
+      # Adds the $within/$centerSphere selection to the queryable.
+      #
+      # @example Add the selection.
+      #   queryable.within_spherical_circle(location: [[ 1, 10 ], 25 ])
+      #
+      # @param [ Hash ] criterion The field/distance criterion.
       #
       # @return [ Queryable ] The cloned queryable.
       #

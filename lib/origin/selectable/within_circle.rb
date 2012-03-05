@@ -5,6 +5,12 @@ module Origin
     # Provides behaviour for $within/$center selection.
     module WithinCircle
 
+      # Adds the $within/$center selection to the queryable.
+      #
+      # @example Add the selection.
+      #   queryable.within_circle(location: [[ 1, 10 ], 25 ])
+      #
+      # @param [ Hash ] criterion The field/radius criterion.
       #
       # @return [ Queryable ] The cloned queryable.
       #

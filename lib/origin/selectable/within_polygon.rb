@@ -5,6 +5,14 @@ module Origin
     # Provides behaviour for $within/$polygon selection.
     module WithinPolygon
 
+      # Adds the $within/$polygon selection to the queryable.
+      #
+      # @example Add the selection.
+      #   queryable.within_polygon(
+      #     location: [[ 10, 20 ], [ 10, 40 ], [ 30, 40 ], [ 30, 20 ]]
+      #   )
+      #
+      # @param [ Hash ] criterion The field/polygon points criterion.
       #
       # @return [ Queryable ] The cloned queryable.
       #

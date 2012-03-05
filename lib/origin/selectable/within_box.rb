@@ -5,6 +5,12 @@ module Origin
     # Provides behaviour for $within/$box selection.
     module WithinBox
 
+      # Adds the $within/$box selection to the queryable.
+      #
+      # @example Add the selection.
+      #   queryable.within_box(location: [[ 1, 10 ], [ 10, 1 ]])
+      #
+      # @param [ Hash ] criterion The field/box corner criterion.
       #
       # @return [ Queryable ] The cloned queryable.
       #

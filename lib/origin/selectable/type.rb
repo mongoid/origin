@@ -5,6 +5,14 @@ module Origin
     # Provides behaviour for $type selection.
     module Type
 
+      # Adds a $type selection to the queryable.
+      #
+      # @example Add the $type selection.
+      #   queryable.type(field: 15)
+      #
+      # @note http://vurl.me/PGOU contains a list of all types.
+      #
+      # @param [ Hash ] criterion The field/type pairs.
       #
       # @return [ Queryable ] The cloned queryable.
       #

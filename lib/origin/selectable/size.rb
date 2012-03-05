@@ -5,6 +5,15 @@ module Origin
     # Provides behaviour for $size selection.
     module Size
 
+      # Add a $size selection for array fields.
+      #
+      # @example Add the $size selection.
+      #   queryable.with_size(field: 5)
+      #
+      # @note This method is named #with_size not to conflict with any existing
+      #   #size method on enumerables or symbols.
+      #
+      # @param [ Hash ] criterion The field/size pairs criterion.
       #
       # @return [ Queryable ] The cloned queryable.
       #
