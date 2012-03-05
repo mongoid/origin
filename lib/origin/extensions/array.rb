@@ -82,7 +82,7 @@ module Origin
         end
       end
 
-      def in_friendly
+      def as_array
         self
       end
     end

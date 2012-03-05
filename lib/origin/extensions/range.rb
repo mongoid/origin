@@ -3,7 +3,7 @@ module Origin
   module Extensions
     module Range
 
-      def in_friendly
+      def as_array
         to_a
       end
 

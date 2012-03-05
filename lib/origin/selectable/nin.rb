@@ -10,7 +10,7 @@ module Origin
       #
       # @since 1.0.0
       def nin(criterion = nil)
-        send(strategy || :__intersect__, criterion, "$nin")
+        send(strategy || :__intersect__, with_array_values(criterion), "$nin")
       end
       alias :not_in :nin
 

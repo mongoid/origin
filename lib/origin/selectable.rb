@@ -84,5 +84,27 @@ module Origin
         end
       end
     end
+
+    private
+
+    # Convert the criterion values to $in friendly values. This means you,
+    # array.
+    #
+    # @api private
+    #
+    # @example Convert all the values to arrays.
+    #   queryable.with_array_values({ key: 1...4 })
+    #
+    # @param [ Hash ] criterion The criterion.
+    #
+    # @return [ Hash ] The $in friendly criterion (array values).
+    #
+    # @since 1.0.0
+    def with_array_values(criterion)
+      return nil unless criterion
+      criterion.each_pair do |key, value|
+        criterion[key] = value.as_array
+      end
+    end
   end
 end

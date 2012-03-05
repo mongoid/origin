@@ -10,7 +10,7 @@ module Origin
       #
       # @since 1.0.0
       def in(criterion = nil)
-        send(strategy || :__intersect__, in_friendly(criterion), "$in")
+        send(strategy || :__intersect__, with_array_values(criterion), "$in")
       end
       alias :any_in :in
 
@@ -21,28 +21,6 @@ module Origin
       #
       # @since 1.0.0
       ::Symbol.add_key(:in, "$in")
-
-      private
-
-      # Convert the criterion values to $in friendly values. This means you,
-      # array.
-      #
-      # @api private
-      #
-      # @example Convert all the values to arrays.
-      #   queryable.make_in_friendly({ key: 1...4 })
-      #
-      # @param [ Hash ] criterion The criterion.
-      #
-      # @return [ Hash ] The $in friendly criterion.
-      #
-      # @since 1.0.0
-      def in_friendly(criterion)
-        return nil unless criterion
-        criterion.each_pair do |key, value|
-          criterion[key] = value.in_friendly
-        end
-      end
     end
   end
 end

@@ -48,18 +48,55 @@ describe Origin::Selectable::Nin do
 
     context "when provided a sningle criterion" do
 
-      let(:selection) do
-        query.nin(field: [ 1, 2 ])
+      context "when providing an array" do
+
+        let(:selection) do
+          query.nin(field: [ 1, 2 ])
+        end
+
+        it "adds the $nin selector" do
+          selection.selector.should eq({
+            field: { "$nin" => [ 1, 2 ] }
+          })
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
       end
 
-      it "adds the $nin selector" do
-        selection.selector.should eq({
-          field: { "$nin" => [ 1, 2 ] }
-        })
+      context "when providing a range" do
+
+        let(:selection) do
+          query.nin(field: 1..3)
+        end
+
+        it "adds the $nin selector with converted range" do
+          selection.selector.should eq({
+            field: { "$nin" => [ 1, 2, 3 ] }
+          })
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
       end
 
-      it "returns a cloned query" do
-        selection.should_not equal(query)
+      context "when providing a single value" do
+
+        let(:selection) do
+          query.nin(field: 1)
+        end
+
+        it "adds the $nin selector with wrapped value" do
+          selection.selector.should eq({
+            field: { "$nin" => [ 1 ] }
+          })
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
       end
     end
 
