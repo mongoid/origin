@@ -56,7 +56,7 @@ describe Origin::Selectable::All do
 
         it "adds the $all selector" do
           selection.selector.should eq({
-            field: { "$all" => [ 1, 2 ] }
+            "field" => { "$all" => [ 1, 2 ] }
           })
         end
 
@@ -73,7 +73,7 @@ describe Origin::Selectable::All do
 
         it "adds the $all selector with converted range" do
           selection.selector.should eq({
-            field: { "$all" => [ 1, 2, 3 ] }
+            "field" => { "$all" => [ 1, 2, 3 ] }
           })
         end
 
@@ -90,7 +90,7 @@ describe Origin::Selectable::All do
 
         it "adds the $all selector with wrapped value" do
           selection.selector.should eq({
-            field: { "$all" => [ 1 ] }
+            "field" => { "$all" => [ 1 ] }
           })
         end
 
@@ -110,8 +110,8 @@ describe Origin::Selectable::All do
 
         it "adds the $all selectors" do
           selection.selector.should eq({
-            first: { "$all" => [ 1, 2 ] },
-            second: { "$all" => [ 3, 4 ] }
+            "first" => { "$all" => [ 1, 2 ] },
+            "second" => { "$all" => [ 3, 4 ] }
           })
         end
 
@@ -131,8 +131,8 @@ describe Origin::Selectable::All do
 
         it "adds the $all selectors" do
           selection.selector.should eq({
-            first: { "$all" => [ 1, 2 ] },
-            second: { "$all" => [ 3, 4 ] }
+            "first" => { "$all" => [ 1, 2 ] },
+            "second" => { "$all" => [ 3, 4 ] }
           })
         end
 
@@ -151,7 +151,7 @@ describe Origin::Selectable::All do
 
           it "overwrites the first $all selector" do
             selection.selector.should eq({
-              first: { "$all" => [ 3, 4 ] }
+              "first" => { "$all" => [ 3, 4 ] }
             })
           end
 
@@ -168,7 +168,7 @@ describe Origin::Selectable::All do
 
           it "intersects the $all selectors" do
             selection.selector.should eq({
-              first: { "$all" => [ 2 ] }
+              "first" => { "$all" => [ 2 ] }
             })
           end
 
@@ -185,7 +185,7 @@ describe Origin::Selectable::All do
 
           it "overwrites the first $all selector" do
             selection.selector.should eq({
-              first: { "$all" => [ 3, 4 ] }
+              "first" => { "$all" => [ 3, 4 ] }
             })
           end
 
@@ -202,7 +202,7 @@ describe Origin::Selectable::All do
 
           it "unions the $all selectors" do
             selection.selector.should eq({
-              first: { "$all" => [ 1, 2, 3, 4 ] }
+              "first" => { "$all" => [ 1, 2, 3, 4 ] }
             })
           end
 

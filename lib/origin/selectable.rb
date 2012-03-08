@@ -79,7 +79,7 @@ module Origin
       clone.tap do |query|
         if criterion
           criterion.each_pair do |field, value|
-            yield(query.selector, field, value)
+            yield(query.selector, field.is_a?(Key) ? field : field.to_s, value)
           end
         end
       end

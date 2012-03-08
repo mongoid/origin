@@ -54,7 +54,7 @@ describe Origin::Selectable::WithinBox do
 
       it "adds the $within expression" do
         selection.selector.should eq({
-          location: { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }}
+          "location" => { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }}
         })
       end
 
@@ -76,8 +76,8 @@ describe Origin::Selectable::WithinBox do
 
         it "adds the $within expression" do
           selection.selector.should eq({
-            location: { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }},
-            comments: { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }}
+            "location" => { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }},
+            "comments" => { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }}
           })
         end
 
@@ -99,8 +99,8 @@ describe Origin::Selectable::WithinBox do
 
         it "adds the $within expression" do
           selection.selector.should eq({
-            location: { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }},
-            comments: { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }}
+            "location" => { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }},
+            "comments" => { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }}
           })
         end
 

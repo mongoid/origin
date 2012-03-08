@@ -56,7 +56,7 @@ describe Origin::Selectable::MaxDistance do
 
         it "adds the $maxDistance expression" do
           selection.selector.should eq({
-            location: { "$near" => [ 1, 1 ], "$maxDistance" => 50 }
+            "location" =>  { "$near" => [ 1, 1 ], "$maxDistance" => 50 }
           })
         end
 

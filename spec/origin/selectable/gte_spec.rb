@@ -54,7 +54,7 @@ describe Origin::Selectable::Gte do
 
       it "adds the $gte selector" do
         selection.selector.should eq({
-          field: { "$gte" => 10 }
+          "field" => { "$gte" => 10 }
         })
       end
 
@@ -73,8 +73,8 @@ describe Origin::Selectable::Gte do
 
         it "adds the $gte selectors" do
           selection.selector.should eq({
-            first: { "$gte" => 10 },
-            second: { "$gte" => 15 }
+            "first" => { "$gte" => 10 },
+            "second" => { "$gte" => 15 }
           })
         end
 
@@ -94,8 +94,8 @@ describe Origin::Selectable::Gte do
 
         it "adds the $gte selectors" do
           selection.selector.should eq({
-            first: { "$gte" => 10 },
-            second: { "$gte" => 15 }
+            "first" => { "$gte" => 10 },
+            "second" => { "$gte" => 15 }
           })
         end
 
@@ -112,7 +112,7 @@ describe Origin::Selectable::Gte do
 
         it "overwrites the first $gte selector" do
           selection.selector.should eq({
-            first: { "$gte" => 15 }
+            "first" =>  { "$gte" => 15 }
           })
         end
 

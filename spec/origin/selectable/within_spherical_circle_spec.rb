@@ -54,7 +54,7 @@ describe Origin::Selectable::WithinSphericalCircle do
 
       it "adds the $within expression" do
         selection.selector.should eq({
-          location: { "$within" => { "$centerSphere" => [[ 1, 10 ], 25 ] }}
+          "location" => { "$within" => { "$centerSphere" => [[ 1, 10 ], 25 ] }}
         })
       end
 
@@ -76,8 +76,8 @@ describe Origin::Selectable::WithinSphericalCircle do
 
         it "adds the $within expression" do
           selection.selector.should eq({
-            location: { "$within" => { "$centerSphere" => [[ 1, 10 ], 25 ] }},
-            comments: { "$within" => { "$centerSphere" => [[ 1, 10 ], 25 ] }}
+            "location" => { "$within" => { "$centerSphere" => [[ 1, 10 ], 25 ] }},
+            "comments" => { "$within" => { "$centerSphere" => [[ 1, 10 ], 25 ] }}
           })
         end
 
@@ -99,8 +99,8 @@ describe Origin::Selectable::WithinSphericalCircle do
 
         it "adds the $within expression" do
           selection.selector.should eq({
-            location: { "$within" => { "$centerSphere" => [[ 1, 10 ], 25 ] }},
-            comments: { "$within" => { "$centerSphere" => [[ 1, 10 ], 25 ] }}
+            "location" => { "$within" => { "$centerSphere" => [[ 1, 10 ], 25 ] }},
+            "comments" => { "$within" => { "$centerSphere" => [[ 1, 10 ], 25 ] }}
           })
         end
 

@@ -54,7 +54,7 @@ describe Origin::Selectable::Mod do
 
       it "adds the $mod expression" do
         selection.selector.should eq({
-          value: { "$mod" => [ 10, 1 ] }
+          "value" =>  { "$mod" => [ 10, 1 ] }
         })
       end
 
@@ -76,8 +76,8 @@ describe Origin::Selectable::Mod do
 
         it "adds the $mod expression" do
           selection.selector.should eq({
-            value: { "$mod" => [ 10, 1 ] },
-            comments: { "$mod" => [ 10, 1 ] }
+            "value" =>  { "$mod" => [ 10, 1 ] },
+            "comments" =>  { "$mod" => [ 10, 1 ] }
           })
         end
 
@@ -99,8 +99,8 @@ describe Origin::Selectable::Mod do
 
         it "adds the $mod expression" do
           selection.selector.should eq({
-            value: { "$mod" => [ 10, 1 ] },
-            result: { "$mod" => [ 10, 1 ] }
+            "value" =>  { "$mod" => [ 10, 1 ] },
+            "result" =>  { "$mod" => [ 10, 1 ] }
           })
         end
 

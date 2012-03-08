@@ -54,7 +54,7 @@ describe Origin::Selectable::ElemMatch do
 
       it "adds the $elemMatch expression" do
         selection.selector.should eq({
-          users: { "$elemMatch" => { name: "value" }}
+          "users" => { "$elemMatch" => { name: "value" }}
         })
       end
 
@@ -76,8 +76,8 @@ describe Origin::Selectable::ElemMatch do
 
         it "adds the $elemMatch expression" do
           selection.selector.should eq({
-            users: { "$elemMatch" => { name: "value" }},
-            comments: { "$elemMatch" => { text: "value" }}
+            "users" => { "$elemMatch" => { name: "value" }},
+            "comments" => { "$elemMatch" => { text: "value" }}
           })
         end
 
@@ -99,8 +99,8 @@ describe Origin::Selectable::ElemMatch do
 
         it "adds the $elemMatch expression" do
           selection.selector.should eq({
-            users: { "$elemMatch" => { name: "value" }},
-            comments: { "$elemMatch" => { text: "value" }}
+            "users" => { "$elemMatch" => { name: "value" }},
+            "comments" => { "$elemMatch" => { text: "value" }}
           })
         end
 
@@ -119,7 +119,7 @@ describe Origin::Selectable::ElemMatch do
 
         it "overrides the $elemMatch expression" do
           selection.selector.should eq({
-            users: { "$elemMatch" => { state: "new" }}
+            "users" => { "$elemMatch" => { state: "new" }}
           })
         end
 

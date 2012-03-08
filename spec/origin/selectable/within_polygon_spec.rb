@@ -58,7 +58,7 @@ describe Origin::Selectable::WithinPolygon do
 
       it "adds the $within expression" do
         selection.selector.should eq({
-          location: { "$within" => { "$polygon" => polygon }}
+          "location" => { "$within" => { "$polygon" => polygon }}
         })
       end
 
@@ -88,8 +88,8 @@ describe Origin::Selectable::WithinPolygon do
 
         it "adds the $within expression" do
           selection.selector.should eq({
-            location: { "$within" => { "$polygon" => polygon_one }},
-            comments: { "$within" => { "$polygon" => polygon_two }}
+            "location" => { "$within" => { "$polygon" => polygon_one }},
+            "comments" => { "$within" => { "$polygon" => polygon_two }}
           })
         end
 
@@ -119,8 +119,8 @@ describe Origin::Selectable::WithinPolygon do
 
         it "adds the $within expression" do
           selection.selector.should eq({
-            location: { "$within" => { "$polygon" => polygon_one }},
-            comments: { "$within" => { "$polygon" => polygon_two }}
+            "location" => { "$within" => { "$polygon" => polygon_one }},
+            "comments" => { "$within" => { "$polygon" => polygon_two }}
           })
         end
 

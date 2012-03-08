@@ -56,7 +56,7 @@ describe Origin::Selectable::Nin do
 
         it "adds the $nin selector" do
           selection.selector.should eq({
-            field: { "$nin" => [ 1, 2 ] }
+            "field" =>  { "$nin" => [ 1, 2 ] }
           })
         end
 
@@ -73,7 +73,7 @@ describe Origin::Selectable::Nin do
 
         it "adds the $nin selector with converted range" do
           selection.selector.should eq({
-            field: { "$nin" => [ 1, 2, 3 ] }
+            "field" =>  { "$nin" => [ 1, 2, 3 ] }
           })
         end
 
@@ -90,7 +90,7 @@ describe Origin::Selectable::Nin do
 
         it "adds the $nin selector with wrapped value" do
           selection.selector.should eq({
-            field: { "$nin" => [ 1 ] }
+            "field" =>  { "$nin" => [ 1 ] }
           })
         end
 
@@ -110,8 +110,8 @@ describe Origin::Selectable::Nin do
 
         it "adds the $nin selectors" do
           selection.selector.should eq({
-            first: { "$nin" => [ 1, 2 ] },
-            second: { "$nin" => [ 3, 4 ] }
+            "first" =>  { "$nin" => [ 1, 2 ] },
+            "second" =>  { "$nin" => [ 3, 4 ] }
           })
         end
 
@@ -131,8 +131,8 @@ describe Origin::Selectable::Nin do
 
         it "adds the $nin selectors" do
           selection.selector.should eq({
-            first: { "$nin" => [ 1, 2 ] },
-            second: { "$nin" => [ 3, 4 ] }
+            "first" => { "$nin" => [ 1, 2 ] },
+            "second" => { "$nin" => [ 3, 4 ] }
           })
         end
 
@@ -151,7 +151,7 @@ describe Origin::Selectable::Nin do
 
           it "intersects the $nin selectors" do
             selection.selector.should eq({
-              first: { "$nin" => [ 2 ] }
+              "first" => { "$nin" => [ 2 ] }
             })
           end
 
@@ -168,7 +168,7 @@ describe Origin::Selectable::Nin do
 
           it "intersects the $nin selectors" do
             selection.selector.should eq({
-              first: { "$nin" => [ 2 ] }
+              "first" => { "$nin" => [ 2 ] }
             })
           end
 
@@ -185,7 +185,7 @@ describe Origin::Selectable::Nin do
 
           it "overwrites the first $nin selector" do
             selection.selector.should eq({
-              first: { "$nin" => [ 3, 4 ] }
+              "first" => { "$nin" => [ 3, 4 ] }
             })
           end
 
@@ -202,7 +202,7 @@ describe Origin::Selectable::Nin do
 
           it "unions the $nin selectors" do
             selection.selector.should eq({
-              first: { "$nin" => [ 1, 2, 3, 4 ] }
+              "first" => { "$nin" => [ 1, 2, 3, 4 ] }
             })
           end
 

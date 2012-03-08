@@ -54,7 +54,7 @@ describe Origin::Selectable::Lte do
 
       it "adds the $lte selector" do
         selection.selector.should eq({
-          field: { "$lte" => 10 }
+          "field" =>  { "$lte" => 10 }
         })
       end
 
@@ -73,8 +73,8 @@ describe Origin::Selectable::Lte do
 
         it "adds the $lte selectors" do
           selection.selector.should eq({
-            first: { "$lte" => 10 },
-            second: { "$lte" => 15 }
+            "first" =>  { "$lte" => 10 },
+            "second" =>  { "$lte" => 15 }
           })
         end
 
@@ -94,8 +94,8 @@ describe Origin::Selectable::Lte do
 
         it "adds the $lte selectors" do
           selection.selector.should eq({
-            first: { "$lte" => 10 },
-            second: { "$lte" => 15 }
+            "first" =>  { "$lte" => 10 },
+            "second" =>  { "$lte" => 15 }
           })
         end
 
@@ -112,7 +112,7 @@ describe Origin::Selectable::Lte do
 
         it "overwrites the first $lte selector" do
           selection.selector.should eq({
-            first: { "$lte" => 15 }
+            "first" =>  { "$lte" => 15 }
           })
         end
 

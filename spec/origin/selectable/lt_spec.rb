@@ -54,7 +54,7 @@ describe Origin::Selectable::Lt do
 
       it "adds the $lt selector" do
         selection.selector.should eq({
-          field: { "$lt" => 10 }
+          "field" =>  { "$lt" => 10 }
         })
       end
 
@@ -73,8 +73,8 @@ describe Origin::Selectable::Lt do
 
         it "adds the $lt selectors" do
           selection.selector.should eq({
-            first: { "$lt" => 10 },
-            second: { "$lt" => 15 }
+            "first" =>  { "$lt" => 10 },
+            "second" =>  { "$lt" => 15 }
           })
         end
 
@@ -94,8 +94,8 @@ describe Origin::Selectable::Lt do
 
         it "adds the $lt selectors" do
           selection.selector.should eq({
-            first: { "$lt" => 10 },
-            second: { "$lt" => 15 }
+            "first" =>  { "$lt" => 10 },
+            "second" =>  { "$lt" => 15 }
           })
         end
 
@@ -112,7 +112,7 @@ describe Origin::Selectable::Lt do
 
         it "overwrites the first $lt selector" do
           selection.selector.should eq({
-            first: { "$lt" => 15 }
+            "first" =>  { "$lt" => 15 }
           })
         end
 

@@ -54,7 +54,7 @@ describe Origin::Selectable::Ne do
 
       it "adds the $ne expression" do
         selection.selector.should eq({
-          value: { "$ne" => 10 }
+          "value" =>  { "$ne" => 10 }
         })
       end
 
@@ -76,8 +76,8 @@ describe Origin::Selectable::Ne do
 
         it "adds the $ne expression" do
           selection.selector.should eq({
-            value: { "$ne" => 10 },
-            comments: { "$ne" => 10 }
+            "value" =>  { "$ne" => 10 },
+            "comments" =>  { "$ne" => 10 }
           })
         end
 
@@ -99,8 +99,8 @@ describe Origin::Selectable::Ne do
 
         it "adds the $ne expression" do
           selection.selector.should eq({
-            value: { "$ne" => 10 },
-            result: { "$ne" => 10 }
+            "value" =>  { "$ne" => 10 },
+            "result" =>  { "$ne" => 10 }
           })
         end
 

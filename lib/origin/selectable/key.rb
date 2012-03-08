@@ -36,7 +36,7 @@ module Origin
       #
       # @since 1.0.0
       def specify(value)
-        { name => { operator => expanded ? { expanded => value } : value }}
+        { name.to_s => { operator => expanded ? { expanded => value } : value }}
       end
 
       # Get the key as raw Mongo sorting options.

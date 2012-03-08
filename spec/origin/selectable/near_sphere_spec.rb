@@ -54,7 +54,7 @@ describe Origin::Selectable::NearSphere do
 
       it "adds the $nearSphere expression" do
         selection.selector.should eq({
-          location: { "$nearSphere" => [ 20, 21 ] }
+          "location" =>  { "$nearSphere" => [ 20, 21 ] }
         })
       end
 
@@ -76,8 +76,8 @@ describe Origin::Selectable::NearSphere do
 
         it "adds the $nearSphere expression" do
           selection.selector.should eq({
-            location: { "$nearSphere" => [ 20, 21 ] },
-            comments: { "$nearSphere" => [ 20, 21 ] }
+            "location" =>  { "$nearSphere" => [ 20, 21 ] },
+            "comments" =>  { "$nearSphere" => [ 20, 21 ] }
           })
         end
 
@@ -99,8 +99,8 @@ describe Origin::Selectable::NearSphere do
 
         it "adds the $nearSphere expression" do
           selection.selector.should eq({
-            location: { "$nearSphere" => [ 20, 21 ] },
-            comments: { "$nearSphere" => [ 20, 21 ] }
+            "location" =>  { "$nearSphere" => [ 20, 21 ] },
+            "comments" =>  { "$nearSphere" => [ 20, 21 ] }
           })
         end
 

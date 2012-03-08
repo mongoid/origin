@@ -54,7 +54,7 @@ describe Origin::Selectable::Between do
 
       it "adds the $gte and $lte selectors" do
         selection.selector.should eq({
-          field: { "$gte" => 1, "$lte" => 10 }
+          "field" => { "$gte" => 1, "$lte" => 10 }
         })
       end
 
@@ -73,8 +73,8 @@ describe Origin::Selectable::Between do
 
         it "adds the $gte and $lte selectors" do
           selection.selector.should eq({
-            field: { "$gte" => 1, "$lte" => 10 },
-            key: { "$gte" => 5, "$lte" => 7 }
+            "field" => { "$gte" => 1, "$lte" => 10 },
+            "key" => { "$gte" => 5, "$lte" => 7 }
           })
         end
 

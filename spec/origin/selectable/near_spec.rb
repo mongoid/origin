@@ -54,7 +54,7 @@ describe Origin::Selectable::Near do
 
       it "adds the $near expression" do
         selection.selector.should eq({
-          location: { "$near" => [ 20, 21 ] }
+          "location" =>  { "$near" => [ 20, 21 ] }
         })
       end
 
@@ -76,8 +76,8 @@ describe Origin::Selectable::Near do
 
         it "adds the $near expression" do
           selection.selector.should eq({
-            location: { "$near" => [ 20, 21 ] },
-            comments: { "$near" => [ 20, 21 ] }
+            "location" =>  { "$near" => [ 20, 21 ] },
+            "comments" =>  { "$near" => [ 20, 21 ] }
           })
         end
 
@@ -99,8 +99,8 @@ describe Origin::Selectable::Near do
 
         it "adds the $near expression" do
           selection.selector.should eq({
-            location: { "$near" => [ 20, 21 ] },
-            comments: { "$near" => [ 20, 21 ] }
+            "location" =>  { "$near" => [ 20, 21 ] },
+            "comments" =>  { "$near" => [ 20, 21 ] }
           })
         end
 

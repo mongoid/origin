@@ -54,7 +54,7 @@ describe Origin::Selectable::Exists do
 
       it "adds the $exists expression" do
         selection.selector.should eq({
-          users: { "$exists" => true }
+          "users" => { "$exists" => true }
         })
       end
 
@@ -76,8 +76,8 @@ describe Origin::Selectable::Exists do
 
         it "adds the $exists expression" do
           selection.selector.should eq({
-            users: { "$exists" => true },
-            comments: { "$exists" => true }
+            "users" => { "$exists" => true },
+            "comments" => { "$exists" => true }
           })
         end
 
@@ -99,8 +99,8 @@ describe Origin::Selectable::Exists do
 
         it "adds the $exists expression" do
           selection.selector.should eq({
-            users: { "$exists" => true },
-            comments: { "$exists" => true }
+            "users" => { "$exists" => true },
+            "comments" => { "$exists" => true }
           })
         end
 

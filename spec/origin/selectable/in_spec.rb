@@ -56,7 +56,7 @@ describe Origin::Selectable::In do
 
         it "adds the $in selector" do
           selection.selector.should eq({
-            field: { "$in" => [ 1, 2 ] }
+            "field" =>  { "$in" => [ 1, 2 ] }
           })
         end
 
@@ -73,7 +73,7 @@ describe Origin::Selectable::In do
 
         it "adds the $in selector with converted range" do
           selection.selector.should eq({
-            field: { "$in" => [ 1, 2, 3 ] }
+            "field" =>  { "$in" => [ 1, 2, 3 ] }
           })
         end
 
@@ -90,7 +90,7 @@ describe Origin::Selectable::In do
 
         it "adds the $in selector with wrapped value" do
           selection.selector.should eq({
-            field: { "$in" => [ 1 ] }
+            "field" =>  { "$in" => [ 1 ] }
           })
         end
 
@@ -110,8 +110,8 @@ describe Origin::Selectable::In do
 
         it "adds the $in selectors" do
           selection.selector.should eq({
-            first: { "$in" => [ 1, 2 ] },
-            second: { "$in" => [ 3, 4 ] }
+            "first" =>  { "$in" => [ 1, 2 ] },
+            "second" =>  { "$in" => [ 3, 4 ] }
           })
         end
 
@@ -131,8 +131,8 @@ describe Origin::Selectable::In do
 
         it "adds the $in selectors" do
           selection.selector.should eq({
-            first: { "$in" => [ 1, 2 ] },
-            second: { "$in" => [ 3, 4 ] }
+            "first" =>  { "$in" => [ 1, 2 ] },
+            "second" =>  { "$in" => [ 3, 4 ] }
           })
         end
 
@@ -151,7 +151,7 @@ describe Origin::Selectable::In do
 
           it "intersects the $in selectors" do
             selection.selector.should eq({
-              first: { "$in" => [ 2 ] }
+              "first" =>  { "$in" => [ 2 ] }
             })
           end
 
@@ -168,7 +168,7 @@ describe Origin::Selectable::In do
 
           it "intersects the $in selectors" do
             selection.selector.should eq({
-              first: { "$in" => [ 2 ] }
+              "first" =>  { "$in" => [ 2 ] }
             })
           end
 
@@ -185,7 +185,7 @@ describe Origin::Selectable::In do
 
           it "overwrites the first $in selector" do
             selection.selector.should eq({
-              first: { "$in" => [ 3, 4 ] }
+              "first" =>  { "$in" => [ 3, 4 ] }
             })
           end
 
@@ -202,7 +202,7 @@ describe Origin::Selectable::In do
 
           it "unions the $in selectors" do
             selection.selector.should eq({
-              first: { "$in" => [ 1, 2, 3, 4 ] }
+              "first" =>  { "$in" => [ 1, 2, 3, 4 ] }
             })
           end
 

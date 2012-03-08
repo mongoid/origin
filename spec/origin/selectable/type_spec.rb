@@ -54,7 +54,7 @@ describe Origin::Selectable::Type do
 
       it "adds the $type selector" do
         selection.selector.should eq({
-          field: { "$type" => 10 }
+          "field" => { "$type" => 10 }
         })
       end
 
@@ -73,8 +73,8 @@ describe Origin::Selectable::Type do
 
         it "adds the $type selectors" do
           selection.selector.should eq({
-            first: { "$type" => 10 },
-            second: { "$type" => 15 }
+            "first" => { "$type" => 10 },
+            "second" => { "$type" => 15 }
           })
         end
 
@@ -94,8 +94,8 @@ describe Origin::Selectable::Type do
 
         it "adds the $type selectors" do
           selection.selector.should eq({
-            first: { "$type" => 10 },
-            second: { "$type" => 15 }
+            "first" => { "$type" => 10 },
+            "second" => { "$type" => 15 }
           })
         end
 
@@ -112,7 +112,7 @@ describe Origin::Selectable::Type do
 
         it "overwrites the first $type selector" do
           selection.selector.should eq({
-            first: { "$type" => 15 }
+            "first" => { "$type" => 15 }
           })
         end
 

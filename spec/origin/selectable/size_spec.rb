@@ -54,7 +54,7 @@ describe Origin::Selectable::Size do
 
       it "adds the $size selector" do
         selection.selector.should eq({
-          field: { "$size" => 10 }
+          "field" => { "$size" => 10 }
         })
       end
 
@@ -73,8 +73,8 @@ describe Origin::Selectable::Size do
 
         it "adds the $size selectors" do
           selection.selector.should eq({
-            first: { "$size" => 10 },
-            second: { "$size" => 15 }
+            "first" => { "$size" => 10 },
+            "second" => { "$size" => 15 }
           })
         end
 
@@ -94,8 +94,8 @@ describe Origin::Selectable::Size do
 
         it "adds the $size selectors" do
           selection.selector.should eq({
-            first: { "$size" => 10 },
-            second: { "$size" => 15 }
+            "first" => { "$size" => 10 },
+            "second" => { "$size" => 15 }
           })
         end
 
@@ -112,7 +112,7 @@ describe Origin::Selectable::Size do
 
         it "overwrites the first $size selector" do
           selection.selector.should eq({
-            first: { "$size" => 15 }
+            "first" => { "$size" => 15 }
           })
         end
 
