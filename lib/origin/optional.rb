@@ -30,8 +30,8 @@ module Origin
     include Snapshot
     include Without
 
-    # @attribute [r] options The query options.
-    attr_reader :options
+    # @attribute [rw] options The query options.
+    attr_accessor :options
 
     # Take the provided criterion and store it as an option in the query
     # options.

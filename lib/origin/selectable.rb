@@ -61,8 +61,8 @@ module Origin
     include WithinPolygon
     include WithinSphericalCircle
 
-    # @attribute [r] selector The query selector.
-    attr_reader :selector
+    # @attribute [rw] selector The query selector.
+    attr_accessor :selector
 
     # Take the provided criterion and store it as a selection in the query
     # selector.
