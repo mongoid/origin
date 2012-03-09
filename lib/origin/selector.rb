@@ -106,7 +106,7 @@ module Origin
     #
     # @since 1.0.0
     def evolve_array(serializer, value)
-      value.map do |_value|
+      value.map! do |_value|
         evolve(serializer, _value)
       end
     end

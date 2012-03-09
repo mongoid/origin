@@ -11,6 +11,11 @@ module Origin
       # @attribute [r] expanded The MongoDB expanded query operator.
       attr_reader :name, :operator, :expanded
 
+      def ==(other)
+        return false unless other.is_a?(Key)
+        name == other.name && operator == other.operator && expanded == other.expanded
+      end
+
       # Instantiate the new key.
       #
       # @example Instantiate the key.
