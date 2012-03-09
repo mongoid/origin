@@ -5,22 +5,25 @@ module Origin
   # coming into it as well as being alias and locale aware for key names.
   class Selector < Hash
 
+    # @attribute [r] aliases The aliases.
     # @attribute [r] serializers The serializers.
-    attr_reader :serializers
+    attr_reader :aliases, :serializers
 
     # Initialize the new selector.
     #
     # @example Initialize the new selector.
-    #   Origin::Selector.new(serializers)
+    #   Origin::Selector.new(aliases, serializers)
     #
+    # @param [ Hash ] aliases A hash of mappings from aliases to the actual
+    #   field names in the database.
     # @param [ Hash ] serializers An optional hash of objects that are
     #   responsible for serializing values. The keys of the hash must be
     #   strings that match the field name, and the values must respond to
     #   #localized? and #evolve(object).
     #
     # @since 1.0.0
-    def initialize(serializers = nil)
-      @serializers = serializers || {}
+    def initialize(aliases = {}, serializers = {})
+      @aliases, @serializers = aliases, serializers
     end
 
     # Store the value in the selector for the provided key. The selector will
@@ -36,7 +39,8 @@ module Origin
     #
     # @since 1.0.0
     def store(key, value)
-      name = key.to_s
+      field = key.to_s
+      name = aliases[field] || field
       serializer = serializers[name]
       if multi_selection?(name)
         super(name, evolve_multi(value))

@@ -43,8 +43,8 @@ module Origin
     # @param [ Hash ] serializers The optional field serializers.
     #
     # @since 1.0.0
-    def initialize(serializers = nil)
-      @options, @selector = Options.new, Selector.new(serializers)
+    def initialize(aliases = {}, serializers = {})
+      @options, @selector = Options.new, Selector.new(aliases, serializers)
       yield(self) if block_given?
     end
 

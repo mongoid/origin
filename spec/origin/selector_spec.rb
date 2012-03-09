@@ -41,6 +41,51 @@ describe Origin::Selector do
 
     describe "##{method}" do
 
+      context "when aliases are provided" do
+
+        context "when the alias has no serializer" do
+
+          let(:selector) do
+            described_class.new({ "id" => "_id" })
+          end
+
+          before do
+            selector.send(method, "id", 1)
+          end
+
+          it "stores the field in the selector by database name" do
+            selector["_id"].should eq(1)
+          end
+        end
+
+        context "when the alias has a serializer" do
+
+          class AliasedField
+            def evolve(object)
+              Integer.evolve(object)
+            end
+
+            def localized?
+              false
+            end
+          end
+
+          let(:selector) do
+            described_class.new(
+              { "id" => "_id" }, { "_id" => AliasedField.new }
+            )
+          end
+
+          before do
+            selector.send(method, "id", "1")
+          end
+
+          it "stores the serialized field in the selector by database name" do
+            selector["_id"].should eq(1)
+          end
+        end
+      end
+
       context "when no serializers are provided" do
 
         let(:selector) do
@@ -118,7 +163,7 @@ describe Origin::Selector do
           end
 
           let(:selector) do
-            described_class.new({ "key" => Field.new })
+            described_class.new({}, { "key" => Field.new })
           end
 
           context "when the criterion is simple" do
@@ -312,7 +357,7 @@ describe Origin::Selector do
           end
 
           let(:selector) do
-            described_class.new({ "key" => LocalizedField.new })
+            described_class.new({}, { "key" => LocalizedField.new })
           end
 
           before do
