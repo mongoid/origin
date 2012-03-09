@@ -125,9 +125,8 @@ module Origin
     #
     # @since 1.0.0
     def evolve_hash(serializer, value)
-      value.reduce({}) do |hash, (operator, _value)|
-        hash[operator] = evolve(serializer, _value)
-        hash
+      value.each_pair do |operator, _value|
+        value[operator] = evolve(serializer, _value)
       end
     end
 

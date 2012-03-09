@@ -85,12 +85,20 @@ describe Origin::Selector do
             BigDecimal.new("4.2222")
           end
 
+          let(:array) do
+            [ big_one, big_two ]
+          end
+
           before do
-            selector.send(method, "key", [ big_one, big_two ])
+            selector.send(method, "key", array)
           end
 
           it "serializes each element in the array" do
             selector["key"].should eq([ big_one.to_s, big_two.to_s ])
+          end
+
+          it "sets the same array instance" do
+            selector["key"].should equal(array)
           end
         end
       end
@@ -371,12 +379,20 @@ describe Origin::Selector do
 
                   context "when the key is a string" do
 
+                    let(:hash) do
+                      { "$gt" => "5" }
+                    end
+
                     before do
-                      selector.send(method, "key", { "$gt" => "5" })
+                      selector.send(method, "key", hash)
                     end
 
                     it "serializes the value" do
                       selector["key.de"].should eq({ "$gt" => 5 })
+                    end
+
+                    it "sets the same hash instance" do
+                      selector["key.de"].should equal(hash)
                     end
                   end
 
