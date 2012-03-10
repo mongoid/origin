@@ -119,7 +119,7 @@ describe Origin::Query do
     end
 
     it "retains the option values" do
-      cloned.options.should eq({ "sort" => { :field => sort }})
+      cloned.options.should eq({ "sort" => { field: sort }})
     end
 
     it "deep copies the selector" do

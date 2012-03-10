@@ -3,28 +3,7 @@ module Origin
 
   # The selector is a special kind of hash that knows how to serialize values
   # coming into it as well as being alias and locale aware for key names.
-  class Selector < Hash
-
-    # @attribute [r] aliases The aliases.
-    # @attribute [r] serializers The serializers.
-    attr_reader :aliases, :serializers
-
-    # Initialize the new selector.
-    #
-    # @example Initialize the new selector.
-    #   Origin::Selector.new(aliases, serializers)
-    #
-    # @param [ Hash ] aliases A hash of mappings from aliases to the actual
-    #   field names in the database.
-    # @param [ Hash ] serializers An optional hash of objects that are
-    #   responsible for serializing values. The keys of the hash must be
-    #   strings that match the field name, and the values must respond to
-    #   #localized? and #evolve(object).
-    #
-    # @since 1.0.0
-    def initialize(aliases = {}, serializers = {})
-      @aliases, @serializers = aliases, serializers
-    end
+  class Selector < Smash
 
     # Store the value in the selector for the provided key. The selector will
     # handle all necessary serialization and localization in this step.
@@ -39,9 +18,7 @@ module Origin
     #
     # @since 1.0.0
     def store(key, value)
-      field = key.to_s
-      name = aliases[field] || field
-      serializer = serializers[name]
+      name, serializer = storage_pair(key)
       if multi_selection?(name)
         super(name, evolve_multi(value))
       else
@@ -149,24 +126,6 @@ module Origin
     # @since 1.0.0
     def multi_selection?(key)
       key =~ /\$and|\$or/
-    end
-
-    # Get the normalized value for the key. If localization is in play the
-    # current locale will be appended to the key in MongoDB dot notation.
-    #
-    # @api private
-    #
-    # @example Get the normalized key name.
-    #   selector.normalized_key("field", serializer)
-    #
-    # @param [ String ] name The name of the field.
-    # @param [ Object ] serializer The optional field serializer.
-    #
-    # @return [ String ] The normalized key.
-    #
-    # @since 1.0.0
-    def normalized_key(name, serializer)
-      serializer && serializer.localized? ? "#{name}.#{::I18n.locale}" : name
     end
   end
 end

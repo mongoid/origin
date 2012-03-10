@@ -1,5 +1,6 @@
 # encoding: utf-8
 require "origin/extensions"
+require "origin/smash"
 require "origin/optional"
 require "origin/options"
 require "origin/selectable"
@@ -44,7 +45,8 @@ module Origin
     #
     # @since 1.0.0
     def initialize(aliases = {}, serializers = {})
-      @options, @selector = Options.new, Selector.new(aliases, serializers)
+      @options = Options.new(aliases, serializers)
+      @selector = Selector.new(aliases, serializers)
       yield(self) if block_given?
     end
 

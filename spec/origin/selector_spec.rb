@@ -60,19 +60,25 @@ describe Origin::Selector do
 
         context "when the alias has a serializer" do
 
-          class AliasedField
-            def evolve(object)
-              Integer.evolve(object)
-            end
+          before(:all) do
+            class Field
+              def evolve(object)
+                Integer.evolve(object)
+              end
 
-            def localized?
-              false
+              def localized?
+                false
+              end
             end
+          end
+
+          after(:all) do
+            Object.send(:remove_const, :Field)
           end
 
           let(:selector) do
             described_class.new(
-              { "id" => "_id" }, { "_id" => AliasedField.new }
+              { "id" => "_id" }, { "_id" => Field.new }
             )
           end
 
@@ -152,14 +158,20 @@ describe Origin::Selector do
 
         context "when the serializer is not localized" do
 
-          class Field
-            def evolve(object)
-              Integer.evolve(object)
-            end
+          before(:all) do
+            class Field
+              def evolve(object)
+                Integer.evolve(object)
+              end
 
-            def localized?
-              false
+              def localized?
+                false
+              end
             end
+          end
+
+          after(:all) do
+            Object.send(:remove_const, :Field)
           end
 
           let(:selector) do
@@ -346,18 +358,24 @@ describe Origin::Selector do
 
         context "when the serializer is localized" do
 
-          class LocalizedField
-            def evolve(object)
-              Integer.evolve(object)
-            end
+          before(:all) do
+            class Field
+              def evolve(object)
+                Integer.evolve(object)
+              end
 
-            def localized?
-              true
+              def localized?
+                true
+              end
             end
           end
 
+          after(:all) do
+            Object.send(:remove_const, :Field)
+          end
+
           let(:selector) do
-            described_class.new({}, { "key" => LocalizedField.new })
+            described_class.new({}, { "key" => Field.new })
           end
 
           before do
