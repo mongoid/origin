@@ -8,6 +8,9 @@ require "origin/selectable/strategies/union"
 
 module Origin
   module Selectable
+
+    # This module adds behaviour for different types of merge strategies when
+    # generating selection.
     module Strategies
       include Add
       include Expanded
@@ -16,8 +19,21 @@ module Origin
       include Override
       include Union
 
+      # @attribute [rw] strategy The name of the current strategy.
       attr_accessor :strategy
 
+      # Add criterion to the selection with the named strategy.
+      #
+      # @example Add criterion with a strategy.
+      #   selectable.with_strategy(:__union__, [ 1, 2, 3 ], "$in")
+      #
+      # @param [ Symbol ] strategy The name of the strategy method.
+      # @param [ Object ] criterion The criterion to add.
+      # @param [ String ] operator The MongoDB operator.
+      #
+      # @return [ Queryable ] The cloned query.
+      #
+      # @since 1.0.0
       def with_strategy(strategy, criterion, operator)
         selection(criterion) do |selector, field, value|
           selector.store(

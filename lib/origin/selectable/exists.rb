@@ -13,6 +13,9 @@ module Origin
       # @example Add multiple selections.
       #   queryable.exists(field: true, other: false)
       #
+      # @example Execute an $exists in a where query.
+      #   queryable.where(:field.exists => true)
+      #
       # @param [ Hash ] criterion The field/boolean existence checks.
       #
       # @return [ Queryable ] The cloned queryable.
@@ -22,12 +25,6 @@ module Origin
         __override__(criterion, "$exists")
       end
 
-      # Add the key to symbol for where matching.
-      #
-      # @example Execute an $exists in a where query.
-      #   queryable.where(:field.exists => true)
-      #
-      # @since 1.0.0
       ::Symbol.add_key(:exists, "$exists")
     end
   end

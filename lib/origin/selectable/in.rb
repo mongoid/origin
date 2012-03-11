@@ -13,6 +13,9 @@ module Origin
       # @example Add $in selection on a range.
       #   queryable.in(age: 18..24)
       #
+      # @example Execute an $in in a where query.
+      #   queryable.where(:field.in => [ 1, 2, 3 ])
+      #
       # @param [ Hash ] criterion The field/value criterion pairs.
       #
       # @return [ Queryable ] The cloned queryable.
@@ -23,12 +26,6 @@ module Origin
       end
       alias :any_in :in
 
-      # Add the key to symbol for where matching.
-      #
-      # @example Execute an $in in a where query.
-      #   queryable.where(:field.in => [ 1, 2, 3 ])
-      #
-      # @since 1.0.0
       ::Symbol.add_key(:in, "$in")
     end
   end

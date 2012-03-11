@@ -6,6 +6,19 @@ module Origin
 
         private
 
+        # Adds the criterion to the existing selection.
+        #
+        # @api private
+        #
+        # @example Add the criterion.
+        #   queryable.__multi__([ 1, 2 ], "$in")
+        #
+        # @param [ Hash ] criterion The criteria.
+        # @param [ String ] operator The MongoDB operator.
+        #
+        # @return [ Queryable ] The new queryable.
+        #
+        # @since 1.0.0
         def __multi__(criterion, operator)
           clone.tap do |query|
             sel = query.selector

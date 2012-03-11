@@ -10,6 +10,9 @@ module Origin
       # @example Add the selection.
       #   queryable.within_spherical_circle(location: [[ 1, 10 ], 25 ])
       #
+      # @example Execute an $within/$centerSphere in a where query.
+      #   queryable.where(:field.within_spherical_circle => [[ 1, 10 ], 25 ])
+      #
       # @param [ Hash ] criterion The field/distance criterion.
       #
       # @return [ Queryable ] The cloned queryable.
@@ -19,12 +22,6 @@ module Origin
         __expanded__(criterion, "$within", "$centerSphere")
       end
 
-      # Add the key to symbol for where matching.
-      #
-      # @example Execute an $within/$centerSphere in a where query.
-      #   queryable.where(:field.within_spherical_circle => [[ 1, 10 ], 25 ])
-      #
-      # @since 1.0.0
       ::Symbol.add_multi_key(:within_spherical_circle, "$within", "$centerSphere")
     end
   end

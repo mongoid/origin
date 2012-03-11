@@ -10,6 +10,9 @@ module Origin
       # @example Add the selection.
       #   queryable.within_box(location: [[ 1, 10 ], [ 10, 1 ]])
       #
+      # @example Execute an $within/$box in a where query.
+      #   queryable.where(:field.within_box => [[ 1, 10 ], [ 10, 1 ]])
+      #
       # @param [ Hash ] criterion The field/box corner criterion.
       #
       # @return [ Queryable ] The cloned queryable.
@@ -19,12 +22,6 @@ module Origin
         __expanded__(criterion, "$within", "$box")
       end
 
-      # Add the key to symbol for where matching.
-      #
-      # @example Execute an $within/$box in a where query.
-      #   queryable.where(:field.within_box => [[ 1, 10 ], [ 10, 1 ]])
-      #
-      # @since 1.0.0
       ::Symbol.add_multi_key(:within_box, "$within", "$box")
     end
   end

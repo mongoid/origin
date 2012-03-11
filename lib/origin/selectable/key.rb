@@ -11,6 +11,16 @@ module Origin
       # @attribute [r] expanded The MongoDB expanded query operator.
       attr_reader :name, :operator, :expanded
 
+      # Does the key equal another object?
+      #
+      # @example Is the key equal to another?
+      #   key == other
+      #
+      # @param [ Object ] other The object to compare to.
+      #
+      # @return [ true, false ] If the objects are equal.
+      #
+      # @since 1.0.0
       def ==(other)
         return false unless other.is_a?(Key)
         name == other.name && operator == other.operator && expanded == other.expanded

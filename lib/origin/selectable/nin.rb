@@ -13,6 +13,9 @@ module Origin
       # @example Add $nin selection on a range.
       #   queryable.nin(age: 18..24)
       #
+      # @example Execute an $nin in a where query.
+      #   queryable.where(:field.nin => [ 1, 2, 3 ])
+      #
       # @param [ Hash ] criterion The field/value criterion pairs.
       #
       # @return [ Queryable ] The cloned queryable.
@@ -23,12 +26,6 @@ module Origin
       end
       alias :not_in :nin
 
-      # Add the key to symbol for where matching.
-      #
-      # @example Execute an $nin in a where query.
-      #   queryable.where(:field.nin => [ 1, 2, 3 ])
-      #
-      # @since 1.0.0
       ::Symbol.add_key(:nin, "$nin")
     end
   end

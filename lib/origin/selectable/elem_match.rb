@@ -16,6 +16,9 @@ module Origin
       #     other: { name: "value"}
       #   )
       #
+      # @example Execute an $elemMatch in a where query.
+      #   queryable.where(:field.elem_match => { name: "value" })
+      #
       # @param [ Hash ] criterion The field/match pairs.
       #
       # @return [ Queryable ] The cloned queryable.
@@ -25,12 +28,6 @@ module Origin
         __override__(criterion, "$elemMatch")
       end
 
-      # Add the key to symbol for where matching.
-      #
-      # @example Execute an $elemMatch in a where query.
-      #   queryable.where(:field.elem_match => { name: "value" })
-      #
-      # @since 1.0.0
       ::Symbol.add_key(:elem_match, "$elemMatch")
     end
   end

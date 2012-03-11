@@ -10,6 +10,9 @@ module Origin
       # @example Add the $lte criterion.
       #   queryable.lte(age: 60)
       #
+      # @example Execute an $lte in a where query.
+      #   queryable.where(:field.lte => 10)
+      #
       # @param [ Hash ] criterion The field/value pairs to check.
       #
       # @return [ Queryable ] The cloned queryable.
@@ -19,12 +22,6 @@ module Origin
         __override__(criterion, "$lte")
       end
 
-      # Add the key to symbol for where matching.
-      #
-      # @example Execute an $lte in a where query.
-      #   queryable.where(:field.lte => 10)
-      #
-      # @since 1.0.0
       ::Symbol.add_key(:lte, "$lte")
     end
   end

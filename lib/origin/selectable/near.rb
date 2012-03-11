@@ -10,6 +10,9 @@ module Origin
       # @example Add the $near selection.
       #   queryable.near(location: [ 23.1, 12.1 ])
       #
+      # @example Execute an $near in a where query.
+      #   queryable.where(:field.near => [ 23.2, 12.1 ])
+      #
       # @param [ Hash ] criterion The field/location pair.
       #
       # @return [ Queryable ] The cloned queryable.
@@ -19,12 +22,6 @@ module Origin
         __override__(criterion, "$near")
       end
 
-      # Add the key to symbol for where matching.
-      #
-      # @example Execute an $near in a where query.
-      #   queryable.where(:field.near => [ 23.2, 12.1 ])
-      #
-      # @since 1.0.0
       ::Symbol.add_key(:near, "$near")
     end
   end

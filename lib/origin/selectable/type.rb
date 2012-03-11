@@ -10,6 +10,9 @@ module Origin
       # @example Add the $type selection.
       #   queryable.type(field: 15)
       #
+      # @example Execute an $type in a where query.
+      #   queryable.where(:field.type => 15)
+      #
       # @note http://vurl.me/PGOU contains a list of all types.
       #
       # @param [ Hash ] criterion The field/type pairs.
@@ -21,12 +24,6 @@ module Origin
         __override__(criterion, "$type")
       end
 
-      # Add the key to symbol for where matching.
-      #
-      # @example Execute an $type in a where query.
-      #   queryable.where(:field.type => 15)
-      #
-      # @since 1.0.0
       ::Symbol.add_key(:type, "$type")
     end
   end
