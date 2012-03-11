@@ -19,10 +19,10 @@ module Origin
       #
       # @since 1.0.0
       def all(criterion = nil)
-        send(strategy || :__override__, with_array_values(criterion), "$all")
+        send(strategy || :__union__, with_array_values(criterion), "$all")
       end
       alias :all_in :all
-        
+
       ::Symbol.add_key(:all, "$all")
     end
   end

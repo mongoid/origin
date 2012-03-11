@@ -143,7 +143,7 @@ describe Origin::Selectable::All do
 
       context "when the criterion are on the same field" do
 
-        context "when the strategy is the default (override)" do
+        context "when the strategy is the default (union)" do
 
           let(:selection) do
             query.all(first: [ 1, 2 ]).all(first: [ 3, 4 ])
@@ -151,7 +151,7 @@ describe Origin::Selectable::All do
 
           it "overwrites the first $all selector" do
             selection.selector.should eq({
-              "first" => { "$all" => [ 3, 4 ] }
+              "first" => { "$all" => [ 1, 2, 3, 4 ] }
             })
           end
 
