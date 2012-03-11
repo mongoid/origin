@@ -54,7 +54,7 @@ describe Origin::Optional::Slice do
 
       it "adds the field options" do
         selection.options.should eq(
-          { :fields => { :first => { "$slice" => 5 }}}
+          { "fields" => { "first" => { "$slice" => 5 }}}
         )
       end
 
@@ -70,8 +70,8 @@ describe Origin::Optional::Slice do
       end
 
       it "adds the field options" do
-        selection.options.should eq({ :fields =>
-          { :first => { "$slice" => 5 }, :second => { "$slice" => [ 0, 3 ] }}
+        selection.options.should eq({ "fields" =>
+          { "first" => { "$slice" => 5 }, "second" => { "$slice" => [ 0, 3 ] }}
         })
       end
 
@@ -92,10 +92,10 @@ describe Origin::Optional::Slice do
 
       it "adds the field options" do
         selection.options.should eq({
-          :fields => {
-            :name => 1,
-            :first => { "$slice" => 5 },
-            :second => { "$slice" => [ 0, 3 ] }
+          "fields" => {
+            "name" => 1,
+            "first" => { "$slice" => 5 },
+            "second" => { "$slice" => [ 0, 3 ] }
           }
         })
       end

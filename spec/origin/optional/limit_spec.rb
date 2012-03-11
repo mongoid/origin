@@ -55,7 +55,7 @@ describe Origin::Optional::Limit do
         end
 
         it "adds the field options" do
-          selection.options.should eq({ :limit => 10 })
+          selection.options.should eq({ "limit" => 10 })
         end
 
         it "returns a cloned query" do
@@ -70,7 +70,7 @@ describe Origin::Optional::Limit do
         end
 
         it "adds the field options as an integer" do
-          selection.options.should eq({ :limit => 10 })
+          selection.options.should eq({ "limit" => 10 })
         end
 
         it "returns a cloned query" do
@@ -85,7 +85,7 @@ describe Origin::Optional::Limit do
         end
 
         it "adds the field options as an integer" do
-          selection.options.should eq({ :limit => 10 })
+          selection.options.should eq({ "limit" => 10 })
         end
 
         it "returns a cloned query" do

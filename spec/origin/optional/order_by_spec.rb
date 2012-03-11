@@ -18,7 +18,7 @@ describe Origin::Optional::OrderBy do
 
         it "adds the sorting criteria" do
           selection.options.should eq(
-            { :sort => { field_one: 1, field_two: -1 }}
+            { "sort" => { "field_one" => 1, "field_two" => -1 }}
           )
         end
 
@@ -35,7 +35,7 @@ describe Origin::Optional::OrderBy do
 
         it "adds the sorting criteria" do
           selection.options.should eq(
-            { :sort => { field_one: 1, field_two: -1 }}
+            { "sort" => { "field_one" => 1, "field_two" => -1 }}
           )
         end
 
@@ -52,7 +52,7 @@ describe Origin::Optional::OrderBy do
 
         it "adds the sorting criteria" do
           selection.options.should eq(
-            { :sort => { field_one: 1, field_two: -1 }}
+            { "sort" => { "field_one" => 1, "field_two" => -1 }}
           )
         end
 
@@ -74,7 +74,7 @@ describe Origin::Optional::OrderBy do
 
           it "adds the sorting criteria" do
             selection.options.should eq(
-              { :sort => { field_one: 1, field_two: -1 }}
+              { "sort" => { "field_one" => 1, "field_two" => -1 }}
             )
           end
 
@@ -91,7 +91,7 @@ describe Origin::Optional::OrderBy do
 
           it "adds the sorting criteria" do
             selection.options.should eq(
-              { :sort => { field_one: 1, field_two: -1 }}
+              { "sort" => { "field_one" => 1, "field_two" => -1 }}
             )
           end
 
@@ -108,7 +108,7 @@ describe Origin::Optional::OrderBy do
 
           it "adds the sorting criteria" do
             selection.options.should eq(
-              { :sort => { field_one: 1, field_two: -1 }}
+              { "sort" => { "field_one" => 1, "field_two" => -1 }}
             )
           end
 
@@ -126,7 +126,7 @@ describe Origin::Optional::OrderBy do
 
         it "adds the sorting criteria" do
           selection.options.should eq(
-            { :sort => { field_one: 1, field_two: -1 }}
+            { "sort" => { "field_one" => 1, "field_two" => -1 }}
           )
         end
 
@@ -148,7 +148,7 @@ describe Origin::Optional::OrderBy do
 
           it "adds the sorting criteria" do
             selection.options.should eq(
-              { :sort => { field_one: 1, field_two: -1 }}
+              { "sort" => { "field_one" => 1, "field_two" => -1 }}
             )
           end
 
@@ -165,7 +165,7 @@ describe Origin::Optional::OrderBy do
 
           it "adds the sorting criteria" do
             selection.options.should eq(
-              { :sort => { field_one: 1, field_two: -1 }}
+              { "sort" => { "field_one" => 1, "field_two" => -1 }}
             )
           end
 
@@ -182,7 +182,7 @@ describe Origin::Optional::OrderBy do
 
           it "adds the sorting criteria" do
             selection.options.should eq(
-              { :sort => { field_one: 1, field_two: -1 }}
+              { "sort" => { "field_one" => 1, "field_two" => -1 }}
             )
           end
 
@@ -200,7 +200,7 @@ describe Origin::Optional::OrderBy do
 
         it "adds the sorting criteria" do
           selection.options.should eq(
-            { :sort => { field_one: 1, field_two: -1 }}
+            { "sort" => { "field_one" => 1, "field_two" => -1 }}
           )
         end
 
@@ -222,7 +222,7 @@ describe Origin::Optional::OrderBy do
 
           it "adds the sorting criteria" do
             selection.options.should eq(
-              { :sort => { field_one: 1, field_two: -1 }}
+              { "sort" => { "field_one" => 1, "field_two" => -1 }}
             )
           end
 
@@ -239,7 +239,7 @@ describe Origin::Optional::OrderBy do
 
           it "adds the sorting criteria" do
             selection.options.should eq(
-              { :sort => { field_one: 1, field_two: -1 }}
+              { "sort" => { "field_one" => 1, "field_two" => -1 }}
             )
           end
 
@@ -259,7 +259,7 @@ describe Origin::Optional::OrderBy do
 
           it "adds the sorting criteria" do
             selection.options.should eq(
-              { :sort => { field_one: 1, field_two: -1 }}
+              { "sort" => { "field_one" => 1, "field_two" => -1 }}
             )
           end
 
@@ -276,7 +276,7 @@ describe Origin::Optional::OrderBy do
 
           it "adds the sorting criteria" do
             selection.options.should eq(
-              { :sort => { field_one: 1, field_two: -1 }}
+              { "sort" => { "field_one" => 1, "field_two" => -1 }}
             )
           end
 

@@ -13,7 +13,7 @@ describe Origin::Optional::NoTimeout do
     end
 
     it "adds the timeout option" do
-      selection.options.should eq({ :timeout => false })
+      selection.options.should eq({ "timeout" => false })
     end
   end
 end

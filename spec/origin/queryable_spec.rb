@@ -92,13 +92,13 @@ describe Origin::Query do
   describe "#initialize_copy" do
 
     let(:sort) do
-      [[ :name, :asc ]]
+      { "name" => 1 }
     end
 
     let(:query) do
       described_class.new do |query|
         query.selector["field"] = "value"
-        query.options["sort"] = { :field => sort }
+        query.options["sort"] = { "field" => sort }
       end
     end
 
@@ -119,7 +119,7 @@ describe Origin::Query do
     end
 
     it "retains the option values" do
-      cloned.options.should eq({ "sort" => { field: sort }})
+      cloned.options.should eq({ "sort" => { "field" => sort }})
     end
 
     it "deep copies the selector" do
@@ -131,7 +131,7 @@ describe Origin::Query do
     end
 
     it "deep copies n levels deep" do
-      cloned.options["sort"][:field].should_not equal(sort)
+      cloned.options["sort"]["field"].should_not equal(sort)
     end
   end
 end

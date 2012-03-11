@@ -54,7 +54,7 @@ describe Origin::Optional::Only do
 
       it "adds the field options" do
         selection.options.should eq(
-          { :fields => { :first => 1, :second => 1 }}
+          { "fields" => { "first" => 1, "second" => 1 }}
         )
       end
 
