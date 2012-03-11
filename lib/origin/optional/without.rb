@@ -6,7 +6,7 @@ module Origin
       def without(*args)
         option(*args) do |options|
           options.store(
-            :fields, args.inject({}){ |sub, field| sub.tap { sub[field] = -1 }}
+            :fields, args.inject({}){ |sub, field| sub.tap { sub[field] = 0 }}
           )
         end
       end
