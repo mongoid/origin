@@ -24,9 +24,9 @@ module Origin
       end
 
       def add_sort_option(options, field, direction)
-        sorting = options["sort"] ||= {}
+        sorting = options[:sort] || {}
         sorting[field] = direction
-        options.store("sort", sorting)
+        options.store(:sort, sorting)
       end
     end
   end

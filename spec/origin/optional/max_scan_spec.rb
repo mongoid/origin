@@ -53,7 +53,7 @@ describe Origin::Optional::MaxScan do
       end
 
       it "adds the field options" do
-        selection.options.should eq({ "max_scan" => 500 })
+        selection.options.should eq({ max_scan: 500 })
       end
 
       it "returns a cloned query" do

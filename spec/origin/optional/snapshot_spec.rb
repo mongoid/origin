@@ -13,7 +13,7 @@ describe Origin::Optional::Snapshot do
     end
 
     it "adds the snapshot option" do
-      selection.options.should eq({ "snapshot" => true })
+      selection.options.should eq({ snapshot: true })
     end
   end
 end

@@ -53,7 +53,7 @@ describe Origin::Optional::BatchSize do
       end
 
       it "adds the field options" do
-        selection.options.should eq({ "batch_size" => 500 })
+        selection.options.should eq({ batch_size: 500 })
       end
 
       it "returns a cloned query" do
