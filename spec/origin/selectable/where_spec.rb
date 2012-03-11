@@ -63,10 +63,53 @@ describe Origin::Selectable::Where do
 
     context "when provided a single criterion" do
 
-    end
+      context "when the value needs no evolution" do
 
-    context "when provided multiple criterion" do
+        let(:selection) do
+          query.where(name: "Syd")
+        end
 
+        it "adds the criterion to the selection" do
+          selection.selector.should eq({ "name" => "Syd" })
+        end
+      end
+
+      context "when the value must be evolved" do
+
+        before(:all) do
+          class Document
+            def id
+              13
+            end
+            def self.evolve(object)
+              object.id
+            end
+          end
+        end
+
+        after(:all) do
+          Object.send(:remove_const, :Document)
+        end
+
+        context "when the key needs evolution" do
+
+          let(:query) do
+            Origin::Query.new({ "user" => "user_id" })
+          end
+
+          let(:document) do
+            Document.new
+          end
+
+          let(:selection) do
+            query.where(user: document)
+          end
+
+          it "alters the key and value" do
+            selection.selector.should eq({ "user_id" => document.id })
+          end
+        end
+      end
     end
 
     context "when provided complex criterion" do
