@@ -24,7 +24,7 @@ module Origin
       end
 
       def add_sort_option(options, field, direction)
-        sorting = options[:sort] || {}
+        sorting = (options[:sort] || {}).dup
         sorting[field] = direction
         options.store(:sort, sorting)
       end
