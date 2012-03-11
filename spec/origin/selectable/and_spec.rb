@@ -54,7 +54,7 @@ describe Origin::Selectable::And do
 
       it "adds the $and selector" do
         selection.selector.should eq({
-          "$and" => [{ field: [ 1, 2 ] }]
+          "$and" => [{ "field" => [ 1, 2 ] }]
         })
       end
 
@@ -74,8 +74,8 @@ describe Origin::Selectable::And do
         it "adds the $and selector" do
           selection.selector.should eq({
             "$and" => [
-              { first: [ 1, 2 ] },
-              { second: [ 3, 4 ] }
+              { "first" => [ 1, 2 ] },
+              { "second" => [ 3, 4 ] }
             ]
           })
         end
@@ -94,8 +94,8 @@ describe Origin::Selectable::And do
         it "appends both $and expressions" do
           selection.selector.should eq({
             "$and" => [
-              { first: [ 1, 2 ] },
-              { first: [ 3, 4 ] }
+              { "first" => [ 1, 2 ] },
+              { "first" => [ 3, 4 ] }
             ]
           })
         end
@@ -117,8 +117,8 @@ describe Origin::Selectable::And do
         it "adds the $and selectors" do
           selection.selector.should eq({
             "$and" => [
-              { first: [ 1, 2 ] },
-              { second: [ 3, 4 ] }
+              { "first" => [ 1, 2 ] },
+              { "second" => [ 3, 4 ] }
             ]
           })
         end
@@ -137,8 +137,8 @@ describe Origin::Selectable::And do
         it "appends both $and expressions" do
           selection.selector.should eq({
             "$and" => [
-              { first: [ 1, 2 ] },
-              { first: [ 3, 4 ] }
+              { "first" => [ 1, 2 ] },
+              { "first" => [ 3, 4 ] }
             ]
           })
         end

@@ -8,6 +8,22 @@ module Origin
     # @attribute [r] serializers The serializers.
     attr_reader :aliases, :serializers
 
+    # Perform a deep copy of the smash.
+    #
+    # @example Perform a deep copy.
+    #   smash.__deep_copy__
+    #
+    # @return [ Smash ] The copied hash.
+    #
+    # @since 1.0.0
+    def __deep_copy__
+      self.class.new(aliases, serializers) do |copy|
+        each_pair do |key, value|
+          copy.store(key, value.__deep_copy__)
+        end
+      end
+    end
+
     # Initialize the new selector.
     #
     # @example Initialize the new selector.
@@ -23,6 +39,7 @@ module Origin
     # @since 1.0.0
     def initialize(aliases = {}, serializers = {})
       @aliases, @serializers = aliases, serializers
+      yield(self) if block_given?
     end
 
     private

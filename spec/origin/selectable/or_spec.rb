@@ -54,7 +54,7 @@ describe Origin::Selectable::Or do
 
       it "adds the $or selector" do
         selection.selector.should eq({
-          "$or" => [{ field: [ 1, 2 ] }]
+          "$or" => [{ "field" => [ 1, 2 ] }]
         })
       end
 
@@ -74,8 +74,8 @@ describe Origin::Selectable::Or do
         it "adds the $or selector" do
           selection.selector.should eq({
             "$or" => [
-              { first: [ 1, 2 ] },
-              { second: [ 3, 4 ] }
+              { "first" => [ 1, 2 ] },
+              { "second" => [ 3, 4 ] }
             ]
           })
         end
@@ -94,8 +94,8 @@ describe Origin::Selectable::Or do
         it "appends both $or expressions" do
           selection.selector.should eq({
             "$or" => [
-              { first: [ 1, 2 ] },
-              { first: [ 3, 4 ] }
+              { "first" => [ 1, 2 ] },
+              { "first" => [ 3, 4 ] }
             ]
           })
         end
@@ -117,8 +117,8 @@ describe Origin::Selectable::Or do
         it "adds the $or selectors" do
           selection.selector.should eq({
             "$or" => [
-              { first: [ 1, 2 ] },
-              { second: [ 3, 4 ] }
+              { "first" => [ 1, 2 ] },
+              { "second" => [ 3, 4 ] }
             ]
           })
         end
@@ -137,8 +137,8 @@ describe Origin::Selectable::Or do
         it "appends both $or expressions" do
           selection.selector.should eq({
             "$or" => [
-              { first: [ 1, 2 ] },
-              { first: [ 3, 4 ] }
+              { "first" => [ 1, 2 ] },
+              { "first" => [ 3, 4 ] }
             ]
           })
         end

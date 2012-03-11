@@ -67,9 +67,12 @@ module Origin
     # @since 1.0.0
     def evolve(serializer, value)
       case value
-        when Hash then evolve_hash(serializer, value)
-        when Array then evolve_array(serializer, value)
-        else (serializer || value.class).evolve(value)
+      when Hash
+        evolve_hash(serializer, value)
+      when Array
+        evolve_array(serializer, value)
+      else
+        (serializer || value.class).evolve(value)
       end
     end
 

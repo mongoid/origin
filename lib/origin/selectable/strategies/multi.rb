@@ -11,7 +11,8 @@ module Origin
             sel = query.selector
             criterion.each do |expr|
               next unless expr
-              sel.fetch(operator){ |key| sel.store(operator, []) }.push(expr)
+              criteria = sel[operator] || []
+              sel.store(operator, criteria.push(expr))
             end
           end
         end
