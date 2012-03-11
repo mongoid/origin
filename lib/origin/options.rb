@@ -18,8 +18,7 @@ module Origin
     #
     # @since 1.0.0
     def store(key, value)
-      _, serializer = storage_pair(key)
-      super(key, evolve(serializer, value))
+      super(key, evolve(value))
     end
     alias :[]= :store
 
@@ -32,16 +31,15 @@ module Origin
     # @example Evolve a simple selection.
     #   options.evolve(field, 5)
     #
-    # @param [ Object ] serializer The optional serializer for the field.
     # @param [ Object ] value The value to serialize.
     #
     # @return [ Object ] The serialized object.
     #
     # @since 1.0.0
-    def evolve(serializer, value)
+    def evolve(value)
       case value
       when Hash
-        evolve_hash(serializer, value)
+        evolve_hash(value)
       else
         value
       end
@@ -54,15 +52,15 @@ module Origin
     # @example Evolve a simple selection.
     #   options.evolve(field, { "$gt" => 5 })
     #
-    # @param [ Object ] serializer The optional serializer for the field.
     # @param [ Hash ] value The hash to serialize.
     #
     # @return [ Object ] The serialized hash.
     #
     # @since 1.0.0
-    def evolve_hash(serializer, value)
+    def evolve_hash(value)
       value.inject({}) do |hash, (field, _value)|
-        hash[normalized_key(field.to_s, serializer)] = _value
+        name, serializer = storage_pair(field)
+        hash[normalized_key(name, serializer)] = _value
         hash
       end
     end
