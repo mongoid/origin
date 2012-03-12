@@ -37,7 +37,7 @@ module Origin
         #
         # @since 1.0.0
         def evolve(object)
-          __evolve__(object) { |obj| obj.to_sym }
+          __evolve__(object) { |obj| obj ? obj.to_sym : obj }
         end
       end
     end

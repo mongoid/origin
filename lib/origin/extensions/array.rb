@@ -87,7 +87,11 @@ module Origin
       module ClassMethods
 
         def evolve(object)
-          object.map!{ |obj| obj.class.evolve(obj) }
+          if object.is_a?(::Array)
+            object.map!{ |obj| obj.class.evolve(obj) }
+          else
+            object
+          end
         end
       end
     end
