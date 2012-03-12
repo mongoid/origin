@@ -30,29 +30,36 @@ describe Float do
         end
       end
     end
-  end
 
-  context "when provided a number" do
+    context "when provided an array of strings" do
 
-    context "when the number is an integer" do
-
-      it "returns a float" do
-        described_class.evolve(1).should eq(1.0)
+      it "returns the array of floats" do
+        described_class.evolve([ "2.23" ]).should eq([ 2.23 ])
       end
     end
 
-    context "when the number is a float" do
+    context "when provided a number" do
 
-      it "returns the float" do
-        described_class.evolve(2.23).should eq(2.23)
+      context "when the number is an integer" do
+
+        it "returns a float" do
+          described_class.evolve(1).should eq(1.0)
+        end
+      end
+
+      context "when the number is a float" do
+
+        it "returns the float" do
+          described_class.evolve(2.23).should eq(2.23)
+        end
       end
     end
-  end
 
-  context "when provided nil" do
+    context "when provided nil" do
 
-    it "returns nil" do
-      described_class.evolve(nil).should be_nil
+      it "returns nil" do
+        described_class.evolve(nil).should be_nil
+      end
     end
   end
 end

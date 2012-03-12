@@ -4,9 +4,9 @@ module Origin
     module Set
       module ClassMethods
 
-        def evolve(object)
-          return object unless object
-          object.respond_to?(:to_a) ? object.to_a : object
+        def evolve(object, type = nil)
+          return object if !object || !object.respond_to?(:to_a)
+          object.to_a.map!{ |obj| (type || obj.class).evolve(obj) }
         end
       end
     end

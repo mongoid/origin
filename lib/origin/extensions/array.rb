@@ -34,10 +34,8 @@ module Origin
       #
       # @since 1.0.0
       def __deep_copy__
-        [].tap do |copy|
-          each do |value|
-            copy.push(value.__deep_copy__)
-          end
+        map do |value|
+          value.__deep_copy__
         end
       end
 
@@ -78,15 +76,23 @@ module Origin
         when Array
           ::Hash[self].as_sorting_options
         else
-          ::Hash[[ self ]].as_sorting_options
+          ::Hash[[self]].as_sorting_options
         end
       end
 
       def as_array
         self
       end
+
+      module ClassMethods
+
+        def evolve(object)
+          object.map!{ |obj| obj.class.evolve(obj) }
+        end
+      end
     end
   end
 end
 
 ::Array.__send__(:include, Origin::Extensions::Array)
+::Array.__send__(:extend, Origin::Extensions::Array::ClassMethods)

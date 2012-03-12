@@ -41,6 +41,14 @@ module Origin
 
         private
 
+        def __evolve__(object)
+          if object.is_a?(::Array)
+            object.map!{ |obj| evolve(obj) }
+          else
+            yield(object)
+          end
+        end
+
         def __numeric__(object)
           object.to_s =~ /(^[-+]?[0-9]+$)|(\.0+)$/ ? object.to_i : Float(object)
         end

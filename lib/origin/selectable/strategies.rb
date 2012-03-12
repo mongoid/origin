@@ -38,9 +38,16 @@ module Origin
         selection(criterion) do |selector, field, value|
           selector.store(
             field,
-            selector[field].send(strategy, { operator => value })
+            selector[field].send(strategy, { operator => prepare(field, value) })
           )
         end
+      end
+
+      private
+
+      def prepare(field, value)
+        serializer = serializers[field]
+        serializer ? serializer.evolve(value) : value
       end
     end
   end

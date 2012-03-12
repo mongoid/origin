@@ -19,6 +19,10 @@ module Origin
     include Selectable
     include Optional
 
+    # @attribute [r] aliases The aliases.
+    # @attribute [r] serializers The serializers.
+    attr_reader :aliases, :serializers
+
     # Is this queryable equal to another object? Is true if the selector and
     # options are equal.
     #
@@ -45,8 +49,9 @@ module Origin
     #
     # @since 1.0.0
     def initialize(aliases = {}, serializers = {})
-      @options = Options.new(aliases, serializers)
-      @selector = Selector.new(aliases, serializers)
+      @aliases, @serializers = aliases, serializers
+      @options, @selector =
+        Options.new(aliases, serializers), Selector.new(aliases, serializers)
       yield(self) if block_given?
     end
 

@@ -18,8 +18,9 @@ module Origin
         #
         # @since 1.0.0
         def evolve(object)
-          return true if object.to_s =~ (/(true|t|yes|y|1|1.0)$/i)
-          false
+          __evolve__(object) do |obj|
+            obj.to_s =~ (/(true|t|yes|y|1|1.0)$/i) ? true : false
+          end
         end
       end
     end

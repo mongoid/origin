@@ -17,7 +17,9 @@ module Origin
         #
         # @since 1.0.0
         def evolve(object)
-          __numeric__(object) rescue object
+          __evolve__(object) do |obj|
+            __numeric__(obj) rescue obj
+          end
         end
       end
     end

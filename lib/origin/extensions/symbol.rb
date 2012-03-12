@@ -24,6 +24,21 @@ module Origin
             end
           EOR
         end
+
+        # Evolves the symbol into a MongoDB friendly value - in this case
+        # a symbol.
+        #
+        # @example Evolve the symbol
+        #   Symbol.evolve("test")
+        #
+        # @param [ Object ] object The object to convert.
+        #
+        # @return [ Symbol ] The value as a symbol.
+        #
+        # @since 1.0.0
+        def evolve(object)
+          __evolve__(object) { |obj| obj.to_sym }
+        end
       end
     end
   end

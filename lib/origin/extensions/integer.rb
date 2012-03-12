@@ -8,7 +8,9 @@ module Origin
       module ClassMethods
 
         def evolve(object)
-          __numeric__(object) rescue object
+          __evolve__(object) do |obj|
+            __numeric__(obj) rescue obj
+          end
         end
       end
     end

@@ -15,8 +15,27 @@ module Origin
       def to_direction
         self =~ /desc/i ? -1 : 1
       end
+
+      module ClassMethods
+
+        # Evolves the string into a MongoDB friendly value - in this case
+        # a string.
+        #
+        # @example Evolve the string
+        #   String.evolve(1)
+        #
+        # @param [ Object ] object The object to convert.
+        #
+        # @return [ String ] The value as a string.
+        #
+        # @since 1.0.0
+        def evolve(object)
+          __evolve__(object) { |obj| obj.to_s }
+        end
+      end
     end
   end
 end
 
 ::String.__send__(:include, Origin::Extensions::String)
+::String.__send__(:extend, Origin::Extensions::String::ClassMethods)

@@ -21,8 +21,9 @@ module Origin
         #
         # @since 1.0.0
         def evolve(object)
-          return object unless object
-          object.to_s
+          __evolve__(object) do |obj|
+            obj ? obj.to_s : obj
+          end
         end
       end
     end

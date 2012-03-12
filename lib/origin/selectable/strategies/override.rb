@@ -29,7 +29,7 @@ module Origin
         # @since 1.0.0
         def __override__(criterion, operator)
           selection(criterion) do |selector, field, value|
-            selector.store(field, { operator => value })
+            selector.store(field, { operator => prepare(field, value) })
           end
         end
       end

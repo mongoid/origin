@@ -48,54 +48,130 @@ describe Origin::Selectable::All do
 
     context "when provided a single criterion" do
 
-      context "when providing an array" do
+      context "when no serializers are provided" do
 
-        let(:selection) do
-          query.all(field: [ 1, 2 ])
+        context "when providing an array" do
+
+          let(:selection) do
+            query.all(field: [ 1, 2 ])
+          end
+
+          it "adds the $all selector" do
+            selection.selector.should eq({
+              "field" => { "$all" => [ 1, 2 ] }
+            })
+          end
+
+          it "returns a cloned query" do
+            selection.should_not equal(query)
+          end
         end
 
-        it "adds the $all selector" do
-          selection.selector.should eq({
-            "field" => { "$all" => [ 1, 2 ] }
-          })
+        context "when providing a range" do
+
+          let(:selection) do
+            query.all(field: 1..3)
+          end
+
+          it "adds the $all selector with converted range" do
+            selection.selector.should eq({
+              "field" => { "$all" => [ 1, 2, 3 ] }
+            })
+          end
+
+          it "returns a cloned query" do
+            selection.should_not equal(query)
+          end
         end
 
-        it "returns a cloned query" do
-          selection.should_not equal(query)
+        context "when providing a single value" do
+
+          let(:selection) do
+            query.all(field: 1)
+          end
+
+          it "adds the $all selector with wrapped value" do
+            selection.selector.should eq({
+              "field" => { "$all" => [ 1 ] }
+            })
+          end
+
+          it "returns a cloned query" do
+            selection.should_not equal(query)
+          end
         end
       end
 
-      context "when providing a range" do
+      context "when serializers are provided" do
 
-        let(:selection) do
-          query.all(field: 1..3)
+        before(:all) do
+          class Field
+            def evolve(object)
+              Integer.evolve(object)
+            end
+            def localized?
+              false
+            end
+          end
         end
 
-        it "adds the $all selector with converted range" do
-          selection.selector.should eq({
-            "field" => { "$all" => [ 1, 2, 3 ] }
-          })
+        after(:all) do
+          Object.send(:remove_const, :Field)
         end
 
-        it "returns a cloned query" do
-          selection.should_not equal(query)
-        end
-      end
-
-      context "when providing a single value" do
-
-        let(:selection) do
-          query.all(field: 1)
+        let!(:query) do
+          Origin::Query.new({}, { "field" => Field.new })
         end
 
-        it "adds the $all selector with wrapped value" do
-          selection.selector.should eq({
-            "field" => { "$all" => [ 1 ] }
-          })
+        context "when providing an array" do
+
+          let(:selection) do
+            query.all(field: [ "1", "2" ])
+          end
+
+          it "adds the $all selector" do
+            selection.selector.should eq({
+              "field" => { "$all" => [ 1, 2 ] }
+            })
+          end
+
+          it "returns a cloned query" do
+            selection.should_not equal(query)
+          end
         end
 
-        it "returns a cloned query" do
-          selection.should_not equal(query)
+        context "when providing a range" do
+
+          let(:selection) do
+            query.all(field: "1".."3")
+          end
+
+          it "adds the $all selector with converted range" do
+            selection.selector.should eq({
+              "field" => { "$all" => [ 1, 2, 3 ] }
+            })
+          end
+
+          it "returns a cloned query" do
+            selection.should_not equal(query)
+          end
+        end
+
+        context "when providing a single value" do
+
+          let(:selection) do
+            query.all(field: "1")
+          end
+
+          it "adds the $all selector with wrapped value" do
+            selection.selector.should eq({
+              "field" => { "$all" => [ 1 ] }
+            })
+          end
+
+          it "returns a cloned query" do
+            selection.should_not equal(query)
+          end
         end
       end
     end
@@ -143,71 +219,164 @@ describe Origin::Selectable::All do
 
       context "when the criterion are on the same field" do
 
-        context "when the strategy is the default (union)" do
+        context "when no serializers are provided" do
 
-          let(:selection) do
-            query.all(first: [ 1, 2 ]).all(first: [ 3, 4 ])
+          context "when the strategy is the default (union)" do
+
+            let(:selection) do
+              query.all(first: [ 1, 2 ]).all(first: [ 3, 4 ])
+            end
+
+            it "overwrites the first $all selector" do
+              selection.selector.should eq({
+                "first" => { "$all" => [ 1, 2, 3, 4 ] }
+              })
+            end
+
+            it "returns a cloned query" do
+              selection.should_not equal(query)
+            end
           end
 
-          it "overwrites the first $all selector" do
-            selection.selector.should eq({
-              "first" => { "$all" => [ 1, 2, 3, 4 ] }
-            })
+          context "when the strategy is intersect" do
+
+            let(:selection) do
+              query.all(first: [ 1, 2 ]).intersect.all(first: [ 2, 3 ])
+            end
+
+            it "intersects the $all selectors" do
+              selection.selector.should eq({
+                "first" => { "$all" => [ 2 ] }
+              })
+            end
+
+            it "returns a cloned query" do
+              selection.should_not equal(query)
+            end
           end
 
-          it "returns a cloned query" do
-            selection.should_not equal(query)
+          context "when the strategy is override" do
+
+            let(:selection) do
+              query.all(first: [ 1, 2 ]).override.all(first: [ 3, 4 ])
+            end
+
+            it "overwrites the first $all selector" do
+              selection.selector.should eq({
+                "first" => { "$all" => [ 3, 4 ] }
+              })
+            end
+
+            it "returns a cloned query" do
+              selection.should_not equal(query)
+            end
+          end
+
+          context "when the strategy is union" do
+
+            let(:selection) do
+              query.all(first: [ 1, 2 ]).union.all(first: [ 3, 4 ])
+            end
+
+            it "unions the $all selectors" do
+              selection.selector.should eq({
+                "first" => { "$all" => [ 1, 2, 3, 4 ] }
+              })
+            end
+
+            it "returns a cloned query" do
+              selection.should_not equal(query)
+            end
           end
         end
 
-        context "when the strategy is intersect" do
+        context "when serializers are provided" do
 
-          let(:selection) do
-            query.all(first: [ 1, 2 ]).intersect.all(first: [ 2, 3 ])
+          before(:all) do
+            class Field
+              def evolve(object)
+                Integer.evolve(object)
+              end
+              def localized?
+                false
+              end
+            end
           end
 
-          it "intersects the $all selectors" do
-            selection.selector.should eq({
-              "first" => { "$all" => [ 2 ] }
-            })
+          after(:all) do
+            Object.send(:remove_const, :Field)
           end
 
-          it "returns a cloned query" do
-            selection.should_not equal(query)
-          end
-        end
-
-        context "when the strategy is override" do
-
-          let(:selection) do
-            query.all(first: [ 1, 2 ]).override.all(first: [ 3, 4 ])
+          let!(:query) do
+            Origin::Query.new({}, { "field" => Field.new })
           end
 
-          it "overwrites the first $all selector" do
-            selection.selector.should eq({
-              "first" => { "$all" => [ 3, 4 ] }
-            })
+          context "when the strategy is the default (union)" do
+
+            let(:selection) do
+              query.all(field: [ "1", "2" ]).all(field: [ "3", "4" ])
+            end
+
+            it "overwrites the field $all selector" do
+              selection.selector.should eq({
+                "field" => { "$all" => [ 1, 2, 3, 4 ] }
+              })
+            end
+
+            it "returns a cloned query" do
+              selection.should_not equal(query)
+            end
           end
 
-          it "returns a cloned query" do
-            selection.should_not equal(query)
+          context "when the strategy is intersect" do
+
+            let(:selection) do
+              query.all(field: [ "1", "2" ]).intersect.all(field: [ "2", "3" ])
+            end
+
+            it "intersects the $all selectors" do
+              selection.selector.should eq({
+                "field" => { "$all" => [ 2 ] }
+              })
+            end
+
+            it "returns a cloned query" do
+              selection.should_not equal(query)
+            end
           end
-        end
 
-        context "when the strategy is union" do
+          context "when the strategy is override" do
 
-          let(:selection) do
-            query.all(first: [ 1, 2 ]).union.all(first: [ 3, 4 ])
+            let(:selection) do
+              query.all(field: [ "1", "2" ]).override.all(field: [ "3", "4" ])
+            end
+
+            it "overwrites the field $all selector" do
+              selection.selector.should eq({
+                "field" => { "$all" => [ 3, 4 ] }
+              })
+            end
+
+            it "returns a cloned query" do
+              selection.should_not equal(query)
+            end
           end
 
-          it "unions the $all selectors" do
-            selection.selector.should eq({
-              "first" => { "$all" => [ 1, 2, 3, 4 ] }
-            })
-          end
+          context "when the strategy is union" do
 
-          it "returns a cloned query" do
-            selection.should_not equal(query)
+            let(:selection) do
+              query.all(field: [ "1", "2" ]).union.all(field: [ "3", "4" ])
+            end
+
+            it "unions the $all selectors" do
+              selection.selector.should eq({
+                "field" => { "$all" => [ 1, 2, 3, 4 ] }
+              })
+            end
+
+            it "returns a cloned query" do
+              selection.should_not equal(query)
+            end
           end
         end
       end
