@@ -12,6 +12,10 @@ module Origin
         end
       end
 
+      def specify(value)
+        { self => value }
+      end
+
       def to_direction
         self =~ /desc/i ? -1 : 1
       end

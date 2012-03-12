@@ -40,11 +40,7 @@ module Origin
       # @since 1.0.0
       def expr_query(criterion)
         selection(criterion) do |selector, field, value|
-          if field.is_a?(Key)
-            selector.merge!(field.specify(value))
-          else
-            selector.store(field, value)
-          end
+          selector.merge!(field.specify(value))
         end
       end
 

@@ -16,12 +16,7 @@ module Origin
       #
       # @since 1.0.0
       def __add__(object)
-        if object.is_a?(Hash)
-          object[object.keys.first] = __add__(object.values.first)
-          object
-        else
-          concat(Array(object)).uniq
-        end
+        object.__add_from_array__(self)
       end
 
       # Makes a deep copy of the array, deep copying every element inside the
@@ -50,12 +45,7 @@ module Origin
       #
       # @since 1.0.0
       def __intersect__(object)
-        if object.is_a?(Hash)
-          object[object.keys.first] = __intersect__(object.values.first)
-          object
-        else
-          self & Array(object)
-        end
+        object.__intersect_from_array__(self)
       end
 
       # Gets the array as options in the proper format to pass as MongoDB sort

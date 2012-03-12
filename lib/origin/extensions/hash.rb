@@ -7,12 +7,28 @@ module Origin
         apply_strategy(:__add__, object)
       end
 
+      def __add_from_array__(array)
+        { keys.first => array.__add__(values.first) }
+      end
+
       def __intersect__(object)
         apply_strategy(:__intersect__, object)
       end
 
+      def __intersect_from_array__(array)
+        { keys.first => array.__intersect__(values.first) }
+      end
+
+      def __intersect_from_object__(object)
+        { keys.first => object.__intersect__(values.first) }
+      end
+
       def __union__(object)
         apply_strategy(:__union__, object)
+      end
+
+      def __union_from_object__(object)
+        { keys.first => object.__union__(values.first) }
       end
 
       def __deep_copy__

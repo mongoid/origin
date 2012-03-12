@@ -25,7 +25,10 @@ module Origin
             criterion.each do |expr|
               next unless expr
               criteria = sel[operator] || []
-              sel.store(operator, criteria.push(expr))
+              normalized = expr.inject({}) do |hash, (field, value)|
+                hash.merge!(field.specify(value)); hash
+              end
+              sel.store(operator, criteria.push(normalized))
             end
           end
         end

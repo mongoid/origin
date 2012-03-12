@@ -5,6 +5,12 @@ module Origin
   # coming into it as well as being alias and locale aware for key names.
   class Selector < Smash
 
+    def merge!(other)
+      other.each_pair do |key, value|
+        store(key, value)
+      end
+    end
+
     # Store the value in the selector for the provided key. The selector will
     # handle all necessary serialization and localization in this step.
     #

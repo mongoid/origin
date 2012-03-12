@@ -3,6 +3,10 @@ module Origin
   module Extensions
     module Symbol
 
+      def specify(value)
+        { self => value }
+      end
+
       def to_direction
         to_s.to_direction
       end

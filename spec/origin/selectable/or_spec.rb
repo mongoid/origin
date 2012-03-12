@@ -85,6 +85,26 @@ describe Origin::Selectable::Or do
         end
       end
 
+      context "when a criterion has a selectable key" do
+
+        let(:selection) do
+          query.or({ first: [ 1, 2 ] }, { :second.gt => 3 })
+        end
+
+        it "adds the $or selector" do
+          selection.selector.should eq({
+            "$or" => [
+              { "first" => [ 1, 2 ] },
+              { "second" => { "$gt" => 3 }}
+            ]
+          })
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
+      end
+
       context "when the criterion are on the same field" do
 
         let(:selection) do
