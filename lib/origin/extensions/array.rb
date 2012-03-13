@@ -27,9 +27,7 @@ module Origin
       # @return [ Array ] self
       #
       # @since 1.0.0
-      def __array__
-        self
-      end
+      def __array__; self; end
 
       # Makes a deep copy of the array, deep copying every element inside the
       # array.
@@ -106,6 +104,16 @@ module Origin
 
       module ClassMethods
 
+        # Evolve the object when the serializer is defined as an array.
+        #
+        # @example Evolve the object.
+        #   Array.evolve(1)
+        #
+        # @param [ Object ] The object to evolve.
+        #
+        # @return [ Object ] The evolved object.
+        #
+        # @since 1.0.0
         def evolve(object)
           if object.is_a?(::Array)
             object.map!{ |obj| obj.class.evolve(obj) }
