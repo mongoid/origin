@@ -112,8 +112,10 @@ module Origin
       #
       # @since 1.0.0
       def __deep_copy__
-        map do |key, value|
-          { key => value.__deep_copy__ }
+        {}.tap do |copy|
+          each_pair do |key, value|
+            copy.store(key, value.__deep_copy__)
+          end
         end
       end
 
