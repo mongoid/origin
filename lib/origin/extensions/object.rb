@@ -35,7 +35,7 @@ module Origin
         self
       end
 
-      def as_array
+      def __array__
         [ self ]
       end
 

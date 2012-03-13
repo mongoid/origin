@@ -22,11 +22,12 @@ module Origin
         def __multi__(criterion, operator)
           clone.tap do |query|
             sel = query.selector
-            criterion.each do |expr|
+            criterion.flatten.each do |expr|
               next unless expr
               criteria = sel[operator] || []
               normalized = expr.inject({}) do |hash, (field, value)|
-                hash.merge!(field.specify(value)); hash
+                hash.merge!(field.specify(value))
+                hash
               end
               sel.store(operator, criteria.push(normalized))
             end

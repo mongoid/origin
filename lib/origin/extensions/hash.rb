@@ -39,7 +39,7 @@ module Origin
         end
       end
 
-      def as_sorting_options
+      def __sort_option__
         tap do |hash|
           hash.each_pair do |key, value|
             hash.store(key, value.to_direction)

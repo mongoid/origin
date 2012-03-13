@@ -19,6 +19,18 @@ module Origin
         object.__add_from_array__(self)
       end
 
+      # Return the object as an array.
+      #
+      # @example Get the array.
+      #   [ 1, 2 ].__array__
+      #
+      # @return [ Array ] self
+      #
+      # @since 1.0.0
+      def __array__
+        self
+      end
+
       # Makes a deep copy of the array, deep copying every element inside the
       # array.
       #
@@ -52,26 +64,44 @@ module Origin
       # criteria.
       #
       # @example Get the array as sorting options.
-      #   [ :field, 1 ].as_sorting_options
+      #   [ :field, 1 ].__sort_option__
       #
       # @return [ Hash ] The array as sort criterion.
       #
       # @since 1.0.0
-      def as_sorting_options
-        case first
-        when Selectable::Key
-          inject({}) do |hash, value|
-            hash.tap { |_hash| _hash.merge!(value.as_sorting_options) }
-          end
-        when Array
-          ::Hash[self].as_sorting_options
-        else
-          ::Hash[[self]].as_sorting_options
+      def __sort_option__
+        multi.inject({}) do |options, criteria|
+          options.merge!(criteria.__sort_pair__)
+          options
         end
       end
 
-      def as_array
-        self
+      # Get the array as a sort pair.
+      #
+      # @example Get the array as field/direction pair.
+      #   [ 1, 2, 3 ].__sort_pair__
+      #
+      # @return [ Hash ] The field/direction pair.
+      #
+      # @since 1.0.0
+      def __sort_pair__
+        { first => last.to_direction }
+      end
+
+      private
+
+      # Converts the array to a multi-dimensional array.
+      #
+      # @api private
+      #
+      # @example Convert to multi-dimensional.
+      #   [ 1, 2, 3 ].multi
+      #
+      # @return [ Array ] The multi-dimensional array.
+      #
+      # @since 1.0.0
+      def multi
+        first.is_a?(::Symbol) ? [ self ] : self
       end
 
       module ClassMethods

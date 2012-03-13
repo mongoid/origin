@@ -3,7 +3,7 @@ module Origin
   module Extensions
     module String
 
-      def as_sorting_options
+      def __sort_option__
         split(/,/).inject({}) do |hash, spec|
           hash.tap do |_hash|
             field, direction = spec.strip.split(/\s/)

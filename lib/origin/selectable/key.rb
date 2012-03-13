@@ -57,14 +57,15 @@ module Origin
       # Get the key as raw Mongo sorting options.
       #
       # @example Get the key as a sort.
-      #   key.as_sorting_options
+      #   key.__sort_option__
       #
       # @return [ Hash ] The field/direction pair.
       #
       # @since 1.0.0
-      def as_sorting_options
+      def __sort_option__
         { name => operator }
       end
+      alias :__sort_pair__ :__sort_option__
     end
   end
 end

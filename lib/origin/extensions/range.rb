@@ -3,7 +3,7 @@ module Origin
   module Extensions
     module Range
 
-      def as_array
+      def __array__
         to_a
       end
 

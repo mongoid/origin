@@ -171,24 +171,76 @@ describe Array do
     end
   end
 
-  describe "#as_sorting_options" do
+  describe "#__sort_option__" do
 
-    context "when the first element is an array" do
+    context "when the array is multi-dimensional" do
 
-      context "when the array is multi-dimensional" do
+      context "when the arrays have integer values" do
 
-        context "when the arrays have integer values" do
-
-          let(:selection) do
-            [[ :field_one, 1 ],[ :field_two, -1 ]]
-          end
-
-          it "returns the sorting criteria" do
-            selection.as_sorting_options.should eq(
-              { field_one: 1, field_two: -1 }
-            )
-          end
+        let(:selection) do
+          [[ :field_one, 1 ],[ :field_two, -1 ]]
         end
+
+        it "adds the sorting criteria" do
+          selection.__sort_option__.should eq(
+            { field_one: 1, field_two: -1 }
+          )
+        end
+      end
+
+      context "when the arrays have symbol values" do
+
+        let(:selection) do
+          [[ :field_one, :asc ],[ :field_two, :desc ]]
+        end
+
+        it "adds the sorting criteria" do
+          selection.__sort_option__.should eq(
+            { field_one: 1, field_two: -1 }
+          )
+        end
+      end
+
+      context "when the arrays have string values" do
+
+        let(:selection) do
+          [[ :field_one, "asc" ],[ :field_two, "desc" ]]
+        end
+
+        it "adds the sorting criteria" do
+          selection.__sort_option__.should eq(
+            { field_one: 1, field_two: -1 }
+          )
+        end
+      end
+    end
+
+    context "when the array is one-dimensional" do
+
+      context "when the arrays have integer values" do
+
+        let(:selection) do
+          [ :field_one, 1 ]
+        end
+
+        it "adds the sorting criteria" do
+          selection.__sort_option__.should eq(
+            { field_one: 1 }
+          )
+        end
+      end
+    end
+
+    context "when the array is selectable keys" do
+
+      let(:selection) do
+        [ :field_one.asc, :field_two.desc ]
+      end
+
+      it "adds the sorting criteria" do
+        selection.__sort_option__.should eq(
+          { field_one: 1, field_two: -1 }
+        )
       end
     end
   end

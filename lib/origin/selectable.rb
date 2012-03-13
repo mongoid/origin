@@ -103,7 +103,7 @@ module Origin
     def with_array_values(criterion)
       return nil unless criterion
       criterion.each_pair do |key, value|
-        criterion[key] = value.as_array
+        criterion[key] = value.__array__
       end
     end
   end

@@ -6,7 +6,7 @@ module Origin
       def order_by(*spec)
         option(spec) do |options|
           spec.compact.each do |criterion|
-            criterion.as_sorting_options.each_pair do |field, direction|
+            criterion.__sort_option__.each_pair do |field, direction|
               add_sort_option(options, field, direction)
             end
           end
