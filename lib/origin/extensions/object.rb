@@ -157,8 +157,11 @@ module Origin
         #
         # @since 1.0.0
         def __evolve__(object)
-          if object.is_a?(::Array)
+          case object
+          when ::Array
             object.map!{ |obj| evolve(obj) }
+          when ::Range
+            { "$gte" => evolve(object.min), "$lte" => evolve(object.max) }
           else
             yield(object)
           end
