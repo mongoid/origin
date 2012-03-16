@@ -1,13 +1,13 @@
 require "spec_helper"
 
-describe Date do
+describe DateTime do
 
   describe ".evolve" do
 
-    context "when provided a date" do
+    context "when provided a date time" do
 
       let(:date) do
-        Date.new(2010, 1, 1)
+        DateTime.new(2010, 1, 1, 12, 0, 0)
       end
 
       let(:evolved) do
@@ -15,7 +15,7 @@ describe Date do
       end
 
       let(:expected) do
-        Time.new(2010, 1, 1)
+        Time.new(2010, 1, 1, 12, 0, 0)
       end
 
       it "returns the time" do
@@ -25,10 +25,10 @@ describe Date do
 
     context "when provided an array" do
 
-      context "when the array is composed of dates" do
+      context "when the array is composed of date times" do
 
         let(:date) do
-          Date.new(2010, 1, 1)
+          DateTime.new(2010, 1, 1, 12, 0, 0)
         end
 
         let(:evolved) do
@@ -36,7 +36,7 @@ describe Date do
         end
 
         let(:expected) do
-          Time.new(2010, 1, 1)
+          Time.new(2010, 1, 1, 12, 0, 0)
         end
 
         it "returns the array with evolved times" do
@@ -47,7 +47,7 @@ describe Date do
       context "when the array is composed of strings" do
 
         let(:date) do
-          Date.parse("1st Jan 2010")
+          DateTime.parse("1st Jan 2010 12:00:00+01:00")
         end
 
         let(:evolved) do
@@ -103,11 +103,11 @@ describe Date do
       context "when the range are dates" do
 
         let(:min) do
-          Date.new(2010, 1, 1)
+          DateTime.new(2010, 1, 1, 12, 0, 0)
         end
 
         let(:max) do
-          Date.new(2010, 1, 3)
+          DateTime.new(2010, 1, 3, 12, 0, 0)
         end
 
         let(:evolved) do
@@ -115,11 +115,11 @@ describe Date do
         end
 
         let(:expected_min) do
-          Time.new(2010, 1, 1)
+          Time.new(2010, 1, 1, 12, 0, 0)
         end
 
         let(:expected_max) do
-          Time.new(2010, 1, 3)
+          Time.new(2010, 1, 3, 12, 0, 0)
         end
 
         it "returns a selection of times" do
@@ -132,11 +132,11 @@ describe Date do
       context "when the range are strings" do
 
         let(:min) do
-          Date.new(2010, 1, 1)
+          DateTime.new(2010, 1, 1, 12, 0, 0)
         end
 
         let(:max) do
-          Date.new(2010, 1, 3)
+          DateTime.new(2010, 1, 3, 12, 0, 0)
         end
 
         let(:evolved) do
@@ -222,7 +222,7 @@ describe Date do
     context "when provided a string" do
 
       let(:date) do
-        Date.parse("1st Jan 2010")
+        DateTime.parse("1st Jan 2010 12:00:00+01:00")
       end
 
       let(:evolved) do

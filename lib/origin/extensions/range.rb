@@ -17,6 +17,10 @@ module Origin
         to_a
       end
 
+      def __evolve_time__
+        { "$gte" => min.__evolve_time__, "$lte" => max.__evolve_time__ }
+      end
+
       module ClassMethods
 
         # Evolve the range. This will transform it into a $gte/$lte selection.

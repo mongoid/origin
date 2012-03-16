@@ -39,9 +39,11 @@ module Origin
       #
       # @since 1.0.0
       def __deep_copy__
-        map do |value|
-          value.__deep_copy__
-        end
+        map { |value| value.__deep_copy__ }
+      end
+
+      def __evolve_time__
+        map { |value| value.__evolve_time__ }
       end
 
       # Combine the two objects using an intersection strategy.

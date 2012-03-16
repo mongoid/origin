@@ -4,6 +4,11 @@ module Origin
 
     # This module contains behaviour extensions for floats.
     module Float
+
+      def __evolve_time__
+        ::Time.at(self)
+      end
+
       module ClassMethods
 
         # Evolve the object into a float for selection.
@@ -26,4 +31,5 @@ module Origin
   end
 end
 
+::Float.__send__(:include, Origin::Extensions::Float)
 ::Float.__send__(:extend, Origin::Extensions::Float::ClassMethods)

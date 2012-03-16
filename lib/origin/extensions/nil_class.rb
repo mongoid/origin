@@ -17,6 +17,8 @@ module Origin
       # @since 1.0.0
       def __add__(object); object; end
 
+      def __evolve_time__; self; end
+
       # Add this object to nil.
       #
       # @example Add the object to a nil value.

@@ -157,6 +157,7 @@ module Origin
         #
         # @since 1.0.0
         def __evolve__(object)
+          return nil if object.nil?
           case object
           when ::Array
             object.map!{ |obj| evolve(obj) }

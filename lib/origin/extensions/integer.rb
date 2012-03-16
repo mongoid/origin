@@ -5,6 +5,10 @@ module Origin
     # This module contains additional integer behaviour.
     module Integer
 
+      def __evolve_time__
+        ::Time.at(self)
+      end
+
       # Get the integer as a sort direction.
       #
       # @example Get the integer as a sort direction.

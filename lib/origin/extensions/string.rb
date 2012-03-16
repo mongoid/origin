@@ -5,6 +5,10 @@ module Origin
     # This module contains additional object behaviour.
     module String
 
+      def __evolve_time__
+        ::Time.parse(self)
+      end
+
       # Get the string as a sort option.
       #
       # @example Get the string as a sort option.

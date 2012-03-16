@@ -2,11 +2,11 @@
 module Origin
   module Extensions
 
-    # This module contains additional date behaviour.
-    module Date
+    # This module contains additional datetime behaviour.
+    module DateTime
 
       def __evolve_time__
-        ::Time.local(year, month, day)
+        ::Time.local(year, month, day, hour, min, sec)
       end
 
       module ClassMethods
@@ -14,17 +14,14 @@ module Origin
         # Evolve the object to an date.
         #
         # @example Evolve dates.
-        #   Date.evolve(Date.new(1990, 1, 1))
         #
         # @example Evolve string dates.
-        #   Date.evolve("1990-1-1")
         #
         # @example Evolve date ranges.
-        #   Date.evolve(Date.new(1990, 1, 1)..Date.new(1990, 1, 4))
         #
         # @param [ Object ] object The object to evolve.
         #
-        # @return [ Time ] The evolved date.
+        # @return [ Time ] The evolved date time.
         #
         # @since 1.0.0
         def evolve(object)
@@ -35,5 +32,5 @@ module Origin
   end
 end
 
-::Date.__send__(:include, Origin::Extensions::Date)
-::Date.__send__(:extend, Origin::Extensions::Date::ClassMethods)
+::DateTime.__send__(:include, Origin::Extensions::DateTime)
+::DateTime.__send__(:extend, Origin::Extensions::DateTime::ClassMethods)
