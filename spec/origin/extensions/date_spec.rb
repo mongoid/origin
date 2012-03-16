@@ -61,8 +61,12 @@ describe Date do
 
       context "when the array is composed of integers" do
 
+        let(:time) do
+          Time.utc(2010, 1, 1, 0, 0, 0, 0)
+        end
+
         let(:integer) do
-          1262300400
+          time.to_i
         end
 
         let(:evolved) do
@@ -74,14 +78,18 @@ describe Date do
         end
 
         it "returns the integers as times" do
-          evolved.should eq([ Time.utc(2010, 1, 1, 0, 0, 0, 0) ])
+          evolved.should eq([ time ])
         end
       end
 
       context "when the array is composed of floats" do
 
+        let(:time) do
+          Time.utc(2010, 1, 1, 0, 0, 0, 0)
+        end
+
         let(:float) do
-          1262300400.413
+          time.to_f
         end
 
         let(:evolved) do
@@ -93,7 +101,7 @@ describe Date do
         end
 
         it "returns the floats as times" do
-          evolved.should eq([ Time.utc(2010, 1, 1, 0, 0, 0, 0) ])
+          evolved.should eq([ time ])
         end
       end
     end
@@ -160,58 +168,58 @@ describe Date do
 
       context "when the range is floats" do
 
+        let(:min_time) do
+          Time.utc(2010, 1, 1, 0, 0, 0, 0)
+        end
+
+        let(:max_time) do
+          Time.utc(2010, 1, 3, 0, 0, 0, 0)
+        end
+
         let(:min) do
-          1262300400.9999
+          min_time.to_f
         end
 
         let(:max) do
-          1262476800.7651
+          max_time.to_f
         end
 
         let(:evolved) do
           described_class.evolve(min..max)
         end
 
-        let(:expected_min) do
-          Time.utc(2010, 1, 1, 0, 0, 0, 0)
-        end
-
-        let(:expected_max) do
-          Time.utc(2010, 1, 3, 0, 0, 0, 0)
-        end
-
         it "returns a selection of times" do
           evolved.should eq(
-            { "$gte" => expected_min, "$lte" => expected_max }
+            { "$gte" => min_time, "$lte" => max_time }
           )
         end
       end
 
       context "when the range is integers" do
 
+        let(:min_time) do
+          Time.utc(2010, 1, 1, 0, 0, 0, 0)
+        end
+
+        let(:max_time) do
+          Time.utc(2010, 1, 3, 0, 0, 0, 0)
+        end
+
         let(:min) do
-          1262300400
+          min_time.to_i
         end
 
         let(:max) do
-          1262476800
+          max_time.to_i
         end
 
         let(:evolved) do
           described_class.evolve(min..max)
         end
 
-        let(:expected_min) do
-          Time.utc(2010, 1, 1, 0, 0, 0, 0)
-        end
-
-        let(:expected_max) do
-          Time.utc(2010, 1, 3, 0, 0, 0, 0)
-        end
-
         it "returns a selection of times" do
           evolved.should eq(
-            { "$gte" => expected_min, "$lte" => expected_max }
+            { "$gte" => min_time, "$lte" => max_time }
           )
         end
       end
@@ -248,39 +256,39 @@ describe Date do
 
     context "when provided a float" do
 
+      let(:time) do
+        Time.utc(2010, 1, 1, 0, 0, 0, 0)
+      end
+
       let(:float) do
-        1262300400.9999
+        time.to_f
       end
 
       let(:evolved) do
         described_class.evolve(float)
       end
 
-      let(:expected) do
-        Time.utc(2010, 1, 1, 0, 0, 0, 0)
-      end
-
       it "returns the float as a time" do
-        evolved.should eq(expected)
+        evolved.should eq(time)
       end
     end
 
     context "when provided an integer" do
 
+      let(:time) do
+        Time.utc(2010, 1, 1, 0, 0, 0, 0)
+      end
+
       let(:integer) do
-        1262300400
+        time.to_i
       end
 
       let(:evolved) do
         described_class.evolve(integer)
       end
 
-      let(:expected) do
-        Time.utc(2010, 1, 1, 0, 0, 0, 0)
-      end
-
       it "returns the integer as a time" do
-        evolved.should eq(expected)
+        evolved.should eq(time)
       end
     end
 
