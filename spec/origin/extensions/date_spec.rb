@@ -74,7 +74,7 @@ describe Date do
         end
 
         it "returns the integers as times" do
-          evolved.should eq([ Time.new(2010, 1, 1, 0, 0, 0, 0).utc ])
+          evolved.should eq([ Time.utc(2010, 1, 1, 0, 0, 0, 0) ])
         end
       end
 
@@ -93,7 +93,7 @@ describe Date do
         end
 
         it "returns the floats as times" do
-          evolved.should eq([ Time.new(2010, 1, 1, 0, 0, 0, 0).utc ])
+          evolved.should eq([ Time.utc(2010, 1, 1, 0, 0, 0, 0) ])
         end
       end
     end
@@ -161,7 +161,7 @@ describe Date do
       context "when the range is floats" do
 
         let(:min) do
-          1262300400.413
+          1262300400.9999
         end
 
         let(:max) do
@@ -249,7 +249,7 @@ describe Date do
     context "when provided a float" do
 
       let(:float) do
-        1262300400.413
+        1262300400.9999
       end
 
       let(:evolved) do
