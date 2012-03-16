@@ -2,12 +2,10 @@
 module Origin
   module Extensions
 
-    # This module contains additional datetime behaviour.
-    module DateTime
+    # This module contains additional time behaviour.
+    module Time
 
-      def __evolve_time__
-        ::Time.local(year, month, day, hour, min, sec)
-      end
+      def __evolve_time__; self; end
 
       module ClassMethods
 
@@ -32,5 +30,5 @@ module Origin
   end
 end
 
-::DateTime.__send__(:include, Origin::Extensions::DateTime)
-::DateTime.__send__(:extend, Origin::Extensions::DateTime::ClassMethods)
+::Time.__send__(:include, Origin::Extensions::Time)
+::Time.__send__(:extend, Origin::Extensions::Time::ClassMethods)
