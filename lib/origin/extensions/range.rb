@@ -17,6 +17,10 @@ module Origin
         to_a
       end
 
+      def __evolve_date__
+        { "$gte" => min.__evolve_date__, "$lte" => max.__evolve_date__ }
+      end
+
       def __evolve_time__
         { "$gte" => min.__evolve_time__, "$lte" => max.__evolve_time__ }
       end

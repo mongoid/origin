@@ -5,6 +5,11 @@ module Origin
     # This module contains additional object behaviour.
     module String
 
+      def __evolve_date__
+        time = __evolve_time__
+        ::Time.utc(time.year, time.month, time.day, 0, 0, 0, 0)
+      end
+
       def __evolve_time__
         ::Time.parse(self)
       end

@@ -18,6 +18,7 @@ module Origin
       def __add__(object); object; end
 
       def __evolve_time__; self; end
+      alias :__evolve_date__ :__evolve_time__
 
       # Add this object to nil.
       #

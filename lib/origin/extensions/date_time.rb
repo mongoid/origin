@@ -25,6 +25,7 @@ module Origin
         #
         # @since 1.0.0
         def evolve(object)
+          p object
           object.__evolve_time__
         end
       end

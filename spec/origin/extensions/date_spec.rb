@@ -15,7 +15,7 @@ describe Date do
       end
 
       let(:expected) do
-        Time.new(2010, 1, 1)
+        Time.utc(2010, 1, 1, 0, 0, 0)
       end
 
       it "returns the time" do
@@ -36,7 +36,7 @@ describe Date do
         end
 
         let(:expected) do
-          Time.new(2010, 1, 1)
+          Time.utc(2010, 1, 1, 0, 0, 0, 0)
         end
 
         it "returns the array with evolved times" do
@@ -55,14 +55,14 @@ describe Date do
         end
 
         it "returns the strings as a times" do
-          evolved.should eq([ date.to_time ])
+          evolved.should eq([ Time.new(2010, 1, 1, 0, 0, 0, 0).utc ])
         end
       end
 
       context "when the array is composed of integers" do
 
         let(:integer) do
-          1331890719
+          1262300400
         end
 
         let(:evolved) do
@@ -74,14 +74,14 @@ describe Date do
         end
 
         it "returns the integers as times" do
-          evolved.should eq([ expected ])
+          evolved.should eq([ Time.new(2010, 1, 1, 0, 0, 0, 0).utc ])
         end
       end
 
       context "when the array is composed of floats" do
 
         let(:float) do
-          1331890719.413
+          1262300400.413
         end
 
         let(:evolved) do
@@ -93,7 +93,7 @@ describe Date do
         end
 
         it "returns the floats as times" do
-          evolved.should eq([ expected ])
+          evolved.should eq([ Time.new(2010, 1, 1, 0, 0, 0, 0).utc ])
         end
       end
     end
@@ -115,11 +115,11 @@ describe Date do
         end
 
         let(:expected_min) do
-          Time.new(2010, 1, 1)
+          Time.utc(2010, 1, 1, 0, 0, 0, 0)
         end
 
         let(:expected_max) do
-          Time.new(2010, 1, 3)
+          Time.utc(2010, 1, 3, 0, 0, 0, 0)
         end
 
         it "returns a selection of times" do
@@ -143,9 +143,17 @@ describe Date do
           described_class.evolve(min.to_s..max.to_s)
         end
 
+        let(:expected_min) do
+          Time.utc(2010, 1, 1, 0, 0, 0, 0)
+        end
+
+        let(:expected_max) do
+          Time.utc(2010, 1, 3, 0, 0, 0, 0)
+        end
+
         it "returns a selection of times" do
           evolved.should eq(
-            { "$gte" => min.to_time, "$lte" => max.to_time }
+            { "$gte" => expected_min, "$lte" => expected_max }
           )
         end
       end
@@ -153,11 +161,11 @@ describe Date do
       context "when the range is floats" do
 
         let(:min) do
-          1331890719.1234
+          1262300400.413
         end
 
         let(:max) do
-          1332890719.7651
+          1262476800.7651
         end
 
         let(:evolved) do
@@ -165,11 +173,11 @@ describe Date do
         end
 
         let(:expected_min) do
-          Time.at(min)
+          Time.utc(2010, 1, 1, 0, 0, 0, 0)
         end
 
         let(:expected_max) do
-          Time.at(max)
+          Time.utc(2010, 1, 3, 0, 0, 0, 0)
         end
 
         it "returns a selection of times" do
@@ -182,11 +190,11 @@ describe Date do
       context "when the range is integers" do
 
         let(:min) do
-          1331890719
+          1262300400
         end
 
         let(:max) do
-          1332890719
+          1262476800
         end
 
         let(:evolved) do
@@ -194,11 +202,11 @@ describe Date do
         end
 
         let(:expected_min) do
-          Time.at(min)
+          Time.utc(2010, 1, 1, 0, 0, 0, 0)
         end
 
         let(:expected_max) do
-          Time.at(max)
+          Time.utc(2010, 1, 3, 0, 0, 0, 0)
         end
 
         it "returns a selection of times" do
@@ -229,15 +237,19 @@ describe Date do
         described_class.evolve(date.to_s)
       end
 
+      let(:expected) do
+        Time.utc(2010, 1, 1, 0, 0, 0, 0)
+      end
+
       it "returns the string as a time" do
-        evolved.should eq(date.to_time)
+        evolved.should eq(expected)
       end
     end
 
     context "when provided a float" do
 
       let(:float) do
-        1331890719.8170738
+        1262300400.413
       end
 
       let(:evolved) do
@@ -245,7 +257,7 @@ describe Date do
       end
 
       let(:expected) do
-        Time.at(float)
+        Time.utc(2010, 1, 1, 0, 0, 0, 0)
       end
 
       it "returns the float as a time" do
@@ -256,7 +268,7 @@ describe Date do
     context "when provided an integer" do
 
       let(:integer) do
-        1331890719
+        1262300400
       end
 
       let(:evolved) do
@@ -264,7 +276,7 @@ describe Date do
       end
 
       let(:expected) do
-        Time.at(integer)
+        Time.utc(2010, 1, 1, 0, 0, 0, 0)
       end
 
       it "returns the integer as a time" do

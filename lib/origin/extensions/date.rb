@@ -5,6 +5,10 @@ module Origin
     # This module contains additional date behaviour.
     module Date
 
+      def __evolve_date__
+        ::Time.utc(year, month, day, 0, 0, 0, 0)
+      end
+
       def __evolve_time__
         ::Time.local(year, month, day)
       end
@@ -28,7 +32,7 @@ module Origin
         #
         # @since 1.0.0
         def evolve(object)
-          object.__evolve_time__
+          object.__evolve_date__
         end
       end
     end

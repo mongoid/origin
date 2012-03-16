@@ -42,6 +42,10 @@ module Origin
         map { |value| value.__deep_copy__ }
       end
 
+      def __evolve_date__
+        map { |value| value.__evolve_date__ }
+      end
+
       def __evolve_time__
         map { |value| value.__evolve_time__ }
       end

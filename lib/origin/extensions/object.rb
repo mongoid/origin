@@ -167,22 +167,6 @@ module Origin
             yield(object)
           end
         end
-
-        # Get the object as a numeric.
-        #
-        # @api private
-        #
-        # @example Get the object as numeric.
-        #   Object.__numeric__("1.442")
-        #
-        # @param [ Object ] object The object to convert.
-        #
-        # @return [ Object ] The converted number.
-        #
-        # @since 1.0.0
-        def __numeric__(object)
-          object.to_s =~ /(^[-+]?[0-9]+$)|(\.0+)$/ ? object.to_i : Float(object)
-        end
       end
     end
   end
