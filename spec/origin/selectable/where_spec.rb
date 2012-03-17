@@ -148,18 +148,38 @@ describe Origin::Selectable::Where do
 
       context "when performing an $exists" do
 
-        let(:selection) do
-          query.where(:field.exists => true)
+        context "when providing boolean values" do
+
+          let(:selection) do
+            query.where(:field.exists => true)
+          end
+
+          it "adds the $exists criterion" do
+            selection.selector.should eq(
+              { "field" => { "$exists" => true }}
+            )
+          end
+
+          it "returns a cloned query" do
+            selection.should_not eq(query)
+          end
         end
 
-        it "adds the $exists criterion" do
-          selection.selector.should eq(
-            { "field" => { "$exists" => true }}
-          )
-        end
+        context "when providing string values" do
 
-        it "returns a cloned query" do
-          selection.should_not eq(query)
+          let(:selection) do
+            query.where(:field.exists => "t")
+          end
+
+          it "adds the $exists criterion" do
+            selection.selector.should eq(
+              { "field" => { "$exists" => true }}
+            )
+          end
+
+          it "returns a cloned query" do
+            selection.should_not eq(query)
+          end
         end
       end
 

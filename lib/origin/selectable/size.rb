@@ -22,12 +22,16 @@ module Origin
       #
       # @since 1.0.0
       def with_size(criterion = nil)
-        criterion.update_values(&:to_i) if criterion
+        if criterion
+          criterion.update_values do |value|
+            ::Integer.evolve(value)
+          end
+        end
         __override__(criterion, "$size")
       end
 
       ::Symbol.add_key(:with_size, "$size") do |value|
-        value.to_i
+        ::Integer.evolve(value)
       end
     end
   end

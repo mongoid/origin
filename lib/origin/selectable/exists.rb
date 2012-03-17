@@ -22,10 +22,17 @@ module Origin
       #
       # @since 1.0.0
       def exists(criterion = nil)
+        if criterion
+          criterion.update_values do |value|
+            ::Boolean.evolve(value)
+          end
+        end
         __override__(criterion, "$exists")
       end
 
-      ::Symbol.add_key(:exists, "$exists")
+      ::Symbol.add_key(:exists, "$exists") do |value|
+        ::Boolean.evolve(value)
+      end
     end
   end
 end

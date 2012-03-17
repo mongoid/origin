@@ -48,18 +48,38 @@ describe Origin::Selectable::Exists do
 
     context "when provided a criterion" do
 
-      let(:selection) do
-        query.exists(users: true)
+      context "when provided a boolean" do
+
+        let(:selection) do
+          query.exists(users: true)
+        end
+
+        it "adds the $exists expression" do
+          selection.selector.should eq({
+            "users" => { "$exists" => true }
+          })
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
       end
 
-      it "adds the $exists expression" do
-        selection.selector.should eq({
-          "users" => { "$exists" => true }
-        })
-      end
+      context "when provided a string" do
 
-      it "returns a cloned query" do
-        selection.should_not equal(query)
+        let(:selection) do
+          query.exists(users: "yes")
+        end
+
+        it "adds the $exists expression" do
+          selection.selector.should eq({
+            "users" => { "$exists" => true }
+          })
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
       end
     end
 
@@ -67,22 +87,46 @@ describe Origin::Selectable::Exists do
 
       context "when the fields differ" do
 
-        let(:selection) do
-          query.exists(
-            users: true,
-            comments: true
-          )
+        context "when providing boolean values" do
+
+          let(:selection) do
+            query.exists(
+              users: true,
+              comments: true
+            )
+          end
+
+          it "adds the $exists expression" do
+            selection.selector.should eq({
+              "users" => { "$exists" => true },
+              "comments" => { "$exists" => true }
+            })
+          end
+
+          it "returns a cloned query" do
+            selection.should_not equal(query)
+          end
         end
 
-        it "adds the $exists expression" do
-          selection.selector.should eq({
-            "users" => { "$exists" => true },
-            "comments" => { "$exists" => true }
-          })
-        end
+        context "when providing string values" do
 
-        it "returns a cloned query" do
-          selection.should_not equal(query)
+          let(:selection) do
+            query.exists(
+              users: "y",
+              comments: "true"
+            )
+          end
+
+          it "adds the $exists expression" do
+            selection.selector.should eq({
+              "users" => { "$exists" => true },
+              "comments" => { "$exists" => true }
+            })
+          end
+
+          it "returns a cloned query" do
+            selection.should_not equal(query)
+          end
         end
       end
     end
