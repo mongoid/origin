@@ -48,18 +48,38 @@ describe Origin::Selectable::Size do
 
     context "when provided a single criterion" do
 
-      let(:selection) do
-        query.with_size(field: 10)
+      context "when provided an integer" do
+
+        let(:selection) do
+          query.with_size(field: 10)
+        end
+
+        it "adds the $size selector" do
+          selection.selector.should eq({
+            "field" => { "$size" => 10 }
+          })
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
       end
 
-      it "adds the $size selector" do
-        selection.selector.should eq({
-          "field" => { "$size" => 10 }
-        })
-      end
+      context "when provided a string" do
 
-      it "returns a cloned query" do
-        selection.should_not equal(query)
+        let(:selection) do
+          query.with_size(field: "10")
+        end
+
+        it "adds the $size selector with an integer" do
+          selection.selector.should eq({
+            "field" => { "$size" => 10 }
+          })
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
       end
     end
 
@@ -67,19 +87,40 @@ describe Origin::Selectable::Size do
 
       context "when the criterion are for different fields" do
 
-        let(:selection) do
-          query.with_size(first: 10, second: 15)
+        context "when provided integers" do
+
+          let(:selection) do
+            query.with_size(first: 10, second: 15)
+          end
+
+          it "adds the $size selectors" do
+            selection.selector.should eq({
+              "first" => { "$size" => 10 },
+              "second" => { "$size" => 15 }
+            })
+          end
+
+          it "returns a cloned query" do
+            selection.should_not equal(query)
+          end
         end
 
-        it "adds the $size selectors" do
-          selection.selector.should eq({
-            "first" => { "$size" => 10 },
-            "second" => { "$size" => 15 }
-          })
-        end
+        context "when provided strings" do
 
-        it "returns a cloned query" do
-          selection.should_not equal(query)
+          let(:selection) do
+            query.with_size(first: "10", second: "15")
+          end
+
+          it "adds the $size selectors" do
+            selection.selector.should eq({
+              "first" => { "$size" => 10 },
+              "second" => { "$size" => 15 }
+            })
+          end
+
+          it "returns a cloned query" do
+            selection.should_not equal(query)
+          end
         end
       end
     end

@@ -135,6 +135,13 @@ module Origin
         end
       end
 
+      # Update all the values in the hash with the provided block.
+      def update_values(&block)
+        each_pair do |key, value|
+          store(key, block[value])
+        end
+      end
+
       private
 
       # Apply the provided strategy for the hash with the given object.

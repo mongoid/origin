@@ -7,9 +7,10 @@ module Origin
     class Key
 
       # @attribute [r] name The name of the field.
+      # @attribute [r] block The optional block to transform values.
       # @attribute [r] operator The MongoDB query operator.
       # @attribute [r] expanded The MongoDB expanded query operator.
-      attr_reader :name, :operator, :expanded
+      attr_reader :block, :name, :operator, :expanded
 
       # Does the key equal another object?
       #
@@ -36,8 +37,8 @@ module Origin
       # @param [ String ] expanded The Mongo expanded operator.
       #
       # @since 1.0.0
-      def initialize(name, operator, expanded = nil)
-        @name, @operator, @expanded = name, operator, expanded
+      def initialize(name, operator, expanded = nil, &block)
+        @name, @operator, @expanded, @block = name, operator, expanded, block
       end
 
       # Gets the raw selector that would be passed to Mongo from this key.
@@ -45,12 +46,13 @@ module Origin
       # @example Specify the raw selector.
       #   key.specify(50)
       #
-      # @param [ Object ] value The value to be included.
+      # @param [ Object ] object The value to be included.
       #
       # @return [ Hash ] The raw MongoDB selector.
       #
       # @since 1.0.0
-      def specify(value)
+      def specify(object)
+        value = block ? block[object] : object
         { name.to_s => { operator => expanded ? { expanded => value } : value }}
       end
 

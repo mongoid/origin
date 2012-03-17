@@ -42,12 +42,10 @@ module Origin
         # @param [ String ] operator The MongoDB operator.
         #
         # @since 1.0.0
-        def add_key(name, operator)
-          class_eval <<-EOR
-            def #{name}
-              Selectable::Key.new(self, #{operator.inspect})
-            end
-          EOR
+        def add_key(name, operator, &block)
+          define_method(name) do
+            Selectable::Key.new(self, operator, &block)
+          end
         end
 
         # Adds a method on symbol as a convenience for the MongoDB operator.
@@ -60,12 +58,10 @@ module Origin
         # @param [ String ] inner The MongoDB inner operator.
         #
         # @since 1.0.0
-        def add_multi_key(name, outer, inner)
-          class_eval <<-EOR
-            def #{name}
-              Selectable::Key.new(self, #{outer.inspect}, #{inner.inspect})
-            end
-          EOR
+        def add_multi_key(name, outer, inner, &block)
+          define_method(name) do
+            Selectable::Key.new(self, outer, inner, &block)
+          end
         end
 
         # Evolves the symbol into a MongoDB friendly value - in this case

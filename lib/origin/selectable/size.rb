@@ -22,10 +22,13 @@ module Origin
       #
       # @since 1.0.0
       def with_size(criterion = nil)
+        criterion.update_values(&:to_i) if criterion
         __override__(criterion, "$size")
       end
 
-      ::Symbol.add_key(:with_size, "$size")
+      ::Symbol.add_key(:with_size, "$size") do |value|
+        value.to_i
+      end
     end
   end
 end

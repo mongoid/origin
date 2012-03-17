@@ -331,18 +331,38 @@ describe Origin::Selectable::Where do
 
       context "when performing a $size" do
 
-        let(:selection) do
-          query.where(:field.with_size => 10)
+        context "when providing an integer" do
+
+          let(:selection) do
+            query.where(:field.with_size => 10)
+          end
+
+          it "adds the $size criterion" do
+            selection.selector.should eq(
+              { "field" => { "$size" => 10 }}
+            )
+          end
+
+          it "returns a cloned query" do
+            selection.should_not eq(query)
+          end
         end
 
-        it "adds the $size criterion" do
-          selection.selector.should eq(
-            { "field" => { "$size" => 10 }}
-          )
-        end
+        context "when providing a string" do
 
-        it "returns a cloned query" do
-          selection.should_not eq(query)
+          let(:selection) do
+            query.where(:field.with_size => "10")
+          end
+
+          it "adds the $size criterion" do
+            selection.selector.should eq(
+              { "field" => { "$size" => 10 }}
+            )
+          end
+
+          it "returns a cloned query" do
+            selection.should_not eq(query)
+          end
         end
       end
 
