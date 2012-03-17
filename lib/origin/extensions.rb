@@ -3,6 +3,10 @@ unless defined?(Boolean)
   class Boolean; end
 end
 
+if defined?(ActiveSupport)
+  require "origin/extensions/time_with_zone"
+end
+
 require "time"
 require "origin/extensions/object"
 require "origin/extensions/array"
