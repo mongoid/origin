@@ -3,7 +3,7 @@ require "spec_helper"
 describe ActiveSupport::TimeWithZone do
 
   let(:time_zone) do
-    ActiveSupport::TimeZone.new("Berlin")
+    ActiveSupport::TimeZone.new("Eastern Time (US & Canada)")
   end
 
   describe ".evolve" do
@@ -19,7 +19,7 @@ describe ActiveSupport::TimeWithZone do
       end
 
       let(:expected) do
-        Time.new(2010, 1, 1, 12, 0, 0).utc
+        Time.utc(2010, 1, 1, 17, 0, 0)
       end
 
       it "returns the same time" do
@@ -44,7 +44,7 @@ describe ActiveSupport::TimeWithZone do
         end
 
         let(:expected) do
-          Time.new(2010, 1, 1, 12, 0, 0).utc
+          Time.utc(2010, 1, 1, 17, 0, 0)
         end
 
         it "returns the array with evolved times" do
@@ -139,11 +139,11 @@ describe ActiveSupport::TimeWithZone do
         end
 
         let(:expected_min) do
-          Time.new(2010, 1, 1, 12, 0, 0).utc
+          Time.utc(2010, 1, 1, 17, 0, 0)
         end
 
         let(:expected_max) do
-          Time.new(2010, 1, 3, 12, 0, 0).utc
+          Time.utc(2010, 1, 3, 17, 0, 0)
         end
 
         it "returns a selection of times" do
