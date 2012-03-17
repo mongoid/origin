@@ -4,7 +4,7 @@ describe Time do
 
   describe ".evolve" do
 
-    context "when provided a date time" do
+    context "when provided a time" do
 
       let(:date) do
         Time.new(2010, 1, 1, 12, 0, 0)
@@ -15,17 +15,21 @@ describe Time do
       end
 
       let(:expected) do
-        Time.new(2010, 1, 1, 12, 0, 0)
+        Time.new(2010, 1, 1, 12, 0, 0).utc
       end
 
-      it "returns the time" do
+      it "returns the same time" do
         evolved.should eq(expected)
+      end
+
+      it "returns the time in utc" do
+        evolved.utc_offset.should eq(0)
       end
     end
 
     context "when provided an array" do
 
-      context "when the array is composed of date times" do
+      context "when the array is composed of times" do
 
         let(:date) do
           Time.new(2010, 1, 1, 12, 0, 0)
@@ -36,11 +40,15 @@ describe Time do
         end
 
         let(:expected) do
-          Time.new(2010, 1, 1, 12, 0, 0)
+          Time.new(2010, 1, 1, 12, 0, 0).utc
         end
 
         it "returns the array with evolved times" do
           evolved.should eq([ expected ])
+        end
+
+        it "returns utc times" do
+          evolved.first.utc_offset.should eq(0)
         end
       end
 
@@ -57,6 +65,10 @@ describe Time do
         it "returns the strings as a times" do
           evolved.should eq([ date.to_time ])
         end
+
+        it "returns the times in utc" do
+          evolved.first.utc_offset.should eq(0)
+        end
       end
 
       context "when the array is composed of integers" do
@@ -70,11 +82,15 @@ describe Time do
         end
 
         let(:expected) do
-          Time.at(integer)
+          Time.at(integer).utc
         end
 
         it "returns the integers as times" do
           evolved.should eq([ expected ])
+        end
+
+        it "returns the times in utc" do
+          evolved.first.utc_offset.should eq(0)
         end
       end
 
@@ -89,11 +105,15 @@ describe Time do
         end
 
         let(:expected) do
-          Time.at(float)
+          Time.at(float).utc
         end
 
         it "returns the floats as times" do
           evolved.should eq([ expected ])
+        end
+
+        it "returns the times in utc" do
+          evolved.first.utc_offset.should eq(0)
         end
       end
     end
@@ -115,17 +135,21 @@ describe Time do
         end
 
         let(:expected_min) do
-          Time.new(2010, 1, 1, 12, 0, 0)
+          Time.new(2010, 1, 1, 12, 0, 0).utc
         end
 
         let(:expected_max) do
-          Time.new(2010, 1, 3, 12, 0, 0)
+          Time.new(2010, 1, 3, 12, 0, 0).utc
         end
 
         it "returns a selection of times" do
           evolved.should eq(
             { "$gte" => expected_min, "$lte" => expected_max }
           )
+        end
+
+        it "returns the times in utc" do
+          evolved["$gte"].utc_offset.should eq(0)
         end
       end
 
@@ -148,6 +172,10 @@ describe Time do
             { "$gte" => min.to_time, "$lte" => max.to_time }
           )
         end
+
+        it "returns the times in utc" do
+          evolved["$gte"].utc_offset.should eq(0)
+        end
       end
 
       context "when the range is floats" do
@@ -165,17 +193,21 @@ describe Time do
         end
 
         let(:expected_min) do
-          Time.at(min)
+          Time.at(min).utc
         end
 
         let(:expected_max) do
-          Time.at(max)
+          Time.at(max).utc
         end
 
         it "returns a selection of times" do
           evolved.should eq(
             { "$gte" => expected_min, "$lte" => expected_max }
           )
+        end
+
+        it "returns the times in utc" do
+          evolved["$gte"].utc_offset.should eq(0)
         end
       end
 
@@ -194,17 +226,21 @@ describe Time do
         end
 
         let(:expected_min) do
-          Time.at(min)
+          Time.at(min).utc
         end
 
         let(:expected_max) do
-          Time.at(max)
+          Time.at(max).utc
         end
 
         it "returns a selection of times" do
           evolved.should eq(
             { "$gte" => expected_min, "$lte" => expected_max }
           )
+        end
+
+        it "returns the times in utc" do
+          evolved["$gte"].utc_offset.should eq(0)
         end
       end
 
@@ -232,6 +268,10 @@ describe Time do
       it "returns the string as a time" do
         evolved.should eq(date.to_time)
       end
+
+      it "returns the time in utc" do
+        evolved.utc_offset.should eq(0)
+      end
     end
 
     context "when provided a float" do
@@ -251,6 +291,10 @@ describe Time do
       it "returns the float as a time" do
         evolved.should eq(expected)
       end
+
+      it "returns the time in utc" do
+        evolved.utc_offset.should eq(0)
+      end
     end
 
     context "when provided an integer" do
@@ -269,6 +313,10 @@ describe Time do
 
       it "returns the integer as a time" do
         evolved.should eq(expected)
+      end
+
+      it "returns the time in utc" do
+        evolved.utc_offset.should eq(0)
       end
     end
 

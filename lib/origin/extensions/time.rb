@@ -5,7 +5,9 @@ module Origin
     # This module contains additional time behaviour.
     module Time
 
-      def __evolve_time__; self; end
+      def __evolve_time__
+        utc
+      end
 
       module ClassMethods
 

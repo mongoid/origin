@@ -6,7 +6,7 @@ module Origin
     module DateTime
 
       def __evolve_time__
-        ::Time.local(year, month, day, hour, min, sec)
+        ::Time.local(year, month, day, hour, min, sec).utc
       end
 
       module ClassMethods

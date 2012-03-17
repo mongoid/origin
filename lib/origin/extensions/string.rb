@@ -6,12 +6,12 @@ module Origin
     module String
 
       def __evolve_date__
-        time = __evolve_time__
+        time = ::Time.parse(self)
         ::Time.utc(time.year, time.month, time.day, 0, 0, 0, 0)
       end
 
       def __evolve_time__
-        ::Time.parse(self)
+        ::Time.parse(self).utc
       end
 
       # Get the string as a sort option.
