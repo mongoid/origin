@@ -44,7 +44,7 @@ module Origin
         # @since 1.0.0
         def add_key(name, operator, &block)
           define_method(name) do
-            Selectable::Key.new(self, operator, &block)
+            Key.new(self, operator, &block)
           end
         end
 
@@ -60,7 +60,7 @@ module Origin
         # @since 1.0.0
         def add_multi_key(name, outer, inner, &block)
           define_method(name) do
-            Selectable::Key.new(self, outer, inner, &block)
+            Key.new(self, outer, inner, &block)
           end
         end
 

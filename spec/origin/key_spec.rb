@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Origin::Selectable::Key do
+describe Origin::Key do
 
   describe "#initialize" do
 

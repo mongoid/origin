@@ -1,6 +1,7 @@
 # encoding: utf-8
 require "origin/extensions"
 require "origin/smash"
+require "origin/key"
 require "origin/optional"
 require "origin/options"
 require "origin/selectable"
