@@ -112,11 +112,7 @@ module Origin
     #
     # @since 1.0.0
     def exists(criterion = nil)
-      if criterion
-        criterion.update_values do |value|
-          ::Boolean.evolve(value)
-        end
-      end
+      force_typing(criterion) { |value| ::Boolean.evolve(value) }
       __override__(criterion, "$exists")
     end
 
@@ -383,11 +379,7 @@ module Origin
     #
     # @since 1.0.0
     def with_size(criterion = nil)
-      if criterion
-        criterion.update_values do |value|
-          ::Integer.evolve(value)
-        end
-      end
+      force_typing(criterion) { |value| ::Integer.evolve(value) }
       __override__(criterion, "$size")
     end
 
@@ -532,6 +524,26 @@ module Origin
     def expr_query(criterion)
       selection(criterion) do |selector, field, value|
         selector.merge!(field.specify(value))
+      end
+    end
+
+    # Force the values of the criterion to be evolved.
+    #
+    # @api private
+    #
+    # @example Force values to booleans.
+    #   queryable.force_typing(criterion) do |val|
+    #     Boolean.evolve(val)
+    #   end
+    #
+    # @param [ Hash ] criterion The criterion.
+    #
+    # @since 1.0.0
+    def force_typing(criterion)
+      if criterion
+        criterion.update_values do |value|
+          yield(value)
+        end
       end
     end
 
