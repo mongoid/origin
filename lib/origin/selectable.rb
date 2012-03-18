@@ -22,7 +22,7 @@ module Origin
     #
     # @param [ Hash ] criterion The key value pairs for $all matching.
     #
-    # @return [ Queryable ] The cloned queryable.
+    # @return [ Selectable ] The cloned queryable.
     #
     # @since 1.0.0
     def all(criterion = nil)
@@ -40,7 +40,7 @@ module Origin
     # @param [ Array<Hash> ] criterion Multiple key/value pair matches that
     #   all must match to return results.
     #
-    # @return [ Queryable ] The cloned queryable.
+    # @return [ Selectable ] The cloned queryable.
     #
     # @since 1.0.0
     def and(*criterion)
@@ -58,7 +58,7 @@ module Origin
     #
     # @param [ Hash ] criterion Multiple key/range pairs.
     #
-    # @return [ Queryable ] The cloned queryable.
+    # @return [ Selectable ] The cloned queryable.
     #
     # @since 1.0.0
     def between(criterion = nil)
@@ -86,7 +86,7 @@ module Origin
     #
     # @param [ Hash ] criterion The field/match pairs.
     #
-    # @return [ Queryable ] The cloned queryable.
+    # @return [ Selectable ] The cloned queryable.
     #
     # @since 1.0.0
     def elem_match(criterion = nil)
@@ -108,7 +108,7 @@ module Origin
     #
     # @param [ Hash ] criterion The field/boolean existence checks.
     #
-    # @return [ Queryable ] The cloned queryable.
+    # @return [ Selectable ] The cloned queryable.
     #
     # @since 1.0.0
     def exists(criterion = nil)
@@ -130,7 +130,7 @@ module Origin
     #
     # @param [ Hash ] criterion The field/value pairs to check.
     #
-    # @return [ Queryable ] The cloned queryable.
+    # @return [ Selectable ] The cloned queryable.
     #
     # @since 1.0.0
     def gt(criterion = nil)
@@ -149,7 +149,7 @@ module Origin
     #
     # @param [ Hash ] criterion The field/value pairs to check.
     #
-    # @return [ Queryable ] The cloned queryable.
+    # @return [ Selectable ] The cloned queryable.
     #
     # @since 1.0.0
     def gte(criterion = nil)
@@ -171,7 +171,7 @@ module Origin
     #
     # @param [ Hash ] criterion The field/value criterion pairs.
     #
-    # @return [ Queryable ] The cloned queryable.
+    # @return [ Selectable ] The cloned queryable.
     #
     # @since 1.0.0
     def in(criterion = nil)
@@ -191,7 +191,7 @@ module Origin
     #
     # @param [ Hash ] criterion The field/value pairs to check.
     #
-    # @return [ Queryable ] The cloned queryable.
+    # @return [ Selectable ] The cloned queryable.
     #
     # @since 1.0.0
     def lt(criterion = nil)
@@ -210,7 +210,7 @@ module Origin
     #
     # @param [ Hash ] criterion The field/value pairs to check.
     #
-    # @return [ Queryable ] The cloned queryable.
+    # @return [ Selectable ] The cloned queryable.
     #
     # @since 1.0.0
     def lte(criterion = nil)
@@ -226,7 +226,7 @@ module Origin
     #
     # @param [ Hash ] criterion The field/distance pairs.
     #
-    # @return [ Queryable ] The cloned queryable.
+    # @return [ Selectable ] The cloned queryable.
     #
     # @since 1.0.0
     def max_distance(criterion = nil)
@@ -243,7 +243,7 @@ module Origin
     #
     # @param [ Hash ] criterion The field/mod selections.
     #
-    # @return [ Queryable ] The cloned queryable.
+    # @return [ Selectable ] The cloned queryable.
     #
     # @since 1.0.0
     def mod(criterion = nil)
@@ -262,7 +262,7 @@ module Origin
     #
     # @param [ Hash ] criterion The field/ne selections.
     #
-    # @return [ Queryable ] The cloned queryable.
+    # @return [ Selectable ] The cloned queryable.
     #
     # @since 1.0.0
     def ne(criterion = nil)
@@ -282,7 +282,7 @@ module Origin
     #
     # @param [ Hash ] criterion The field/location pair.
     #
-    # @return [ Queryable ] The cloned queryable.
+    # @return [ Selectable ] The cloned queryable.
     #
     # @since 1.0.0
     def near(criterion = nil)
@@ -301,7 +301,7 @@ module Origin
     #
     # @param [ Hash ] criterion The field/location pair.
     #
-    # @return [ Queryable ] The cloned queryable.
+    # @return [ Selectable ] The cloned queryable.
     #
     # @since 1.0.0
     def near_sphere(criterion = nil)
@@ -323,7 +323,7 @@ module Origin
     #
     # @param [ Hash ] criterion The field/value criterion pairs.
     #
-    # @return [ Queryable ] The cloned queryable.
+    # @return [ Selectable ] The cloned queryable.
     #
     # @since 1.0.0
     def nin(criterion = nil)
@@ -340,7 +340,7 @@ module Origin
     #
     # @param [ Array ] criterion An array of hash criterion.
     #
-    # @return [ Queryable ] The cloned queryable.
+    # @return [ Selectable ] The cloned queryable.
     #
     # @since 1.0.0
     def nor(*criterion)
@@ -354,7 +354,7 @@ module Origin
     #
     # @param [ Array ] criterion An array of hash criterion.
     #
-    # @return [ Queryable ] The cloned queryable.
+    # @return [ Selectable ] The cloned queryable.
     #
     # @since 1.0.0
     def or(*criterion)
@@ -375,7 +375,7 @@ module Origin
     #
     # @param [ Hash ] criterion The field/size pairs criterion.
     #
-    # @return [ Queryable ] The cloned queryable.
+    # @return [ Selectable ] The cloned queryable.
     #
     # @since 1.0.0
     def with_size(criterion = nil)
@@ -399,7 +399,7 @@ module Origin
     #
     # @param [ Hash ] criterion The field/type pairs.
     #
-    # @return [ Queryable ] The cloned queryable.
+    # @return [ Selectable ] The cloned queryable.
     #
     # @since 1.0.0
     def type(criterion = nil)
@@ -420,7 +420,7 @@ module Origin
     #
     # @param [ String, Hash ] criterion The javascript or standard selection.
     #
-    # @return [ Queryable ] The cloned queryable.
+    # @return [ Selectable ] The cloned queryable.
     #
     # @since 1.0.0
     def where(criterion = nil)
@@ -437,7 +437,7 @@ module Origin
     #
     # @param [ Hash ] criterion The field/box corner criterion.
     #
-    # @return [ Queryable ] The cloned queryable.
+    # @return [ Selectable ] The cloned queryable.
     #
     # @since 1.0.0
     def within_box(criterion = nil)
@@ -456,7 +456,7 @@ module Origin
     #
     # @param [ Hash ] criterion The field/radius criterion.
     #
-    # @return [ Queryable ] The cloned queryable.
+    # @return [ Selectable ] The cloned queryable.
     #
     # @since 1.0.0
     def within_circle(criterion = nil)
@@ -479,7 +479,7 @@ module Origin
     #
     # @param [ Hash ] criterion The field/polygon points criterion.
     #
-    # @return [ Queryable ] The cloned queryable.
+    # @return [ Selectable ] The cloned queryable.
     #
     # @since 1.0.0
     def within_polygon(criterion = nil)
@@ -498,7 +498,7 @@ module Origin
     #
     # @param [ Hash ] criterion The field/distance criterion.
     #
-    # @return [ Queryable ] The cloned queryable.
+    # @return [ Selectable ] The cloned queryable.
     #
     # @since 1.0.0
     def within_spherical_circle(criterion = nil)
@@ -518,7 +518,7 @@ module Origin
     #
     # @param [ Hash ] criterion The field/value pairs.
     #
-    # @return [ Queryable ] The cloned queryable.
+    # @return [ Selectable ] The cloned queryable.
     #
     # @since 1.0.0
     def expr_query(criterion)
@@ -556,7 +556,7 @@ module Origin
     #
     # @param [ String ] criterion The javascript as a string.
     #
-    # @return [ Queryable ] The cloned queryable
+    # @return [ Selectable ] The cloned queryable
     #
     # @since 1.0.0
     def js_query(criterion)
@@ -573,7 +573,7 @@ module Origin
     #
     # @param [ Hash ] criterion The selection to store.
     #
-    # @return [ Queryable ] The cloned queryable.
+    # @return [ Selectable ] The cloned queryable.
     #
     # @since 1.0.0
     def selection(criterion = nil)
