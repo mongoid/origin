@@ -128,8 +128,9 @@ module Origin
     #
     # @since 1.0.0
     def exists(criterion = nil)
-      force_typing(criterion) { |value| ::Boolean.evolve(value) }
-      __override__(criterion, "$exists")
+      typed_override(criterion, "$exists") do |value|
+        ::Boolean.evolve(value)
+      end
     end
     key :exists, "$exists" do |value|
       ::Boolean.evolve(value)
@@ -384,8 +385,9 @@ module Origin
     #
     # @since 1.0.0
     def with_size(criterion = nil)
-      force_typing(criterion) { |value| ::Integer.evolve(value) }
-      __override__(criterion, "$size")
+      typed_override(criterion, "$size") do |value|
+        ::Integer.evolve(value)
+      end
     end
     key :with_size, "$size" do |value|
       ::Integer.evolve(value)
@@ -538,12 +540,13 @@ module Origin
     # @param [ Hash ] criterion The criterion.
     #
     # @since 1.0.0
-    def force_typing(criterion)
+    def typed_override(criterion, operator)
       if criterion
         criterion.update_values do |value|
           yield(value)
         end
       end
+      __override__(criterion, operator)
     end
 
     # Create a javascript selection.
