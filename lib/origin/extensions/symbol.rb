@@ -40,27 +40,12 @@ module Origin
         #
         # @param [ Symbol ] name The name of the method.
         # @param [ String ] operator The MongoDB operator.
+        # @param [ String ] additional The additional MongoDB operator.
         #
         # @since 1.0.0
-        def add_key(name, operator, &block)
+        def add_key(name, operator, additional = nil, &block)
           define_method(name) do
-            Key.new(self, operator, &block)
-          end
-        end
-
-        # Adds a method on symbol as a convenience for the MongoDB operator.
-        #
-        # @example Add the $within/$center method.
-        #   Symbol.add_key(:within_circle, "$within", "$center")
-        #
-        # @param [ Symbol ] name The name of the method.
-        # @param [ String ] outer The MongoDB outer operator.
-        # @param [ String ] inner The MongoDB inner operator.
-        #
-        # @since 1.0.0
-        def add_multi_key(name, outer, inner, &block)
-          define_method(name) do
-            Key.new(self, outer, inner, &block)
+            Key.new(self, operator, additional, &block)
           end
         end
 
