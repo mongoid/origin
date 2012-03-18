@@ -1,6 +1,4 @@
 # encoding: utf-8
-require "origin/mergeable"
-
 module Origin
 
   # An origin queryable is selectable, in that it has the ability to select
@@ -8,27 +6,10 @@ module Origin
   # to the queryable that has to do with building MongoDB selectors.
   module Selectable
     include Mergeable
+    extend Macroable
 
     # @attribute [rw] selector The query selector.
     attr_accessor :selector
-
-    class << self
-
-      # Adds a method on Symbol for convenience in where queries for the
-      # provided operators.
-      #
-      # @example Add a symbol key.
-      #   key :all, "$all
-      #
-      # @param [ Symbol ] name The name of the method.
-      # @param [ String ] operator The MongoDB operator.
-      # @param [ String ] additional The additional MongoDB operator.
-      #
-      # @since 1.0.0
-      def key(name, operator, additional = nil, &block)
-        ::Symbol.add_key(name, operator, additional, &block)
-      end
-    end
 
     # Add the $all criterion.
     #
@@ -569,6 +550,8 @@ module Origin
 
     # Take the provided criterion and store it as a selection in the query
     # selector.
+    #
+    # @api private
     #
     # @example Store the selection.
     #   selectable.selection({ field: "value" })
