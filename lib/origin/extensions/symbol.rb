@@ -39,13 +39,15 @@ module Origin
         #   Symbol.add_key(:in, "$in")
         #
         # @param [ Symbol ] name The name of the method.
+        # @param [ Symbol ] strategy The name of the merge strategy.
         # @param [ String ] operator The MongoDB operator.
         # @param [ String ] additional The additional MongoDB operator.
         #
         # @since 1.0.0
-        def add_key(name, operator, additional = nil, &block)
+        def add_key(name, strategy, operator, additional = nil, &block)
           define_method(name) do
-            Key.new(self, operator, additional, &block)
+            method = "__#{strategy}__".to_sym
+            Key.new(self, method, operator, additional, &block)
           end
         end
 

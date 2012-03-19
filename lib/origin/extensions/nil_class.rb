@@ -17,6 +17,18 @@ module Origin
       # @since 1.0.0
       def __add__(object); object; end
 
+      # Add this object to nil.
+      #
+      # @example Add the object to a nil value.
+      #   nil.__expanded__([ 1, 2, 3 ])
+      #
+      # @param [ Object ] object The object to expanded.
+      #
+      # @return [ Object ] The provided object.
+      #
+      # @since 1.0.0
+      def __expanded__(object); object; end
+
       def __evolve_time__; self; end
       alias :__evolve_date__ :__evolve_time__
 
@@ -31,6 +43,18 @@ module Origin
       #
       # @since 1.0.0
       def __intersect__(object); object; end
+
+      # Add this object to nil.
+      #
+      # @example Add the object to a nil value.
+      #   nil.__override__([ 1, 2, 3 ])
+      #
+      # @param [ Object ] object The object to override.
+      #
+      # @return [ Object ] The provided object.
+      #
+      # @since 1.0.0
+      def __override__(object); object; end
 
       # Add this object to nil.
       #

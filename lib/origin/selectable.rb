@@ -28,7 +28,7 @@ module Origin
       send(strategy || :__union__, with_array_values(criterion), "$all")
     end
     alias :all_in :all
-    key :all, "$all"
+    key :all, :union, "$all"
 
     # Add the $and criterion.
     #
@@ -90,7 +90,7 @@ module Origin
     def elem_match(criterion = nil)
       __override__(criterion, "$elemMatch")
     end
-    key :elem_match, "$elemMatch"
+    key :elem_match, :override, "$elemMatch"
 
     # Add the $exists selection.
     #
@@ -113,7 +113,7 @@ module Origin
         ::Boolean.evolve(value)
       end
     end
-    key :exists, "$exists" do |value|
+    key :exists, :override, "$exists" do |value|
       ::Boolean.evolve(value)
     end
 
@@ -133,7 +133,7 @@ module Origin
     def gt(criterion = nil)
       __override__(criterion, "$gt")
     end
-    key :gt, "$gt"
+    key :gt, :override, "$gt"
 
     # Add the $gte criterion to the selector.
     #
@@ -151,7 +151,7 @@ module Origin
     def gte(criterion = nil)
       __override__(criterion, "$gte")
     end
-    key :gte, "$gte"
+    key :gte, :override, "$gte"
 
     # Adds the $in selection to the queryable.
     #
@@ -173,7 +173,7 @@ module Origin
       send(strategy || :__intersect__, with_array_values(criterion), "$in")
     end
     alias :any_in :in
-    key :in, "$in"
+    key :in, :intersect, "$in"
 
     # Add the $lt criterion to the selector.
     #
@@ -191,7 +191,7 @@ module Origin
     def lt(criterion = nil)
       __override__(criterion, "$lt")
     end
-    key :lt, "$lt"
+    key :lt, :override, "$lt"
 
     # Add the $lte criterion to the selector.
     #
@@ -209,7 +209,7 @@ module Origin
     def lte(criterion = nil)
       __override__(criterion, "$lte")
     end
-    key :lte, "$lte"
+    key :lte, :override, "$lte"
 
     # Add a $maxDistance selection to the queryable.
     #
@@ -241,7 +241,7 @@ module Origin
     def mod(criterion = nil)
       __override__(criterion, "$mod")
     end
-    key :mod, "$mod"
+    key :mod, :override, "$mod"
 
     # Adds $ne selection to the queryable.
     #
@@ -260,7 +260,7 @@ module Origin
       __override__(criterion, "$ne")
     end
     alias :excludes :ne
-    key :ne, "$ne"
+    key :ne, :override, "$ne"
 
     # Adds a $near criterion to a geo selection.
     #
@@ -278,7 +278,7 @@ module Origin
     def near(criterion = nil)
       __override__(criterion, "$near")
     end
-    key :near, "$near"
+    key :near, :override, "$near"
 
     # Adds a $nearSphere criterion to a geo selection.
     #
@@ -296,7 +296,7 @@ module Origin
     def near_sphere(criterion = nil)
       __override__(criterion, "$nearSphere")
     end
-    key :near_sphere, "$nearSphere"
+    key :near_sphere, :override, "$nearSphere"
 
     # Adds the $nin selection to the queryable.
     #
@@ -318,7 +318,7 @@ module Origin
       send(strategy || :__intersect__, with_array_values(criterion), "$nin")
     end
     alias :not_in :nin
-    key :nin, "$nin"
+    key :nin, :intersect, "$nin"
 
     # Adds $nor selection to the queryable.
     #
@@ -370,7 +370,7 @@ module Origin
         ::Integer.evolve(value)
       end
     end
-    key :with_size, "$size" do |value|
+    key :with_size, :override, "$size" do |value|
       ::Integer.evolve(value)
     end
 
@@ -392,7 +392,7 @@ module Origin
     def type(criterion = nil)
       __override__(criterion, "$type")
     end
-    key :type, "$type"
+    key :type, :override, "$type"
 
     # This is the general entry point for most MongoDB queries. This either
     # creates a standard field: value selection, and expanded selection with
@@ -429,7 +429,7 @@ module Origin
     def within_box(criterion = nil)
       __expanded__(criterion, "$within", "$box")
     end
-    key :within_box, "$within", "$box"
+    key :within_box, :expanded, "$within", "$box"
 
     # Adds the $within/$center selection to the queryable.
     #
@@ -447,7 +447,7 @@ module Origin
     def within_circle(criterion = nil)
       __expanded__(criterion, "$within", "$center")
     end
-    key :within_circle, "$within", "$center"
+    key :within_circle, :expanded, "$within", "$center"
 
     # Adds the $within/$polygon selection to the queryable.
     #
@@ -469,7 +469,7 @@ module Origin
     def within_polygon(criterion = nil)
       __expanded__(criterion, "$within", "$polygon")
     end
-    key :within_polygon, "$within", "$polygon"
+    key :within_polygon, :expanded, "$within", "$polygon"
 
     # Adds the $within/$centerSphere selection to the queryable.
     #
@@ -487,7 +487,7 @@ module Origin
     def within_spherical_circle(criterion = nil)
       __expanded__(criterion, "$within", "$centerSphere")
     end
-    key :within_spherical_circle, "$within", "$centerSphere"
+    key :within_spherical_circle, :expanded, "$within", "$centerSphere"
 
     private
 

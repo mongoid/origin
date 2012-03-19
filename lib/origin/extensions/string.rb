@@ -31,6 +31,10 @@ module Origin
         end
       end
 
+      def field
+        self
+      end
+
       # Get the string as a specification.
       #
       # @example Get the string as a criteria.
@@ -43,6 +47,10 @@ module Origin
       # @since 1.0.0
       def specify(value)
         { self => value }
+      end
+
+      def strategy
+        :__override__
       end
 
       # Get the string as a sort direction.

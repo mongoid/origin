@@ -9,7 +9,8 @@ module Origin
     # @attribute [r] block The optional block to transform values.
     # @attribute [r] operator The MongoDB query operator.
     # @attribute [r] expanded The MongoDB expanded query operator.
-    attr_reader :block, :name, :operator, :expanded
+    # @attribute [r] strategy The name of the merge strategy.
+    attr_reader :block, :name, :operator, :expanded, :strategy
 
     # Does the key equal another object?
     #
@@ -26,18 +27,24 @@ module Origin
       name == other.name && operator == other.operator && expanded == other.expanded
     end
 
+    def field
+      name.to_s
+    end
+
     # Instantiate the new key.
     #
     # @example Instantiate the key.
     #   Key.new("age", "$gt")
     #
     # @param [ String, Symbol ] name The field name.
+    # @param [ Symbol ] strategy The name of the merge strategy.
     # @param [ String ] operator The Mongo operator.
     # @param [ String ] expanded The Mongo expanded operator.
     #
     # @since 1.0.0
-    def initialize(name, operator, expanded = nil, &block)
-      @name, @operator, @expanded, @block = name, operator, expanded, block
+    def initialize(name, strategy, operator, expanded = nil, &block)
+      @name, @strategy, @operator, @expanded, @block =
+        name, strategy, operator, expanded, block
     end
 
     # Gets the raw selector that would be passed to Mongo from this key.

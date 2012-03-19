@@ -2957,16 +2957,38 @@ describe Origin::Selectable do
 
       context "when performing an $all" do
 
-        let(:selection) do
-          query.where(:field.all => [ 1, 2 ])
+        context "when performing a single query" do
+
+          let(:selection) do
+            query.where(:field.all => [ 1, 2 ])
+          end
+
+          it "adds the $all criterion" do
+            selection.selector.should eq({ "field" => { "$all" => [ 1, 2 ] }})
+          end
+
+          it "returns a cloned query" do
+            selection.should_not eq(query)
+          end
         end
 
-        it "adds the $all criterion" do
-          selection.selector.should eq({ "field" => { "$all" => [ 1, 2 ] }})
-        end
+        pending "when chaining on the same field" do
 
-        it "returns a cloned query" do
-          selection.should_not eq(query)
+          let(:selection) do
+            query.
+              where(:field.all => [ 1, 2 ]).
+              where(:field.all => [ 2, 3 ])
+          end
+
+          it "unions the $all criterion" do
+            selection.selector.should eq(
+              { "field" => { "$all" => [ 1, 2, 3 ] }}
+            )
+          end
+
+          it "returns a cloned query" do
+            selection.should_not eq(query)
+          end
         end
       end
 

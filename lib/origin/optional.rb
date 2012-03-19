@@ -23,8 +23,8 @@ module Origin
       sort_with_list(*fields, 1)
     end
     alias :asc :ascending
-    key :asc, 1
-    key :ascending, 1
+    key :asc, :override, 1
+    key :ascending, :override, 1
 
     # Adds the option for telling MongoDB how many documents to retrieve in
     # it's batching.
@@ -55,8 +55,8 @@ module Origin
       sort_with_list(*fields, -1)
     end
     alias :desc :descending
-    key :desc, -1
-    key :descending, -1
+    key :desc, :override, -1
+    key :descending, :override, -1
 
     # Add the number of documents to limit in the returned results.
     #
