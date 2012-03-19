@@ -590,5 +590,20 @@ module Origin
         criterion[key] = value.__array__
       end
     end
+
+    class << self
+
+      # Get the methods on the selectable that can be forwarded to from a model.
+      #
+      # @example Get the forwardable methods.
+      #   Selectable.forwardables
+      #
+      # @return [ Array<Symbol> ] The names of the forwardable methods.
+      #
+      # @since 1.0.0
+      def forwardables
+        public_instance_methods(false) - [ :selector, :selector= ]
+      end
+    end
   end
 end

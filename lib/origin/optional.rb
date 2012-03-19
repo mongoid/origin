@@ -287,5 +287,20 @@ module Origin
         end
       end
     end
+
+    class << self
+
+      # Get the methods on the optional that can be forwarded to from a model.
+      #
+      # @example Get the forwardable methods.
+      #   Optional.forwardables
+      #
+      # @return [ Array<Symbol> ] The names of the forwardable methods.
+      #
+      # @since 1.0.0
+      def forwardables
+        public_instance_methods(false) - [ :options, :options= ]
+      end
+    end
   end
 end
