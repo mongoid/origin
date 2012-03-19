@@ -43,7 +43,7 @@ module Origin
     #
     # @since 1.0.0
     def __forward__(name, receiver)
-      (class << self; self; end).class_eval <<-SEL
+      module_eval <<-SEL
         delegate :#{name}, to: :#{receiver}
       SEL
     end

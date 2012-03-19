@@ -3,8 +3,9 @@ require "spec_helper"
 describe Origin::Forwardable do
 
   before(:all) do
-    class Band
+    module Finders
       extend Origin::Forwardable
+      select_with :queryable
 
       def self.queryable
         Query.new
@@ -13,7 +14,7 @@ describe Origin::Forwardable do
   end
 
   after(:all) do
-    Object.send(:remove_const, :Band)
+    Object.send(:remove_const, :Finders)
   end
 
   describe ".select_with" do
@@ -21,7 +22,13 @@ describe Origin::Forwardable do
     context "when provided a symbol" do
 
       before(:all) do
-        Band.select_with :queryable
+        class Band
+          extend Finders
+        end
+      end
+
+      after(:all) do
+        Object.send(:remove_const, :Band)
       end
 
       Origin::Selectable.forwardables.each do |method|
