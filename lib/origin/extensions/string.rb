@@ -79,7 +79,9 @@ module Origin
         #
         # @since 1.0.0
         def evolve(object)
-          __evolve__(object) { |obj| obj.to_s }
+          __evolve__(object) do |obj|
+            obj.regexp? ? obj : obj.to_s
+          end
         end
       end
     end

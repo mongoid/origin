@@ -126,6 +126,10 @@ module Origin
         [ self ]
       end
 
+      def regexp?
+        false
+      end
+
       module ClassMethods
 
         # Evolve the object.
