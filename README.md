@@ -206,3 +206,23 @@ Adds $lte selection to the queryable.
 This translates to the following selector.
 
         { "gold_albums" => { "$lte" => 10 }}
+
+### Queryable#max_distance
+
+Adds a $maxDistance selection to an existing $near.
+
+        Band.near(location: [ 10, 10 ]).max_distance(location: 50)
+
+This translates to the following selector.
+
+        { "location" => { "$near" => [ 10, 10 ], "$maxDistance" => 50 }}
+
+### Queryable#mod
+
+Adds $mod selection to the queryable.
+
+        Band.mod(value: [ 10, 1 ])
+
+This translates to the following selector.
+
+        { "value" => { "$mod" => [ 10, 1 ] }}
