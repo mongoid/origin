@@ -107,3 +107,17 @@ query operation you can perform.
 Adds $all selection to the queryable.
 
         Band.all(labels: [ "Mute", "Nothing" ])
+
+This translates to the following selector.
+
+        { "labels" => { "$all" => [ "Mute", "Nothing" ]}}
+
+### Queryable#and
+
+Adds $and selection to the queryable.
+
+        Band.and({ name: "Depeche Mode" }, { label: "Mute" })
+
+This translates to the following selector.
+
+        { "$and" => [{ "name" => "Depeche Mode" }, { "label" => "Mute" }]}
