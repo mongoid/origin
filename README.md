@@ -156,3 +156,53 @@ so all the following are equivalent.*
 This translates to the following selector.
 
         { "name" => { "$exists" => true }}
+
+### Queryable#gt
+
+Adds $gt selection to the queryable.
+
+        Band.gt(gold_albums: 10)
+
+This translates to the following selector.
+
+        { "gold_albums" => { "$gt" => 10 }}
+
+### Queryable#gte
+
+Adds $gte selection to the queryable.
+
+        Band.gte(gold_albums: 10)
+
+This translates to the following selector.
+
+        { "gold_albums" => { "$gte" => 10 }}
+
+### Queryable#in
+
+Adds $in selection to the queryable.
+
+        Band.in(members: [ "Dave", "Martin" ])
+
+This translates to the following selector.
+
+        { "members" => { "$in" => [ "Dave", "Martin" ]}}
+
+### Queryable#lt
+
+Adds $lt selection to the queryable.
+
+        Band.lt(gold_albums: 10)
+
+This translates to the following selector.
+
+        { "gold_albums" => { "$lt" => 10 }}
+
+### Queryable#lte
+
+Adds $lte selection to the queryable.
+
+        Band.lte(gold_albums: 10)
+
+This translates to the following selector.
+
+        { "gold_albums" => { "$lte" => 10 }}
