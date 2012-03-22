@@ -102,7 +102,7 @@ Selection
 The `Queryable` provides convenience methods for every type of MongoDB
 query operation you can perform.
 
-# Queryable#all
+### Queryable#all
 
 Adds $all selection to the queryable.
 
