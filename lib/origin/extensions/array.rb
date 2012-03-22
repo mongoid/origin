@@ -42,10 +42,27 @@ module Origin
         map { |value| value.__deep_copy__ }
       end
 
+      # Evolve the array into an array of mongo friendly dates. (Times at
+      # midnight).
+      #
+      # @example Evolve the array to dates.
+      #   [ Date.new(2010, 1, 1) ].__evolve_date__
+      #
+      # @return [ Array<Time> ] The array as times at midnight UTC.
+      #
+      # @since 1.0.0
       def __evolve_date__
         map { |value| value.__evolve_date__ }
       end
 
+      # Evolve the array to an array of times.
+      #
+      # @example Evolve the array to times.
+      #   [ 1231231231 ].__evolve_time__
+      #
+      # @return [ Array<Time> ] The array as times.
+      #
+      # @since 1.0.0
       def __evolve_time__
         map { |value| value.__evolve_time__ }
       end
@@ -83,7 +100,7 @@ module Origin
       # Get the array as a sort pair.
       #
       # @example Get the array as field/direction pair.
-      #   [ 1, 2, 3 ].__sort_pair__
+      #   [ field, 1 ].__sort_pair__
       #
       # @return [ Hash ] The field/direction pair.
       #
@@ -105,7 +122,7 @@ module Origin
       #
       # @since 1.0.0
       def multi
-        first.is_a?(::Symbol) ? [ self ] : self
+        first.is_a?(::Symbol) || first.is_a?(::String) ? [ self ] : self
       end
 
       module ClassMethods
