@@ -116,9 +116,33 @@ provides, in it's internal `Selectable` module.
 
 In addition to all the convenience methods for selection, Origin also adds
 various convenience methods to `Symbol` which can be used *only* within
-`#where` selection for syntax suger.
+`#where` selection for syntax suger. For example:
 
         Band.where(:name.in => [ "Depeche Mode", "New Order" ])
 
+This translates to the following selector.
+
+        { "name" => { "$in" => [ "Depeche Mode", "New Order" ] }}
+
 The API documentation contains all the corresponding symbol methods as well
 in the example annotations for each standard method.
+
+### Merge strategies
+
+The selection API also provides merge strategies for cases you want to
+override the default behaviour with specific methods that expect array values.
+The available strategies are *intersect, override, and union* and are used by
+chaining the name of the strategy before calling any method. For example,
+to override the default *intersection* behaviour of `#in`:
+
+        Band.in(name: [ "Depeche Mode" ]).union.in(name: [ "New Order" ])
+
+This translates to the following selector.
+
+        { "name" => { "$in" => [ "Depeche Mode", "New Order" ] }}
+
+The default behaviour for the array methods are:
+
+* `Queryable#all` - defaults to *union*.
+* `Queryable#in` - defaults to *intersect*.
+* `Queryable#nin` - defaults to *intersect*.
