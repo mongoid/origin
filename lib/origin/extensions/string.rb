@@ -5,11 +5,27 @@ module Origin
     # This module contains additional object behaviour.
     module String
 
+      # Evolve the string into a mongodb friendly date.
+      #
+      # @example Evolve the string.
+      #   "2012-1-1".__evolve_date__
+      #
+      # @return [ Time ] The time at UTC midnight.
+      #
+      # @since 1.0.0
       def __evolve_date__
         time = ::Time.parse(self)
         ::Time.utc(time.year, time.month, time.day, 0, 0, 0, 0)
       end
 
+      # Evolve the string into a mongodb friendly time.
+      #
+      # @example Evolve the string.
+      #   "2012-1-1".__evolve_time__
+      #
+      # @return [ Time ] The string as a time.
+      #
+      # @since 1.0.0
       def __evolve_time__
         ::Time.parse(self).utc
       end
@@ -31,10 +47,6 @@ module Origin
         end
       end
 
-      def field
-        self
-      end
-
       # Get the string as a specification.
       #
       # @example Get the string as a criteria.
@@ -47,10 +59,6 @@ module Origin
       # @since 1.0.0
       def specify(value)
         { self => value }
-      end
-
-      def strategy
-        :__override__
       end
 
       # Get the string as a sort direction.

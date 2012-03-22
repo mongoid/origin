@@ -68,7 +68,7 @@ describe Regexp do
     end
   end
 
-  describe "#regexp" do
+  describe "#regexp?" do
 
     let(:regexp) do
       /^[123]/
