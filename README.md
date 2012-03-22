@@ -94,7 +94,7 @@ class.
         Band.where(name: "Depeche Mode")
 
 *From here on, assume all references to the `Band` class have extended
-`Origin::Forwardable`.
+`Origin::Forwardable`.*
 
 Selection
 ---------
