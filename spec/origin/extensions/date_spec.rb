@@ -2,6 +2,44 @@ require "spec_helper"
 
 describe Date do
 
+  describe "#__evolve_date__" do
+
+    let(:date) do
+      Date.new(2010, 1, 1)
+    end
+
+    let(:evolved) do
+      date.__evolve_date__
+    end
+
+    let(:expected) do
+      Time.utc(2010, 1, 1, 0, 0, 0)
+    end
+
+    it "returns the time" do
+      evolved.should eq(expected)
+    end
+  end
+
+  describe "#__evolve_time__" do
+
+    let(:date) do
+      Date.new(2010, 1, 1)
+    end
+
+    let(:evolved) do
+      date.__evolve_time__
+    end
+
+    let(:expected) do
+      Time.local(2010, 1, 1, 0, 0, 0)
+    end
+
+    it "returns the time" do
+      evolved.should eq(expected)
+    end
+  end
+
   describe ".evolve" do
 
     context "when provided a date" do
