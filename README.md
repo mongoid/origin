@@ -127,6 +127,18 @@ This translates to the following selector.
 The API documentation contains all the corresponding symbol methods as well
 in the example annotations for each standard method.
 
+`Queryable#where` is also special in that it can take a Javascript string as
+a parameter, that will create the corresponding $where selection.
+
+        Band.where("this.name == 'Depeche Mode'")
+
+Translates to:
+
+        { "$where" => "this.name == 'Depeche Mode'")
+
+*Note that passing Javascript alone by itself to MongoDB will cause a full
+collection scan.*
+
 ### Merge strategies
 
 The selection API also provides merge strategies for cases you want to
