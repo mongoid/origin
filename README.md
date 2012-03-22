@@ -113,3 +113,12 @@ See the API documentation for all available methods that the `Queryable`
 provides, in it's internal `Selectable` module.
 
 [Selectable API](http://rdoc.info/github/mongoid/origin/Origin/Selectable)
+
+In addition to all the convenience methods for selection, Origin also adds
+various convenience methods to `Symbol` which can be used *only* within
+`#where` selection for syntax suger.
+
+        Band.where(:name.in => [ "Depeche Mode", "New Order" ])
+
+The API documentation contains all the corresponding symbol methods as well
+in the example annotations for each standard method.
