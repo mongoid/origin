@@ -93,8 +93,17 @@ class.
 
         Band.where(name: "Depeche Mode")
 
+*From here on, assume all references to the `Band` class have extended
+`Origin::Forwardable`.
+
 Selection
 ---------
 
 The `Queryable` provides convenience methods for every type of MongoDB
 query operation you can perform.
+
+# Queryable#all
+
+Adds $all selection to the queryable.
+
+        Band.all(labels: [ "Mute", "Nothing" ])
