@@ -121,3 +121,23 @@ Adds $and selection to the queryable.
 This translates to the following selector.
 
         { "$and" => [{ "name" => "Depeche Mode" }, { "label" => "Mute" }]}
+
+### Queryable#between
+
+Adds min/max selection for ranges.
+
+        Band.between(members: 1..3)
+
+This translates to the following selector.
+
+        { "members" => { "$gte" => 1, "$lte" => 3 }}
+
+### Queryable#elem_match
+
+Adds $elemMatch selection to the queryable.
+
+        Band.elem_match(labels: { name: "Mute" })
+
+This translates to the following selector.
+
+        { "labels" => { "$elemMatch" => { "name" => "Mute" }}}
