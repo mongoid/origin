@@ -100,11 +100,8 @@ Selection
 ---------
 
 The `Queryable` provides convenience methods for every type of MongoDB
-query operation you can perform.
-
-### Queryable#all
-
-Adds $all selection to the queryable.
+query operation you can perform. For example, to add $all selection to the
+queryable.
 
         Band.all(labels: [ "Mute", "Nothing" ])
 
@@ -112,117 +109,7 @@ This translates to the following selector.
 
         { "labels" => { "$all" => [ "Mute", "Nothing" ]}}
 
-### Queryable#and
+See the API documentation for all available methods that the `Queryable`
+provides, in it's internal `Selectable` module.
 
-Adds $and selection to the queryable.
-
-        Band.and({ name: "Depeche Mode" }, { label: "Mute" })
-
-This translates to the following selector.
-
-        { "$and" => [{ "name" => "Depeche Mode" }, { "label" => "Mute" }]}
-
-### Queryable#between
-
-Adds min/max selection for ranges.
-
-        Band.between(members: 1..3)
-
-This translates to the following selector.
-
-        { "members" => { "$gte" => 1, "$lte" => 3 }}
-
-### Queryable#elem_match
-
-Adds $elemMatch selection to the queryable.
-
-        Band.elem_match(labels: { name: "Mute" })
-
-This translates to the following selector.
-
-        { "labels" => { "$elemMatch" => { "name" => "Mute" }}}
-
-### Queryable#exists
-
-Adds $exists selection to the queryable.
-
-*Note that this will automatically convert any values passed in to booleans,
-so all the following are equivalent.*
-
-        Band.exists(name: true)
-        Band.exists(name: 1)
-        Band.exists(name: "yes")
-
-This translates to the following selector.
-
-        { "name" => { "$exists" => true }}
-
-### Queryable#gt
-
-Adds $gt selection to the queryable.
-
-        Band.gt(gold_albums: 10)
-
-This translates to the following selector.
-
-        { "gold_albums" => { "$gt" => 10 }}
-
-### Queryable#gte
-
-Adds $gte selection to the queryable.
-
-        Band.gte(gold_albums: 10)
-
-This translates to the following selector.
-
-        { "gold_albums" => { "$gte" => 10 }}
-
-### Queryable#in
-
-Adds $in selection to the queryable.
-
-        Band.in(members: [ "Dave", "Martin" ])
-
-This translates to the following selector.
-
-        { "members" => { "$in" => [ "Dave", "Martin" ]}}
-
-### Queryable#lt
-
-Adds $lt selection to the queryable.
-
-        Band.lt(gold_albums: 10)
-
-This translates to the following selector.
-
-        { "gold_albums" => { "$lt" => 10 }}
-
-### Queryable#lte
-
-Adds $lte selection to the queryable.
-
-        Band.lte(gold_albums: 10)
-
-This translates to the following selector.
-
-        { "gold_albums" => { "$lte" => 10 }}
-
-### Queryable#max_distance
-
-Adds a $maxDistance selection to an existing $near.
-
-        Band.near(location: [ 10, 10 ]).max_distance(location: 50)
-
-This translates to the following selector.
-
-        { "location" => { "$near" => [ 10, 10 ], "$maxDistance" => 50 }}
-
-### Queryable#mod
-
-Adds $mod selection to the queryable.
-
-        Band.mod(value: [ 10, 1 ])
-
-This translates to the following selector.
-
-        { "value" => { "$mod" => [ 10, 1 ] }}
+[Selectable API](http://rdoc.info/github/mongoid/origin/Origin/Selectable)
