@@ -9,6 +9,20 @@ describe NilClass do
     end
   end
 
+  describe "#__evolve_date__" do
+
+    it "returns nil" do
+      nil.__evolve_date__.should be_nil
+    end
+  end
+
+  describe "#__evolve_time__" do
+
+    it "returns nil" do
+      nil.__evolve_time__.should be_nil
+    end
+  end
+
   describe "#__intersect__" do
 
     context "when provided a non enumerable" do

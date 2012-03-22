@@ -2,7 +2,7 @@
 module Origin
   module Extensions
 
-    # This module contains additional object behaviour.
+    # This module contains additional range behaviour.
     module Range
 
       # Get the range as an array.
@@ -17,10 +17,26 @@ module Origin
         to_a
       end
 
+      # Convert the range to a min/max mongo friendly query for dates.
+      #
+      # @example Evolve the range.
+      #   (11231312..213123131).__evolve_date__
+      #
+      # @return [ Hash ] The min/max range query with times at midnight.
+      #
+      # @since 1.0.0
       def __evolve_date__
         { "$gte" => min.__evolve_date__, "$lte" => max.__evolve_date__ }
       end
 
+      # Convert the range to a min/max mongo friendly query for times.
+      #
+      # @example Evolve the range.
+      #   (11231312..213123131).__evolve_date__
+      #
+      # @return [ Hash ] The min/max range query with times.
+      #
+      # @since 1.0.0
       def __evolve_time__
         { "$gte" => min.__evolve_time__, "$lte" => max.__evolve_time__ }
       end

@@ -5,11 +5,28 @@ module Origin
     # This module contains additional numeric behaviour.
     module Numeric
 
+      # Evolve the numeric value into a mongo friendly date, aka UTC time at
+      # midnight.
+      #
+      # @example Evolve to a date.
+      #   125214512412.1123.__evolve_date__
+      #
+      # @return [ Time ] The time representation at UTC midnight.
+      #
+      # @since 1.0.0
       def __evolve_date__
         time = ::Time.at(self)
         ::Time.utc(time.year, time.month, time.day, 0, 0, 0, 0)
       end
 
+      # Evolve the numeric value into a mongo friendly time.
+      #
+      # @example Evolve to a time.
+      #   125214512412.1123.__evolve_time__
+      #
+      # @return [ Time ] The time representation.
+      #
+      # @since 1.0.0
       def __evolve_time__
         ::Time.at(self).utc
       end

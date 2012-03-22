@@ -152,6 +152,8 @@ module Origin
         #
         # @api private
         #
+        # @todo Durran refactor out case statement.
+        #
         # @example Evolve an object and yield.
         #   Object.evolve("test") do |obj|
         #     obj.to_s

@@ -29,6 +29,14 @@ module Origin
       # @since 1.0.0
       def __expanded__(object); object; end
 
+      # Evolve the nil into a date or time.
+      #
+      # @example Evolve the nil.
+      #   nil.__evolve_time__
+      #
+      # @return [ nil ] nil.
+      #
+      # @since 1.0.0
       def __evolve_time__; self; end
       alias :__evolve_date__ :__evolve_time__
 
