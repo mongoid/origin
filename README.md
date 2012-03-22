@@ -134,7 +134,7 @@ a parameter, that will create the corresponding $where selection.
 
 Translates to:
 
-        { "$where" => "this.name == 'Depeche Mode'")
+        { "$where" => "this.name == 'Depeche Mode'" }
 
 *Note that passing Javascript alone by itself to MongoDB will cause a full
 collection scan.*
@@ -158,3 +158,9 @@ The default behaviour for the array methods are:
 * `Queryable#all` - defaults to *union*.
 * `Queryable#in` - defaults to *intersect*.
 * `Queryable#nin` - defaults to *intersect*.
+
+### Notes on queryable chaining
+
+Each time a method on the queryable is called, it clones itself and returns
+a new copy with the next selection added. This is to not modify the previous
+queryable in case it needs reuse later on without the additional selection.
