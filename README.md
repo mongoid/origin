@@ -141,3 +141,18 @@ Adds $elemMatch selection to the queryable.
 This translates to the following selector.
 
         { "labels" => { "$elemMatch" => { "name" => "Mute" }}}
+
+### Queryable#exists
+
+Adds $exists selection to the queryable.
+
+*Note that this will automatically convert any values passed in to booleans,
+so all the following are equivalent.*
+
+        Band.exists(name: true)
+        Band.exists(name: 1)
+        Band.exists(name: "yes")
+
+This translates to the following selector.
+
+        { "name" => { "$exists" => true }}
