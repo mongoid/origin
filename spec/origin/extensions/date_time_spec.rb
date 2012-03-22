@@ -2,6 +2,29 @@ require "spec_helper"
 
 describe DateTime do
 
+  describe "#__evolve_time" do
+
+    let(:date) do
+      DateTime.new(2010, 1, 1, 12, 0, 0)
+    end
+
+    let(:evolved) do
+      date.__evolve_time__
+    end
+
+    let(:expected) do
+      Time.new(2010, 1, 1, 12, 0, 0).utc
+    end
+
+    it "returns the time" do
+      evolved.should eq(expected)
+    end
+
+    it "returns the time in utc" do
+      evolved.utc_offset.should eq(0)
+    end
+  end
+
   describe ".evolve" do
 
     context "when provided a date time" do

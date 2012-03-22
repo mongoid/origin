@@ -5,6 +5,14 @@ module Origin
     # This module contains additional datetime behaviour.
     module DateTime
 
+      # Evolve the date time into a mongo friendly UTC time.
+      #
+      # @example Evolve the date time.
+      #   date_time.__evolve_time__
+      #
+      # @return [ Time ] The converted time in UTC.
+      #
+      # @since 1.0.0
       def __evolve_time__
         ::Time.local(year, month, day, hour, min, sec).utc
       end

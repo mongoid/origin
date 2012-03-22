@@ -301,4 +301,19 @@ describe Hash do
       end
     end
   end
+
+  describe "#update_values" do
+
+    let(:hash) do
+      { field: "1" }
+    end
+
+    before do
+      hash.update_values(&:to_i)
+    end
+
+    it "updates each value in the hash" do
+      hash.should eq({ field: 1 })
+    end
+  end
 end
