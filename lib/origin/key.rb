@@ -27,10 +27,6 @@ module Origin
       name == other.name && operator == other.operator && expanded == other.expanded
     end
 
-    def field
-      name.to_s
-    end
-
     # Instantiate the new key.
     #
     # @example Instantiate the key.
