@@ -59,7 +59,10 @@ a hash to know how to map the name to the field in the database.
 
         Criteria.new({ "n" => "name" })
 
-The aliases hash *must* be string keys and string values.
+The aliases hash *must* be string keys and string values. Then you can do
+this and it will get converted to the database field name `n`:
+
+        criteria.where(name: "value")
 
 The second optional parameter is a hash of field names with associated
 serializers. This is useful for when MongoDB cannot handle the Ruby
