@@ -337,4 +337,27 @@ describe ActiveSupport::TimeWithZone do
       end
     end
   end
+
+  describe "#__evolve_time__" do
+
+    let(:date) do
+      time_zone.local(2010, 1, 1, 12, 0, 0)
+    end
+
+    let(:evolved) do
+      date.__evolve_time__
+    end
+
+    let(:expected) do
+      Time.utc(2010, 1, 1, 17, 0, 0)
+    end
+
+    it "returns the same time" do
+      evolved.should eq(expected)
+    end
+
+    it "returns the time in utc" do
+      evolved.utc_offset.should eq(0)
+    end
+  end
 end

@@ -5,6 +5,14 @@ module Origin
     # This module contains additional time with zone behaviour.
     module TimeWithZone
 
+      # Evolve the time into a utc time.
+      #
+      # @example Evolve the time.
+      #   time.__evolve_time__
+      #
+      # @return [ Time ] The time in UTC.
+      #
+      # @since 1.0.0
       def __evolve_time__
         utc
       end
