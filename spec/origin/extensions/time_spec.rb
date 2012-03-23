@@ -333,4 +333,19 @@ describe Time do
       end
     end
   end
+
+  describe "#__evolve_time__" do
+
+    let(:time) do
+      Time.new(2010, 1, 1, 12, 0, 0)
+    end
+
+    let(:evolved) do
+      time.__evolve_time__
+    end
+
+    it "returns self as utc" do
+      evolved.should eq(Time.new(2010, 1, 1, 12, 0, 0).utc)
+    end
+  end
 end
