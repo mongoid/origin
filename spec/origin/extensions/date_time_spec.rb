@@ -266,16 +266,6 @@ describe DateTime do
           evolved["$gte"].utc_offset.should eq(0)
         end
       end
-
-      context "when the range is not convertable" do
-
-        let(:evolved) do
-          described_class.evolve("132".."1211")
-        end
-
-        pending "raises an error" do
-        end
-      end
     end
 
     context "when provided a string" do
@@ -347,12 +337,6 @@ describe DateTime do
 
       it "returns nil" do
         described_class.evolve(nil).should be_nil
-      end
-    end
-
-    context "when provided a non-convertable object" do
-
-      pending "raises an error" do
       end
     end
   end

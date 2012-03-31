@@ -37,11 +37,6 @@ describe Object do
         end
       end
     end
-
-    context "when the other object is a hash" do
-
-      pending "raises an error"
-    end
   end
 
   describe "#__intersect__" do
@@ -79,11 +74,6 @@ describe Object do
         end
       end
     end
-
-    context "when the other object is a hash" do
-
-      pending "raises an error"
-    end
   end
 
   describe "#__union__" do
@@ -113,11 +103,6 @@ describe Object do
           5.__union__([ 5, 6 ]).should eq([ 5, 6 ])
         end
       end
-    end
-
-    context "when the other object is a hash" do
-
-      pending "raises an error"
     end
   end
 end

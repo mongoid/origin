@@ -4,16 +4,6 @@ describe Hash do
 
   describe "#__add__" do
 
-    context "when the other object is a non-enumerable" do
-
-      pending "raises an error"
-    end
-
-    context "when the other object is an array" do
-
-      pending "raises an error"
-    end
-
     context "when the other object is a hash" do
 
       context "when a key matches" do
@@ -110,16 +100,6 @@ describe Hash do
 
   describe "#__intersect__" do
 
-    context "when the other object is a non-enumerable" do
-
-      pending "raises an error"
-    end
-
-    context "when the other object is an array" do
-
-      pending "raises an error"
-    end
-
     context "when the other object is a hash" do
 
       context "when a key matches" do
@@ -215,16 +195,6 @@ describe Hash do
   end
 
   describe "#__union__" do
-
-    context "when the other object is a non-enumerable" do
-
-      pending "raises an error"
-    end
-
-    context "when the other object is an array" do
-
-      pending "raises an error"
-    end
 
     context "when the other object is a hash" do
 
