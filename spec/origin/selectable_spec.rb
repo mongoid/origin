@@ -2735,7 +2735,7 @@ describe Origin::Selectable do
     context "when provided no criterion" do
 
       let(:selection) do
-        query.type
+        query.with_type
       end
 
       it "does not add any criterion" do
@@ -2754,7 +2754,7 @@ describe Origin::Selectable do
     context "when provided nil" do
 
       let(:selection) do
-        query.type(nil)
+        query.with_type(nil)
       end
 
       it "does not add any criterion" do
@@ -2773,7 +2773,7 @@ describe Origin::Selectable do
     context "when provided a single criterion" do
 
       let(:selection) do
-        query.type(field: 10)
+        query.with_type(field: 10)
       end
 
       it "adds the $type selector" do
@@ -2792,7 +2792,7 @@ describe Origin::Selectable do
       context "when the criterion are for different fields" do
 
         let(:selection) do
-          query.type(first: 10, second: 15)
+          query.with_type(first: 10, second: 15)
         end
 
         it "adds the $type selectors" do
@@ -2813,7 +2813,7 @@ describe Origin::Selectable do
       context "when the criterion are for different fields" do
 
         let(:selection) do
-          query.type(first: 10).type(second: 15)
+          query.with_type(first: 10).with_type(second: 15)
         end
 
         it "adds the $type selectors" do
@@ -2831,7 +2831,7 @@ describe Origin::Selectable do
       context "when the criterion are on the same field" do
 
         let(:selection) do
-          query.type(first: 10).type(first: 15)
+          query.with_type(first: 10).with_type(first: 15)
         end
 
         it "overwrites the first $type selector" do
@@ -3252,7 +3252,7 @@ describe Origin::Selectable do
       context "when performing a $type" do
 
         let(:selection) do
-          query.where(:field.type => 10)
+          query.where(:field.with_type => 10)
         end
 
         it "adds the $type criterion" do
@@ -4013,10 +4013,10 @@ describe Origin::Selectable do
       end
     end
 
-    describe "#type" do
+    describe "#with_type" do
 
       let(:key) do
-        :field.type
+        :field.with_type
       end
 
       it "returns a selecton key" do

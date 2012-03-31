@@ -377,10 +377,10 @@ module Origin
     # Adds a $type selection to the queryable.
     #
     # @example Add the $type selection.
-    #   queryable.type(field: 15)
+    #   queryable.with_type(field: 15)
     #
     # @example Execute an $type in a where query.
-    #   queryable.where(:field.type => 15)
+    #   queryable.where(:field.with_type => 15)
     #
     # @note http://vurl.me/PGOU contains a list of all types.
     #
@@ -389,10 +389,10 @@ module Origin
     # @return [ Selectable ] The cloned queryable.
     #
     # @since 1.0.0
-    def type(criterion = nil)
+    def with_type(criterion = nil)
       __override__(criterion, "$type")
     end
-    key :type, :override, "$type"
+    key :with_type, :override, "$type"
 
     # This is the general entry point for most MongoDB queries. This either
     # creates a standard field: value selection, and expanded selection with
