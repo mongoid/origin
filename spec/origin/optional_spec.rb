@@ -286,6 +286,65 @@ describe Origin::Optional do
     end
   end
 
+  describe "#hint" do
+
+    context "when provided no options" do
+
+      let(:selection) do
+        query.hint
+      end
+
+      it "does not add any options" do
+        selection.options.should eq({})
+      end
+
+      it "returns the query" do
+        selection.should eq(query)
+      end
+
+      it "returns a cloned query" do
+        selection.should_not equal(query)
+      end
+    end
+
+    context "when provided nil" do
+
+      let(:selection) do
+        query.hint(nil)
+      end
+
+      it "does not add any options" do
+        selection.options.should eq({})
+      end
+
+      it "returns the query" do
+        selection.should eq(query)
+      end
+
+      it "returns a cloned query" do
+        selection.should_not equal(query)
+      end
+    end
+
+    context "when provided arguments" do
+
+      context "when the argument is a hash" do
+
+        let(:selection) do
+          query.hint("$natural" => 1)
+        end
+
+        it "adds the field options" do
+          selection.options.should eq({ hint: { "$natural" => 1 }})
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
+      end
+    end
+  end
+
   describe "#limit" do
 
     context "when provided no options" do

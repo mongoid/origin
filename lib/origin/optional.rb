@@ -58,6 +58,20 @@ module Origin
     key :desc, :override, -1
     key :descending, :override, -1
 
+    # Add an index hint to the query options.
+    #
+    # @example Add an index hint.
+    #   optional.hint("$natural" => 1)
+    #
+    # @param [ Hash ] value The index hint.
+    #
+    # @return [ Optional ] The cloned optional.
+    #
+    # @since 1.0.0
+    def hint(value = nil)
+      option(value) { |options| options.store(:hint, value) }
+    end
+
     # Add the number of documents to limit in the returned results.
     #
     # @example Limit the number of returned documents.
