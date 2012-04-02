@@ -19,7 +19,7 @@ Documentation
 -------------
 
 Until the official website is complete, please use this README as
-a documentaion reference.
+a documentation reference.
 
 Inclusion
 ---------
