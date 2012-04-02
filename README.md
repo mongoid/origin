@@ -113,9 +113,10 @@ This translates to the following selector.
         { "labels" => { "$all" => [ "Mute", "Nothing" ]}}
 
 See the API documentation for all available methods that the `Queryable`
-provides, in it's internal `Selectable` module.
+provides, in it's internal `Selectable` and `Optional` modules.
 
 [Selectable API](http://rdoc.info/github/mongoid/origin/Origin/Selectable)
+[Optional API](http://rdoc.info/github/mongoid/origin/Origin/Optional)
 
 In addition to all the convenience methods for selection, Origin also adds
 various convenience methods to `Symbol` which can be used *only* within
@@ -167,3 +168,13 @@ The default behaviour for the array methods are:
 Each time a method on the queryable is called, it clones itself and returns
 a new copy with the next selection added. This is to not modify the previous
 queryable in case it needs reuse later on without the additional selection.
+
+### Notes on sorting options
+
+Origin's sort options is not compatible with the 10gen Mongo Ruby Driver out
+of the box, but is compatible with Moped. Internally it is stored as a hash
+and to use with the 10gen driver you must convert it to a multi dimensional
+array.
+
+        query = Band.asc(:name) # Options: { sort: { "name" => 1 }}
+        [*query.options[:sort]] # Will work with 10gen driver.
