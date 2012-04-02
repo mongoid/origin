@@ -390,9 +390,13 @@ module Origin
     #
     # @since 1.0.0
     def with_type(criterion = nil)
-      __override__(criterion, "$type")
+      typed_override(criterion, "$type") do |value|
+        ::Integer.evolve(value)
+      end
     end
-    key :with_type, :override, "$type"
+    key :with_type, :override, "$type" do |value|
+      ::Integer.evolve(value)
+    end
 
     # This is the general entry point for most MongoDB queries. This either
     # creates a standard field: value selection, and expanded selection with

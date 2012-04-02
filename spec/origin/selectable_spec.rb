@@ -2772,18 +2772,38 @@ describe Origin::Selectable do
 
     context "when provided a single criterion" do
 
-      let(:selection) do
-        query.with_type(field: 10)
+      context "when provided an integer" do
+
+        let(:selection) do
+          query.with_type(field: 10)
+        end
+
+        it "adds the $type selector" do
+          selection.selector.should eq({
+            "field" => { "$type" => 10 }
+          })
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
       end
 
-      it "adds the $type selector" do
-        selection.selector.should eq({
-          "field" => { "$type" => 10 }
-        })
-      end
+      context "when provided a string" do
 
-      it "returns a cloned query" do
-        selection.should_not equal(query)
+        let(:selection) do
+          query.with_type(field: "10")
+        end
+
+        it "adds the $type selector" do
+          selection.selector.should eq({
+            "field" => { "$type" => 10 }
+          })
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
       end
     end
 
