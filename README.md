@@ -53,7 +53,7 @@ domain model expressive. An example of this in Mongoid is:
         end
 
 In the above example you can reference the field by `Band#name`, but the
-field in the database is stored as `d`. We want to maintain this
+field in the database is stored as `n`. We want to maintain this
 expressiveness in querying the database as well, so the Queryable needs
 a hash to know how to map the name to the field in the database.
 
