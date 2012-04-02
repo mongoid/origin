@@ -142,7 +142,7 @@ module Origin
     # @since 1.0.0
     def __override__(criterion, operator)
       selection(criterion) do |selector, field, value|
-        selector.store(field, { operator => prepare(field, value) })
+        selector.store(field, { operator => prepare(field, operator, value) })
       end
     end
 
@@ -176,7 +176,8 @@ module Origin
     # @return [ Object ] The serialized value.
     #
     # @since 1.0.0
-    def prepare(field, value)
+    def prepare(field, operator, value)
+      return value if operator =~ /exists|type|size/
       serializer = serializers[field]
       serializer ? serializer.evolve(value) : value
     end
@@ -217,7 +218,7 @@ module Origin
       selection(criterion) do |selector, field, value|
         selector.store(
           field,
-          selector[field].send(strategy, { operator => prepare(field, value) })
+          selector[field].send(strategy, { operator => prepare(field, operator, value) })
         )
       end
     end

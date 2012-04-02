@@ -116,7 +116,11 @@ module Origin
     # @since 1.0.0
     def evolve_hash(serializer, value)
       value.each_pair do |operator, _value|
-        value[operator] = evolve(serializer, _value)
+        if operator =~ /exists|type|size/
+          value[operator] = _value
+        else
+          value[operator] = evolve(serializer, _value)
+        end
       end
     end
 
