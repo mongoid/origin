@@ -871,56 +871,22 @@ describe Origin::Optional do
     end
   end
 
-  describe "#skip" do
+  [ :skip, :offset ].each do |method|
 
-    context "when provided no options" do
+    describe "\##{method}" do
 
-      let(:selection) do
-        query.skip
-      end
-
-      it "does not add any options" do
-        selection.options.should eq({})
-      end
-
-      it "returns the query" do
-        selection.should eq(query)
-      end
-
-      it "returns a cloned query" do
-        selection.should_not equal(query)
-      end
-    end
-
-    context "when provided nil" do
-
-      let(:selection) do
-        query.skip(nil)
-      end
-
-      it "does not add any options" do
-        selection.options.should eq({})
-      end
-
-      it "returns the query" do
-        selection.should eq(query)
-      end
-
-      it "returns a cloned query" do
-        selection.should_not equal(query)
-      end
-    end
-
-    context "when provided arguments" do
-
-      context "when provided an integer" do
+      context "when provided no options" do
 
         let(:selection) do
-          query.skip(10)
+          query.send(method)
         end
 
-        it "adds the field options" do
-          selection.options.should eq({ skip: 10 })
+        it "does not add any options" do
+          selection.options.should eq({})
+        end
+
+        it "returns the query" do
+          selection.should eq(query)
         end
 
         it "returns a cloned query" do
@@ -928,14 +894,18 @@ describe Origin::Optional do
         end
       end
 
-      context "when provided a float" do
+      context "when provided nil" do
 
         let(:selection) do
-          query.skip(10.25)
+          query.send(method, nil)
         end
 
-        it "adds the field options converted to an integer" do
-          selection.options.should eq({ skip: 10 })
+        it "does not add any options" do
+          selection.options.should eq({})
+        end
+
+        it "returns the query" do
+          selection.should eq(query)
         end
 
         it "returns a cloned query" do
@@ -943,18 +913,51 @@ describe Origin::Optional do
         end
       end
 
-      context "when provided a non number" do
+      context "when provided arguments" do
 
-        let(:selection) do
-          query.skip("10")
+        context "when provided an integer" do
+
+          let(:selection) do
+            query.send(method, 10)
+          end
+
+          it "adds the field options" do
+            selection.options.should eq({ skip: 10 })
+          end
+
+          it "returns a cloned query" do
+            selection.should_not equal(query)
+          end
         end
 
-        it "adds the field options converted to an integer" do
-          selection.options.should eq({ skip: 10 })
+        context "when provided a float" do
+
+          let(:selection) do
+            query.send(method, 10.25)
+          end
+
+          it "adds the field options converted to an integer" do
+            selection.options.should eq({ skip: 10 })
+          end
+
+          it "returns a cloned query" do
+            selection.should_not equal(query)
+          end
         end
 
-        it "returns a cloned query" do
-          selection.should_not equal(query)
+        context "when provided a non number" do
+
+          let(:selection) do
+            query.send(method, "10")
+          end
+
+          it "adds the field options converted to an integer" do
+            selection.options.should eq({ skip: 10 })
+          end
+
+          it "returns a cloned query" do
+            selection.should_not equal(query)
+          end
         end
       end
     end
