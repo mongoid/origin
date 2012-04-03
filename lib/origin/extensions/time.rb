@@ -5,6 +5,18 @@ module Origin
     # This module contains additional time behaviour.
     module Time
 
+      # Evolve the time as a date, UTC midnight.
+      #
+      # @example Evolve the time to a date query format.
+      #   time.__evolve_date__
+      #
+      # @return [ Time ] The date at midnight UTC.
+      #
+      # @since 1.0.0
+      def __evolve_date__
+        ::Time.utc(year, month, day, 0, 0, 0, 0)
+      end
+
       # Evolve the time into a utc time.
       #
       # @example Evolve the time.
