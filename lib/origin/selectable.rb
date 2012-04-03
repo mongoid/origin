@@ -1,27 +1,28 @@
 # encoding: utf-8
 module Origin
 
-  # An origin queryable is selectable, in that it has the ability to select
+  # An origin selectable is selectable, in that it has the ability to select
   # document from the database. The selectable module brings all functionality
-  # to the queryable that has to do with building MongoDB selectors.
+  # to the selectable that has to do with building MongoDB selectors.
   module Selectable
     include Mergeable
     extend Macroable
 
+    # @attribute [rw] negating If the next spression is negated.
     # @attribute [rw] selector The query selector.
-    attr_accessor :selector
+    attr_accessor :negating, :selector
 
     # Add the $all criterion.
     #
     # @example Add the criterion.
-    #   queryable.all(field: [ 1, 2 ])
+    #   selectable.all(field: [ 1, 2 ])
     #
     # @example Execute an $all in a where query.
-    #   queryable.where(:field.all => [ 1, 2 ])
+    #   selectable.where(:field.all => [ 1, 2 ])
     #
     # @param [ Hash ] criterion The key value pairs for $all matching.
     #
-    # @return [ Selectable ] The cloned queryable.
+    # @return [ Selectable ] The cloned selectable.
     #
     # @since 1.0.0
     def all(criterion = nil)
@@ -33,12 +34,12 @@ module Origin
     # Add the $and criterion.
     #
     # @example Add the criterion.
-    #   queryable.and({ field: value }, { other: value })
+    #   selectable.and({ field: value }, { other: value })
     #
     # @param [ Array<Hash> ] criterion Multiple key/value pair matches that
     #   all must match to return results.
     #
-    # @return [ Selectable ] The cloned queryable.
+    # @return [ Selectable ] The cloned selectable.
     #
     # @since 1.0.0
     def and(*criterion)
@@ -49,14 +50,14 @@ module Origin
     # Add the range selection.
     #
     # @example Match on results within a single range.
-    #   queryable.between(field: 1..2)
+    #   selectable.between(field: 1..2)
     #
     # @example Match on results between multiple ranges.
-    #   queryable.between(field: 1..2, other: 5..7)
+    #   selectable.between(field: 1..2, other: 5..7)
     #
     # @param [ Hash ] criterion Multiple key/range pairs.
     #
-    # @return [ Selectable ] The cloned queryable.
+    # @return [ Selectable ] The cloned selectable.
     #
     # @since 1.0.0
     def between(criterion = nil)
@@ -71,20 +72,20 @@ module Origin
     # Select with an $elemMatch.
     #
     # @example Add criterion for a single match.
-    #   queryable.elem_match(field: { name: "value" })
+    #   selectable.elem_match(field: { name: "value" })
     #
     # @example Add criterion for multiple matches.
-    #   queryable.elem_match(
+    #   selectable.elem_match(
     #     field: { name: "value" },
     #     other: { name: "value"}
     #   )
     #
     # @example Execute an $elemMatch in a where query.
-    #   queryable.where(:field.elem_match => { name: "value" })
+    #   selectable.where(:field.elem_match => { name: "value" })
     #
     # @param [ Hash ] criterion The field/match pairs.
     #
-    # @return [ Selectable ] The cloned queryable.
+    # @return [ Selectable ] The cloned selectable.
     #
     # @since 1.0.0
     def elem_match(criterion = nil)
@@ -95,17 +96,17 @@ module Origin
     # Add the $exists selection.
     #
     # @example Add a single selection.
-    #   queryable.exists(field: true)
+    #   selectable.exists(field: true)
     #
     # @example Add multiple selections.
-    #   queryable.exists(field: true, other: false)
+    #   selectable.exists(field: true, other: false)
     #
     # @example Execute an $exists in a where query.
-    #   queryable.where(:field.exists => true)
+    #   selectable.where(:field.exists => true)
     #
     # @param [ Hash ] criterion The field/boolean existence checks.
     #
-    # @return [ Selectable ] The cloned queryable.
+    # @return [ Selectable ] The cloned selectable.
     #
     # @since 1.0.0
     def exists(criterion = nil)
@@ -120,14 +121,14 @@ module Origin
     # Add the $gt criterion to the selector.
     #
     # @example Add the $gt criterion.
-    #   queryable.gt(age: 60)
+    #   selectable.gt(age: 60)
     #
     # @example Execute an $gt in a where query.
-    #   queryable.where(:field.gt => 10)
+    #   selectable.where(:field.gt => 10)
     #
     # @param [ Hash ] criterion The field/value pairs to check.
     #
-    # @return [ Selectable ] The cloned queryable.
+    # @return [ Selectable ] The cloned selectable.
     #
     # @since 1.0.0
     def gt(criterion = nil)
@@ -138,14 +139,14 @@ module Origin
     # Add the $gte criterion to the selector.
     #
     # @example Add the $gte criterion.
-    #   queryable.gte(age: 60)
+    #   selectable.gte(age: 60)
     #
     # @example Execute an $gte in a where query.
-    #   queryable.where(:field.gte => 10)
+    #   selectable.where(:field.gte => 10)
     #
     # @param [ Hash ] criterion The field/value pairs to check.
     #
-    # @return [ Selectable ] The cloned queryable.
+    # @return [ Selectable ] The cloned selectable.
     #
     # @since 1.0.0
     def gte(criterion = nil)
@@ -153,20 +154,20 @@ module Origin
     end
     key :gte, :override, "$gte"
 
-    # Adds the $in selection to the queryable.
+    # Adds the $in selection to the selectable.
     #
     # @example Add $in selection on an array.
-    #   queryable.in(age: [ 1, 2, 3 ])
+    #   selectable.in(age: [ 1, 2, 3 ])
     #
     # @example Add $in selection on a range.
-    #   queryable.in(age: 18..24)
+    #   selectable.in(age: 18..24)
     #
     # @example Execute an $in in a where query.
-    #   queryable.where(:field.in => [ 1, 2, 3 ])
+    #   selectable.where(:field.in => [ 1, 2, 3 ])
     #
     # @param [ Hash ] criterion The field/value criterion pairs.
     #
-    # @return [ Selectable ] The cloned queryable.
+    # @return [ Selectable ] The cloned selectable.
     #
     # @since 1.0.0
     def in(criterion = nil)
@@ -178,14 +179,14 @@ module Origin
     # Add the $lt criterion to the selector.
     #
     # @example Add the $lt criterion.
-    #   queryable.lt(age: 60)
+    #   selectable.lt(age: 60)
     #
     # @example Execute an $lt in a where query.
-    #   queryable.where(:field.lt => 10)
+    #   selectable.where(:field.lt => 10)
     #
     # @param [ Hash ] criterion The field/value pairs to check.
     #
-    # @return [ Selectable ] The cloned queryable.
+    # @return [ Selectable ] The cloned selectable.
     #
     # @since 1.0.0
     def lt(criterion = nil)
@@ -196,14 +197,14 @@ module Origin
     # Add the $lte criterion to the selector.
     #
     # @example Add the $lte criterion.
-    #   queryable.lte(age: 60)
+    #   selectable.lte(age: 60)
     #
     # @example Execute an $lte in a where query.
-    #   queryable.where(:field.lte => 10)
+    #   selectable.where(:field.lte => 10)
     #
     # @param [ Hash ] criterion The field/value pairs to check.
     #
-    # @return [ Selectable ] The cloned queryable.
+    # @return [ Selectable ] The cloned selectable.
     #
     # @since 1.0.0
     def lte(criterion = nil)
@@ -211,31 +212,31 @@ module Origin
     end
     key :lte, :override, "$lte"
 
-    # Add a $maxDistance selection to the queryable.
+    # Add a $maxDistance selection to the selectable.
     #
     # @example Add the $maxDistance selection.
-    #   queryable.max_distance(location: 10)
+    #   selectable.max_distance(location: 10)
     #
     # @param [ Hash ] criterion The field/distance pairs.
     #
-    # @return [ Selectable ] The cloned queryable.
+    # @return [ Selectable ] The cloned selectable.
     #
     # @since 1.0.0
     def max_distance(criterion = nil)
       __add__(criterion, "$maxDistance")
     end
 
-    # Adds $mod selection to the queryable.
+    # Adds $mod selection to the selectable.
     #
     # @example Add the $mod selection.
-    #   queryable.mod(field: [ 10, 1 ])
+    #   selectable.mod(field: [ 10, 1 ])
     #
     # @example Execute an $mod in a where query.
-    #   queryable.where(:field.mod => [ 10, 1 ])
+    #   selectable.where(:field.mod => [ 10, 1 ])
     #
     # @param [ Hash ] criterion The field/mod selections.
     #
-    # @return [ Selectable ] The cloned queryable.
+    # @return [ Selectable ] The cloned selectable.
     #
     # @since 1.0.0
     def mod(criterion = nil)
@@ -243,17 +244,17 @@ module Origin
     end
     key :mod, :override, "$mod"
 
-    # Adds $ne selection to the queryable.
+    # Adds $ne selection to the selectable.
     #
     # @example Query for a value $ne to something.
-    #   queryable.ne(field: 10)
+    #   selectable.ne(field: 10)
     #
     # @example Execute an $ne in a where query.
-    #   queryable.where(:field.ne => "value")
+    #   selectable.where(:field.ne => "value")
     #
     # @param [ Hash ] criterion The field/ne selections.
     #
-    # @return [ Selectable ] The cloned queryable.
+    # @return [ Selectable ] The cloned selectable.
     #
     # @since 1.0.0
     def ne(criterion = nil)
@@ -265,14 +266,14 @@ module Origin
     # Adds a $near criterion to a geo selection.
     #
     # @example Add the $near selection.
-    #   queryable.near(location: [ 23.1, 12.1 ])
+    #   selectable.near(location: [ 23.1, 12.1 ])
     #
     # @example Execute an $near in a where query.
-    #   queryable.where(:field.near => [ 23.2, 12.1 ])
+    #   selectable.where(:field.near => [ 23.2, 12.1 ])
     #
     # @param [ Hash ] criterion The field/location pair.
     #
-    # @return [ Selectable ] The cloned queryable.
+    # @return [ Selectable ] The cloned selectable.
     #
     # @since 1.0.0
     def near(criterion = nil)
@@ -283,14 +284,14 @@ module Origin
     # Adds a $nearSphere criterion to a geo selection.
     #
     # @example Add the $nearSphere selection.
-    #   queryable.near_sphere(location: [ 23.1, 12.1 ])
+    #   selectable.near_sphere(location: [ 23.1, 12.1 ])
     #
     # @example Execute an $nearSphere in a where query.
-    #   queryable.where(:field.near_sphere => [ 10.11, 3.22 ])
+    #   selectable.where(:field.near_sphere => [ 10.11, 3.22 ])
     #
     # @param [ Hash ] criterion The field/location pair.
     #
-    # @return [ Selectable ] The cloned queryable.
+    # @return [ Selectable ] The cloned selectable.
     #
     # @since 1.0.0
     def near_sphere(criterion = nil)
@@ -298,20 +299,20 @@ module Origin
     end
     key :near_sphere, :override, "$nearSphere"
 
-    # Adds the $nin selection to the queryable.
+    # Adds the $nin selection to the selectable.
     #
     # @example Add $nin selection on an array.
-    #   queryable.nin(age: [ 1, 2, 3 ])
+    #   selectable.nin(age: [ 1, 2, 3 ])
     #
     # @example Add $nin selection on a range.
-    #   queryable.nin(age: 18..24)
+    #   selectable.nin(age: 18..24)
     #
     # @example Execute an $nin in a where query.
-    #   queryable.where(:field.nin => [ 1, 2, 3 ])
+    #   selectable.where(:field.nin => [ 1, 2, 3 ])
     #
     # @param [ Hash ] criterion The field/value criterion pairs.
     #
-    # @return [ Selectable ] The cloned queryable.
+    # @return [ Selectable ] The cloned selectable.
     #
     # @since 1.0.0
     def nin(criterion = nil)
@@ -320,28 +321,52 @@ module Origin
     alias :not_in :nin
     key :nin, :intersect, "$nin"
 
-    # Adds $nor selection to the queryable.
+    # Adds $nor selection to the selectable.
     #
     # @example Add the $nor selection.
-    #   queryable.nor(field: 1, field: 2)
+    #   selectable.nor(field: 1, field: 2)
     #
     # @param [ Array ] criterion An array of hash criterion.
     #
-    # @return [ Selectable ] The cloned queryable.
+    # @return [ Selectable ] The cloned selectable.
     #
     # @since 1.0.0
     def nor(*criterion)
       __multi__(criterion, "$nor")
     end
 
-    # Adds $or selection to the queryable.
+    # Is the current selectable negating the next selection?
+    #
+    # @example Is the selectable negating?
+    #   selectable.negating?
+    #
+    # @return [ true, false ] If the selectable is negating.
+    #
+    # @since 1.0.0
+    def negating?
+      !!negating
+    end
+
+    # Negate the next selection.
+    #
+    # @example Negate the selection.
+    #   selectable.not.in(field: [ 1, 2 ])
+    #
+    # @return [ Selectable ] The negated selectable.
+    #
+    # @since 1.0.0
+    def not
+      tap { |query| query.negating = true }
+    end
+
+    # Adds $or selection to the selectable.
     #
     # @example Add the $or selection.
-    #   queryable.or(field: 1, field: 2)
+    #   selectable.or(field: 1, field: 2)
     #
     # @param [ Array ] criterion An array of hash criterion.
     #
-    # @return [ Selectable ] The cloned queryable.
+    # @return [ Selectable ] The cloned selectable.
     #
     # @since 1.0.0
     def or(*criterion)
@@ -352,17 +377,17 @@ module Origin
     # Add a $size selection for array fields.
     #
     # @example Add the $size selection.
-    #   queryable.with_size(field: 5)
+    #   selectable.with_size(field: 5)
     #
     # @note This method is named #with_size not to conflict with any existing
     #   #size method on enumerables or symbols.
     #
     # @example Execute an $size in a where query.
-    #   queryable.where(:field.with_size => 10)
+    #   selectable.where(:field.with_size => 10)
     #
     # @param [ Hash ] criterion The field/size pairs criterion.
     #
-    # @return [ Selectable ] The cloned queryable.
+    # @return [ Selectable ] The cloned selectable.
     #
     # @since 1.0.0
     def with_size(criterion = nil)
@@ -374,19 +399,19 @@ module Origin
       ::Integer.evolve(value)
     end
 
-    # Adds a $type selection to the queryable.
+    # Adds a $type selection to the selectable.
     #
     # @example Add the $type selection.
-    #   queryable.with_type(field: 15)
+    #   selectable.with_type(field: 15)
     #
     # @example Execute an $type in a where query.
-    #   queryable.where(:field.with_type => 15)
+    #   selectable.where(:field.with_type => 15)
     #
     # @note http://vurl.me/PGOU contains a list of all types.
     #
     # @param [ Hash ] criterion The field/type pairs.
     #
-    # @return [ Selectable ] The cloned queryable.
+    # @return [ Selectable ] The cloned selectable.
     #
     # @since 1.0.0
     def with_type(criterion = nil)
@@ -403,31 +428,31 @@ module Origin
     # the use of hash methods, or a $where selection if a string is provided.
     #
     # @example Add a standard selection.
-    #   queryable.where(name: "syd")
+    #   selectable.where(name: "syd")
     #
     # @example Add a javascript selection.
-    #   queryable.where("this.name == 'syd'")
+    #   selectable.where("this.name == 'syd'")
     #
     # @param [ String, Hash ] criterion The javascript or standard selection.
     #
-    # @return [ Selectable ] The cloned queryable.
+    # @return [ Selectable ] The cloned selectable.
     #
     # @since 1.0.0
     def where(criterion = nil)
       criterion.is_a?(String) ? js_query(criterion) : expr_query(criterion)
     end
 
-    # Adds the $within/$box selection to the queryable.
+    # Adds the $within/$box selection to the selectable.
     #
     # @example Add the selection.
-    #   queryable.within_box(location: [[ 1, 10 ], [ 10, 1 ]])
+    #   selectable.within_box(location: [[ 1, 10 ], [ 10, 1 ]])
     #
     # @example Execute an $within/$box in a where query.
-    #   queryable.where(:field.within_box => [[ 1, 10 ], [ 10, 1 ]])
+    #   selectable.where(:field.within_box => [[ 1, 10 ], [ 10, 1 ]])
     #
     # @param [ Hash ] criterion The field/box corner criterion.
     #
-    # @return [ Selectable ] The cloned queryable.
+    # @return [ Selectable ] The cloned selectable.
     #
     # @since 1.0.0
     def within_box(criterion = nil)
@@ -435,17 +460,17 @@ module Origin
     end
     key :within_box, :expanded, "$within", "$box"
 
-    # Adds the $within/$center selection to the queryable.
+    # Adds the $within/$center selection to the selectable.
     #
     # @example Add the selection.
-    #   queryable.within_circle(location: [[ 1, 10 ], 25 ])
+    #   selectable.within_circle(location: [[ 1, 10 ], 25 ])
     #
     # @example Execute an $within/$center in a where query.
-    #   queryable.where(:field.within_circle => [[ 1, 10 ], 25 ])
+    #   selectable.where(:field.within_circle => [[ 1, 10 ], 25 ])
     #
     # @param [ Hash ] criterion The field/radius criterion.
     #
-    # @return [ Selectable ] The cloned queryable.
+    # @return [ Selectable ] The cloned selectable.
     #
     # @since 1.0.0
     def within_circle(criterion = nil)
@@ -453,21 +478,21 @@ module Origin
     end
     key :within_circle, :expanded, "$within", "$center"
 
-    # Adds the $within/$polygon selection to the queryable.
+    # Adds the $within/$polygon selection to the selectable.
     #
     # @example Add the selection.
-    #   queryable.within_polygon(
+    #   selectable.within_polygon(
     #     location: [[ 10, 20 ], [ 10, 40 ], [ 30, 40 ], [ 30, 20 ]]
     #   )
     #
     # @example Execute an $within/$polygon in a where query.
-    #   queryable.where(
+    #   selectable.where(
     #     :field.within_polygon => [[ 10, 20 ], [ 10, 40 ], [ 30, 40 ], [ 30, 20 ]]
     #   )
     #
     # @param [ Hash ] criterion The field/polygon points criterion.
     #
-    # @return [ Selectable ] The cloned queryable.
+    # @return [ Selectable ] The cloned selectable.
     #
     # @since 1.0.0
     def within_polygon(criterion = nil)
@@ -475,17 +500,17 @@ module Origin
     end
     key :within_polygon, :expanded, "$within", "$polygon"
 
-    # Adds the $within/$centerSphere selection to the queryable.
+    # Adds the $within/$centerSphere selection to the selectable.
     #
     # @example Add the selection.
-    #   queryable.within_spherical_circle(location: [[ 1, 10 ], 25 ])
+    #   selectable.within_spherical_circle(location: [[ 1, 10 ], 25 ])
     #
     # @example Execute an $within/$centerSphere in a where query.
-    #   queryable.where(:field.within_spherical_circle => [[ 1, 10 ], 25 ])
+    #   selectable.where(:field.within_spherical_circle => [[ 1, 10 ], 25 ])
     #
     # @param [ Hash ] criterion The field/distance criterion.
     #
-    # @return [ Selectable ] The cloned queryable.
+    # @return [ Selectable ] The cloned selectable.
     #
     # @since 1.0.0
     def within_spherical_circle(criterion = nil)
@@ -500,16 +525,16 @@ module Origin
     # @api private
     #
     # @example Create the selection.
-    #   queryable.expr_query(age: 50)
+    #   selectable.expr_query(age: 50)
     #
     # @param [ Hash ] criterion The field/value pairs.
     #
-    # @return [ Selectable ] The cloned queryable.
+    # @return [ Selectable ] The cloned selectable.
     #
     # @since 1.0.0
     def expr_query(criterion)
       selection(criterion) do |selector, field, value|
-        selector.merge!(field.specify(value))
+        selector.merge!(field.specify(value, negating?))
       end
     end
 
@@ -518,7 +543,7 @@ module Origin
     # @api private
     #
     # @example Force values to booleans.
-    #   queryable.force_typing(criterion) do |val|
+    #   selectable.force_typing(criterion) do |val|
     #     Boolean.evolve(val)
     #   end
     #
@@ -539,11 +564,11 @@ module Origin
     # @api private
     #
     # @example Create the javascript selection.
-    #   queryable.js_query("this.age == 50")
+    #   selectable.js_query("this.age == 50")
     #
     # @param [ String ] criterion The javascript as a string.
     #
-    # @return [ Selectable ] The cloned queryable
+    # @return [ Selectable ] The cloned selectable
     #
     # @since 1.0.0
     def js_query(criterion)
@@ -562,7 +587,7 @@ module Origin
     #
     # @param [ Hash ] criterion The selection to store.
     #
-    # @return [ Selectable ] The cloned queryable.
+    # @return [ Selectable ] The cloned selectable.
     #
     # @since 1.0.0
     def selection(criterion = nil)
@@ -572,6 +597,7 @@ module Origin
             yield(query.selector, field.is_a?(Key) ? field : field.to_s, value)
           end
         end
+        query.reset_strategies!
       end
     end
 
@@ -581,7 +607,7 @@ module Origin
     # @api private
     #
     # @example Convert all the values to arrays.
-    #   queryable.with_array_values({ key: 1...4 })
+    #   selectable.with_array_values({ key: 1...4 })
     #
     # @param [ Hash ] criterion The criterion.
     #
@@ -606,7 +632,8 @@ module Origin
       #
       # @since 1.0.0
       def forwardables
-        public_instance_methods(false) - [ :selector, :selector= ]
+        public_instance_methods(false) -
+          [ :negating, :negating=, :negating?, :selector, :selector= ]
       end
     end
   end

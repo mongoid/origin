@@ -43,6 +43,18 @@ module Origin
       use(:__union__)
     end
 
+    # Reset the stratgies to nil, used after cloning.
+    #
+    # @example Reset the strategies.
+    #   mergeable.reset_strategies!
+    #
+    # @return [ nil ] nil.
+    #
+    # @since 1.0.0
+    def reset_strategies!
+      self.strategy, self.negating = nil, nil
+    end
+
     private
 
     # Adds the criterion to the existing selection.
@@ -205,7 +217,7 @@ module Origin
     # @api private
     #
     # @example Add criterion with a strategy.
-    #   selectable.with_strategy(:__union__, [ 1, 2, 3 ], "$in")
+    #   mergeable.with_strategy(:__union__, [ 1, 2, 3 ], "$in")
     #
     # @param [ Symbol ] strategy The name of the strategy method.
     # @param [ Object ] criterion The criterion to add.
@@ -218,9 +230,26 @@ module Origin
       selection(criterion) do |selector, field, value|
         selector.store(
           field,
-          selector[field].send(strategy, { operator => prepare(field, operator, value) })
+          selector[field].send(strategy, prepared(field, operator, value))
         )
       end
+    end
+
+    # Get the selection as a prepared selection.
+    #
+    # @example Get the prepared selection.
+    #   mergeable.prepared("name", "$all", [ 1, 2 ])
+    #
+    # @param [ String, Symbol ] field The name of the field.
+    # @param [ String ] operator The operator.
+    # @param [ Object ] value The value.
+    #
+    # @return [ Hash ] The prepared selection.
+    #
+    # @since 1.0.0
+    def prepared(field, operator, value)
+      selection = { operator => prepare(field, operator, value) }
+      negating? ? { "$not" => selection } : selection
     end
   end
 end

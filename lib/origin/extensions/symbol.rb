@@ -11,11 +11,12 @@ module Origin
       #   :field.specify(value)
       #
       # @param [ Object ] value The value of the criteria.
+      # @param [ true, false ] negating If the selection should be negated.
       #
       # @return [ Hash ] The selection.
       #
       # @since 1.0.0
-      def specify(value)
+      def specify(value, negating = false)
         { self => value }
       end
 

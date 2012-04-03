@@ -2388,6 +2388,51 @@ describe Origin::Selectable do
     end
   end
 
+  describe "#not" do
+
+    context "when the following criteria is a query method" do
+
+      let(:selection) do
+        query.not.all(field: [ 1, 2 ])
+      end
+
+      it "negates the all selection" do
+        selection.selector.should eq(
+          { "field" => { "$not" => { "$all" => [ 1, 2 ] }}}
+        )
+      end
+
+      it "returns a cloned query" do
+        selection.should_not equal(query)
+      end
+
+      it "removes the negation on the clone" do
+        selection.should_not be_negating
+      end
+    end
+
+    context "when the following criteria is a where" do
+
+      let(:selection) do
+        query.not.where(field: 1, :other.in => [ 1, 2 ])
+      end
+
+      it "negates the selection with an operator" do
+        selection.selector.should eq(
+          { "field" => 1, "other" => { "$not" => { "$in" => [ 1, 2 ] }}}
+        )
+      end
+
+      it "returns a cloned query" do
+        selection.should_not equal(query)
+      end
+
+      it "removes the negation on the clone" do
+        selection.should_not be_negating
+      end
+    end
+  end
+
   describe "#or" do
 
     context "when provided no criterion" do

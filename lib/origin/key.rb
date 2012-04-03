@@ -49,13 +49,15 @@ module Origin
     #   key.specify(50)
     #
     # @param [ Object ] object The value to be included.
+    # @param [ true, false ] negating If the selection should be negated.
     #
     # @return [ Hash ] The raw MongoDB selector.
     #
     # @since 1.0.0
-    def specify(object)
+    def specify(object, negating = false)
       value = block ? block[object] : object
-      { name.to_s => { operator => expanded ? { expanded => value } : value }}
+      expression = { operator => expanded ? { expanded => value } : value }
+      { name.to_s => negating ? { "$not" => expression } : expression }
     end
 
     # Get the key as raw Mongo sorting options.
