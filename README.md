@@ -179,4 +179,4 @@ If you would like the sorting options to be compatible with the 10gen
 driver, then when instantiating a `Queryable` you'll need to pass `:mongo`
 as the third parameter to the constructor.
 
-        Queryable.new(aliases, serializers, :mongo)
+        Crtieria.new(aliases, serializers, :mongo)
