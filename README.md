@@ -115,8 +115,8 @@ This translates to the following selector.
 See the API documentation for all available methods that the `Queryable`
 provides, in it's internal `Selectable` and `Optional` modules.
 
-[Selectable API](http://rdoc.info/github/mongoid/origin/Origin/Selectable)
-[Optional API](http://rdoc.info/github/mongoid/origin/Origin/Optional)
+- [Selectable API](http://rdoc.info/github/mongoid/origin/Origin/Selectable)
+- [Optional API](http://rdoc.info/github/mongoid/origin/Origin/Optional)
 
 In addition to all the convenience methods for selection, Origin also adds
 various convenience methods to `Symbol` which can be used *only* within
