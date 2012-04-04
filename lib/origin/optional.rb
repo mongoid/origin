@@ -256,9 +256,15 @@ module Origin
     #
     # @since 1.0.0
     def add_sort_option(options, field, direction)
-      sorting = (options[:sort] || {}).dup
-      sorting[field] = direction
-      options.store(:sort, sorting)
+      if driver == :mongo
+        sorting = (options[:sort] || []).dup
+        sorting.push([ field, direction ])
+        options.store(:sort, sorting)
+      else
+        sorting = (options[:sort] || {}).dup
+        sorting[field] = direction
+        options.store(:sort, sorting)
+      end
     end
 
     # Take the provided criterion and store it as an option in the query

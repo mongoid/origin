@@ -23,8 +23,9 @@ module Origin
     include Optional
 
     # @attribute [r] aliases The aliases.
+    # @attribute [r] driver The Mongo driver being used.
     # @attribute [r] serializers The serializers.
-    attr_reader :aliases, :serializers
+    attr_reader :aliases, :driver, :serializers
 
     # Is this queryable equal to another object? Is true if the selector and
     # options are equal.
@@ -48,11 +49,13 @@ module Origin
     # @example Initialize the queryable.
     #   Origin::Queryable.new
     #
+    # @param [ Hash ] aliases The optional field aliases.
     # @param [ Hash ] serializers The optional field serializers.
+    # @param [ Symbol ] driver The driver being used.
     #
     # @since 1.0.0
-    def initialize(aliases = {}, serializers = {})
-      @aliases, @serializers = aliases, serializers
+    def initialize(aliases = {}, serializers = {}, driver = :moped)
+      @aliases, @driver, @serializers = aliases, driver.to_sym, serializers
       @options, @selector =
         Options.new(aliases, serializers), Selector.new(aliases, serializers)
       yield(self) if block_given?
