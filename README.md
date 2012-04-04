@@ -169,12 +169,14 @@ Each time a method on the queryable is called, it clones itself and returns
 a new copy with the next selection added. This is to not modify the previous
 queryable in case it needs reuse later on without the additional selection.
 
-### Notes on sorting options
+### Notes on sorting syntax
 
-Origin's sort options is not compatible with the 10gen Mongo Ruby Driver out
-of the box, but is compatible with Moped. Internally it is stored as a hash
-and to use with the 10gen driver you must convert it to a multi dimensional
-array.
+By default, Origin's sort options are in a format that is compatible with
+Moped, but not the 10gen Ruby driver. (It's a hash vs a multi-dimensional
+array.)
 
-        query = Band.asc(:name) # Options: { sort: { "name" => 1 }}
-        [*query.options[:sort]] # Will work with 10gen driver.
+If you would like the sorting options to be compatible with the 10gen
+driver, then when instantiating a `Queryable` you'll need to pass `:mongo`
+as the third parameter to the constructor.
+
+        Queryable.new(aliases, serializers, :mongo)
