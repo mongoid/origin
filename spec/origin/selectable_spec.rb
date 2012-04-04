@@ -3036,25 +3036,6 @@ describe Origin::Selectable do
             selection.should_not eq(query)
           end
         end
-
-        pending "when chaining on the same field" do
-
-          let(:selection) do
-            query.
-              where(:field.all => [ 1, 2 ]).
-              where(:field.all => [ 2, 3 ])
-          end
-
-          it "unions the $all criterion" do
-            selection.selector.should eq(
-              { "field" => { "$all" => [ 1, 2, 3 ] }}
-            )
-          end
-
-          it "returns a cloned query" do
-            selection.should_not eq(query)
-          end
-        end
       end
 
       context "when performing an $elemMatch" do
