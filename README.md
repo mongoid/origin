@@ -28,9 +28,11 @@ Origin provides a DSL to mix in to any object to give it the ability
 to build MongoDB queries easily. Simply include the module
 `Origin::Queryable` to get started.
 
-        class Criteria
-          include Origin::Queryable
-        end
+``` ruby
+class Criteria
+  include Origin::Queryable
+end
+```
 
 *From here on out when a `Criteria` object is instantiated, assume it
 already includes `Origin::Queryable`.*
@@ -47,22 +49,28 @@ to conserve space. This is not ideal from a business domain standpoint
 so mappers like Mongoid provide alias functionality to keep the
 domain model expressive. An example of this in Mongoid is:
 
-        class Band
-          include Mongoid::Document
-          field :n, as: :name, type: String
-        end
+``` ruby
+class Band
+  include Mongoid::Document
+  field :n, as: :name, type: String
+end
+```
 
 In the above example you can reference the field by `Band#name`, but the
 field in the database is stored as `n`. We want to maintain this
 expressiveness in querying the database as well, so the Queryable needs
 a hash to know how to map the name to the field in the database.
 
-        Criteria.new({ "n" => "name" })
+``` ruby
+Criteria.new({ "n" => "name" })
+```
 
 The aliases hash *must* be string keys and string values. Then you can do
 this and it will get converted to the database field name `n`:
 
-        criteria.where(name: "value")
+``` ruby
+criteria.where(name: "value")
+```
 
 The second optional parameter is a hash of field names with associated
 serializers. This is useful for when MongoDB cannot handle the Ruby
@@ -71,30 +79,34 @@ Serializers are Ruby objects that respond to `#evolve`. A good example
 of this are Date objects in Ruby, which must be converted to UTC
 times for MongoDB.
 
-        class DateSerializer
-          def evolve(date)
-            Time.utc(date.year, date.month, date.day, 0, 0, 0, 0)
-          end
-        end
+``` ruby
+class DateSerializer
+  def evolve(date)
+    Time.utc(date.year, date.month, date.day, 0, 0, 0, 0)
+  end
+end
 
-        criteria = Criteria.new({}, { "dob" => DateSerializer.new })
-        criteria.where(dob: Date.new(1970, 1, 1)) # Converts dob to a time.
+criteria = Criteria.new({}, { "dob" => DateSerializer.new })
+criteria.where(dob: Date.new(1970, 1, 1)) # Converts dob to a time.
+```
 
 If you'd like to have convenience methods added to a model, you can extend
 `Origin::Forwardable` and tell the queryable methods which class method
 to delegate to. This will add all the public queryable methods to that
 class.
 
-        class Band
-          extend Origin::Forwardable
-          select_with :criteria
+``` ruby
+class Band
+  extend Origin::Forwardable
+  select_with :criteria
 
-          def self.criteria
-            Criteria.new(aliases, serializers)
-          end
-        end
+  def self.criteria
+    Criteria.new(aliases, serializers)
+  end
+end
 
-        Band.where(name: "Depeche Mode")
+Band.where(name: "Depeche Mode")
+```
 
 *From here on, assume all references to the `Band` class have extended
 `Origin::Forwardable`.*
@@ -106,11 +118,15 @@ The `Queryable` provides convenience methods for every type of MongoDB
 query operation you can perform. For example, to add $all selection to the
 queryable.
 
-        Band.all(labels: [ "Mute", "Nothing" ])
+``` ruby
+Band.all(labels: [ "Mute", "Nothing" ])
+```
 
 This translates to the following selector.
 
-        { "labels" => { "$all" => [ "Mute", "Nothing" ]}}
+``` ruby
+{ "labels" => { "$all" => [ "Mute", "Nothing" ]}}
+```
 
 See the API documentation for all available methods that the `Queryable`
 provides, in it's internal `Selectable` and `Optional` modules.
@@ -122,11 +138,15 @@ In addition to all the convenience methods for selection, Origin also adds
 various convenience methods to `Symbol` which can be used *only* within
 `#where` selection for syntax suger. For example:
 
-        Band.where(:name.in => [ "Depeche Mode", "New Order" ])
+``` ruby
+Band.where(:name.in => [ "Depeche Mode", "New Order" ])
+```
 
 This translates to the following selector.
 
-        { "name" => { "$in" => [ "Depeche Mode", "New Order" ] }}
+``` ruby
+{ "name" => { "$in" => [ "Depeche Mode", "New Order" ] }}
+```
 
 The API documentation contains all the corresponding symbol methods as well
 in the example annotations for each standard method.
@@ -134,11 +154,15 @@ in the example annotations for each standard method.
 `Queryable#where` is also special in that it can take a Javascript string as
 a parameter, that will create the corresponding $where selection.
 
-        Band.where("this.name == 'Depeche Mode'")
+``` ruby
+Band.where("this.name == 'Depeche Mode'")
+```
 
 Translates to:
 
-        { "$where" => "this.name == 'Depeche Mode'" }
+``` ruby
+{ "$where" => "this.name == 'Depeche Mode'" }
+```
 
 *Note that passing Javascript alone by itself to MongoDB will cause a full
 collection scan.*
@@ -151,11 +175,15 @@ The available strategies are *intersect, override, and union* and are used by
 chaining the name of the strategy before calling any method. For example,
 to override the default *intersection* behaviour of `#in`:
 
-        Band.in(name: [ "Depeche Mode" ]).union.in(name: [ "New Order" ])
+``` ruby
+Band.in(name: [ "Depeche Mode" ]).union.in(name: [ "New Order" ])
+```
 
 This translates to the following selector.
 
-        { "name" => { "$in" => [ "Depeche Mode", "New Order" ] }}
+``` ruby
+{ "name" => { "$in" => [ "Depeche Mode", "New Order" ] }}
+```
 
 The default behaviour for the array methods are:
 
@@ -179,4 +207,6 @@ If you would like the sorting options to be compatible with the 10gen
 driver, then when instantiating a `Queryable` you'll need to pass `:mongo`
 as the third parameter to the constructor.
 
-        Crtieria.new(aliases, serializers, :mongo)
+``` ruby
+Criteria.new(aliases, serializers, :mongo)
+```
