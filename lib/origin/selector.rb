@@ -55,7 +55,7 @@ module Origin
           serializer = serializers[name]
           [ normalized_key(name, serializer), evolve(serializer, _value) ]
         end]
-      end
+      end.uniq
     end
 
     # Evolve a single key selection with various types of values.

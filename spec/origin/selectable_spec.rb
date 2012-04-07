@@ -442,6 +442,25 @@ describe Origin::Selectable do
 
     context "when provided multiple criterion" do
 
+      context "when the criterion is already included" do
+
+        let(:selection) do
+          query.and({ first: [ 1, 2 ] }).and({ first: [ 1, 2 ] })
+        end
+
+        it "does not duplicate the $and selector" do
+          selection.selector.should eq({
+            "$and" => [
+              { "first" => [ 1, 2 ] }
+            ]
+          })
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
+      end
+
       context "when the criterion are for different fields" do
 
         let(:selection) do
