@@ -284,6 +284,19 @@ describe Range do
           )
         end
       end
+
+      context "when the range is characters" do
+
+        let(:range) do
+          "a".."z"
+        end
+
+        it "returns the character range" do
+          described_class.evolve(range).should eq(
+            { "$gte" => "a", "$lte" => "z" }
+          )
+        end
+      end
     end
 
     context "when provided a string" do
