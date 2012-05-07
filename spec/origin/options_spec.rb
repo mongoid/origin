@@ -29,6 +29,106 @@ describe Origin::Options do
     end
   end
 
+  describe "#fields" do
+
+    let(:options) do
+      described_class.new
+    end
+
+    context "when field options exist" do
+
+      before do
+        options[:fields] = { name: 1 }
+      end
+
+      it "returns the field options" do
+        options.fields.should eq({ "name" => 1 })
+      end
+    end
+
+    context "when field options do not exist" do
+
+      it "returns nil" do
+        options.fields.should be_nil
+      end
+    end
+  end
+
+  describe "#limit" do
+
+    let(:options) do
+      described_class.new
+    end
+
+    context "when limit options exist" do
+
+      before do
+        options[:limit] = 20
+      end
+
+      it "returns the limit options" do
+        options.limit.should eq(20)
+      end
+    end
+
+    context "when limit options do not exist" do
+
+      it "returns nil" do
+        options.limit.should be_nil
+      end
+    end
+  end
+
+  describe "#skip" do
+
+    let(:options) do
+      described_class.new
+    end
+
+    context "when skip options exist" do
+
+      before do
+        options[:skip] = 100
+      end
+
+      it "returns the skip options" do
+        options.skip.should eq(100)
+      end
+    end
+
+    context "when skip options do not exist" do
+
+      it "returns nil" do
+        options.skip.should be_nil
+      end
+    end
+  end
+
+  describe "#sort" do
+
+    let(:options) do
+      described_class.new
+    end
+
+    context "when sort options exist" do
+
+      before do
+        options[:sort] = { name: 1 }
+      end
+
+      it "returns the sort options" do
+        options.sort.should eq({ "name" => 1 })
+      end
+    end
+
+    context "when sort options do not exist" do
+
+      it "returns nil" do
+        options.sort.should be_nil
+      end
+    end
+  end
+
   [ :store, :[]= ].each do |method|
 
     describe "##{method}" do

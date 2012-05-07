@@ -5,6 +5,54 @@ module Origin
   # such as skip, limit, and sorting criteria.
   class Options < Smash
 
+    # Convenience method for getting the field options.
+    #
+    # @example Get the fields options.
+    #   options.fields
+    #
+    # @return [ Hash ] The fields options.
+    #
+    # @since 1.0.0
+    def fields
+      self[:fields]
+    end
+
+    # Convenience method for getting the limit option.
+    #
+    # @example Get the limit option.
+    #   options.limit
+    #
+    # @return [ Integer ] The limit option.
+    #
+    # @since 1.0.0
+    def limit
+      self[:limit]
+    end
+
+    # Convenience method for getting the skip option.
+    #
+    # @example Get the skip option.
+    #   options.skip
+    #
+    # @return [ Integer ] The skip option.
+    #
+    # @since 1.0.0
+    def skip
+      self[:skip]
+    end
+
+    # Convenience method for getting the sort options.
+    #
+    # @example Get the sort options.
+    #   options.sort
+    #
+    # @return [ Hash ] The sort options.
+    #
+    # @since 1.0.0
+    def sort
+      self[:sort]
+    end
+
     # Store the value in the options for the provided key. The options will
     # handle all necessary serialization and localization in this step.
     #
