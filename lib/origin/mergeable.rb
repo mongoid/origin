@@ -154,7 +154,13 @@ module Origin
     # @since 1.0.0
     def __override__(criterion, operator)
       selection(criterion) do |selector, field, value|
-        selector.store(field, { operator => prepare(field, operator, value) })
+        existing = selector[field]
+        expression = { operator => prepare(field, operator, value) }
+        if existing.respond_to?(:merge!)
+          selector.store(field, existing.merge!(expression))
+        else
+          selector.store(field, expression)
+        end
       end
     end
 

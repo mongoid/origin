@@ -4189,4 +4189,34 @@ describe Origin::Selectable do
       end
     end
   end
+
+  context "when using multiple strategies on the same field" do
+
+    context "when using the strategies via methods" do
+
+      context "when the values are a hash" do
+
+        let(:selection) do
+          query.gt(field: 5).lt(field: 10).ne(field: 7)
+        end
+
+        it "merges the strategies on the same field" do
+          selection.selector.should eq(
+            { "field" => { "$gt" => 5, "$lt" => 10, "$ne" => 7 }}
+          )
+        end
+      end
+
+      context "when the values are not hashes" do
+
+        let(:selection) do
+          query.where(field: 5).where(field: 10)
+        end
+
+        it "overrides the previous field" do
+          selection.selector.should eq({ "field" => 10 })
+        end
+      end
+    end
+  end
 end
