@@ -109,6 +109,20 @@ module Origin
         { first => last.to_direction }
       end
 
+      # Update all the values in the hash with the provided block.
+      #
+      # @example Update the values in place.
+      #   [ 1, 2, 3 ].update_values(&:to_s)
+      #
+      # @param [ Proc ] block The block to execute on each value.
+      #
+      # @return [ Array ] the array.
+      #
+      # @since 1.0.0
+      def update_values(&block)
+        replace(map(&block))
+      end
+
       private
 
       # Converts the array to a multi-dimensional array.
