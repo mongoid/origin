@@ -1,4 +1,6 @@
 # encoding: utf-8
+require "set"
+
 module Origin
   module Extensions
 
