@@ -4218,5 +4218,21 @@ describe Origin::Selectable do
         end
       end
     end
+
+    context "when using the strategies via #where" do
+
+      context "when the values are a hash" do
+
+        let(:selection) do
+          query.where(:field.gt => 5, :field.lt => 10, :field.ne => 7)
+        end
+
+        it "merges the strategies on the same field" do
+          selection.selector.should eq(
+            { "field" => { "$gt" => 5, "$lt" => 10, "$ne" => 7 }}
+          )
+        end
+      end
+    end
   end
 end
