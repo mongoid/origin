@@ -2,6 +2,62 @@ require "spec_helper"
 
 describe Origin::Selector do
 
+  describe "merge!" do
+
+    let(:selector) do
+      described_class.new
+    end
+
+    before do
+      selector[:field] = selection
+      selector.merge!(other)
+    end
+
+    context "when selector is nested" do
+
+      let(:selection) do
+        { "$lt" => 50 }
+      end
+
+      context "when other contains same key with a hash" do
+
+        let(:other) do
+          { "field" => { "$gt" => 20 } }
+        end
+
+        it "deep merges" do
+          selector['field'].should eq({"$lt"=>50, "$gt" => 20})
+        end
+      end
+
+      context "when other contains same key without hash" do
+
+        let(:other) do
+          { "field" => 10 }
+        end
+
+        it "merges" do
+          selector['field'].should eq(10)
+        end
+      end
+    end
+
+    context "when selector is not nested" do
+
+      let(:selection) do
+        50
+      end
+
+      let(:other) do
+        { "field" => { "$gt" => 20 } }
+      end
+
+      it "merges" do
+        selector['field'].should eq({ "$gt" => 20 })
+      end
+    end
+  end
+
   describe "#__deep_copy__" do
 
     let(:value) do
