@@ -7,6 +7,9 @@ module Origin
 
     def merge!(other)
       other.each_pair do |key, value|
+        if value.is_a?(Hash) && self[key.to_s].is_a?(Hash)
+          value = self[key.to_s].merge(value)
+        end
         store(key, value)
       end
     end
