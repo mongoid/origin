@@ -6,24 +6,50 @@ describe Time do
 
     context "when provided a time" do
 
-      let(:date) do
-        Time.new(2010, 1, 1, 12, 0, 0)
+      context "when the time is not in utc" do
+
+        let(:date) do
+          Time.new(2010, 1, 1, 12, 0, 0)
+        end
+
+        let(:evolved) do
+          described_class.evolve(date)
+        end
+
+        let(:expected) do
+          Time.new(2010, 1, 1, 12, 0, 0).utc
+        end
+
+        it "returns the same time" do
+          evolved.should eq(expected)
+        end
+
+        it "returns the time in utc" do
+          evolved.utc_offset.should eq(0)
+        end
       end
 
-      let(:evolved) do
-        described_class.evolve(date)
-      end
+      context "when the time is already utc" do
 
-      let(:expected) do
-        Time.new(2010, 1, 1, 12, 0, 0).utc
-      end
+        let(:date) do
+          Time.new(2010, 1, 1, 12, 0, 0).utc
+        end
 
-      it "returns the same time" do
-        evolved.should eq(expected)
-      end
+        let(:evolved) do
+          described_class.evolve(date)
+        end
 
-      it "returns the time in utc" do
-        evolved.utc_offset.should eq(0)
+        let(:expected) do
+          Time.new(2010, 1, 1, 12, 0, 0).utc
+        end
+
+        it "returns the same time" do
+          evolved.should eq(expected)
+        end
+
+        it "returns the time in utc" do
+          evolved.utc_offset.should eq(0)
+        end
       end
     end
 

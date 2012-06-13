@@ -4,24 +4,50 @@ describe DateTime do
 
   describe "#__evolve_time" do
 
-    let(:date) do
-      DateTime.new(2010, 1, 1, 12, 0, 0)
+    context "when the date time is not utc" do
+
+      let(:date) do
+        DateTime.new(2010, 1, 1, 12, 0, 0, "+01:00")
+      end
+
+      let(:evolved) do
+        date.__evolve_time__
+      end
+
+      let(:expected) do
+        Time.new(2010, 1, 1, 12, 0, 0).utc
+      end
+
+      it "returns the time" do
+        evolved.should eq(expected)
+      end
+
+      it "returns the time in utc" do
+        evolved.utc_offset.should eq(0)
+      end
     end
 
-    let(:evolved) do
-      date.__evolve_time__
-    end
+    context "when the date time is already in utc" do
 
-    let(:expected) do
-      Time.new(2010, 1, 1, 12, 0, 0).utc
-    end
+      let(:date) do
+        DateTime.new(2010, 1, 1, 12, 0, 0).utc
+      end
 
-    it "returns the time" do
-      evolved.should eq(expected)
-    end
+      let(:evolved) do
+        date.__evolve_time__
+      end
 
-    it "returns the time in utc" do
-      evolved.utc_offset.should eq(0)
+      let(:expected) do
+        Time.utc(2010, 1, 1, 12, 0, 0)
+      end
+
+      it "returns the time" do
+        evolved.should eq(expected)
+      end
+
+      it "returns the time in utc" do
+        evolved.utc_offset.should eq(0)
+      end
     end
   end
 
@@ -30,7 +56,7 @@ describe DateTime do
     context "when provided a date time" do
 
       let(:date) do
-        DateTime.new(2010, 1, 1, 12, 0, 0)
+        DateTime.new(2010, 1, 1, 12, 0, 0, "+01:00")
       end
 
       let(:evolved) do
@@ -55,7 +81,7 @@ describe DateTime do
       context "when the array is composed of date times" do
 
         let(:date) do
-          DateTime.new(2010, 1, 1, 12, 0, 0)
+          DateTime.new(2010, 1, 1, 12, 0, 0, "+01:00")
         end
 
         let(:evolved) do
@@ -146,11 +172,11 @@ describe DateTime do
       context "when the range are dates" do
 
         let(:min) do
-          DateTime.new(2010, 1, 1, 12, 0, 0)
+          DateTime.new(2010, 1, 1, 12, 0, 0, "+01:00")
         end
 
         let(:max) do
-          DateTime.new(2010, 1, 3, 12, 0, 0)
+          DateTime.new(2010, 1, 3, 12, 0, 0, "+01:00")
         end
 
         let(:evolved) do
