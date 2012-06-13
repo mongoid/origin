@@ -6,6 +6,12 @@
 
 ### Resolved Issues
 
-## 1.0.1 (branch: 1.0.0-stable)
+## 1.0.1
 
 ### Resolved Issues
+
+* \#38 Fixed issues around UTC time conversion of dates and date times:
+
+    `DateTimes` already in UTC are not converted to UTC again.
+
+    `Dates` properly convert directly to UTC from numeric values.

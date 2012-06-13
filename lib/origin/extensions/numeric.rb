@@ -15,7 +15,7 @@ module Origin
       #
       # @since 1.0.0
       def __evolve_date__
-        time = ::Time.at(self)
+        time = ::Time.at(self).utc
         ::Time.utc(time.year, time.month, time.day, 0, 0, 0, 0)
       end
 

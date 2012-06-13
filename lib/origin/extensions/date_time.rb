@@ -14,7 +14,11 @@ module Origin
       #
       # @since 1.0.0
       def __evolve_time__
-        ::Time.local(year, month, day, hour, min, sec).utc
+        if utc?
+          ::Time.utc(year, month, day, hour, min, sec)
+        else
+          ::Time.local(year, month, day, hour, min, sec).utc
+        end
       end
 
       module ClassMethods
