@@ -6,11 +6,18 @@
 
 ### Resolved Issues
 
+## 1.0.3
+
+### Resolved Issues
+
+* mongoid/mongoid\#2170 Multi selection ($and/$or) now properly concats
+  when merging two criteria.
+
 ## 1.0.2
 
 ### Resolved Issues
 
-* mongoid/mongoid \#2165 Multi selection ($and/$or) now takes into account
+* mongoid/mongoid\#2165 Multi selection ($and/$or) now takes into account
   field aliases.
 
 ## 1.0.1
