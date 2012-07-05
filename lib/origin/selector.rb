@@ -54,8 +54,7 @@ module Origin
     def evolve_multi(value)
       value.map do |val|
         Hash[val.map do |key, _value|
-          name = key.to_s
-          serializer = serializers[name]
+          name, serializer = storage_pair(key)
           [ normalized_key(name, serializer), evolve(serializer, _value) ]
         end]
       end.uniq

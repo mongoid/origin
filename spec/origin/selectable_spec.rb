@@ -3,7 +3,7 @@ require "spec_helper"
 describe Origin::Selectable do
 
   let(:query) do
-    Origin::Query.new
+    Origin::Query.new("id" => "_id")
   end
 
   describe "#all" do
@@ -2543,6 +2543,23 @@ describe Origin::Selectable do
               { "first" => [ 1, 2 ] },
               { "second" => { "$gt" => 3 }}
             ]
+          })
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
+      end
+
+      context "when the criterion has an aliased field" do
+
+        let(:selection) do
+          query.or({ id: 1 })
+        end
+
+        it "adds the $or selector and aliases the field" do
+          selection.selector.should eq({
+            "$or" => [ { "_id" => 1 } ]
           })
         end
 
