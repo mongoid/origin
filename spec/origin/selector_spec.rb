@@ -8,12 +8,12 @@ describe Origin::Selector do
       described_class.new
     end
 
-    before do
-      selector[:field] = selection
-      selector.merge!(other)
-    end
-
     context "when selector is nested" do
+
+      before do
+        selector[:field] = selection
+        selector.merge!(other)
+      end
 
       let(:selection) do
         { "$lt" => 50 }
@@ -44,6 +44,11 @@ describe Origin::Selector do
 
     context "when selector is not nested" do
 
+      before do
+        selector[:field] = selection
+        selector.merge!(other)
+      end
+
       let(:selection) do
         50
       end
@@ -54,6 +59,62 @@ describe Origin::Selector do
 
       it "merges" do
         selector['field'].should eq({ "$gt" => 20 })
+      end
+    end
+
+    context "when the selector contains an $or" do
+
+      let(:initial) do
+        [{ "value" => 1 }]
+      end
+
+      before do
+        selector["$or"] = initial
+      end
+
+      context "when merging in a new $or" do
+
+        let(:other) do
+          [{ "value" => 2 }]
+        end
+
+        before do
+          selector.merge!({ "$or" => other })
+        end
+
+        it "combines the two $or queries into one" do
+          selector.should eq({
+            "$or" => [{ "value" => 1 }, { "value" => 2 }]
+          })
+        end
+      end
+    end
+
+    context "when the selector contains an $and" do
+
+      let(:initial) do
+        [{ "value" => 1 }]
+      end
+
+      before do
+        selector["$and"] = initial
+      end
+
+      context "when merging in a new $and" do
+
+        let(:other) do
+          [{ "value" => 2 }]
+        end
+
+        before do
+          selector.merge!({ "$and" => other })
+        end
+
+        it "combines the two $and queries into one" do
+          selector.should eq({
+            "$and" => [{ "value" => 1 }, { "value" => 2 }]
+          })
+        end
       end
     end
   end

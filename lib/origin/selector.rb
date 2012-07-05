@@ -5,10 +5,23 @@ module Origin
   # coming into it as well as being alias and locale aware for key names.
   class Selector < Smash
 
+    # Merges another selector into this one.
+    #
+    # @example Merge in another selector.
+    #   selector.merge!(name: "test")
+    #
+    # @param [ Hash, Selector ] other The object to merge in.
+    #
+    # @return [ Selector ] The selector.
+    #
+    # @since 1.0.0
     def merge!(other)
       other.each_pair do |key, value|
         if value.is_a?(Hash) && self[key.to_s].is_a?(Hash)
           value = self[key.to_s].merge(value)
+        end
+        if multi_selection?(key)
+          value = (self[key.to_s] || []).concat(value)
         end
         store(key, value)
       end
