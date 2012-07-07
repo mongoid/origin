@@ -45,11 +45,15 @@ module Origin
     def __forward__(name, receiver)
       if self.class == Module
         module_eval <<-SEL
-          delegate :#{name}, to: :#{receiver}
+          def #{name}(*args, &block)
+            #{receiver}.__send__(:#{name}, *args, &block)
+          end
         SEL
       else
         (class << self; self; end).class_eval <<-SEL
-          delegate :#{name}, to: :#{receiver}
+          def #{name}(*args, &block)
+            #{receiver}.__send__(:#{name}, *args, &block)
+          end
         SEL
       end
     end
