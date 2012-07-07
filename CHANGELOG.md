@@ -6,6 +6,12 @@
 
 ### Resolved Issues
 
+## 1.0.4
+
+### Resolved Issues
+
+* \#39 Fixed errors when using forwarding when active support is not present.
+
 ## 1.0.3
 
 ### Resolved Issues
