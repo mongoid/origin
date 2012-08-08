@@ -196,7 +196,7 @@ module Origin
     # @since 1.0.0
     def prepare(field, operator, value)
       return value if operator =~ /exists|type|size/
-      value = value.__expanded__
+      value = value.__expand_complex__
       serializer = serializers[field]
       serializer ? serializer.evolve(value) : value
     end
