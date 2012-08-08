@@ -129,12 +129,12 @@ module Origin
       # Get the object as expanded.
       #
       # @example Get the object expanded.
-      #   obj.__expanded__
+      #   obj.__expand_complex__
       #
       # @return [ Object ] self.
       #
       # @since 1.0.5
-      def __expanded__
+      def __expand_complex__
         self
       end
 
