@@ -6,6 +6,12 @@
 
 ### Resolved Issues
 
+## 1.0.5
+
+### Resolved Issues
+
+* \#40 Allow $elemMatch queries to be expanded.
+
 ## 1.0.4
 
 ### Resolved Issues

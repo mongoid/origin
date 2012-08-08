@@ -667,18 +667,42 @@ describe Origin::Selectable do
 
     context "when provided a criterion" do
 
-      let(:selection) do
-        query.elem_match(users: { name: "value" })
+      context "when there are no nested complex keys" do
+
+        let(:selection) do
+          query.elem_match(users: { name: "value" })
+        end
+
+        it "adds the $elemMatch expression" do
+          selection.selector.should eq({
+            "users" => { "$elemMatch" => { name: "value" }}
+          })
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
       end
 
-      it "adds the $elemMatch expression" do
-        selection.selector.should eq({
-          "users" => { "$elemMatch" => { name: "value" }}
-        })
-      end
+      context "when there are nested complex keys" do
 
-      it "returns a cloned query" do
-        selection.should_not equal(query)
+        let(:time) do
+          Time.now
+        end
+
+        let(:selection) do
+          query.elem_match(users: { :time.gt => time })
+        end
+
+        it "adds the $elemMatch expression" do
+          selection.selector.should eq({
+            "users" => { "$elemMatch" => { "time" => { "$gt" => time }}}
+          })
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
       end
     end
 
