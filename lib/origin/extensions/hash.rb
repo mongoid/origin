@@ -135,6 +135,22 @@ module Origin
         end
       end
 
+      # Get the object as expanded.
+      #
+      # @example Get the object expanded.
+      #   obj.__expanded__
+      #
+      # @return [ Hash ] The expanded hash.
+      #
+      # @since 1.0.5
+      def __expanded__
+        replacement = {}
+        each_pair do |key, value|
+          replacement.merge!(key.specify(value))
+        end
+        replacement
+      end
+
       # Update all the values in the hash with the provided block.
       #
       # @example Update the values in place.

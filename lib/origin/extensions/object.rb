@@ -126,6 +126,26 @@ module Origin
         [ self ]
       end
 
+      # Get the object as expanded.
+      #
+      # @example Get the object expanded.
+      #   obj.__expanded__
+      #
+      # @return [ Object ] self.
+      #
+      # @since 1.0.5
+      def __expanded__
+        self
+      end
+
+      # Is the object a regex.
+      #
+      # @example Is the object a regex?
+      #   obj.regexp?
+      #
+      # @return [ false ] Always false.
+      #
+      # @since 1.0.4
       def regexp?
         false
       end
