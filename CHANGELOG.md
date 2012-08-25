@@ -6,7 +6,14 @@
 
 ### Resolved Issues
 
-## 1.0.6
+## 1.0.7
+
+### Resolved Issues
+
+* \#40 Allow $elemMatch queries to be expanded in where clauses, not just
+  elem_match method calls.
+
+## 1.0.5
 
 ### Resolved Issues
 
