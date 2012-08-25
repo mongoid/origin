@@ -534,7 +534,7 @@ module Origin
     # @since 1.0.0
     def expr_query(criterion)
       selection(criterion) do |selector, field, value|
-        selector.merge!(field.specify(value, negating?))
+        selector.merge!(field.specify(value.__expand_complex__, negating?))
       end
     end
 

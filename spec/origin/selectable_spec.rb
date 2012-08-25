@@ -3100,18 +3100,38 @@ describe Origin::Selectable do
 
       context "when performing an $elemMatch" do
 
-        let(:selection) do
-          query.where(:field.elem_match => { key: 1 })
+        context "when the value is not complex" do
+
+          let(:selection) do
+            query.where(:field.elem_match => { key: 1 })
+          end
+
+          it "adds the $elemMatch criterion" do
+            selection.selector.should eq(
+              { "field" => { "$elemMatch" => { key: 1 } }}
+            )
+          end
+
+          it "returns a cloned query" do
+            selection.should_not eq(query)
+          end
         end
 
-        it "adds the $elemMatch criterion" do
-          selection.selector.should eq(
-            { "field" => { "$elemMatch" => { key: 1 } }}
-          )
-        end
+        context "when the value is complex" do
 
-        it "returns a cloned query" do
-          selection.should_not eq(query)
+          let(:selection) do
+            query.where(:field.elem_match => { :key.gt => 1 })
+          end
+
+          it "adds the $elemMatch criterion" do
+            selection.selector.should eq(
+              { "field" => { "$elemMatch" => { "key" => { "$gt" => 1 }}}}
+            )
+          end
+
+          it "returns a cloned query" do
+            selection.should_not eq(query)
+          end
         end
       end
 
