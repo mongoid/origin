@@ -67,6 +67,7 @@ module Origin
     def evolve_multi(value)
       value.map do |val|
         Hash[val.map do |key, _value|
+          _value = evolve_multi(_value) if multi_selection?(key)
           name, serializer = storage_pair(key)
           [ normalized_key(name, serializer), evolve(serializer, _value) ]
         end]

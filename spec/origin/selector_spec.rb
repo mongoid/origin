@@ -199,12 +199,14 @@ describe Origin::Selector do
             )
           end
 
-          before do
+          it "stores the serialized field in the selector by database name" do
             selector.send(method, "id", "1")
+            selector["_id"].should eq(1)
           end
 
-          it "stores the serialized field in the selector by database name" do
-            selector["_id"].should eq(1)
+          it "stores the serialized field when selector is deeply nested" do
+            selector.send(method, "$or", [{'$and' => [{'_id' => '5'}]}])
+            selector['$or'][0]['$and'][0]['_id'].should eq(5)
           end
         end
       end
