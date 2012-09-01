@@ -6,6 +6,12 @@
 
 ### Resolved Issues
 
+## 1.0.8
+
+### Resolved Issues
+
+* \#44 Fixed serialization on deeply nested $and and $or queries. (Egor Lynko)
+
 ## 1.0.7
 
 ### Resolved Issues
