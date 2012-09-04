@@ -28,7 +28,7 @@ module Origin
         hash = transform_array(first) || transform_hash(first) || {}
 
         hash.each_pair do |k, v|
-          @hash[k.to_s] = v
+          @hash[k.to_s] = transform_val(v)
         end
       end
 
@@ -48,6 +48,13 @@ module Origin
           return nil unless hash.is_a?(Hash)
 
           hash
+        end
+
+        def transform_val(val)
+          return 1 if val == true || val.nil?
+          return 0 if val == false
+
+          val
         end
     end
   end

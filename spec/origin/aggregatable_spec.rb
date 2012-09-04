@@ -8,13 +8,38 @@ describe Origin::Aggregatable do
 
   describe Origin::Aggregatable::ProjectParams do
     context "#hash" do
-      context "when is an array" do
+      context "when an array is provided" do
         let(:params) { Origin::Aggregatable::ProjectParams.new([:author, :title]).hash }
 
-        it "projects all fields" do
+        it "creates a hash" do
           params.should eq({ "author" => 1, "title" => 1 })
         end
       end
+
+      context "when a hash with number values is provided" do
+        let(:params) { Origin::Aggregatable::ProjectParams.new({author: 1, title: 1}).hash}
+
+        it "creates a hash" do
+          params.should eq({ "author" => 1, "title" => 1})
+        end
+      end
+
+      context "when a hash with boolean values is provided" do
+        let(:params) { Origin::Aggregatable::ProjectParams.new({author: true, title: true}).hash}
+
+        it "creates a hash" do
+          params.should eq({ "author" => 1, "title" => 1})
+        end
+      end
+
+      context "when a hash with string values is provided" do
+        let(:params) { Origin::Aggregatable::ProjectParams.new({page_views: "$pageViews"}).hash}
+
+        it "creates a hash" do
+          params.should eq({ "page_views" => "$pageViews" })
+        end
+      end
+
     end
   end
 
@@ -31,7 +56,7 @@ describe Origin::Aggregatable do
 
     context "when a hash is provided" do
       context "with fields" do
-        let(:aggregation) { query.project author: 1, title: 1 }
+        let(:aggregation) { query.project author: 1, title: true }
 
         it "projects all fields" do
           aggregation.aggregator.should eq({ "$project" => { "author" => 1, "title" => 1 } })
