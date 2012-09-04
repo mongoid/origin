@@ -6,9 +6,30 @@ describe Origin::Aggregatable do
     Origin::Aggregation.new
   end
 
-  describe "project" do
-    context "when a hash is provided" do
+  describe Origin::Aggregatable::ProjectParams do
+    context "#hash" do
+      context "when is an array" do
+        let(:params) { Origin::Aggregatable::ProjectParams.new([:author, :title]).hash }
 
+        it "projects all fields" do
+          params.should eq({ "author" => 1, "title" => 1 })
+        end
+      end
+    end
+  end
+
+  describe "project" do
+    context "when an array is provided" do
+      context "with symbols" do
+        let(:aggregation) { query.project [:author, :title]}
+
+        it "projects all fields" do
+          aggregation.aggregator.should eq({ "$project" => { "author" => 1, "title" => 1 } })
+        end
+      end
+    end
+
+    context "when a hash is provided" do
       context "with fields" do
         let(:aggregation) { query.project author: 1, title: 1 }
 

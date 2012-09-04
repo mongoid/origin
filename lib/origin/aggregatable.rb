@@ -6,13 +6,10 @@ module Origin
     attr_accessor :aggregator
 
     def project(projection)
-      clone.tap do |aggretable|
-        aggregator["$project"] = {} unless aggregator["$project"]
+      params = ProjectParams.new(projection)
 
-        projection.each_pair do |key, val|
-          aggregator["$project"].merge!( { key.to_s => val } )
-        end
-
+      clone.tap do
+        aggregator.project.merge! params.hash
       end
     end
 
@@ -20,5 +17,40 @@ module Origin
       @aggregator = Aggregator.new
     end
 
+
+    class ProjectParams
+      attr_reader :hash
+
+      def initialize(*params)
+        @hash = {}
+
+        first = params.first
+        hash = transform_array(first) || transform_hash(first) || {}
+
+        hash.each_pair do |k, v|
+          @hash[k.to_s] = v
+        end
+      end
+
+      private
+        def transform_array(array)
+          return nil unless array.is_a?(Array)
+
+          hash = {}
+          array.each do |f|
+            hash[f] = 1
+          end
+
+          hash
+        end
+
+        def transform_hash(hash)
+          return nil unless hash.is_a?(Hash)
+
+          hash
+        end
+    end
   end
+
+
 end
