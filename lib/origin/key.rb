@@ -57,7 +57,7 @@ module Origin
     def specify(object, negating = false)
       value = block ? block[object] : object
       expression = { operator => expanded ? { expanded => value } : value }
-      { name.to_s => negating ? { "$not" => expression } : expression }
+      { name.to_s => (negating && operator != "$not") ? { "$not" => expression } : expression }
     end
 
     # Get the key as raw Mongo sorting options.

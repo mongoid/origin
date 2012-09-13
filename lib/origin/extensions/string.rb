@@ -59,7 +59,7 @@ module Origin
       #
       # @since 1.0.0
       def specify(value, negating = false)
-        { self => value }
+        (negating && value.regexp?) ? { self => { "$not" => value } } : { self => value }
       end
 
       # Get the string as a sort direction.
