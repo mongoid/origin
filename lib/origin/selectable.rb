@@ -352,12 +352,21 @@ module Origin
     # @example Negate the selection.
     #   selectable.not.in(field: [ 1, 2 ])
     #
+    # @example Add the $not criterion.
+    #   selectable.not(name: /Bob/)
+    #
+    # @example Execute a $not in a where query.
+    #   selectable.where(:field.not => /Bob/)
+    #
+    # @param [ Hash ] criterion The field/value pairs to negate.
+    #
     # @return [ Selectable ] The negated selectable.
     #
     # @since 1.0.0
-    def not
-      tap { |query| query.negating = true }
+    def not(*criterion)
+      (criterion.size == 0) ? tap { |query| query.negating = true } : __override__(criterion.first, "$not")
     end
+    key :not, :override, "$not"
 
     # Adds $or selection to the selectable.
     #

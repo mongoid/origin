@@ -65,6 +65,44 @@ describe Symbol do
     it "returns the string with the value" do
       specified.should eq({ field: 10 })
     end
+
+    context "with a regexp" do
+
+      let(:specified) do
+        :field.specify(/test/)
+      end
+
+      it "returns the symbol with the value" do
+        specified.should eq({ field: /test/ })
+      end
+
+    end
+
+    context "when negated" do
+      context "with a regexp" do
+
+        let(:specified) do
+          :field.specify(/test/, true)
+        end
+
+        it "returns the symbol with the value negated" do
+          specified.should eq({ field: { "$not" => /test/ } })
+        end
+
+      end
+
+      context "with anything else" do
+
+        let(:specified) do
+          :field.specify('test', true)
+        end
+
+        it "returns the symbol with the value" do
+          specified.should eq({ field: 'test' })
+        end
+
+      end
+    end
   end
 
   describe "#to_direction" do
