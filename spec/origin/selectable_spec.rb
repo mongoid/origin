@@ -2432,46 +2432,198 @@ describe Origin::Selectable do
   end
 
   describe "#not" do
-
-    context "when the following criteria is a query method" do
+    context "when provided no criterion" do
 
       let(:selection) do
-        query.not.all(field: [ 1, 2 ])
+        query.not
       end
 
-      it "negates the all selection" do
-        selection.selector.should eq(
-          { "field" => { "$not" => { "$all" => [ 1, 2 ] }}}
-        )
+      it "does not add any criterion" do
+        selection.selector.should eq({})
       end
 
-      it "returns a cloned query" do
-        selection.should_not equal(query)
+      it "returns the query" do
+        selection.should eq(query)
       end
 
-      it "removes the negation on the clone" do
-        selection.should_not be_negating
+      it "returns a non cloned query" do
+        selection.should equal(query)
+      end
+
+      context "when the following criteria is a query method" do
+
+        let(:selection) do
+          query.not.all(field: [ 1, 2 ])
+        end
+
+        it "negates the all selection" do
+          selection.selector.should eq(
+            { "field" => { "$not" => { "$all" => [ 1, 2 ] }}}
+          )
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
+
+        it "removes the negation on the clone" do
+          selection.should_not be_negating
+        end
+      end
+
+      context "when the following criteria is a where" do
+
+        let(:selection) do
+          query.not.where(field: 1, :other.in => [ 1, 2 ])
+        end
+
+        it "negates the selection with an operator" do
+          selection.selector.should eq(
+            { "field" => 1, "other" => { "$not" => { "$in" => [ 1, 2 ] }}}
+          )
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
+
+        it "removes the negation on the clone" do
+          selection.should_not be_negating
+        end
+      end
+
+      context "when the following criteria is a where with a regexp" do
+
+        let(:selection) do
+          query.not.where(field: 1, other: /test/)
+        end
+
+        it "negates the selection with an operator" do
+          selection.selector.should eq(
+            { "field" => 1, "other" => { "$not" => /test/ } }
+          )
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
+
+        it "removes the negation on the clone" do
+          selection.should_not be_negating
+        end
+
       end
     end
 
-    context "when the following criteria is a where" do
+    context "when provided nil" do
 
       let(:selection) do
-        query.not.where(field: 1, :other.in => [ 1, 2 ])
+        query.not(nil)
       end
 
-      it "negates the selection with an operator" do
-        selection.selector.should eq(
-          { "field" => 1, "other" => { "$not" => { "$in" => [ 1, 2 ] }}}
-        )
+      it "does not add any criterion" do
+        selection.selector.should eq({})
+      end
+
+      it "returns the query" do
+        selection.should eq(query)
       end
 
       it "returns a cloned query" do
         selection.should_not equal(query)
       end
+    end
 
-      it "removes the negation on the clone" do
-        selection.should_not be_negating
+    context "when provided a single criterion" do
+
+      let(:selection) do
+        query.not(field: /test/)
+      end
+
+      it "adds the $not selector" do
+        selection.selector.should eq({
+          "field" => { "$not" => /test/ }
+        })
+      end
+
+      it "returns a cloned query" do
+        selection.should_not equal(query)
+      end
+    end
+
+    context "when provided multiple criterion" do
+
+      context "when the criterion are for different fields" do
+
+        let(:selection) do
+          query.not(first: /1/, second: /2/)
+        end
+
+        it "adds the $not selectors" do
+          selection.selector.should eq({
+            "first" => { "$not" => /1/ },
+            "second" => { "$not" => /2/ }
+          })
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
+      end
+    end
+
+    context "when chaining the criterion" do
+
+      context "when the criterion are for different fields" do
+
+        let(:selection) do
+          query.not(first: /1/).not(second: /2/)
+        end
+
+        it "adds the $not selectors" do
+          selection.selector.should eq({
+            "first" => { "$not" => /1/ },
+            "second" => { "$not" => /2/ }
+          })
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
+      end
+
+      context "when the criterion are on the same field" do
+
+        let(:selection) do
+          query.not(first: /1/).not(first: /2/)
+        end
+
+        it "overwrites the first $not selector" do
+          selection.selector.should eq({
+            "first" =>  { "$not" => /2/ }
+          })
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
+      end
+
+      context "when the criterion are a double negative" do
+
+        let(:selection) do
+          query.not.where(:first.not => /1/)
+        end
+
+        it "does not double the $not selector" do
+          selection.selector.should eq({
+            "first" =>  { "$not" => /1/ }
+          })
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
       end
     end
   end
@@ -3338,6 +3490,21 @@ describe Origin::Selectable do
         end
       end
 
+      context "when performing a $not" do
+
+        let(:selection) do
+          query.where(:field.not => /test/)
+        end
+
+        it "adds the $not criterion" do
+          selection.selector.should eq({ "field" => { "$not" => /test/ }})
+        end
+
+        it "returns a cloned query" do
+          selection.should_not eq(query)
+        end
+      end
+
       context "when performing a $size" do
 
         context "when providing an integer" do
@@ -4118,6 +4285,26 @@ describe Origin::Selectable do
       it "sets the operator as $nin" do
         key.operator.should eq("$nin")
       end
+    end
+
+    describe "#not" do
+
+      let(:key) do
+        :field.not
+      end
+
+      it "returns a selection key" do
+        key.should be_a(Origin::Key)
+      end
+
+      it "sets the name as the key" do
+        key.name.should eq(:field)
+      end
+
+      it "sets the operator as $not" do
+        key.operator.should eq("$not")
+      end
+
     end
 
     describe "#with_size" do
