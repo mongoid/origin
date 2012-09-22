@@ -6,6 +6,12 @@
 
 ### Resolved Issues
 
+## 1.0.9
+
+### Resolved Issues
+
+* \#45 Fixed $not query negation with regular expressions. (Andrew Bennett)
+
 ## 1.0.8
 
 ### Resolved Issues
