@@ -27,6 +27,16 @@ module Origin
       name == other.name && operator == other.operator && expanded == other.expanded
     end
 
+
+    # Calculate the hash code for a key.
+    #
+    # @return [ Fixnum ] The hash code for the key.
+    #
+    # @since 1.1.0
+    def hash
+      [name, operator, expanded].hash
+    end
+
     # Instantiate the new key.
     #
     # @example Instantiate the key.
