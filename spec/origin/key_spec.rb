@@ -35,4 +35,18 @@ describe Origin::Key do
       specified.should eq({ "field" => { "$all" => [ 1, 2 ] }})
     end
   end
+
+  describe '#hash' do
+    let(:key) do
+      described_class.new("field", :__union__, "$all")
+    end
+
+    let(:other) do
+      described_class.new("field", :__union__, "$all")
+    end
+
+    it 'should return the same hash for keys with the same attributes' do
+      key.hash.should eq(other.hash)
+    end
+  end
 end
