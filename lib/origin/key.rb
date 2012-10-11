@@ -16,6 +16,7 @@ module Origin
     #
     # @example Is the key equal to another?
     #   key == other
+    #   key.eql? other
     #
     # @param [ Object ] other The object to compare to.
     #
@@ -26,7 +27,7 @@ module Origin
       return false unless other.is_a?(Key)
       name == other.name && operator == other.operator && expanded == other.expanded
     end
-
+    alias :eql? :==
 
     # Calculate the hash code for a key.
     #
