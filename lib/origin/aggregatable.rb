@@ -11,13 +11,19 @@ module Origin
       params = ProjectParams.new(projection)
 
       clone.tap do
-        aggregator.project.merge! params.hash
+        aggregator.project params.hash
       end
     end
 
     def limit(limit)
       clone.tap do
         aggregator.limit limit
+      end
+    end
+
+    def skip(skip)
+      clone.tap do
+        aggregator.skip skip
       end
     end
 

@@ -11,9 +11,12 @@ describe Origin::Aggregatable do
       let(:aggregation) { query.project nil }
 
       it "is empty" do
-        aggregation.aggregator.should eq({ })
+        aggregation.aggregator.should eq([])
       end
 
+      it "returns a cloned query" do
+        aggregation.should_not equal query
+      end
     end
 
     context "when an array is provided" do
@@ -21,7 +24,11 @@ describe Origin::Aggregatable do
         let(:aggregation) { query.project [:author, :title]}
 
         it "projects all fields" do
-          aggregation.aggregator.should eq({ "$project" => { "author" => 1, "title" => 1 } })
+          aggregation.aggregator.should eq([{ "$project" => { "author" => 1, "title" => 1 } }])
+        end
+
+        it "returns a cloned query" do
+          aggregation.should_not equal query
         end
       end
     end
@@ -31,7 +38,7 @@ describe Origin::Aggregatable do
         let(:aggregation) { query.project _id: false, author: 1, title: true, page_views: "$pageViews",  doctoredPageViews: { "$add" => ["$pageViews", 10] } }
 
         it "projects all fields" do
-          aggregation.aggregator.should eq({ "$project" => { "_id" => 0, "author" => 1, "title" => 1, "page_views" => "$pageViews", "doctoredPageViews" => { "$add" => ["$pageViews", 10] } } })
+          aggregation.aggregator.should eq([{ "$project" => { "_id" => 0, "author" => 1, "title" => 1, "page_views" => "$pageViews", "doctoredPageViews" => { "$add" => ["$pageViews", 10] } } }])
         end
 
         it "returns a cloned query" do
@@ -47,7 +54,19 @@ describe Origin::Aggregatable do
     end
 
     it "limits aggregation" do
-      aggregation.aggregator.should eq({ "$limit" => 10 })
+      aggregation.aggregator.should eq( [ { "$limit" => 10 } ] )
+    end
+
+    it "returns a cloned query" do
+      aggregation.should_not equal(query)
+    end
+  end
+
+  describe "#skip" do
+    let(:aggregation) { query.skip(15) }
+
+    it "add skip to aggregation" do
+      aggregation.aggregator.should eq [ { "$skip" => 15 } ]
     end
 
     it "returns a cloned query" do
