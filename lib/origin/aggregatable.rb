@@ -15,6 +15,12 @@ module Origin
       end
     end
 
+    def limit(limit)
+      clone.tap do
+        aggregator.limit limit
+      end
+    end
+
     def initialize
       @aggregator = Aggregator.new
     end

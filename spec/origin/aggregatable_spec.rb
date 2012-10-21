@@ -41,4 +41,18 @@ describe Origin::Aggregatable do
     end
   end
 
+  describe "#limit" do
+    let :aggregation do
+      query.limit(10)
+    end
+
+    it "limits aggregation" do
+      aggregation.aggregator.should eq({ "$limit" => 10 })
+    end
+
+    it "returns a cloned query" do
+      aggregation.should_not equal(query)
+    end
+  end
+
 end

@@ -8,5 +8,9 @@ module Origin
       self["$project"]
     end
 
+    def limit(limit)
+      self["$limit"] = limit
+    end
+
   end
 end
