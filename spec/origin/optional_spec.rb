@@ -773,20 +773,40 @@ describe Origin::Optional do
       end
     end
 
-    context "when provided arguments" do
+    context "when provided fields" do
 
-      let(:selection) do
-        query.only(:first, :second)
+      context "as several arguments" do
+
+        let(:selection) do
+          query.only(:first, :second)
+        end
+
+        it "adds the field options" do
+          selection.options.should eq(
+            { fields: { "first" => 1, "second" => 1 }}
+          )
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
       end
 
-      it "adds the field options" do
-        selection.options.should eq(
-          { fields: { "first" => 1, "second" => 1 }}
-        )
-      end
+      context "as one argument - array" do
 
-      it "returns a cloned query" do
-        selection.should_not equal(query)
+        let(:selection) do
+          query.only([:first, :second])
+        end
+
+        it "adds the field options" do
+          selection.options.should eq(
+            { fields: { "first" => 1, "second" => 1 }}
+          )
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
       end
     end
   end
@@ -1665,20 +1685,40 @@ describe Origin::Optional do
       end
     end
 
-    context "when provided arguments" do
+    context "when provided fields" do
 
-      let(:selection) do
-        query.without(:first, :second)
+      context "as sevaral arguments" do
+
+        let(:selection) do
+          query.without(:first, :second)
+        end
+
+        it "adds the field options" do
+          selection.options.should eq(
+            { fields: { "first" => 0, "second" => 0 }}
+          )
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
       end
 
-      it "adds the field options" do
-        selection.options.should eq(
-          { fields: { "first" => 0, "second" => 0 }}
-        )
-      end
+      context "as one argument - array" do
 
-      it "returns a cloned query" do
-        selection.should_not equal(query)
+        let(:selection) do
+          query.without([:first, :second])
+        end
+
+        it "adds the field options" do
+          selection.options.should eq(
+            { fields: { "first" => 0, "second" => 0 }}
+          )
+        end
+
+        it "returns a cloned query" do
+          selection.should_not equal(query)
+        end
       end
     end
   end

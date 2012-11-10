@@ -124,6 +124,7 @@ module Origin
     #
     # @since 1.0.0
     def only(*args)
+      args = args.flatten
       option(*args) do |options|
         options.store(
           :fields, args.inject({}){ |sub, field| sub.tap { sub[field] = 1 }}
@@ -232,6 +233,7 @@ module Origin
     #
     # @since 1.0.0
     def without(*args)
+      args = args.flatten
       option(*args) do |options|
         options.store(
           :fields, args.inject({}){ |sub, field| sub.tap { sub[field] = 0 }}
