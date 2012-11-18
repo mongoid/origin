@@ -6,6 +6,14 @@
 
 ### Resolved Issues
 
+## 1.0.10
+
+### Resolved Issues
+
+* \#51 hash equality works corectly with `Origin::Key`s (Gerad Suyderhoud)
+
+      { :foo.all => [1, 2] } == { :foo.all => [1, 2] } #=> true
+
 ## 1.0.9
 
 ### Resolved Issues
