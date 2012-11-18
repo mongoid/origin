@@ -74,4 +74,16 @@ describe Origin::Aggregatable do
     end
   end
 
+  describe "#unwind" do
+    let(:aggregation) { query.unwind :tags }
+
+    it "add unwind to aggregation" do
+      aggregation.aggregator.should eq [ { "$unwind" => "$tags" }  ]
+    end
+
+    it "returns a cloned query" do
+      aggregation.aggregator.should_not equal(query)
+    end
+  end
+
 end

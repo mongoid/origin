@@ -27,6 +27,12 @@ module Origin
       end
     end
 
+    def unwind(unwind)
+      clone.tap do
+        aggregator.unwind unwind
+      end
+    end
+
     def initialize
       @aggregator = Aggregator.new
     end
