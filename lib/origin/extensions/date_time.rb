@@ -14,10 +14,11 @@ module Origin
       #
       # @since 1.0.0
       def __evolve_time__
+        usec = strftime("%6N").to_f
         if utc?
-          ::Time.utc(year, month, day, hour, min, sec)
+          ::Time.utc(year, month, day, hour, min, sec, usec)
         else
-          ::Time.local(year, month, day, hour, min, sec).utc
+          ::Time.local(year, month, day, hour, min, sec, usec).utc
         end
       end
 

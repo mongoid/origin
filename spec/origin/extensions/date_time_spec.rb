@@ -49,6 +49,24 @@ describe DateTime do
         evolved.utc_offset.should eq(0)
       end
     end
+
+    context "when the date time has millisecond precision" do
+      let(:date) do
+        DateTime.parse("2012-10-22T04:05:06.942")
+      end
+
+      let(:evolved) do
+        date.__evolve_time__
+      end
+
+      let(:expected) do
+        Time.utc(2012, 10, 22, 4, 5, 6, 942000)
+      end
+
+      it "returns the time with millisecond precision" do
+        evolved.should eq(expected)
+      end
+    end
   end
 
   describe ".evolve" do
@@ -73,6 +91,24 @@ describe DateTime do
 
       it "returns the time in utc" do
         evolved.utc_offset.should eq(0)
+      end
+    end
+
+    context "when provided a date time with millisecond precision" do
+      let(:date) do
+        DateTime.parse("2012-10-22T04:05:06.942")
+      end
+
+      let(:evolved) do
+        described_class.evolve(date)
+      end
+
+      let(:expected) do
+        Time.utc(2012, 10, 22, 4, 5, 6, 942000)
+      end
+
+      it "returns the time with millisecond precision" do
+        evolved.should eq(expected)
       end
     end
 
