@@ -1,16 +1,21 @@
 module Origin
+
   module Aggregatable
-    class ProjectParams
-      attr_reader :hash
+
+    class Project < Operation
+
+      def name
+        "$project"
+      end
 
       def initialize(*params)
-        @hash = {}
+        @operator = {}
 
         first = params.first
         hash = transform_array(first) || transform_hash(first) || {}
 
         hash.each_pair do |k, v|
-          @hash[k.to_s] = transform_val(v)
+          @operator[k.to_s] = transform_val(v)
         end
       end
 
