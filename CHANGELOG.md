@@ -10,6 +10,8 @@
 
 ### Resolved Issues
 
+* \#58 Retain milliseconds precision when evolving times. (Steve Valaitis)
+
 * \#51 hash equality works corectly with `Origin::Key`s (Gerad Suyderhoud)
 
       { :foo.all => [1, 2] } == { :foo.all => [1, 2] } #=> true
