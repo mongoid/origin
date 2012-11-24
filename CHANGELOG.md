@@ -6,7 +6,7 @@
 
 ### Resolved Issues
 
-## 1.0.10
+## 1.0.11
 
 ### Resolved Issues
 
@@ -15,6 +15,10 @@
 * \#56 Selector values are no longer modified in place.
 
 * \#55 Allow #only and #without to take array arguments. (Egor Lynko)
+
+## 1.0.10
+
+### Resolved Issues
 
 * \#51 hash equality works corectly with `Origin::Key`s (Gerad Suyderhoud)
 
