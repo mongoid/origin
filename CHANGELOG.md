@@ -14,6 +14,8 @@
 
 * \#56 Selector values are no longer modified in place.
 
+* \#55 Allow #only and #without to take array arguments. (Egor Lynko)
+
 * \#51 hash equality works corectly with `Origin::Key`s (Gerad Suyderhoud)
 
       { :foo.all => [1, 2] } == { :foo.all => [1, 2] } #=> true
