@@ -266,10 +266,6 @@ describe Origin::Selector do
           it "serializes each element in the array" do
             selector["key"].should eq([ big_one.to_s, big_two.to_s ])
           end
-
-          it "sets the same array instance" do
-            selector["key"].should equal(array)
-          end
         end
       end
 
