@@ -1296,7 +1296,7 @@ describe Origin::Selectable do
         context "when the stretegy is the default (intersection)" do
 
           let(:selection) do
-            query.in(first: [ 1, 2 ]).in(first: [ 2, 3 ])
+            query.in(first: [ 1, 2 ].freeze).in(first: [ 2, 3 ])
           end
 
           it "intersects the $in selectors" do
