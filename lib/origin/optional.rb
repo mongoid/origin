@@ -127,7 +127,7 @@ module Origin
       args = args.flatten
       option(*args) do |options|
         options.store(
-          :fields, args.inject({}){ |sub, field| sub.tap { sub[field] = 1 }}
+          :fields, args.inject(options[:fields] || {}){ |sub, field| sub.tap { sub[field] = 1 }}
         )
       end
     end
@@ -236,7 +236,7 @@ module Origin
       args = args.flatten
       option(*args) do |options|
         options.store(
-          :fields, args.inject({}){ |sub, field| sub.tap { sub[field] = 0 }}
+          :fields, args.inject(options[:fields] || {}){ |sub, field| sub.tap { sub[field] = 0 }}
         )
       end
     end

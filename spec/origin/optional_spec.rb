@@ -809,6 +809,19 @@ describe Origin::Optional do
         end
       end
     end
+
+    context "when #without was called first" do
+
+      let(:selection) do
+        query.without(:id).only(:first)
+      end
+
+      it "adds both fields to option"  do
+        selection.options.should eq(
+          { fields: { "id" => 0, "first" => 1 } }
+        )
+      end
+    end
   end
 
   describe "#order_by" do
@@ -1719,6 +1732,18 @@ describe Origin::Optional do
         it "returns a cloned query" do
           selection.should_not equal(query)
         end
+      end
+    end
+
+    context "when #only was called before" do
+      let(:selection) do
+        query.only(:first).without(:id)
+      end
+
+      it "adds both fields to options" do
+        selection.options.should eq(
+          { fields: { "first" => 1, "id" => 0 } }
+        )
       end
     end
   end
