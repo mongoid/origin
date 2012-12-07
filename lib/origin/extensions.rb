@@ -4,6 +4,9 @@ unless defined?(Boolean)
 end
 
 if defined?(ActiveSupport)
+  unless defined?(ActiveSupport::TimeWithZone)
+    require "active_support/time_with_zone"
+  end
   require "origin/extensions/time_with_zone"
 end
 
