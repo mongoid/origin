@@ -24,7 +24,7 @@ the Origin section: [mongoid.org](http://mongoid.org/en/origin/)
 License
 -------
 
-Copyright (c) 2011-2012 Durran Jordan
+Copyright (c) 2011-2013 Durran Jordan
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
