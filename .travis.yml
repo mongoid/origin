@@ -3,6 +3,7 @@ bundler_args: --without development
 matrix:
   include:
     - rvm: 1.9.3
+    - rvm: 2.0.0
     - rvm: ruby-head
     - rvm: jruby-19mode
       jdk: oraclejdk7
