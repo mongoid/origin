@@ -154,8 +154,8 @@ module Origin
     # @since 1.0.0
     def __override__(criterion, operator)
       selection(criterion) do |selector, field, value|
+        expression = prepare(field, operator, value)
         existing = selector[field]
-        expression = { operator => prepare(field, operator, value) }
         if existing.respond_to?(:merge!)
           selector.store(field, existing.merge!(expression))
         else
@@ -179,26 +179,6 @@ module Origin
     # @since 1.0.0
     def __union__(criterion, operator)
       with_strategy(:__union__, criterion, operator)
-    end
-
-    # Prepare the value for merging.
-    #
-    # @api private
-    #
-    # @example Prepare the value.
-    #   mergeable.prepare("field", 10)
-    #
-    # @param [ String ] field The name of the field.
-    # @param [ Object ] value The value.
-    #
-    # @return [ Object ] The serialized value.
-    #
-    # @since 1.0.0
-    def prepare(field, operator, value)
-      return value if operator =~ /exists|type|size/
-      value = value.__expand_complex__
-      serializer = serializers[field]
-      serializer ? serializer.evolve(value) : value
     end
 
     # Use the named strategy for the next operation.
@@ -237,25 +217,31 @@ module Origin
       selection(criterion) do |selector, field, value|
         selector.store(
           field,
-          selector[field].send(strategy, prepared(field, operator, value))
+          selector[field].send(strategy, prepare(field, operator, value))
         )
       end
     end
 
-    # Get the selection as a prepared selection.
+    # Prepare the value for merging.
     #
-    # @example Get the prepared selection.
-    #   mergeable.prepared("name", "$all", [ 1, 2 ])
+    # @api private
     #
-    # @param [ String, Symbol ] field The name of the field.
-    # @param [ String ] operator The operator.
+    # @example Prepare the value.
+    #   mergeable.prepare("field", "$gt", 10)
+    #
+    # @param [ String ] field The name of the field.
     # @param [ Object ] value The value.
     #
-    # @return [ Hash ] The prepared selection.
+    # @return [ Object ] The serialized value.
     #
     # @since 1.0.0
-    def prepared(field, operator, value)
-      selection = { operator => prepare(field, operator, value) }
+    def prepare(field, operator, value)
+      unless operator =~ /exists|type|size/
+        value = value.__expand_complex__
+        serializer = serializers[field]
+        value = serializer ? serializer.evolve(value) : value
+      end
+      selection = { operator => value }
       negating? ? { "$not" => selection } : selection
     end
   end
