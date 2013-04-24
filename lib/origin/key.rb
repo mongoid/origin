@@ -83,5 +83,9 @@ module Origin
       { name => operator }
     end
     alias :__sort_pair__ :__sort_option__
+
+    def to_s
+      @name.to_s
+    end
   end
 end
