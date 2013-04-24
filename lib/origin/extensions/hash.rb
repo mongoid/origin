@@ -146,7 +146,7 @@ module Origin
       def __expand_complex__
         replacement = {}
         each_pair do |key, value|
-          replacement.merge!(key.specify(value))
+          replacement.merge!(key.specify(value.__expand_complex__))
         end
         replacement
       end
