@@ -84,6 +84,14 @@ module Origin
     end
     alias :__sort_pair__ :__sort_option__
 
+    # Convert the key to a string.
+    #
+    # @example Convert the key to a string.
+    #   key.to_s
+    #
+    # @return [ String ] The key as a string.
+    #
+    # @since 1.1.0
     def to_s
       @name.to_s
     end

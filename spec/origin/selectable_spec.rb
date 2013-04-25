@@ -448,7 +448,7 @@ describe Origin::Selectable do
 
       it "adds the $and selector" do
         selection.selector.should eq({
-          "$and" => [{ "field" => { "$in" => [ 1, 2 ] }}]
+          "$and" => [{ "test" => { "$elemMatch" => { "field" => { "$in" => [ 1, 2 ] }}}}]
         })
       end
 
