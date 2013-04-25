@@ -440,6 +440,23 @@ describe Origin::Selectable do
       end
     end
 
+    context "when provided a nested criterion" do
+
+      let(:selection) do
+        query.and(:test.elem_match => { :field.in => [ 1, 2 ] })
+      end
+
+      it "adds the $and selector" do
+        selection.selector.should eq({
+          "$and" => [{ "field" => { "$in" => [ 1, 2 ] }}]
+        })
+      end
+
+      it "returns a cloned query" do
+        selection.should_not equal(query)
+      end
+    end
+
     context "when provided multiple criterion" do
 
       context "when the criterion is already included" do
