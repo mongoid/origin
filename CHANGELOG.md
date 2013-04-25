@@ -12,6 +12,9 @@
 * \#76 Hashes with nested values multiple levels are now expanded properly.
   (Timersha Ziganshin)
 
+* \#75 Merging strategies now expand nested criteria properly.
+  (Timersha Ziganshin)
+
 ## 1.0.11
 
 ### Resolved Issues
