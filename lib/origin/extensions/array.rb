@@ -55,6 +55,20 @@ module Origin
         map { |value| value.__evolve_date__ }
       end
 
+      # Get the object as expanded.
+      #
+      # @example Get the object expanded.
+      #   obj.__expand_complex__
+      #
+      # @return [ Array ] The expanded array.
+      #
+      # @since 1.1.0
+      def __expand_complex__
+        map do |value|
+          value.__expand_complex__
+        end
+      end
+
       # Evolve the array to an array of times.
       #
       # @example Evolve the array to times.
@@ -137,18 +151,6 @@ module Origin
       # @since 1.0.0
       def multi
         first.is_a?(::Symbol) || first.is_a?(::String) ? [ self ] : self
-      end
-
-      # Get the object as expanded.
-      #
-      # @example Get the object expanded.
-      #   obj.__expand_complex__
-      #
-      # @return [ Array ] The expanded array.
-      def __expand_complex__
-        map do |value|
-          value.__expand_complex__
-        end
       end
 
       module ClassMethods

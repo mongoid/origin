@@ -6,6 +6,9 @@
 
 ### Resolved Issues
 
+* \#77 Arrays can now be expanded when complex keys are preset.
+  (Timersha Ziganshin)
+
 ## 1.0.11
 
 ### Resolved Issues
