@@ -1,6 +1,6 @@
 # Overview
 
-## 1.1.0 (branch: master)
+## 1.1.0
 
 ### Resolved Issues
 
