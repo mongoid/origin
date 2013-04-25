@@ -98,6 +98,44 @@ describe Hash do
     end
   end
 
+  describe "#__expand_complex" do
+
+    let(:hash) do
+      {
+        :test1.elem_match => {
+          :test2.elem_match => {
+            :test3.in => ["value1"]
+          }
+        }
+      }
+    end
+
+    context "when the hash is nested multiple levels" do
+
+      let(:expanded) do
+        hash.__expand_complex__
+      end
+
+      let(:expected) do
+        {
+          "test1"=> {
+            "$elemMatch"=> {
+              "test2"=> {
+                "$elemMatch"=> {
+                  "test3"=> { "$in"=> ["value1"] }
+                }
+              }
+            }
+          }
+        }
+      end
+
+      it "expands the nested values" do
+        expanded.should eq(expected)
+      end
+    end
+  end
+
   describe "#__intersect__" do
 
     context "when the other object is a hash" do
