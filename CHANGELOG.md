@@ -2,8 +2,6 @@
 
 ## 1.1.0 (branch: master)
 
-### New Features
-
 ### Resolved Issues
 
 * \#77 Arrays can now be expanded when complex keys are preset.
@@ -14,6 +12,9 @@
 
 * \#75 Merging strategies now expand nested criteria properly.
   (Timersha Ziganshin)
+
+* \#73 Negation now properly works for $gt/$lt etc queries.
+  (Arthur Neves)
 
 * \#62 Fixed time with zone require. (Julien Boyer)
 
