@@ -15,6 +15,8 @@
 * \#75 Merging strategies now expand nested criteria properly.
   (Timersha Ziganshin)
 
+* \#62 Fixed time with zone require. (Julien Boyer)
+
 ## 1.0.11
 
 ### Resolved Issues
