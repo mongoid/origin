@@ -9,6 +9,9 @@
 * \#77 Arrays can now be expanded when complex keys are preset.
   (Timersha Ziganshin)
 
+* \#76 Hashes with nested values multiple levels are now expanded properly.
+  (Timersha Ziganshin)
+
 ## 1.0.11
 
 ### Resolved Issues
