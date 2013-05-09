@@ -516,16 +516,16 @@ module Origin
     #
     # @since 1.0.0
     def within_box(criterion = nil)
-      __expanded__(criterion, "$within", "$box")
+      __expanded__(criterion, "$geoWithin", "$box")
     end
-    key :within_box, :expanded, "$within", "$box"
+    key :within_box, :expanded, "$geoWithin", "$box"
 
-    # Adds the $within/$center selection to the selectable.
+    # Adds the $geoWithin/$center selection to the selectable.
     #
     # @example Add the selection.
     #   selectable.within_circle(location: [[ 1, 10 ], 25 ])
     #
-    # @example Execute an $within/$center in a where query.
+    # @example Execute an $geoWithin/$center in a where query.
     #   selectable.where(:field.within_circle => [[ 1, 10 ], 25 ])
     #
     # @param [ Hash ] criterion The field/radius criterion.
@@ -534,18 +534,18 @@ module Origin
     #
     # @since 1.0.0
     def within_circle(criterion = nil)
-      __expanded__(criterion, "$within", "$center")
+      __expanded__(criterion, "$geoWithin", "$center")
     end
-    key :within_circle, :expanded, "$within", "$center"
+    key :within_circle, :expanded, "$geoWithin", "$center"
 
-    # Adds the $within/$polygon selection to the selectable.
+    # Adds the $geoWithin/$polygon selection to the selectable.
     #
     # @example Add the selection.
     #   selectable.within_polygon(
     #     location: [[ 10, 20 ], [ 10, 40 ], [ 30, 40 ], [ 30, 20 ]]
     #   )
     #
-    # @example Execute an $within/$polygon in a where query.
+    # @example Execute an $geoWithin/$polygon in a where query.
     #   selectable.where(
     #     :field.within_polygon => [[ 10, 20 ], [ 10, 40 ], [ 30, 40 ], [ 30, 20 ]]
     #   )
@@ -556,16 +556,16 @@ module Origin
     #
     # @since 1.0.0
     def within_polygon(criterion = nil)
-      __expanded__(criterion, "$within", "$polygon")
+      __expanded__(criterion, "$geoWithin", "$polygon")
     end
-    key :within_polygon, :expanded, "$within", "$polygon"
+    key :within_polygon, :expanded, "$geoWithin", "$polygon"
 
-    # Adds the $within/$centerSphere selection to the selectable.
+    # Adds the $geoWithin/$centerSphere selection to the selectable.
     #
     # @example Add the selection.
     #   selectable.within_spherical_circle(location: [[ 1, 10 ], 25 ])
     #
-    # @example Execute an $within/$centerSphere in a where query.
+    # @example Execute an $geoWithin/$centerSphere in a where query.
     #   selectable.where(:field.within_spherical_circle => [[ 1, 10 ], 25 ])
     #
     # @param [ Hash ] criterion The field/distance criterion.
@@ -574,9 +574,9 @@ module Origin
     #
     # @since 1.0.0
     def within_spherical_circle(criterion = nil)
-      __expanded__(criterion, "$within", "$centerSphere")
+      __expanded__(criterion, "$geoWithin", "$centerSphere")
     end
-    key :within_spherical_circle, :expanded, "$within", "$centerSphere"
+    key :within_spherical_circle, :expanded, "$geoWithin", "$centerSphere"
 
     private
 
