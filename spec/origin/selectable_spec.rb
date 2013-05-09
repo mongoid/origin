@@ -3605,9 +3605,9 @@ describe Origin::Selectable do
             query.where(:field.within_circle => [[ 1, 1 ], 10 ])
           end
 
-          it "adds the $within and $center criterion" do
+          it "adds the $geoWithin and $center criterion" do
             selection.selector.should eq(
-              { "field" => { "$within" => { "$center" => [[ 1, 1 ], 10 ]}}}
+              { "field" => { "$geoWithin" => { "$center" => [[ 1, 1 ], 10 ]}}}
             )
           end
 
@@ -3622,9 +3622,9 @@ describe Origin::Selectable do
             query.where(:field.within_box => [[ 1, 1 ], [ 1, 1 ]])
           end
 
-          it "adds the $within and $box criterion" do
+          it "adds the $geoWithin and $box criterion" do
             selection.selector.should eq(
-              { "field" => { "$within" => { "$box" => [[ 1, 1 ], [ 1, 1 ]]}}}
+              { "field" => { "$geoWithin" => { "$box" => [[ 1, 1 ], [ 1, 1 ]]}}}
             )
           end
 
@@ -3682,9 +3682,9 @@ describe Origin::Selectable do
         query.within_box(location: [[ 1, 10 ], [ 10, 1 ]])
       end
 
-      it "adds the $within expression" do
+      it "adds the $geoWithin expression" do
         selection.selector.should eq({
-          "location" => { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }}
+          "location" => { "$geoWithin" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }}
         })
       end
 
@@ -3704,10 +3704,10 @@ describe Origin::Selectable do
           )
         end
 
-        it "adds the $within expression" do
+        it "adds the $geoWithin expression" do
           selection.selector.should eq({
-            "location" => { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }},
-            "comments" => { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }}
+            "location" => { "$geoWithin" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }},
+            "comments" => { "$geoWithin" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }}
           })
         end
 
@@ -3727,10 +3727,10 @@ describe Origin::Selectable do
             within_box(comments: [[ 1, 10 ], [ 10, 1 ]])
         end
 
-        it "adds the $within expression" do
+        it "adds the $geoWithin expression" do
           selection.selector.should eq({
-            "location" => { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }},
-            "comments" => { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }}
+            "location" => { "$geoWithin" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }},
+            "comments" => { "$geoWithin" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }}
           })
         end
 
@@ -3787,9 +3787,9 @@ describe Origin::Selectable do
         query.within_circle(location: [[ 1, 10 ], 25 ])
       end
 
-      it "adds the $within expression" do
+      it "adds the $geoWithin expression" do
         selection.selector.should eq({
-          "location" => { "$within" => { "$center" => [[ 1, 10 ], 25 ] }}
+          "location" => { "$geoWithin" => { "$center" => [[ 1, 10 ], 25 ] }}
         })
       end
 
@@ -3809,10 +3809,10 @@ describe Origin::Selectable do
           )
         end
 
-        it "adds the $within expression" do
+        it "adds the $geoWithin expression" do
           selection.selector.should eq({
-            "location" => { "$within" => { "$center" => [[ 1, 10 ], 25 ] }},
-            "comments" => { "$within" => { "$center" => [[ 1, 10 ], 25 ] }}
+            "location" => { "$geoWithin" => { "$center" => [[ 1, 10 ], 25 ] }},
+            "comments" => { "$geoWithin" => { "$center" => [[ 1, 10 ], 25 ] }}
           })
         end
 
@@ -3832,10 +3832,10 @@ describe Origin::Selectable do
             within_circle(comments: [[ 1, 10 ], 25 ])
         end
 
-        it "adds the $within expression" do
+        it "adds the $geoWithin expression" do
           selection.selector.should eq({
-            "location" => { "$within" => { "$center" => [[ 1, 10 ], 25 ] }},
-            "comments" => { "$within" => { "$center" => [[ 1, 10 ], 25 ] }}
+            "location" => { "$geoWithin" => { "$center" => [[ 1, 10 ], 25 ] }},
+            "comments" => { "$geoWithin" => { "$center" => [[ 1, 10 ], 25 ] }}
           })
         end
 
@@ -3896,9 +3896,9 @@ describe Origin::Selectable do
         query.within_polygon(location: polygon)
       end
 
-      it "adds the $within expression" do
+      it "adds the $geoWithin expression" do
         selection.selector.should eq({
-          "location" => { "$within" => { "$polygon" => polygon }}
+          "location" => { "$geoWithin" => { "$polygon" => polygon }}
         })
       end
 
@@ -3926,10 +3926,10 @@ describe Origin::Selectable do
           )
         end
 
-        it "adds the $within expression" do
+        it "adds the $geoWithin expression" do
           selection.selector.should eq({
-            "location" => { "$within" => { "$polygon" => polygon_one }},
-            "comments" => { "$within" => { "$polygon" => polygon_two }}
+            "location" => { "$geoWithin" => { "$polygon" => polygon_one }},
+            "comments" => { "$geoWithin" => { "$polygon" => polygon_two }}
           })
         end
 
@@ -3957,10 +3957,10 @@ describe Origin::Selectable do
             within_polygon(comments: polygon_two)
         end
 
-        it "adds the $within expression" do
+        it "adds the $geoWithin expression" do
           selection.selector.should eq({
-            "location" => { "$within" => { "$polygon" => polygon_one }},
-            "comments" => { "$within" => { "$polygon" => polygon_two }}
+            "location" => { "$geoWithin" => { "$polygon" => polygon_one }},
+            "comments" => { "$geoWithin" => { "$polygon" => polygon_two }}
           })
         end
 
@@ -4017,9 +4017,9 @@ describe Origin::Selectable do
         query.within_spherical_circle(location: [[ 1, 10 ], 25 ])
       end
 
-      it "adds the $within expression" do
+      it "adds the $geoWithin expression" do
         selection.selector.should eq({
-          "location" => { "$within" => { "$centerSphere" => [[ 1, 10 ], 25 ] }}
+          "location" => { "$geoWithin" => { "$centerSphere" => [[ 1, 10 ], 25 ] }}
         })
       end
 
@@ -4039,10 +4039,10 @@ describe Origin::Selectable do
           )
         end
 
-        it "adds the $within expression" do
+        it "adds the $geoWithin expression" do
           selection.selector.should eq({
-            "location" => { "$within" => { "$centerSphere" => [[ 1, 10 ], 25 ] }},
-            "comments" => { "$within" => { "$centerSphere" => [[ 1, 10 ], 25 ] }}
+            "location" => { "$geoWithin" => { "$centerSphere" => [[ 1, 10 ], 25 ] }},
+            "comments" => { "$geoWithin" => { "$centerSphere" => [[ 1, 10 ], 25 ] }}
           })
         end
 
@@ -4062,10 +4062,10 @@ describe Origin::Selectable do
             within_spherical_circle(comments: [[ 1, 10 ], 25 ])
         end
 
-        it "adds the $within expression" do
+        it "adds the $geoWithin expression" do
           selection.selector.should eq({
-            "location" => { "$within" => { "$centerSphere" => [[ 1, 10 ], 25 ] }},
-            "comments" => { "$within" => { "$centerSphere" => [[ 1, 10 ], 25 ] }}
+            "location" => { "$geoWithin" => { "$centerSphere" => [[ 1, 10 ], 25 ] }},
+            "comments" => { "$geoWithin" => { "$centerSphere" => [[ 1, 10 ], 25 ] }}
           })
         end
 
@@ -4397,8 +4397,8 @@ describe Origin::Selectable do
         key.name.should eq(:field)
       end
 
-      it "sets the operator as $within" do
-        key.operator.should eq("$within")
+      it "sets the operator as $geoWithin" do
+        key.operator.should eq("$geoWithin")
       end
 
       it "sets the expanded operator as $box" do
@@ -4420,8 +4420,8 @@ describe Origin::Selectable do
         key.name.should eq(:field)
       end
 
-      it "sets the operator as $within" do
-        key.operator.should eq("$within")
+      it "sets the operator as $geoWithin" do
+        key.operator.should eq("$geoWithin")
       end
 
       it "sets the expanded operator as $center" do
@@ -4443,8 +4443,8 @@ describe Origin::Selectable do
         key.name.should eq(:field)
       end
 
-      it "sets the operator as $within" do
-        key.operator.should eq("$within")
+      it "sets the operator as $geoWithin" do
+        key.operator.should eq("$geoWithin")
       end
 
       it "sets the expanded operator as $polygon" do
@@ -4466,8 +4466,8 @@ describe Origin::Selectable do
         key.name.should eq(:field)
       end
 
-      it "sets the operator as $within" do
-        key.operator.should eq("$within")
+      it "sets the operator as $geoWithin" do
+        key.operator.should eq("$geoWithin")
       end
 
       it "sets the expanded operator as $centerSphere" do

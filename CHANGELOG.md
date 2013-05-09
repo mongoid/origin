@@ -2,6 +2,9 @@
 
 ## 2.0.0 (branch: master)
 
+* Adding support for $geoWithin which is new on Mongodb 2.4. (Arthur Neves)
+
+
 ## 1.1.0
 
 ### Resolved Issues
