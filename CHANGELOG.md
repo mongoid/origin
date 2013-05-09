@@ -23,6 +23,8 @@
 
 * \#82 Added support for $geoIntersects queries.
 
+* Adding support for $geoWithin which is new on Mongodb 2.4. (Arthur Neves)
+
 ### Resolved Issues
 
 * \#83 Internal smart hashes (Smashes) now can get directly by key or alias.
