@@ -2,3 +2,4 @@
 require "origin/forwardable"
 require "origin/queryable"
 require "origin/version"
+require "origin/aggregatable"

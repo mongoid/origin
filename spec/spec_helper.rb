@@ -9,3 +9,7 @@ require "rspec"
 class Origin::Query
   include Origin::Queryable
 end
+
+class Origin::Aggregation
+  include Origin::Aggregatable
+end
