@@ -6,18 +6,18 @@ describe Origin::Aggregable do
     Origin::Query.new("id" => "_id", "alias" => "a")
   end
 
-  describe "#project" do
+  shared_examples_for "an aggregable object" do
 
-    shared_examples_for "an aggregable object" do
-
-      it "clones the queryable" do
-        expect(aggregation).to_not equal(query)
-      end
-
-      it "sets the aggrating flag" do
-        expect(aggregation).to be_aggregating
-      end
+    it "clones the queryable" do
+      expect(aggregation).to_not equal(query)
     end
+
+    it "sets the aggrating flag" do
+      expect(aggregation).to be_aggregating
+    end
+  end
+
+  describe "#project" do
 
     context "when no selection or options exist" do
 
@@ -167,7 +167,7 @@ describe Origin::Aggregable do
     context "when another pipeline operation exists" do
 
       let(:aggregation) do
-        query.project(name: 1).unwind(:$author)
+        query.project(name: 1).unwind(:author)
       end
 
       let!(:pipeline) do
@@ -180,6 +180,8 @@ describe Origin::Aggregable do
           { "$unwind" => "$author" }
         ])
       end
+
+      it_behaves_like "an aggregable object"
     end
 
     context "when provided a symbol" do
@@ -197,6 +199,8 @@ describe Origin::Aggregable do
         it "converts the symbol to a string" do
           expect(pipeline).to eq([{ "$unwind" => "$author" }])
         end
+
+        it_behaves_like "an aggregable object"
       end
 
       context "when the symbol does not begin with $" do
@@ -212,6 +216,8 @@ describe Origin::Aggregable do
         it "converts the symbol to a string and prepends $" do
           expect(pipeline).to eq([{ "$unwind" => "$author" }])
         end
+
+        it_behaves_like "an aggregable object"
       end
     end
 
@@ -230,6 +236,8 @@ describe Origin::Aggregable do
         it "sets the string" do
           expect(pipeline).to eq([{ "$unwind" => "$author" }])
         end
+
+        it_behaves_like "an aggregable object"
       end
 
       context "when the string does not begin with $" do
@@ -245,6 +253,8 @@ describe Origin::Aggregable do
         it "prepends $ to the string" do
           expect(pipeline).to eq([{ "$unwind" => "$author" }])
         end
+
+        it_behaves_like "an aggregable object"
       end
     end
 
@@ -263,6 +273,8 @@ describe Origin::Aggregable do
         it "prepends $ to the string" do
           expect(pipeline).to eq([{ "$unwind" => "$a" }])
         end
+
+        it_behaves_like "an aggregable object"
       end
     end
   end
