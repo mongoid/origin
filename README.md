@@ -1,4 +1,4 @@
-Origin [![Build Status](https://secure.travis-ci.org/mongoid/origin.png?branch=master&.png)](http://travis-ci.org/mongoid/origin)
+Origin [![Build Status](https://secure.travis-ci.org/mongoid/origin.png?branch=master&.png)](http://travis-ci.org/mongoid/origin) [![Code Climate](https://codeclimate.com/github/mongoid/origin.png)](https://codeclimate.com/github/mongoid/origin)
 ========
 
 Origin is a DSL for building MongoDB queries.
