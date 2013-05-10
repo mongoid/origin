@@ -8,7 +8,6 @@ Project Tracking
 
 * [Mongoid Google Group](http://groups.google.com/group/mongoid)
 * [Origin Website and Documentation](http://mongoid.org/en/origin/)
-* [Origin Code Climate](https://codeclimate.com/github/mongoid/origin)
 
 Compatibility
 -------------
