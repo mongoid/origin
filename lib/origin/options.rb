@@ -70,6 +70,22 @@ module Origin
     end
     alias :[]= :store
 
+    # Convert the options to aggregation pipeline friendly options.
+    #
+    # @example Convert the options to a pipeline.
+    #   options.to_pipeline
+    #
+    # @return [ Array<Hash> ] The options in pipeline form.
+    #
+    # @since 2.0.0
+    def to_pipeline
+      pipeline = []
+      pipeline.push({ "$skip" => skip }) if skip
+      pipeline.push({ "$limit" => limit }) if limit
+      pipeline.push({ "$sort" => sort }) if sort
+      pipeline
+    end
+
     private
 
     # Evolve a single key selection with various types of values.
