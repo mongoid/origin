@@ -17,8 +17,18 @@ module Origin
       end
     end
 
+    # Add a group operation to the aggregation pipeline.
+    #
+    # @example Add a group operation.
+    #   pipeline.group(:count.sum => 1, :max.max => "likes")
+    #
+    # @param [ Hash ] entry The group entry.
+    #
+    # @return [ Pipeline ] The pipeline.
+    #
+    # @since 2.0.0
     def group(entry)
-      push("$group" => evolve(entry))
+      push("$group" => evolve(entry.__expand_complex__))
     end
 
     # Initialize the new pipeline.

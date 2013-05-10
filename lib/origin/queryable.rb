@@ -21,6 +21,7 @@ module Origin
   #     include Origin::Queryable
   #   end
   module Queryable
+    include Mergeable
     include Aggregable
     include Selectable
     include Optional

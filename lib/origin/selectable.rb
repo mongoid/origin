@@ -5,7 +5,6 @@ module Origin
   # document from the database. The selectable module brings all functionality
   # to the selectable that has to do with building MongoDB selectors.
   module Selectable
-    include Mergeable
     extend Macroable
 
     # @attribute [rw] negating If the next spression is negated.

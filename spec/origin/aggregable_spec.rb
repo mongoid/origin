@@ -281,5 +281,86 @@ describe Origin::Aggregable do
 
   describe "#group" do
 
+    context "when the expression fields are not aliased" do
+
+      context "when using full notation" do
+
+        let(:aggregation) do
+          query.group(count: { "$sum" => 1 }, max: { "$max" => "likes" })
+        end
+
+        let!(:pipeline) do
+          aggregation.pipeline
+        end
+
+        it "adds the group operation to the pipeline" do
+          expect(pipeline).to eq([
+            { "$group" => { "count" => { "$sum" => 1 }, "max" => { "$max" => "likes" }}}
+          ])
+        end
+
+        it_behaves_like "an aggregable object"
+      end
+
+      context "when using symbol shortcuts" do
+
+        let(:aggregation) do
+          query.group(:count.sum => 1, :max.max => "likes")
+        end
+
+        let!(:pipeline) do
+          aggregation.pipeline
+        end
+
+        it "adds the group operation to the pipeline" do
+          expect(pipeline).to eq([
+            { "$group" => { "count" => { "$sum" => 1 }, "max" => { "$max" => "likes" }}}
+          ])
+        end
+
+        it_behaves_like "an aggregable object"
+      end
+    end
+
+    pending "when the expression fields are aliased" do
+
+      context "when using full notation" do
+
+        let(:aggregation) do
+          query.group(count: { "$sum" => 1 }, max: { "$max" => "alias" })
+        end
+
+        let!(:pipeline) do
+          aggregation.pipeline
+        end
+
+        it "adds the group operation to the pipeline" do
+          expect(pipeline).to eq([
+            { "$group" => { "count" => { "$sum" => 1 }, "max" => { "$max" => "a" }}}
+          ])
+        end
+
+        it_behaves_like "an aggregable object"
+      end
+
+      context "when using symbol shortcuts" do
+
+        let(:aggregation) do
+          query.group(:count.sum => 1, :max.max => "alias")
+        end
+
+        let!(:pipeline) do
+          aggregation.pipeline
+        end
+
+        it "adds the group operation to the pipeline" do
+          expect(pipeline).to eq([
+            { "$group" => { "count" => { "$sum" => 1 }, "max" => { "$max" => "a" }}}
+          ])
+        end
+
+        it_behaves_like "an aggregable object"
+      end
+    end
   end
 end

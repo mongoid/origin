@@ -5,6 +5,7 @@ module Origin
   #
   # @since 2.0.0
   module Aggregable
+    extend Macroable
 
     # @attribute [r] pipeline The aggregation pipeline.
     attr_reader :pipeline
@@ -25,11 +26,32 @@ module Origin
       !!@aggregating
     end
 
+    # Add a group ($group) operation to the aggregation pipeline.
+    #
+    # @example Add a group operation being verbose.
+    #   aggregable.group(count: { "$sum" => 1 }, max: { "$max" => "likes" })
+    #
+    # @example Add a group operation using symbol shortcuts.
+    #   aggregable.group(:count.sum => 1, :max.max => "likes")
+    #
+    # @param [ Hash ] operation The group operation.
+    #
+    # @return [ Aggregable ] The aggregable.
+    #
+    # @since 2.0.0
     def group(operation)
       aggregation(operation) do |pipeline|
         pipeline.group(operation)
       end
     end
+    key :avg, :override, "$avg"
+    key :max, :override, "$max"
+    key :min, :override, "$min"
+    key :sum, :override, "$sum"
+    key :last, :override, "$last"
+    key :push, :override, "$push"
+    key :first, :override, "$first"
+    key :add_to_set, :override, "$addToSet"
 
     # Add a projection ($project) to the aggregation pipeline.
     #
