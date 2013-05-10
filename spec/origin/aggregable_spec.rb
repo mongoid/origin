@@ -3,7 +3,7 @@ require "spec_helper"
 describe Origin::Aggregable do
 
   let(:query) do
-    Origin::Query.new("id" => "_id")
+    Origin::Query.new("id" => "_id", "alias" => "a")
   end
 
   describe "#project" do
@@ -41,7 +41,7 @@ describe Origin::Aggregable do
     context "when the field is aliased" do
 
       let(:aggregation) do
-        query.project(id: 1, title: 0)
+        query.project(id: 1, title: "$docTitle")
       end
 
       let!(:pipeline) do
@@ -50,7 +50,7 @@ describe Origin::Aggregable do
 
       it "sets the aliased projection" do
         expect(pipeline).to eq([
-          { "$project" => { "_id" => 1, "title" => 0 }}
+          { "$project" => { "_id" => 1, "title" => "$docTitle" }}
         ])
       end
 
@@ -164,6 +164,89 @@ describe Origin::Aggregable do
 
   describe "#unwind" do
 
+    context "when provided a symbol" do
+
+      context "when the symbol begins with $" do
+
+        let(:aggregation) do
+          query.unwind(:$author)
+        end
+
+        let!(:pipeline) do
+          aggregation.pipeline
+        end
+
+        it "converts the symbol to a string" do
+          expect(pipeline).to eq([{ "$unwind" => "$author" }])
+        end
+      end
+
+      context "when the symbol does not begin with $" do
+
+        let(:aggregation) do
+          query.unwind(:author)
+        end
+
+        let!(:pipeline) do
+          aggregation.pipeline
+        end
+
+        it "converts the symbol to a string and prepends $" do
+          expect(pipeline).to eq([{ "$unwind" => "$author" }])
+        end
+      end
+    end
+
+    context "when provided a string" do
+
+      context "when the string begins with $" do
+
+        let(:aggregation) do
+          query.unwind("$author")
+        end
+
+        let!(:pipeline) do
+          aggregation.pipeline
+        end
+
+        it "sets the string" do
+          expect(pipeline).to eq([{ "$unwind" => "$author" }])
+        end
+      end
+
+      context "when the string does not begin with $" do
+
+        let(:aggregation) do
+          query.unwind(:author)
+        end
+
+        let!(:pipeline) do
+          aggregation.pipeline
+        end
+
+        it "prepends $ to the string" do
+          expect(pipeline).to eq([{ "$unwind" => "$author" }])
+        end
+      end
+    end
+
+    context "when provided a string alias" do
+
+      context "when the string does not begin with $" do
+
+        let(:aggregation) do
+          query.unwind(:alias)
+        end
+
+        let!(:pipeline) do
+          aggregation.pipeline
+        end
+
+        it "prepends $ to the string" do
+          expect(pipeline).to eq([{ "$unwind" => "$a" }])
+        end
+      end
+    end
   end
 
   describe "#group" do

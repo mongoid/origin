@@ -5,6 +5,7 @@ require "origin/macroable"
 require "origin/mergeable"
 require "origin/smash"
 require "origin/aggregable"
+require "origin/pipeline"
 require "origin/optional"
 require "origin/options"
 require "origin/selectable"
@@ -60,7 +61,7 @@ module Origin
       @aliases, @driver, @serializers = aliases, driver.to_sym, serializers
       @options = Options.new(aliases, serializers)
       @selector = Selector.new(aliases, serializers)
-      @pipeline = []
+      @pipeline = Pipeline.new(aliases)
       yield(self) if block_given?
     end
 

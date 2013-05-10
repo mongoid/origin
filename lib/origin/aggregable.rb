@@ -25,13 +25,13 @@ module Origin
       !!@aggregating
     end
 
-    def group(criterion)
-      aggregation(criterion) do |pipeline, operation|
-        pipeline.push("$group" => operation)
+    def group(operation)
+      aggregation(operation) do |pipeline|
+        pipeline.group(operation)
       end
     end
 
-    # Add a projection to the aggregation pipeline.
+    # Add a projection ($project) to the aggregation pipeline.
     #
     # @example Add a projection to the pipeline.
     #   aggregable.project(author: 1, name: 0)
@@ -41,15 +41,25 @@ module Origin
     # @return [ Aggregable ] The aggregable.
     #
     # @since 2.0.0
-    def project(criterion)
-      aggregation(criterion) do |pipeline, operation|
-        pipeline.push("$project" => operation)
+    def project(operation = nil)
+      aggregation(operation) do |pipeline|
+        pipeline.project(operation)
       end
     end
 
-    def unwind(criterion)
-      aggregation(criterion) do |pipeline, operation|
-        pipeline.push("$unwind" => operation)
+    # Add an unwind ($unwind) to the aggregation pipeline.
+    #
+    # @example Add an unwind to the pipeline.
+    #   aggregable.unwind(:field)
+    #
+    # @param [ String, Symbol ] field The name of the field to unwind.
+    #
+    # @return [ Aggregable ] The aggregable.
+    #
+    # @since 2.0.0
+    def unwind(field)
+      aggregation(field) do |pipeline|
+        pipeline.unwind(field)
       end
     end
 
@@ -60,45 +70,25 @@ module Origin
     # @api private
     #
     # @example Aggregate on the operation.
-    #   aggregation(name: 1) do |pipeline, operation|
+    #   aggregation(operation) do |pipeline|
     #     pipeline.push("$project" => operation)
     #   end
     #
-    # @param [ Hash ] criterion The criterion for the pipeline.
+    # @param [ Hash ] operation The operation for the pipeline.
     #
     # @return [ Aggregable ] The cloned aggregable.
     #
     # @since 2.0.0
-    def aggregation(criterion)
+    def aggregation(operation)
+      return self unless operation
       clone.tap do |query|
         unless aggregating?
           query.pipeline.concat(query.selector.to_pipeline)
           query.pipeline.concat(query.options.to_pipeline)
           query.aggregating = true
         end
-        yield(query.pipeline, evolve_aggregation(criterion))
+        yield(query.pipeline)
       end
-    end
-
-    # Evolve the aggregation, so that we can handle aliased fields, and
-    # serialization.
-    #
-    # @api private
-    #
-    # @example Evolve the aggregation.
-    #   qggregable.evolve_aggregation(name: 1)
-    #
-    # @param [ Hash ] criterion The operation to evolve.
-    #
-    # @return [ Hash ] The evolved aggregation.
-    #
-    # @since 2.0.0
-    def evolve_aggregation(criterion)
-      aggregate = Selector.new(aliases)
-      criterion.each_pair do |field, value|
-        aggregate.merge!(field.to_s => value)
-      end
-      aggregate
     end
   end
 end

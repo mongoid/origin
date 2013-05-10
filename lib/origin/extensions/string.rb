@@ -30,6 +30,18 @@ module Origin
         ::Time.parse(self).utc
       end
 
+      # Get the string as a mongo expression, adding $ to the front.
+      #
+      # @example Get the string as an expression.
+      #   "test".__mongo_expression__
+      #
+      # @return [ String ] The string with $ at the front.
+      #
+      # @since 2.0.0
+      def __mongo_expression__
+        start_with?("$") ? self : "$#{self}"
+      end
+
       # Get the string as a sort option.
       #
       # @example Get the string as a sort option.
