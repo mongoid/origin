@@ -685,4 +685,37 @@ describe Origin::Selector do
       end
     end
   end
+
+  describe "#to_pipeline" do
+
+    let(:selector) do
+      described_class.new
+    end
+
+    context "when the selector is empty" do
+
+      let(:pipeline) do
+        selector.to_pipeline
+      end
+
+      it "returns an empty array" do
+        expect(pipeline).to be_empty
+      end
+    end
+
+    context "when the selector is not empty" do
+
+      before do
+        selector["name"] = "test"
+      end
+
+      let(:pipeline) do
+        selector.to_pipeline
+      end
+
+      it "returns the selector in a $match entry" do
+        expect(pipeline).to eq([{ "$match" => { "name" => "test" }}])
+      end
+    end
+  end
 end

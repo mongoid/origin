@@ -49,6 +49,20 @@ module Origin
     end
     alias :[]= :store
 
+    # Convert the selector to an aggregation pipeline entry.
+    #
+    # @example Convert the selector to a pipeline.
+    #   selector.to_pipeline
+    #
+    # @return [ Array<Hash> ] The pipeline entry for the selector.
+    #
+    # @since 2.0.0
+    def to_pipeline
+      pipeline = []
+      pipeline.push({ "$match" => self }) unless empty?
+      pipeline
+    end
+
     private
 
     # Evolves a multi-list selection, like an $and or $or criterion, and
