@@ -4,6 +4,7 @@ require "origin/key"
 require "origin/macroable"
 require "origin/mergeable"
 require "origin/smash"
+require "origin/aggregable"
 require "origin/optional"
 require "origin/options"
 require "origin/selectable"
@@ -19,6 +20,7 @@ module Origin
   #     include Origin::Queryable
   #   end
   module Queryable
+    include Aggregable
     include Selectable
     include Optional
 
@@ -56,8 +58,9 @@ module Origin
     # @since 1.0.0
     def initialize(aliases = {}, serializers = {}, driver = :moped)
       @aliases, @driver, @serializers = aliases, driver.to_sym, serializers
-      @options, @selector =
-        Options.new(aliases, serializers), Selector.new(aliases, serializers)
+      @options = Options.new(aliases, serializers)
+      @selector = Selector.new(aliases, serializers)
+      @pipeline = []
       yield(self) if block_given?
     end
 
@@ -72,6 +75,7 @@ module Origin
     def initialize_copy(other)
       @options = other.options.__deep_copy__
       @selector = other.selector.__deep_copy__
+      @pipeline = other.pipeline.__deep_copy__
     end
   end
 end
