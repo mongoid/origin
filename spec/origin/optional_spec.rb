@@ -19,13 +19,13 @@ describe Origin::Optional do
           end
 
           it "adds the sorting criteria" do
-            selection.options.should eq(
+            expect(selection.options).to eq(
               { sort: { "field_one" => 1, "field_two" => 1 }}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -36,13 +36,13 @@ describe Origin::Optional do
           end
 
           it "adds the sorting criteria" do
-            selection.options.should eq(
+            expect(selection.options).to eq(
               { sort: { "field_one" => 1, "field_two" => 1 }}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -53,13 +53,13 @@ describe Origin::Optional do
           end
 
           it "adds the sorting criteria" do
-            selection.options.should eq(
+            expect(selection.options).to eq(
               { sort: { "field_one" => 1, "field_two" => 1 }}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -70,13 +70,13 @@ describe Origin::Optional do
           end
 
           it "adds the sorting criteria" do
-            selection.options.should eq(
+            expect(selection.options).to eq(
               { sort: { "field_one" => 1, "field_two" => 1 }}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -87,15 +87,15 @@ describe Origin::Optional do
           end
 
           it "does not add any sorting criteria" do
-            selection.options.should be_empty
+            expect(selection.options).to be_empty
           end
 
           it "returns the query" do
-            selection.should eq(query)
+            expect(selection).to eq(query)
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -106,15 +106,15 @@ describe Origin::Optional do
           end
 
           it "does not add any sorting criteria" do
-            selection.options.should be_empty
+            expect(selection.options).to be_empty
           end
 
           it "returns the query" do
-            selection.should eq(query)
+            expect(selection).to eq(query)
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
       end
@@ -132,13 +132,13 @@ describe Origin::Optional do
           end
 
           it "adds the sorting criteria" do
-            selection.options.should eq(
+            expect(selection.options).to eq(
               { sort: [[ :field_one, 1 ], [ :field_two, 1 ]]}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -149,13 +149,13 @@ describe Origin::Optional do
           end
 
           it "adds the sorting criteria" do
-            selection.options.should eq(
+            expect(selection.options).to eq(
               { sort: [[ :field_one, 1 ], [ :field_two, 1 ]]}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -166,13 +166,13 @@ describe Origin::Optional do
           end
 
           it "adds the sorting criteria" do
-            selection.options.should eq(
+            expect(selection.options).to eq(
               { sort: [[ "field_one", 1 ], [ "field_two", 1 ]]}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -183,13 +183,13 @@ describe Origin::Optional do
           end
 
           it "adds the sorting criteria" do
-            selection.options.should eq(
+            expect(selection.options).to eq(
               { sort: [[ "field_one", 1 ], [ "field_two", 1 ]]}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -200,15 +200,15 @@ describe Origin::Optional do
           end
 
           it "does not add any sorting criteria" do
-            selection.options.should be_empty
+            expect(selection.options).to be_empty
           end
 
           it "returns the query" do
-            selection.should eq(query)
+            expect(selection).to eq(query)
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -219,15 +219,15 @@ describe Origin::Optional do
           end
 
           it "does not add any sorting criteria" do
-            selection.options.should be_empty
+            expect(selection.options).to be_empty
           end
 
           it "returns the query" do
-            selection.should eq(query)
+            expect(selection).to eq(query)
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
       end
@@ -243,15 +243,15 @@ describe Origin::Optional do
       end
 
       it "does not add any options" do
-        selection.options.should eq({})
+        expect(selection.options).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -262,15 +262,15 @@ describe Origin::Optional do
       end
 
       it "does not add any options" do
-        selection.options.should eq({})
+        expect(selection.options).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -281,11 +281,11 @@ describe Origin::Optional do
       end
 
       it "adds the field options" do
-        selection.options.should eq({ batch_size: 500 })
+        expect(selection.options).to eq({ batch_size: 500 })
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
   end
@@ -303,13 +303,13 @@ describe Origin::Optional do
           end
 
           it "adds the sorting criteria" do
-            selection.options.should eq(
+            expect(selection.options).to eq(
               { sort: { "field_one" => -1, "field_two" => -1 }}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -320,13 +320,13 @@ describe Origin::Optional do
           end
 
           it "adds the sorting criteria" do
-            selection.options.should eq(
+            expect(selection.options).to eq(
               { sort: { "field_one" => -1, "field_two" => -1 }}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -337,13 +337,13 @@ describe Origin::Optional do
           end
 
           it "adds the sorting criteria" do
-            selection.options.should eq(
+            expect(selection.options).to eq(
               { sort: { "field_one" => -1, "field_two" => -1 }}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -354,13 +354,13 @@ describe Origin::Optional do
           end
 
           it "adds the sorting criteria" do
-            selection.options.should eq(
+            expect(selection.options).to eq(
               { sort: { "field_one" => -1, "field_two" => -1 }}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -371,15 +371,15 @@ describe Origin::Optional do
           end
 
           it "does not add any sorting criteria" do
-            selection.options.should be_empty
+            expect(selection.options).to be_empty
           end
 
           it "returns the query" do
-            selection.should eq(query)
+            expect(selection).to eq(query)
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -390,15 +390,15 @@ describe Origin::Optional do
           end
 
           it "does not add any sorting criteria" do
-            selection.options.should be_empty
+            expect(selection.options).to be_empty
           end
 
           it "returns the query" do
-            selection.should eq(query)
+            expect(selection).to eq(query)
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
       end
@@ -416,13 +416,13 @@ describe Origin::Optional do
           end
 
           it "adds the sorting criteria" do
-            selection.options.should eq(
+            expect(selection.options).to eq(
               { sort: [[ :field_one, -1 ], [ :field_two, -1 ]]}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -433,13 +433,13 @@ describe Origin::Optional do
           end
 
           it "adds the sorting criteria" do
-            selection.options.should eq(
+            expect(selection.options).to eq(
               { sort: [[ :field_one, -1 ], [ :field_two, -1 ]]}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -450,13 +450,13 @@ describe Origin::Optional do
           end
 
           it "adds the sorting criteria" do
-            selection.options.should eq(
+            expect(selection.options).to eq(
               { sort: [[ "field_one", -1 ], [ "field_two", -1 ]]}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -467,13 +467,13 @@ describe Origin::Optional do
           end
 
           it "adds the sorting criteria" do
-            selection.options.should eq(
+            expect(selection.options).to eq(
               { sort: [[ "field_one", -1 ], [ "field_two", -1 ]]}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -484,15 +484,15 @@ describe Origin::Optional do
           end
 
           it "does not add any sorting criteria" do
-            selection.options.should be_empty
+            expect(selection.options).to be_empty
           end
 
           it "returns the query" do
-            selection.should eq(query)
+            expect(selection).to eq(query)
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -503,15 +503,15 @@ describe Origin::Optional do
           end
 
           it "does not add any sorting criteria" do
-            selection.options.should be_empty
+            expect(selection.options).to be_empty
           end
 
           it "returns the query" do
-            selection.should eq(query)
+            expect(selection).to eq(query)
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
       end
@@ -527,15 +527,15 @@ describe Origin::Optional do
       end
 
       it "does not add any options" do
-        selection.options.should eq({})
+        expect(selection.options).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -546,15 +546,15 @@ describe Origin::Optional do
       end
 
       it "does not add any options" do
-        selection.options.should eq({})
+        expect(selection.options).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -567,11 +567,11 @@ describe Origin::Optional do
         end
 
         it "adds the field options" do
-          selection.options.should eq({ hint: { "$natural" => 1 }})
+          expect(selection.options).to eq({ hint: { "$natural" => 1 }})
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -586,15 +586,15 @@ describe Origin::Optional do
       end
 
       it "does not add any options" do
-        selection.options.should eq({})
+        expect(selection.options).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -605,15 +605,15 @@ describe Origin::Optional do
       end
 
       it "does not add any options" do
-        selection.options.should eq({})
+        expect(selection.options).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -626,11 +626,11 @@ describe Origin::Optional do
         end
 
         it "adds the field options" do
-          selection.options.should eq({ limit: 10 })
+          expect(selection.options).to eq({ limit: 10 })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -641,11 +641,11 @@ describe Origin::Optional do
         end
 
         it "adds the field options as an integer" do
-          selection.options.should eq({ limit: 10 })
+          expect(selection.options).to eq({ limit: 10 })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -656,11 +656,11 @@ describe Origin::Optional do
         end
 
         it "adds the field options as an integer" do
-          selection.options.should eq({ limit: 10 })
+          expect(selection.options).to eq({ limit: 10 })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -675,15 +675,15 @@ describe Origin::Optional do
       end
 
       it "does not add any options" do
-        selection.options.should eq({})
+        expect(selection.options).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -694,15 +694,15 @@ describe Origin::Optional do
       end
 
       it "does not add any options" do
-        selection.options.should eq({})
+        expect(selection.options).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -713,11 +713,11 @@ describe Origin::Optional do
       end
 
       it "adds the field options" do
-        selection.options.should eq({ max_scan: 500 })
+        expect(selection.options).to eq({ max_scan: 500 })
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
   end
@@ -729,7 +729,7 @@ describe Origin::Optional do
     end
 
     it "adds the timeout option" do
-      selection.options.should eq({ timeout: false })
+      expect(selection.options).to eq({ timeout: false })
     end
   end
 
@@ -742,15 +742,15 @@ describe Origin::Optional do
       end
 
       it "does not add any options" do
-        selection.options.should eq({})
+        expect(selection.options).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -761,15 +761,15 @@ describe Origin::Optional do
       end
 
       it "does not add any options" do
-        selection.options.should eq({})
+        expect(selection.options).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -782,13 +782,13 @@ describe Origin::Optional do
         end
 
         it "adds the field options" do
-          selection.options.should eq(
+          expect(selection.options).to eq(
             { fields: { "first" => 1, "second" => 1 }}
           )
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -799,13 +799,13 @@ describe Origin::Optional do
         end
 
         it "adds the field options" do
-          selection.options.should eq(
+          expect(selection.options).to eq(
             { fields: { "first" => 1, "second" => 1 }}
           )
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -824,13 +824,13 @@ describe Origin::Optional do
           end
 
           it "adds the sorting criteria" do
-            selection.options.should eq(
+            expect(selection.options).to eq(
               { sort: { "field_one" => 1, "field_two" => -1 }}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -841,13 +841,13 @@ describe Origin::Optional do
           end
 
           it "adds the sorting criteria" do
-            selection.options.should eq(
+            expect(selection.options).to eq(
               { sort: { "field_one" => 1, "field_two" => -1 }}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -858,13 +858,13 @@ describe Origin::Optional do
           end
 
           it "adds the sorting criteria" do
-            selection.options.should eq(
+            expect(selection.options).to eq(
               { sort: { "field_one" => 1, "field_two" => -1 }}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
       end
@@ -880,13 +880,13 @@ describe Origin::Optional do
             end
 
             it "adds the sorting criteria" do
-              selection.options.should eq(
+              expect(selection.options).to eq(
                 { sort: { "field_one" => 1, "field_two" => -1 }}
               )
             end
 
             it "returns a cloned query" do
-              selection.should_not equal(query)
+              expect(selection).to_not equal(query)
             end
           end
 
@@ -897,13 +897,13 @@ describe Origin::Optional do
             end
 
             it "adds the sorting criteria" do
-              selection.options.should eq(
+              expect(selection.options).to eq(
                 { sort: { "field_one" => 1, "field_two" => -1 }}
               )
             end
 
             it "returns a cloned query" do
-              selection.should_not equal(query)
+              expect(selection).to_not equal(query)
             end
           end
 
@@ -914,13 +914,13 @@ describe Origin::Optional do
             end
 
             it "adds the sorting criteria" do
-              selection.options.should eq(
+              expect(selection.options).to eq(
                 { sort: { "field_one" => 1, "field_two" => -1 }}
               )
             end
 
             it "returns a cloned query" do
-              selection.should_not equal(query)
+              expect(selection).to_not equal(query)
             end
           end
         end
@@ -932,13 +932,13 @@ describe Origin::Optional do
           end
 
           it "adds the sorting criteria" do
-            selection.options.should eq(
+            expect(selection.options).to eq(
               { sort: { "field_one" => 1, "field_two" => -1 }}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
       end
@@ -954,13 +954,13 @@ describe Origin::Optional do
             end
 
             it "adds the sorting criteria" do
-              selection.options.should eq(
+              expect(selection.options).to eq(
                 { sort: { "field_one" => 1, "field_two" => -1 }}
               )
             end
 
             it "returns a cloned query" do
-              selection.should_not equal(query)
+              expect(selection).to_not equal(query)
             end
           end
 
@@ -971,13 +971,13 @@ describe Origin::Optional do
             end
 
             it "adds the sorting criteria" do
-              selection.options.should eq(
+              expect(selection.options).to eq(
                 { sort: { "field_one" => 1, "field_two" => -1 }}
               )
             end
 
             it "returns a cloned query" do
-              selection.should_not equal(query)
+              expect(selection).to_not equal(query)
             end
           end
 
@@ -988,13 +988,13 @@ describe Origin::Optional do
             end
 
             it "adds the sorting criteria" do
-              selection.options.should eq(
+              expect(selection.options).to eq(
                 { sort: { "field_one" => 1, "field_two" => -1 }}
               )
             end
 
             it "returns a cloned query" do
-              selection.should_not equal(query)
+              expect(selection).to_not equal(query)
             end
           end
         end
@@ -1006,13 +1006,13 @@ describe Origin::Optional do
           end
 
           it "adds the sorting criteria" do
-            selection.options.should eq(
+            expect(selection.options).to eq(
               { sort: { "field_one" => 1, "field_two" => -1 }}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
       end
@@ -1028,13 +1028,13 @@ describe Origin::Optional do
             end
 
             it "adds the sorting criteria" do
-              selection.options.should eq(
+              expect(selection.options).to eq(
                 { sort: { "field_one" => 1, "field_two" => -1 }}
               )
             end
 
             it "returns a cloned query" do
-              selection.should_not equal(query)
+              expect(selection).to_not equal(query)
             end
           end
 
@@ -1045,13 +1045,13 @@ describe Origin::Optional do
             end
 
             it "adds the sorting criteria" do
-              selection.options.should eq(
+              expect(selection.options).to eq(
                 { sort: { "field_one" => 1, "field_two" => -1 }}
               )
             end
 
             it "returns a cloned query" do
-              selection.should_not equal(query)
+              expect(selection).to_not equal(query)
             end
           end
         end
@@ -1065,13 +1065,13 @@ describe Origin::Optional do
             end
 
             it "adds the sorting criteria" do
-              selection.options.should eq(
+              expect(selection.options).to eq(
                 { sort: { "field_one" => 1, "field_two" => -1 }}
               )
             end
 
             it "returns a cloned query" do
-              selection.should_not equal(query)
+              expect(selection).to_not equal(query)
             end
           end
 
@@ -1082,13 +1082,13 @@ describe Origin::Optional do
             end
 
             it "adds the sorting criteria" do
-              selection.options.should eq(
+              expect(selection.options).to eq(
                 { sort: { "field_one" => 1, "field_two" => -1 }}
               )
             end
 
             it "returns a cloned query" do
-              selection.should_not equal(query)
+              expect(selection).to_not equal(query)
             end
           end
         end
@@ -1101,11 +1101,11 @@ describe Origin::Optional do
         end
 
         it "returns the query" do
-          selection.should eq(query)
+          expect(selection).to eq(query)
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -1116,11 +1116,11 @@ describe Origin::Optional do
         end
 
         it "returns the query" do
-          selection.should eq(query)
+          expect(selection).to eq(query)
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -1140,13 +1140,13 @@ describe Origin::Optional do
           end
 
           it "adds the sorting criteria" do
-            selection.options.should eq(
+            expect(selection.options).to eq(
               { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -1157,13 +1157,13 @@ describe Origin::Optional do
           end
 
           it "adds the sorting criteria" do
-            selection.options.should eq(
+            expect(selection.options).to eq(
               { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -1174,13 +1174,13 @@ describe Origin::Optional do
           end
 
           it "adds the sorting criteria" do
-            selection.options.should eq(
+            expect(selection.options).to eq(
               { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
       end
@@ -1196,13 +1196,13 @@ describe Origin::Optional do
             end
 
             it "adds the sorting criteria" do
-              selection.options.should eq(
+              expect(selection.options).to eq(
                 { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
               )
             end
 
             it "returns a cloned query" do
-              selection.should_not equal(query)
+              expect(selection).to_not equal(query)
             end
           end
 
@@ -1213,13 +1213,13 @@ describe Origin::Optional do
             end
 
             it "adds the sorting criteria" do
-              selection.options.should eq(
+              expect(selection.options).to eq(
                 { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
               )
             end
 
             it "returns a cloned query" do
-              selection.should_not equal(query)
+              expect(selection).to_not equal(query)
             end
           end
 
@@ -1230,13 +1230,13 @@ describe Origin::Optional do
             end
 
             it "adds the sorting criteria" do
-              selection.options.should eq(
+              expect(selection.options).to eq(
                 { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
               )
             end
 
             it "returns a cloned query" do
-              selection.should_not equal(query)
+              expect(selection).to_not equal(query)
             end
           end
         end
@@ -1248,13 +1248,13 @@ describe Origin::Optional do
           end
 
           it "adds the sorting criteria" do
-            selection.options.should eq(
+            expect(selection.options).to eq(
               { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
       end
@@ -1270,13 +1270,13 @@ describe Origin::Optional do
             end
 
             it "adds the sorting criteria" do
-              selection.options.should eq(
+              expect(selection.options).to eq(
                 { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
               )
             end
 
             it "returns a cloned query" do
-              selection.should_not equal(query)
+              expect(selection).to_not equal(query)
             end
           end
 
@@ -1287,13 +1287,13 @@ describe Origin::Optional do
             end
 
             it "adds the sorting criteria" do
-              selection.options.should eq(
+              expect(selection.options).to eq(
                 { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
               )
             end
 
             it "returns a cloned query" do
-              selection.should_not equal(query)
+              expect(selection).to_not equal(query)
             end
           end
 
@@ -1304,13 +1304,13 @@ describe Origin::Optional do
             end
 
             it "adds the sorting criteria" do
-              selection.options.should eq(
+              expect(selection.options).to eq(
                 { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
               )
             end
 
             it "returns a cloned query" do
-              selection.should_not equal(query)
+              expect(selection).to_not equal(query)
             end
           end
         end
@@ -1322,13 +1322,13 @@ describe Origin::Optional do
           end
 
           it "adds the sorting criteria" do
-            selection.options.should eq(
+            expect(selection.options).to eq(
               { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
       end
@@ -1344,13 +1344,13 @@ describe Origin::Optional do
             end
 
             it "adds the sorting criteria" do
-              selection.options.should eq(
+              expect(selection.options).to eq(
                 { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
               )
             end
 
             it "returns a cloned query" do
-              selection.should_not equal(query)
+              expect(selection).to_not equal(query)
             end
           end
 
@@ -1361,13 +1361,13 @@ describe Origin::Optional do
             end
 
             it "adds the sorting criteria" do
-              selection.options.should eq(
+              expect(selection.options).to eq(
                 { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
               )
             end
 
             it "returns a cloned query" do
-              selection.should_not equal(query)
+              expect(selection).to_not equal(query)
             end
           end
         end
@@ -1381,13 +1381,13 @@ describe Origin::Optional do
             end
 
             it "adds the sorting criteria" do
-              selection.options.should eq(
+              expect(selection.options).to eq(
                 { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
               )
             end
 
             it "returns a cloned query" do
-              selection.should_not equal(query)
+              expect(selection).to_not equal(query)
             end
           end
 
@@ -1398,13 +1398,13 @@ describe Origin::Optional do
             end
 
             it "adds the sorting criteria" do
-              selection.options.should eq(
+              expect(selection.options).to eq(
                 { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
               )
             end
 
             it "returns a cloned query" do
-              selection.should_not equal(query)
+              expect(selection).to_not equal(query)
             end
           end
         end
@@ -1417,11 +1417,11 @@ describe Origin::Optional do
         end
 
         it "returns the query" do
-          selection.should eq(query)
+          expect(selection).to eq(query)
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -1432,11 +1432,11 @@ describe Origin::Optional do
         end
 
         it "returns the query" do
-          selection.should eq(query)
+          expect(selection).to eq(query)
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -1453,15 +1453,15 @@ describe Origin::Optional do
         end
 
         it "does not add any options" do
-          selection.options.should eq({})
+          expect(selection.options).to eq({})
         end
 
         it "returns the query" do
-          selection.should eq(query)
+          expect(selection).to eq(query)
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -1472,15 +1472,15 @@ describe Origin::Optional do
         end
 
         it "does not add any options" do
-          selection.options.should eq({})
+          expect(selection.options).to eq({})
         end
 
         it "returns the query" do
-          selection.should eq(query)
+          expect(selection).to eq(query)
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -1493,11 +1493,11 @@ describe Origin::Optional do
           end
 
           it "adds the field options" do
-            selection.options.should eq({ skip: 10 })
+            expect(selection.options).to eq({ skip: 10 })
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -1508,11 +1508,11 @@ describe Origin::Optional do
           end
 
           it "adds the field options converted to an integer" do
-            selection.options.should eq({ skip: 10 })
+            expect(selection.options).to eq({ skip: 10 })
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -1523,11 +1523,11 @@ describe Origin::Optional do
           end
 
           it "adds the field options converted to an integer" do
-            selection.options.should eq({ skip: 10 })
+            expect(selection.options).to eq({ skip: 10 })
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
       end
@@ -1543,15 +1543,15 @@ describe Origin::Optional do
       end
 
       it "does not add any options" do
-        selection.options.should eq({})
+        expect(selection.options).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -1562,15 +1562,15 @@ describe Origin::Optional do
       end
 
       it "does not add any options" do
-        selection.options.should eq({})
+        expect(selection.options).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -1581,13 +1581,13 @@ describe Origin::Optional do
       end
 
       it "adds the field options" do
-        selection.options.should eq(
+        expect(selection.options).to eq(
           { fields: { "first" => { "$slice" => 5 }}}
         )
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -1598,13 +1598,13 @@ describe Origin::Optional do
       end
 
       it "adds the field options" do
-        selection.options.should eq({ fields:
+        expect(selection.options).to eq({ fields:
           { "first" => { "$slice" => 5 }, "second" => { "$slice" => [ 0, 3 ] }}
         })
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -1619,7 +1619,7 @@ describe Origin::Optional do
       end
 
       it "adds the field options" do
-        selection.options.should eq({
+        expect(selection.options).to eq({
           fields: {
             "name" => 1,
             "first" => { "$slice" => 5 },
@@ -1629,7 +1629,7 @@ describe Origin::Optional do
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
   end
@@ -1641,7 +1641,7 @@ describe Origin::Optional do
     end
 
     it "adds the snapshot option" do
-      selection.options.should eq({ snapshot: true })
+      expect(selection.options).to eq({ snapshot: true })
     end
   end
 
@@ -1654,15 +1654,15 @@ describe Origin::Optional do
       end
 
       it "does not add any options" do
-        selection.options.should eq({})
+        expect(selection.options).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -1673,15 +1673,15 @@ describe Origin::Optional do
       end
 
       it "does not add any options" do
-        selection.options.should eq({})
+        expect(selection.options).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -1694,13 +1694,13 @@ describe Origin::Optional do
         end
 
         it "adds the field options" do
-          selection.options.should eq(
+          expect(selection.options).to eq(
             { fields: { "first" => 0, "second" => 0 }}
           )
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -1711,13 +1711,13 @@ describe Origin::Optional do
         end
 
         it "adds the field options" do
-          selection.options.should eq(
+          expect(selection.options).to eq(
             { fields: { "first" => 0, "second" => 0 }}
           )
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end

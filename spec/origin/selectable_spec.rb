@@ -15,15 +15,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -34,15 +34,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -57,13 +57,13 @@ describe Origin::Selectable do
           end
 
           it "adds the $all selector" do
-            selection.selector.should eq({
+            expect(selection.selector).to eq({
               "field" => { "$all" => [ 1, 2 ] }
             })
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -74,13 +74,13 @@ describe Origin::Selectable do
           end
 
           it "adds the $all selector with converted range" do
-            selection.selector.should eq({
+            expect(selection.selector).to eq({
               "field" => { "$all" => [ 1, 2, 3 ] }
             })
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -91,13 +91,13 @@ describe Origin::Selectable do
           end
 
           it "adds the $all selector with wrapped value" do
-            selection.selector.should eq({
+            expect(selection.selector).to eq({
               "field" => { "$all" => [ 1 ] }
             })
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
       end
@@ -130,13 +130,13 @@ describe Origin::Selectable do
           end
 
           it "adds the $all selector" do
-            selection.selector.should eq({
+            expect(selection.selector).to eq({
               "field" => { "$all" => [ 1, 2 ] }
             })
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -147,13 +147,13 @@ describe Origin::Selectable do
           end
 
           it "adds the $all selector with converted range" do
-            selection.selector.should eq({
+            expect(selection.selector).to eq({
               "field" => { "$all" => [ 1, 2, 3 ] }
             })
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -164,13 +164,13 @@ describe Origin::Selectable do
           end
 
           it "adds the $all selector with wrapped value" do
-            selection.selector.should eq({
+            expect(selection.selector).to eq({
               "field" => { "$all" => [ 1 ] }
             })
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
       end
@@ -185,14 +185,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $all selectors" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "first" => { "$all" => [ 1, 2 ] },
             "second" => { "$all" => [ 3, 4 ] }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -206,14 +206,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $all selectors" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "first" => { "$all" => [ 1, 2 ] },
             "second" => { "$all" => [ 3, 4 ] }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -228,13 +228,13 @@ describe Origin::Selectable do
             end
 
             it "overwrites the first $all selector" do
-              selection.selector.should eq({
+              expect(selection.selector).to eq({
                 "first" => { "$all" => [ 1, 2, 3, 4 ] }
               })
             end
 
             it "returns a cloned query" do
-              selection.should_not equal(query)
+              expect(selection).to_not equal(query)
             end
           end
 
@@ -245,13 +245,13 @@ describe Origin::Selectable do
             end
 
             it "intersects the $all selectors" do
-              selection.selector.should eq({
+              expect(selection.selector).to eq({
                 "first" => { "$all" => [ 2 ] }
               })
             end
 
             it "returns a cloned query" do
-              selection.should_not equal(query)
+              expect(selection).to_not equal(query)
             end
           end
 
@@ -262,13 +262,13 @@ describe Origin::Selectable do
             end
 
             it "overwrites the first $all selector" do
-              selection.selector.should eq({
+              expect(selection.selector).to eq({
                 "first" => { "$all" => [ 3, 4 ] }
               })
             end
 
             it "returns a cloned query" do
-              selection.should_not equal(query)
+              expect(selection).to_not equal(query)
             end
           end
 
@@ -279,13 +279,13 @@ describe Origin::Selectable do
             end
 
             it "unions the $all selectors" do
-              selection.selector.should eq({
+              expect(selection.selector).to eq({
                 "first" => { "$all" => [ 1, 2, 3, 4 ] }
               })
             end
 
             it "returns a cloned query" do
-              selection.should_not equal(query)
+              expect(selection).to_not equal(query)
             end
           end
         end
@@ -318,13 +318,13 @@ describe Origin::Selectable do
             end
 
             it "overwrites the field $all selector" do
-              selection.selector.should eq({
+              expect(selection.selector).to eq({
                 "field" => { "$all" => [ 1, 2, 3, 4 ] }
               })
             end
 
             it "returns a cloned query" do
-              selection.should_not equal(query)
+              expect(selection).to_not equal(query)
             end
           end
 
@@ -335,13 +335,13 @@ describe Origin::Selectable do
             end
 
             it "intersects the $all selectors" do
-              selection.selector.should eq({
+              expect(selection.selector).to eq({
                 "field" => { "$all" => [ 2 ] }
               })
             end
 
             it "returns a cloned query" do
-              selection.should_not equal(query)
+              expect(selection).to_not equal(query)
             end
           end
 
@@ -352,13 +352,13 @@ describe Origin::Selectable do
             end
 
             it "overwrites the field $all selector" do
-              selection.selector.should eq({
+              expect(selection.selector).to eq({
                 "field" => { "$all" => [ 3, 4 ] }
               })
             end
 
             it "returns a cloned query" do
-              selection.should_not equal(query)
+              expect(selection).to_not equal(query)
             end
           end
 
@@ -369,13 +369,13 @@ describe Origin::Selectable do
             end
 
             it "unions the $all selectors" do
-              selection.selector.should eq({
+              expect(selection.selector).to eq({
                 "field" => { "$all" => [ 1, 2, 3, 4 ] }
               })
             end
 
             it "returns a cloned query" do
-              selection.should_not equal(query)
+              expect(selection).to_not equal(query)
             end
           end
         end
@@ -392,15 +392,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -411,15 +411,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -430,13 +430,13 @@ describe Origin::Selectable do
       end
 
       it "adds the $and selector" do
-        selection.selector.should eq({
+        expect(selection.selector).to eq({
           "$and" => [{ "field" => [ 1, 2 ] }]
         })
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -447,13 +447,13 @@ describe Origin::Selectable do
       end
 
       it "adds the $and selector" do
-        selection.selector.should eq({
+        expect(selection.selector).to eq({
           "$and" => [{ "test" => { "$elemMatch" => { "field" => { "$in" => [ 1, 2 ] }}}}]
         })
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -466,7 +466,7 @@ describe Origin::Selectable do
         end
 
         it "does not duplicate the $and selector" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "$and" => [
               { "first" => [ 1, 2 ] }
             ]
@@ -474,7 +474,7 @@ describe Origin::Selectable do
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -485,7 +485,7 @@ describe Origin::Selectable do
         end
 
         it "adds the $and selector" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "$and" => [
               { "first" => [ 1, 2 ] },
               { "second" => [ 3, 4 ] }
@@ -494,7 +494,7 @@ describe Origin::Selectable do
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -505,7 +505,7 @@ describe Origin::Selectable do
         end
 
         it "appends both $and expressions" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "$and" => [
               { "first" => [ 1, 2 ] },
               { "first" => [ 3, 4 ] }
@@ -514,7 +514,7 @@ describe Origin::Selectable do
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -528,7 +528,7 @@ describe Origin::Selectable do
         end
 
         it "adds the $and selectors" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "$and" => [
               { "first" => [ 1, 2 ] },
               { "second" => [ 3, 4 ] }
@@ -537,7 +537,7 @@ describe Origin::Selectable do
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -548,7 +548,7 @@ describe Origin::Selectable do
         end
 
         it "appends both $and expressions" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "$and" => [
               { "first" => [ 1, 2 ] },
               { "first" => [ 3, 4 ] }
@@ -557,7 +557,7 @@ describe Origin::Selectable do
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -572,15 +572,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -591,15 +591,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -610,13 +610,13 @@ describe Origin::Selectable do
       end
 
       it "adds the $gte and $lte selectors" do
-        selection.selector.should eq({
+        expect(selection.selector).to eq({
           "field" => { "$gte" => 1, "$lte" => 10 }
         })
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -629,14 +629,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $gte and $lte selectors" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "field" => { "$gte" => 1, "$lte" => 10 },
             "key" => { "$gte" => 5, "$lte" => 7 }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -651,15 +651,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -670,15 +670,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -691,13 +691,13 @@ describe Origin::Selectable do
         end
 
         it "adds the $elemMatch expression" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "users" => { "$elemMatch" => { name: "value" }}
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -712,13 +712,13 @@ describe Origin::Selectable do
         end
 
         it "adds the $elemMatch expression" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "users" => { "$elemMatch" => { "time" => { "$gt" => time }}}
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -735,14 +735,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $elemMatch expression" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "users" => { "$elemMatch" => { name: "value" }},
             "comments" => { "$elemMatch" => { text: "value" }}
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -758,14 +758,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $elemMatch expression" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "users" => { "$elemMatch" => { name: "value" }},
             "comments" => { "$elemMatch" => { text: "value" }}
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -778,13 +778,13 @@ describe Origin::Selectable do
         end
 
         it "overrides the $elemMatch expression" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "users" => { "$elemMatch" => { state: "new" }}
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -799,15 +799,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -818,15 +818,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -839,13 +839,13 @@ describe Origin::Selectable do
         end
 
         it "adds the $exists expression" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "users" => { "$exists" => true }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -856,13 +856,13 @@ describe Origin::Selectable do
         end
 
         it "adds the $exists expression" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "users" => { "$exists" => true }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -881,14 +881,14 @@ describe Origin::Selectable do
           end
 
           it "adds the $exists expression" do
-            selection.selector.should eq({
+            expect(selection.selector).to eq({
               "users" => { "$exists" => true },
               "comments" => { "$exists" => true }
             })
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -902,14 +902,14 @@ describe Origin::Selectable do
           end
 
           it "adds the $exists expression" do
-            selection.selector.should eq({
+            expect(selection.selector).to eq({
               "users" => { "$exists" => true },
               "comments" => { "$exists" => true }
             })
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
       end
@@ -926,14 +926,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $exists expression" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "users" => { "$exists" => true },
             "comments" => { "$exists" => true }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -948,15 +948,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -967,15 +967,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -986,13 +986,13 @@ describe Origin::Selectable do
       end
 
       it "adds the $gt selector" do
-        selection.selector.should eq({
+        expect(selection.selector).to eq({
           "field" => { "$gt" => 10 }
         })
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -1005,14 +1005,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $gt selectors" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "first" => { "$gt" => 10 },
             "second" => { "$gt" => 15 }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -1026,14 +1026,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $gt selectors" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "first" => { "$gt" => 10 },
             "second" => { "$gt" => 15 }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -1044,13 +1044,13 @@ describe Origin::Selectable do
         end
 
         it "overwrites the first $gt selector" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "first" => { "$gt" => 15 }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -1065,15 +1065,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -1084,15 +1084,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -1103,13 +1103,13 @@ describe Origin::Selectable do
       end
 
       it "adds the $gte selector" do
-        selection.selector.should eq({
+        expect(selection.selector).to eq({
           "field" => { "$gte" => 10 }
         })
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -1122,14 +1122,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $gte selectors" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "first" => { "$gte" => 10 },
             "second" => { "$gte" => 15 }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -1143,14 +1143,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $gte selectors" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "first" => { "$gte" => 10 },
             "second" => { "$gte" => 15 }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -1161,13 +1161,13 @@ describe Origin::Selectable do
         end
 
         it "overwrites the first $gte selector" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "first" =>  { "$gte" => 15 }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -1182,15 +1182,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -1201,15 +1201,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -1222,13 +1222,13 @@ describe Origin::Selectable do
         end
 
         it "adds the $in selector" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "field" =>  { "$in" => [ 1, 2 ] }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -1239,13 +1239,13 @@ describe Origin::Selectable do
         end
 
         it "adds the $in selector with converted range" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "field" =>  { "$in" => [ 1, 2, 3 ] }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -1256,13 +1256,13 @@ describe Origin::Selectable do
         end
 
         it "adds the $in selector with wrapped value" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "field" =>  { "$in" => [ 1 ] }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -1276,14 +1276,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $in selectors" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "first" =>  { "$in" => [ 1, 2 ] },
             "second" =>  { "$in" => [ 3, 4 ] }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -1297,14 +1297,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $in selectors" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "first" =>  { "$in" => [ 1, 2 ] },
             "second" =>  { "$in" => [ 3, 4 ] }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -1317,13 +1317,13 @@ describe Origin::Selectable do
           end
 
           it "intersects the $in selectors" do
-            selection.selector.should eq({
+            expect(selection.selector).to eq({
               "first" =>  { "$in" => [ 2 ] }
             })
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -1334,13 +1334,13 @@ describe Origin::Selectable do
           end
 
           it "intersects the $in selectors" do
-            selection.selector.should eq({
+            expect(selection.selector).to eq({
               "first" =>  { "$in" => [ 2 ] }
             })
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -1351,13 +1351,13 @@ describe Origin::Selectable do
           end
 
           it "overwrites the first $in selector" do
-            selection.selector.should eq({
+            expect(selection.selector).to eq({
               "first" =>  { "$in" => [ 3, 4 ] }
             })
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -1368,13 +1368,13 @@ describe Origin::Selectable do
           end
 
           it "unions the $in selectors" do
-            selection.selector.should eq({
+            expect(selection.selector).to eq({
               "first" =>  { "$in" => [ 1, 2, 3, 4 ] }
             })
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
       end
@@ -1390,15 +1390,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -1409,15 +1409,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -1428,13 +1428,13 @@ describe Origin::Selectable do
       end
 
       it "adds the $lt selector" do
-        selection.selector.should eq({
+        expect(selection.selector).to eq({
           "field" =>  { "$lt" => 10 }
         })
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -1447,14 +1447,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $lt selectors" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "first" =>  { "$lt" => 10 },
             "second" =>  { "$lt" => 15 }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -1468,14 +1468,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $lt selectors" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "first" =>  { "$lt" => 10 },
             "second" =>  { "$lt" => 15 }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -1486,13 +1486,13 @@ describe Origin::Selectable do
         end
 
         it "overwrites the first $lt selector" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "first" =>  { "$lt" => 15 }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -1507,15 +1507,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -1526,15 +1526,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -1545,13 +1545,13 @@ describe Origin::Selectable do
       end
 
       it "adds the $lte selector" do
-        selection.selector.should eq({
+        expect(selection.selector).to eq({
           "field" =>  { "$lte" => 10 }
         })
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -1564,14 +1564,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $lte selectors" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "first" =>  { "$lte" => 10 },
             "second" =>  { "$lte" => 15 }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -1585,14 +1585,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $lte selectors" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "first" =>  { "$lte" => 10 },
             "second" =>  { "$lte" => 15 }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -1603,13 +1603,13 @@ describe Origin::Selectable do
         end
 
         it "overwrites the first $lte selector" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "first" =>  { "$lte" => 15 }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -1624,15 +1624,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -1643,15 +1643,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -1664,13 +1664,13 @@ describe Origin::Selectable do
         end
 
         it "adds the $maxDistance expression" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "location" =>  { "$near" => [ 1, 1 ], "$maxDistance" => 50 }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -1685,15 +1685,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -1704,15 +1704,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -1723,13 +1723,13 @@ describe Origin::Selectable do
       end
 
       it "adds the $mod expression" do
-        selection.selector.should eq({
+        expect(selection.selector).to eq({
           "value" =>  { "$mod" => [ 10, 1 ] }
         })
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -1745,14 +1745,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $mod expression" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "value" =>  { "$mod" => [ 10, 1 ] },
             "comments" =>  { "$mod" => [ 10, 1 ] }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -1768,14 +1768,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $mod expression" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "value" =>  { "$mod" => [ 10, 1 ] },
             "result" =>  { "$mod" => [ 10, 1 ] }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -1790,15 +1790,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -1809,15 +1809,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -1828,13 +1828,13 @@ describe Origin::Selectable do
       end
 
       it "adds the $ne expression" do
-        selection.selector.should eq({
+        expect(selection.selector).to eq({
           "value" =>  { "$ne" => 10 }
         })
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -1850,14 +1850,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $ne expression" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "value" =>  { "$ne" => 10 },
             "comments" =>  { "$ne" => 10 }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -1873,14 +1873,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $ne expression" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "value" =>  { "$ne" => 10 },
             "result" =>  { "$ne" => 10 }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -1895,15 +1895,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -1914,15 +1914,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -1933,13 +1933,13 @@ describe Origin::Selectable do
       end
 
       it "adds the $near expression" do
-        selection.selector.should eq({
+        expect(selection.selector).to eq({
           "location" =>  { "$near" => [ 20, 21 ] }
         })
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -1955,14 +1955,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $near expression" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "location" =>  { "$near" => [ 20, 21 ] },
             "comments" =>  { "$near" => [ 20, 21 ] }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -1978,14 +1978,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $near expression" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "location" =>  { "$near" => [ 20, 21 ] },
             "comments" =>  { "$near" => [ 20, 21 ] }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -2000,15 +2000,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -2019,15 +2019,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -2038,13 +2038,13 @@ describe Origin::Selectable do
       end
 
       it "adds the $nearSphere expression" do
-        selection.selector.should eq({
+        expect(selection.selector).to eq({
           "location" =>  { "$nearSphere" => [ 20, 21 ] }
         })
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -2060,14 +2060,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $nearSphere expression" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "location" =>  { "$nearSphere" => [ 20, 21 ] },
             "comments" =>  { "$nearSphere" => [ 20, 21 ] }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -2083,14 +2083,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $nearSphere expression" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "location" =>  { "$nearSphere" => [ 20, 21 ] },
             "comments" =>  { "$nearSphere" => [ 20, 21 ] }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -2105,15 +2105,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -2124,15 +2124,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -2145,13 +2145,13 @@ describe Origin::Selectable do
         end
 
         it "adds the $nin selector" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "field" =>  { "$nin" => [ 1, 2 ] }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -2162,13 +2162,13 @@ describe Origin::Selectable do
         end
 
         it "adds the $nin selector with converted range" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "field" =>  { "$nin" => [ 1, 2, 3 ] }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -2179,13 +2179,13 @@ describe Origin::Selectable do
         end
 
         it "adds the $nin selector with wrapped value" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "field" =>  { "$nin" => [ 1 ] }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -2199,14 +2199,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $nin selectors" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "first" =>  { "$nin" => [ 1, 2 ] },
             "second" =>  { "$nin" => [ 3, 4 ] }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -2220,14 +2220,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $nin selectors" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "first" => { "$nin" => [ 1, 2 ] },
             "second" => { "$nin" => [ 3, 4 ] }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -2240,13 +2240,13 @@ describe Origin::Selectable do
           end
 
           it "intersects the $nin selectors" do
-            selection.selector.should eq({
+            expect(selection.selector).to eq({
               "first" => { "$nin" => [ 2 ] }
             })
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -2257,13 +2257,13 @@ describe Origin::Selectable do
           end
 
           it "intersects the $nin selectors" do
-            selection.selector.should eq({
+            expect(selection.selector).to eq({
               "first" => { "$nin" => [ 2 ] }
             })
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -2274,13 +2274,13 @@ describe Origin::Selectable do
           end
 
           it "overwrites the first $nin selector" do
-            selection.selector.should eq({
+            expect(selection.selector).to eq({
               "first" => { "$nin" => [ 3, 4 ] }
             })
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -2291,13 +2291,13 @@ describe Origin::Selectable do
           end
 
           it "unions the $nin selectors" do
-            selection.selector.should eq({
+            expect(selection.selector).to eq({
               "first" => { "$nin" => [ 1, 2, 3, 4 ] }
             })
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
       end
@@ -2313,15 +2313,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -2332,15 +2332,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -2351,13 +2351,13 @@ describe Origin::Selectable do
       end
 
       it "adds the $nor selector" do
-        selection.selector.should eq({
+        expect(selection.selector).to eq({
           "$nor" => [{ field: [ 1, 2 ] }]
         })
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -2370,7 +2370,7 @@ describe Origin::Selectable do
         end
 
         it "adds the $nor selector" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "$nor" => [
               { first: [ 1, 2 ] },
               { second: [ 3, 4 ] }
@@ -2379,7 +2379,7 @@ describe Origin::Selectable do
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -2390,7 +2390,7 @@ describe Origin::Selectable do
         end
 
         it "appends both $nor expressions" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "$nor" => [
               { first: [ 1, 2 ] },
               { first: [ 3, 4 ] }
@@ -2399,7 +2399,7 @@ describe Origin::Selectable do
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -2413,7 +2413,7 @@ describe Origin::Selectable do
         end
 
         it "adds the $nor selectors" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "$nor" => [
               { first: [ 1, 2 ] },
               { second: [ 3, 4 ] }
@@ -2422,7 +2422,7 @@ describe Origin::Selectable do
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -2433,7 +2433,7 @@ describe Origin::Selectable do
         end
 
         it "appends both $nor expressions" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "$nor" => [
               { first: [ 1, 2 ] },
               { first: [ 3, 4 ] }
@@ -2442,7 +2442,7 @@ describe Origin::Selectable do
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -2456,15 +2456,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a non cloned query" do
-        selection.should equal(query)
+        expect(selection).to equal(query)
       end
 
       context "when the following criteria is a query method" do
@@ -2474,17 +2474,17 @@ describe Origin::Selectable do
         end
 
         it "negates the all selection" do
-          selection.selector.should eq(
+          expect(selection.selector).to eq(
             { "field" => { "$not" => { "$all" => [ 1, 2 ] }}}
           )
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
 
         it "removes the negation on the clone" do
-          selection.should_not be_negating
+          expect(selection).to_not be_negating
         end
       end
 
@@ -2495,17 +2495,17 @@ describe Origin::Selectable do
         end
 
         it "negates the gt selection" do
-          selection.selector.should eq(
+          expect(selection.selector).to eq(
             { "age" => { "$not" => {"$gt"=>50} } }
           )
         end
 
         it "returns a coned query" do
-          selection.should_not eq(query)
+          expect(selection).to_not eq(query)
         end
 
         it "removes the negation on the clone" do
-          selection.should_not be_negating
+          expect(selection).to_not be_negating
         end
       end
 
@@ -2516,17 +2516,17 @@ describe Origin::Selectable do
         end
 
         it "negates the selection with an operator" do
-          selection.selector.should eq(
+          expect(selection.selector).to eq(
             { "field" => 1, "other" => { "$not" => { "$in" => [ 1, 2 ] }}}
           )
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
 
         it "removes the negation on the clone" do
-          selection.should_not be_negating
+          expect(selection).to_not be_negating
         end
       end
 
@@ -2537,17 +2537,17 @@ describe Origin::Selectable do
         end
 
         it "negates the selection with an operator" do
-          selection.selector.should eq(
+          expect(selection.selector).to eq(
             { "field" => 1, "other" => { "$not" => /test/ } }
           )
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
 
         it "removes the negation on the clone" do
-          selection.should_not be_negating
+          expect(selection).to_not be_negating
         end
 
       end
@@ -2560,15 +2560,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -2579,13 +2579,13 @@ describe Origin::Selectable do
       end
 
       it "adds the $not selector" do
-        selection.selector.should eq({
+        expect(selection.selector).to eq({
           "field" => { "$not" => /test/ }
         })
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -2598,14 +2598,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $not selectors" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "first" => { "$not" => /1/ },
             "second" => { "$not" => /2/ }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -2619,14 +2619,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $not selectors" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "first" => { "$not" => /1/ },
             "second" => { "$not" => /2/ }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -2637,13 +2637,13 @@ describe Origin::Selectable do
         end
 
         it "overwrites the first $not selector" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "first" =>  { "$not" => /2/ }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -2654,13 +2654,13 @@ describe Origin::Selectable do
         end
 
         it "does not double the $not selector" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "first" =>  { "$not" => /1/ }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -2675,15 +2675,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -2694,15 +2694,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -2713,13 +2713,13 @@ describe Origin::Selectable do
       end
 
       it "adds the $or selector" do
-        selection.selector.should eq({
+        expect(selection.selector).to eq({
           "$or" => [{ "field" => [ 1, 2 ] }]
         })
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -2732,7 +2732,7 @@ describe Origin::Selectable do
         end
 
         it "adds the $or selector" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "$or" => [
               { "first" => [ 1, 2 ] },
               { "second" => [ 3, 4 ] }
@@ -2741,7 +2741,7 @@ describe Origin::Selectable do
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -2752,7 +2752,7 @@ describe Origin::Selectable do
         end
 
         it "adds the $or selector" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "$or" => [
               { "first" => [ 1, 2 ] },
               { "second" => { "$gt" => 3 }}
@@ -2761,7 +2761,7 @@ describe Origin::Selectable do
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -2772,13 +2772,13 @@ describe Origin::Selectable do
         end
 
         it "adds the $or selector and aliases the field" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "$or" => [ { "_id" => 1 } ]
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -2789,7 +2789,7 @@ describe Origin::Selectable do
         end
 
         it "adds the $or selector" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "$or" => [
               { "first" => [ 1, 2 ] },
               { "second" => { "$gt" => 3 }}
@@ -2798,7 +2798,7 @@ describe Origin::Selectable do
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -2809,7 +2809,7 @@ describe Origin::Selectable do
         end
 
         it "appends both $or expressions" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "$or" => [
               { "first" => [ 1, 2 ] },
               { "first" => [ 3, 4 ] }
@@ -2818,7 +2818,7 @@ describe Origin::Selectable do
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -2832,7 +2832,7 @@ describe Origin::Selectable do
         end
 
         it "adds the $or selectors" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "$or" => [
               { "first" => [ 1, 2 ] },
               { "second" => [ 3, 4 ] }
@@ -2841,7 +2841,7 @@ describe Origin::Selectable do
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -2852,7 +2852,7 @@ describe Origin::Selectable do
         end
 
         it "appends both $or expressions" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "$or" => [
               { "first" => [ 1, 2 ] },
               { "first" => [ 3, 4 ] }
@@ -2861,7 +2861,7 @@ describe Origin::Selectable do
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -2876,15 +2876,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -2895,15 +2895,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -2916,13 +2916,13 @@ describe Origin::Selectable do
         end
 
         it "adds the $size selector" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "field" => { "$size" => 10 }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -2933,13 +2933,13 @@ describe Origin::Selectable do
         end
 
         it "adds the $size selector with an integer" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "field" => { "$size" => 10 }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -2955,14 +2955,14 @@ describe Origin::Selectable do
           end
 
           it "adds the $size selectors" do
-            selection.selector.should eq({
+            expect(selection.selector).to eq({
               "first" => { "$size" => 10 },
               "second" => { "$size" => 15 }
             })
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
 
@@ -2973,14 +2973,14 @@ describe Origin::Selectable do
           end
 
           it "adds the $size selectors" do
-            selection.selector.should eq({
+            expect(selection.selector).to eq({
               "first" => { "$size" => 10 },
               "second" => { "$size" => 15 }
             })
           end
 
           it "returns a cloned query" do
-            selection.should_not equal(query)
+            expect(selection).to_not equal(query)
           end
         end
       end
@@ -2995,14 +2995,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $size selectors" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "first" => { "$size" => 10 },
             "second" => { "$size" => 15 }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -3013,13 +3013,13 @@ describe Origin::Selectable do
         end
 
         it "overwrites the first $size selector" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "first" => { "$size" => 15 }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -3034,15 +3034,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -3053,15 +3053,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -3074,13 +3074,13 @@ describe Origin::Selectable do
         end
 
         it "adds the $type selector" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "field" => { "$type" => 10 }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -3091,13 +3091,13 @@ describe Origin::Selectable do
         end
 
         it "adds the $type selector" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "field" => { "$type" => 10 }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -3111,14 +3111,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $type selectors" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "first" => { "$type" => 10 },
             "second" => { "$type" => 15 }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -3132,14 +3132,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $type selectors" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "first" => { "$type" => 10 },
             "second" => { "$type" => 15 }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
 
@@ -3150,13 +3150,13 @@ describe Origin::Selectable do
         end
 
         it "overwrites the first $type selector" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "first" => { "$type" => 15 }
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -3171,15 +3171,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -3190,15 +3190,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -3209,11 +3209,11 @@ describe Origin::Selectable do
       end
 
       it "adds the $where criterion" do
-        selection.selector.should eq({ "$where" => "this.value = 10" })
+        expect(selection.selector).to eq({ "$where" => "this.value = 10" })
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -3226,7 +3226,7 @@ describe Origin::Selectable do
         end
 
         it "adds the criterion to the selection" do
-          selection.selector.should eq({ "name" => "Syd" })
+          expect(selection.selector).to eq({ "name" => "Syd" })
         end
       end
 
@@ -3262,7 +3262,7 @@ describe Origin::Selectable do
           end
 
           it "alters the key and value" do
-            selection.selector.should eq({ "user_id" => document.id })
+            expect(selection.selector).to eq({ "user_id" => document.id })
           end
         end
       end
@@ -3279,11 +3279,11 @@ describe Origin::Selectable do
           end
 
           it "adds the $all criterion" do
-            selection.selector.should eq({ "field" => { "$all" => [ 1, 2 ] }})
+            expect(selection.selector).to eq({ "field" => { "$all" => [ 1, 2 ] }})
           end
 
           it "returns a cloned query" do
-            selection.should_not eq(query)
+            expect(selection).to_not eq(query)
           end
         end
       end
@@ -3297,13 +3297,13 @@ describe Origin::Selectable do
           end
 
           it "adds the $elemMatch criterion" do
-            selection.selector.should eq(
+            expect(selection.selector).to eq(
               { "field" => { "$elemMatch" => { key: 1 } }}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not eq(query)
+            expect(selection).to_not eq(query)
           end
         end
 
@@ -3314,13 +3314,13 @@ describe Origin::Selectable do
           end
 
           it "adds the $elemMatch criterion" do
-            selection.selector.should eq(
+            expect(selection.selector).to eq(
               { "field" => { "$elemMatch" => { "key" => { "$gt" => 1 }}}}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not eq(query)
+            expect(selection).to_not eq(query)
           end
         end
       end
@@ -3334,13 +3334,13 @@ describe Origin::Selectable do
           end
 
           it "adds the $exists criterion" do
-            selection.selector.should eq(
+            expect(selection.selector).to eq(
               { "field" => { "$exists" => true }}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not eq(query)
+            expect(selection).to_not eq(query)
           end
         end
 
@@ -3351,13 +3351,13 @@ describe Origin::Selectable do
           end
 
           it "adds the $exists criterion" do
-            selection.selector.should eq(
+            expect(selection.selector).to eq(
               { "field" => { "$exists" => true }}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not eq(query)
+            expect(selection).to_not eq(query)
           end
         end
       end
@@ -3369,13 +3369,13 @@ describe Origin::Selectable do
         end
 
         it "adds the $gt criterion" do
-          selection.selector.should eq(
+          expect(selection.selector).to eq(
             { "field" => { "$gt" => 10 }}
           )
         end
 
         it "returns a cloned query" do
-          selection.should_not eq(query)
+          expect(selection).to_not eq(query)
         end
       end
 
@@ -3386,13 +3386,13 @@ describe Origin::Selectable do
         end
 
         it "adds the $gte criterion" do
-          selection.selector.should eq(
+          expect(selection.selector).to eq(
             { "field" => { "$gte" => 10 }}
           )
         end
 
         it "returns a cloned query" do
-          selection.should_not eq(query)
+          expect(selection).to_not eq(query)
         end
       end
 
@@ -3403,11 +3403,11 @@ describe Origin::Selectable do
         end
 
         it "adds the $in criterion" do
-          selection.selector.should eq({ "field" => { "$in" => [ 1, 2 ] }})
+          expect(selection.selector).to eq({ "field" => { "$in" => [ 1, 2 ] }})
         end
 
         it "returns a cloned query" do
-          selection.should_not eq(query)
+          expect(selection).to_not eq(query)
         end
       end
 
@@ -3418,13 +3418,13 @@ describe Origin::Selectable do
         end
 
         it "adds the $lt criterion" do
-          selection.selector.should eq(
+          expect(selection.selector).to eq(
             { "field" => { "$lt" => 10 }}
           )
         end
 
         it "returns a cloned query" do
-          selection.should_not eq(query)
+          expect(selection).to_not eq(query)
         end
       end
 
@@ -3435,13 +3435,13 @@ describe Origin::Selectable do
         end
 
         it "adds the $lte criterion" do
-          selection.selector.should eq(
+          expect(selection.selector).to eq(
             { "field" => { "$lte" => 10 }}
           )
         end
 
         it "returns a cloned query" do
-          selection.should_not eq(query)
+          expect(selection).to_not eq(query)
         end
       end
 
@@ -3452,13 +3452,13 @@ describe Origin::Selectable do
         end
 
         it "adds the $lte criterion" do
-          selection.selector.should eq(
+          expect(selection.selector).to eq(
             { "field" => { "$mod" => [ 10, 1 ]}}
           )
         end
 
         it "returns a cloned query" do
-          selection.should_not eq(query)
+          expect(selection).to_not eq(query)
         end
       end
 
@@ -3469,13 +3469,13 @@ describe Origin::Selectable do
         end
 
         it "adds the $ne criterion" do
-          selection.selector.should eq(
+          expect(selection.selector).to eq(
             { "field" => { "$ne" => 10 }}
           )
         end
 
         it "returns a cloned query" do
-          selection.should_not eq(query)
+          expect(selection).to_not eq(query)
         end
       end
 
@@ -3486,13 +3486,13 @@ describe Origin::Selectable do
         end
 
         it "adds the $near criterion" do
-          selection.selector.should eq(
+          expect(selection.selector).to eq(
             { "field" => { "$near" => [ 1, 1 ] }}
           )
         end
 
         it "returns a cloned query" do
-          selection.should_not eq(query)
+          expect(selection).to_not eq(query)
         end
       end
 
@@ -3503,13 +3503,13 @@ describe Origin::Selectable do
         end
 
         it "adds the $nearSphere criterion" do
-          selection.selector.should eq(
+          expect(selection.selector).to eq(
             { "field" => { "$nearSphere" => [ 1, 1 ] }}
           )
         end
 
         it "returns a cloned query" do
-          selection.should_not eq(query)
+          expect(selection).to_not eq(query)
         end
       end
 
@@ -3520,11 +3520,11 @@ describe Origin::Selectable do
         end
 
         it "adds the $nin criterion" do
-          selection.selector.should eq({ "field" => { "$nin" => [ 1, 2 ] }})
+          expect(selection.selector).to eq({ "field" => { "$nin" => [ 1, 2 ] }})
         end
 
         it "returns a cloned query" do
-          selection.should_not eq(query)
+          expect(selection).to_not eq(query)
         end
       end
 
@@ -3535,11 +3535,11 @@ describe Origin::Selectable do
         end
 
         it "adds the $not criterion" do
-          selection.selector.should eq({ "field" => { "$not" => /test/ }})
+          expect(selection.selector).to eq({ "field" => { "$not" => /test/ }})
         end
 
         it "returns a cloned query" do
-          selection.should_not eq(query)
+          expect(selection).to_not eq(query)
         end
       end
 
@@ -3552,13 +3552,13 @@ describe Origin::Selectable do
           end
 
           it "adds the $size criterion" do
-            selection.selector.should eq(
+            expect(selection.selector).to eq(
               { "field" => { "$size" => 10 }}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not eq(query)
+            expect(selection).to_not eq(query)
           end
         end
 
@@ -3569,13 +3569,13 @@ describe Origin::Selectable do
           end
 
           it "adds the $size criterion" do
-            selection.selector.should eq(
+            expect(selection.selector).to eq(
               { "field" => { "$size" => 10 }}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not eq(query)
+            expect(selection).to_not eq(query)
           end
         end
       end
@@ -3587,13 +3587,13 @@ describe Origin::Selectable do
         end
 
         it "adds the $type criterion" do
-          selection.selector.should eq(
+          expect(selection.selector).to eq(
             { "field" => { "$type" => 10 }}
           )
         end
 
         it "returns a cloned query" do
-          selection.should_not eq(query)
+          expect(selection).to_not eq(query)
         end
       end
 
@@ -3606,13 +3606,13 @@ describe Origin::Selectable do
           end
 
           it "adds the $within and $center criterion" do
-            selection.selector.should eq(
+            expect(selection.selector).to eq(
               { "field" => { "$within" => { "$center" => [[ 1, 1 ], 10 ]}}}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not eq(query)
+            expect(selection).to_not eq(query)
           end
         end
 
@@ -3623,13 +3623,13 @@ describe Origin::Selectable do
           end
 
           it "adds the $within and $box criterion" do
-            selection.selector.should eq(
+            expect(selection.selector).to eq(
               { "field" => { "$within" => { "$box" => [[ 1, 1 ], [ 1, 1 ]]}}}
             )
           end
 
           it "returns a cloned query" do
-            selection.should_not eq(query)
+            expect(selection).to_not eq(query)
           end
         end
       end
@@ -3645,15 +3645,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -3664,15 +3664,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -3683,13 +3683,13 @@ describe Origin::Selectable do
       end
 
       it "adds the $within expression" do
-        selection.selector.should eq({
+        expect(selection.selector).to eq({
           "location" => { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }}
         })
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -3705,14 +3705,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $within expression" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "location" => { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }},
             "comments" => { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }}
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -3728,14 +3728,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $within expression" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "location" => { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }},
             "comments" => { "$within" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }}
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -3750,15 +3750,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -3769,15 +3769,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -3788,13 +3788,13 @@ describe Origin::Selectable do
       end
 
       it "adds the $within expression" do
-        selection.selector.should eq({
+        expect(selection.selector).to eq({
           "location" => { "$within" => { "$center" => [[ 1, 10 ], 25 ] }}
         })
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -3810,14 +3810,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $within expression" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "location" => { "$within" => { "$center" => [[ 1, 10 ], 25 ] }},
             "comments" => { "$within" => { "$center" => [[ 1, 10 ], 25 ] }}
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -3833,14 +3833,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $within expression" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "location" => { "$within" => { "$center" => [[ 1, 10 ], 25 ] }},
             "comments" => { "$within" => { "$center" => [[ 1, 10 ], 25 ] }}
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -3855,15 +3855,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -3874,15 +3874,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -3897,13 +3897,13 @@ describe Origin::Selectable do
       end
 
       it "adds the $within expression" do
-        selection.selector.should eq({
+        expect(selection.selector).to eq({
           "location" => { "$within" => { "$polygon" => polygon }}
         })
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -3927,14 +3927,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $within expression" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "location" => { "$within" => { "$polygon" => polygon_one }},
             "comments" => { "$within" => { "$polygon" => polygon_two }}
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -3958,14 +3958,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $within expression" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "location" => { "$within" => { "$polygon" => polygon_one }},
             "comments" => { "$within" => { "$polygon" => polygon_two }}
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -3980,15 +3980,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -3999,15 +3999,15 @@ describe Origin::Selectable do
       end
 
       it "does not add any criterion" do
-        selection.selector.should eq({})
+        expect(selection.selector).to eq({})
       end
 
       it "returns the query" do
-        selection.should eq(query)
+        expect(selection).to eq(query)
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -4018,13 +4018,13 @@ describe Origin::Selectable do
       end
 
       it "adds the $within expression" do
-        selection.selector.should eq({
+        expect(selection.selector).to eq({
           "location" => { "$within" => { "$centerSphere" => [[ 1, 10 ], 25 ] }}
         })
       end
 
       it "returns a cloned query" do
-        selection.should_not equal(query)
+        expect(selection).to_not equal(query)
       end
     end
 
@@ -4040,14 +4040,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $within expression" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "location" => { "$within" => { "$centerSphere" => [[ 1, 10 ], 25 ] }},
             "comments" => { "$within" => { "$centerSphere" => [[ 1, 10 ], 25 ] }}
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -4063,14 +4063,14 @@ describe Origin::Selectable do
         end
 
         it "adds the $within expression" do
-          selection.selector.should eq({
+          expect(selection.selector).to eq({
             "location" => { "$within" => { "$centerSphere" => [[ 1, 10 ], 25 ] }},
             "comments" => { "$within" => { "$centerSphere" => [[ 1, 10 ], 25 ] }}
           })
         end
 
         it "returns a cloned query" do
-          selection.should_not equal(query)
+          expect(selection).to_not equal(query)
         end
       end
     end
@@ -4085,15 +4085,15 @@ describe Origin::Selectable do
       end
 
       it "returns a selecton key" do
-        key.should be_a(Origin::Key)
+        expect(key).to be_a(Origin::Key)
       end
 
       it "sets the name as the key" do
-        key.name.should eq(:field)
+        expect(key.name).to eq(:field)
       end
 
       it "sets the operator as $all" do
-        key.operator.should eq("$all")
+        expect(key.operator).to eq("$all")
       end
     end
 
@@ -4104,15 +4104,15 @@ describe Origin::Selectable do
       end
 
       it "returns a selecton key" do
-        key.should be_a(Origin::Key)
+        expect(key).to be_a(Origin::Key)
       end
 
       it "sets the name as the key" do
-        key.name.should eq(:field)
+        expect(key.name).to eq(:field)
       end
 
       it "sets the operator as $elemMatch" do
-        key.operator.should eq("$elemMatch")
+        expect(key.operator).to eq("$elemMatch")
       end
     end
 
@@ -4123,15 +4123,15 @@ describe Origin::Selectable do
       end
 
       it "returns a selecton key" do
-        key.should be_a(Origin::Key)
+        expect(key).to be_a(Origin::Key)
       end
 
       it "sets the name as the key" do
-        key.name.should eq(:field)
+        expect(key.name).to eq(:field)
       end
 
       it "sets the operator as $exists" do
-        key.operator.should eq("$exists")
+        expect(key.operator).to eq("$exists")
       end
     end
 
@@ -4142,15 +4142,15 @@ describe Origin::Selectable do
       end
 
       it "returns a selecton key" do
-        key.should be_a(Origin::Key)
+        expect(key).to be_a(Origin::Key)
       end
 
       it "sets the name as the key" do
-        key.name.should eq(:field)
+        expect(key.name).to eq(:field)
       end
 
       it "sets the operator as $gt" do
-        key.operator.should eq("$gt")
+        expect(key.operator).to eq("$gt")
       end
     end
 
@@ -4161,15 +4161,15 @@ describe Origin::Selectable do
       end
 
       it "returns a selecton key" do
-        key.should be_a(Origin::Key)
+        expect(key).to be_a(Origin::Key)
       end
 
       it "sets the name as the key" do
-        key.name.should eq(:field)
+        expect(key.name).to eq(:field)
       end
 
       it "sets the operator as $gte" do
-        key.operator.should eq("$gte")
+        expect(key.operator).to eq("$gte")
       end
     end
 
@@ -4180,15 +4180,15 @@ describe Origin::Selectable do
       end
 
       it "returns a selecton key" do
-        key.should be_a(Origin::Key)
+        expect(key).to be_a(Origin::Key)
       end
 
       it "sets the name as the key" do
-        key.name.should eq(:field)
+        expect(key.name).to eq(:field)
       end
 
       it "sets the operator as $in" do
-        key.operator.should eq("$in")
+        expect(key.operator).to eq("$in")
       end
     end
 
@@ -4199,15 +4199,15 @@ describe Origin::Selectable do
       end
 
       it "returns a selecton key" do
-        key.should be_a(Origin::Key)
+        expect(key).to be_a(Origin::Key)
       end
 
       it "sets the name as the key" do
-        key.name.should eq(:field)
+        expect(key.name).to eq(:field)
       end
 
       it "sets the operator as $lt" do
-        key.operator.should eq("$lt")
+        expect(key.operator).to eq("$lt")
       end
     end
 
@@ -4218,15 +4218,15 @@ describe Origin::Selectable do
       end
 
       it "returns a selecton key" do
-        key.should be_a(Origin::Key)
+        expect(key).to be_a(Origin::Key)
       end
 
       it "sets the name as the key" do
-        key.name.should eq(:field)
+        expect(key.name).to eq(:field)
       end
 
       it "sets the operator as $lte" do
-        key.operator.should eq("$lte")
+        expect(key.operator).to eq("$lte")
       end
     end
 
@@ -4237,15 +4237,15 @@ describe Origin::Selectable do
       end
 
       it "returns a selecton key" do
-        key.should be_a(Origin::Key)
+        expect(key).to be_a(Origin::Key)
       end
 
       it "sets the name as the key" do
-        key.name.should eq(:field)
+        expect(key.name).to eq(:field)
       end
 
       it "sets the operator as $mod" do
-        key.operator.should eq("$mod")
+        expect(key.operator).to eq("$mod")
       end
     end
 
@@ -4256,15 +4256,15 @@ describe Origin::Selectable do
       end
 
       it "returns a selecton key" do
-        key.should be_a(Origin::Key)
+        expect(key).to be_a(Origin::Key)
       end
 
       it "sets the name as the key" do
-        key.name.should eq(:field)
+        expect(key.name).to eq(:field)
       end
 
       it "sets the operator as $ne" do
-        key.operator.should eq("$ne")
+        expect(key.operator).to eq("$ne")
       end
     end
 
@@ -4275,15 +4275,15 @@ describe Origin::Selectable do
       end
 
       it "returns a selecton key" do
-        key.should be_a(Origin::Key)
+        expect(key).to be_a(Origin::Key)
       end
 
       it "sets the name as the key" do
-        key.name.should eq(:field)
+        expect(key.name).to eq(:field)
       end
 
       it "sets the operator as $near" do
-        key.operator.should eq("$near")
+        expect(key.operator).to eq("$near")
       end
     end
 
@@ -4294,15 +4294,15 @@ describe Origin::Selectable do
       end
 
       it "returns a selecton key" do
-        key.should be_a(Origin::Key)
+        expect(key).to be_a(Origin::Key)
       end
 
       it "sets the name as the key" do
-        key.name.should eq(:field)
+        expect(key.name).to eq(:field)
       end
 
       it "sets the operator as $nearSphere" do
-        key.operator.should eq("$nearSphere")
+        expect(key.operator).to eq("$nearSphere")
       end
     end
 
@@ -4313,15 +4313,15 @@ describe Origin::Selectable do
       end
 
       it "returns a selecton key" do
-        key.should be_a(Origin::Key)
+        expect(key).to be_a(Origin::Key)
       end
 
       it "sets the name as the key" do
-        key.name.should eq(:field)
+        expect(key.name).to eq(:field)
       end
 
       it "sets the operator as $nin" do
-        key.operator.should eq("$nin")
+        expect(key.operator).to eq("$nin")
       end
     end
 
@@ -4332,15 +4332,15 @@ describe Origin::Selectable do
       end
 
       it "returns a selection key" do
-        key.should be_a(Origin::Key)
+        expect(key).to be_a(Origin::Key)
       end
 
       it "sets the name as the key" do
-        key.name.should eq(:field)
+        expect(key.name).to eq(:field)
       end
 
       it "sets the operator as $not" do
-        key.operator.should eq("$not")
+        expect(key.operator).to eq("$not")
       end
 
     end
@@ -4352,15 +4352,15 @@ describe Origin::Selectable do
       end
 
       it "returns a selecton key" do
-        key.should be_a(Origin::Key)
+        expect(key).to be_a(Origin::Key)
       end
 
       it "sets the name as the key" do
-        key.name.should eq(:field)
+        expect(key.name).to eq(:field)
       end
 
       it "sets the operator as $size" do
-        key.operator.should eq("$size")
+        expect(key.operator).to eq("$size")
       end
     end
 
@@ -4371,15 +4371,15 @@ describe Origin::Selectable do
       end
 
       it "returns a selecton key" do
-        key.should be_a(Origin::Key)
+        expect(key).to be_a(Origin::Key)
       end
 
       it "sets the name as the key" do
-        key.name.should eq(:field)
+        expect(key.name).to eq(:field)
       end
 
       it "sets the operator as $type" do
-        key.operator.should eq("$type")
+        expect(key.operator).to eq("$type")
       end
     end
 
@@ -4390,19 +4390,19 @@ describe Origin::Selectable do
       end
 
       it "returns a selecton key" do
-        key.should be_a(Origin::Key)
+        expect(key).to be_a(Origin::Key)
       end
 
       it "sets the name as the key" do
-        key.name.should eq(:field)
+        expect(key.name).to eq(:field)
       end
 
       it "sets the operator as $within" do
-        key.operator.should eq("$within")
+        expect(key.operator).to eq("$within")
       end
 
       it "sets the expanded operator as $box" do
-        key.expanded.should eq("$box")
+        expect(key.expanded).to eq("$box")
       end
     end
 
@@ -4413,19 +4413,19 @@ describe Origin::Selectable do
       end
 
       it "returns a selecton key" do
-        key.should be_a(Origin::Key)
+        expect(key).to be_a(Origin::Key)
       end
 
       it "sets the name as the key" do
-        key.name.should eq(:field)
+        expect(key.name).to eq(:field)
       end
 
       it "sets the operator as $within" do
-        key.operator.should eq("$within")
+        expect(key.operator).to eq("$within")
       end
 
       it "sets the expanded operator as $center" do
-        key.expanded.should eq("$center")
+        expect(key.expanded).to eq("$center")
       end
     end
 
@@ -4436,19 +4436,19 @@ describe Origin::Selectable do
       end
 
       it "returns a selecton key" do
-        key.should be_a(Origin::Key)
+        expect(key).to be_a(Origin::Key)
       end
 
       it "sets the name as the key" do
-        key.name.should eq(:field)
+        expect(key.name).to eq(:field)
       end
 
       it "sets the operator as $within" do
-        key.operator.should eq("$within")
+        expect(key.operator).to eq("$within")
       end
 
       it "sets the expanded operator as $polygon" do
-        key.expanded.should eq("$polygon")
+        expect(key.expanded).to eq("$polygon")
       end
     end
 
@@ -4459,19 +4459,19 @@ describe Origin::Selectable do
       end
 
       it "returns a selecton key" do
-        key.should be_a(Origin::Key)
+        expect(key).to be_a(Origin::Key)
       end
 
       it "sets the name as the key" do
-        key.name.should eq(:field)
+        expect(key.name).to eq(:field)
       end
 
       it "sets the operator as $within" do
-        key.operator.should eq("$within")
+        expect(key.operator).to eq("$within")
       end
 
       it "sets the expanded operator as $centerSphere" do
-        key.expanded.should eq("$centerSphere")
+        expect(key.expanded).to eq("$centerSphere")
       end
     end
   end
@@ -4487,7 +4487,7 @@ describe Origin::Selectable do
         end
 
         it "merges the strategies on the same field" do
-          selection.selector.should eq(
+          expect(selection.selector).to eq(
             { "field" => { "$gt" => 5, "$lt" => 10, "$ne" => 7 }}
           )
         end
@@ -4500,7 +4500,7 @@ describe Origin::Selectable do
         end
 
         it "overrides the previous field" do
-          selection.selector.should eq({ "field" => 10 })
+          expect(selection.selector).to eq({ "field" => 10 })
         end
       end
     end
@@ -4514,7 +4514,7 @@ describe Origin::Selectable do
         end
 
         it "merges the strategies on the same field" do
-          selection.selector.should eq(
+          expect(selection.selector).to eq(
             { "field" => { "$gt" => 5, "$lt" => 10, "$ne" => 7 }}
           )
         end

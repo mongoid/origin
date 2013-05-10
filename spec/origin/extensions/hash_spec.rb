@@ -23,7 +23,7 @@ describe Hash do
               end
 
               it "sets the new array" do
-                hash.should eq({ "$in" => [ 5, 6 ] })
+                expect(hash).to eq({ "$in" => [ 5, 6 ] })
               end
             end
 
@@ -38,7 +38,7 @@ describe Hash do
               end
 
               it "keeps the old value" do
-                hash.should eq({ "$in" => 5 })
+                expect(hash).to eq({ "$in" => 5 })
               end
             end
           end
@@ -57,7 +57,7 @@ describe Hash do
             end
 
             it "sets the new array" do
-              hash.should eq({ "$in" => [ 5, 6, 7, 8 ] })
+              expect(hash).to eq({ "$in" => [ 5, 6, 7, 8 ] })
             end
           end
 
@@ -72,7 +72,7 @@ describe Hash do
             end
 
             it "sets a new unique array" do
-              hash.should eq({ "$in" => [ 5, 6, 7 ] })
+              expect(hash).to eq({ "$in" => [ 5, 6, 7 ] })
             end
           end
         end
@@ -89,7 +89,7 @@ describe Hash do
         end
 
         it "merges in the new hash" do
-          hash.should eq({
+          expect(hash).to eq({
             "$all" => [ 1, 2, 3 ],
             "$in" => [ 1, 2 ]
           })
@@ -131,7 +131,7 @@ describe Hash do
       end
 
       it "expands the nested values" do
-        expanded.should eq(expected)
+        expect(expanded).to eq(expected)
       end
     end
   end
@@ -157,7 +157,7 @@ describe Hash do
               end
 
               it "sets the intersected array" do
-                hash.should eq({ "$in" => [ 5 ] })
+                expect(hash).to eq({ "$in" => [ 5 ] })
               end
             end
 
@@ -172,7 +172,7 @@ describe Hash do
               end
 
               it "sets the empty array" do
-                hash.should eq({ "$in" => [] })
+                expect(hash).to eq({ "$in" => [] })
               end
             end
           end
@@ -191,7 +191,7 @@ describe Hash do
             end
 
             it "sets the intersected array" do
-              hash.should eq({ "$in" => [ 6 ] })
+              expect(hash).to eq({ "$in" => [ 6 ] })
             end
           end
 
@@ -206,7 +206,7 @@ describe Hash do
             end
 
             it "sets the empty array" do
-              hash.should eq({ "$in" => [] })
+              expect(hash).to eq({ "$in" => [] })
             end
           end
         end
@@ -223,7 +223,7 @@ describe Hash do
         end
 
         it "merges in the new hash" do
-          hash.should eq({
+          expect(hash).to eq({
             "$all" => [ 1, 2, 3 ],
             "$in" => [ 1, 2 ]
           })
@@ -253,7 +253,7 @@ describe Hash do
               end
 
               it "sets the unioned array" do
-                hash.should eq({ "$in" => [ 5 ] })
+                expect(hash).to eq({ "$in" => [ 5 ] })
               end
             end
 
@@ -268,7 +268,7 @@ describe Hash do
               end
 
               it "sets the empty array" do
-                hash.should eq({ "$in" => [ 5, 6 ] })
+                expect(hash).to eq({ "$in" => [ 5, 6 ] })
               end
             end
           end
@@ -285,7 +285,7 @@ describe Hash do
           end
 
           it "sets the unioned array" do
-            hash.should eq({ "$in" => [ 5, 6, 7 ] })
+            expect(hash).to eq({ "$in" => [ 5, 6, 7 ] })
           end
         end
       end
@@ -301,7 +301,7 @@ describe Hash do
         end
 
         it "merges in the new hash" do
-          hash.should eq({
+          expect(hash).to eq({
             "$all" => [ 1, 2, 3 ],
             "$in" => [ 1, 2 ]
           })
@@ -321,7 +321,7 @@ describe Hash do
     end
 
     it "updates each value in the hash" do
-      hash.should eq({ field: 1 })
+      expect(hash).to eq({ field: 1 })
     end
   end
 end

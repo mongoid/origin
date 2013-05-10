@@ -17,7 +17,7 @@ describe Origin::Query do
       context "when the options are the same" do
 
         it "returns true" do
-          query.should eq(other)
+          expect(query).to eq(other)
         end
       end
 
@@ -28,7 +28,7 @@ describe Origin::Query do
         end
 
         it "returns false" do
-          query.should_not eq(other)
+          expect(query).to_not eq(other)
         end
       end
     end
@@ -42,7 +42,7 @@ describe Origin::Query do
       end
 
       it "returns false" do
-        query.should_not eq(other)
+        expect(query).to_not eq(other)
       end
     end
 
@@ -53,7 +53,7 @@ describe Origin::Query do
       end
 
       it "returns false" do
-        query.should_not eq(other)
+        expect(query).to_not eq(other)
       end
     end
   end
@@ -67,11 +67,11 @@ describe Origin::Query do
       end
 
       it "intializes the selector" do
-        query.selector.should eq({})
+        expect(query.selector).to eq({})
       end
 
       it "initializes the options" do
-        query.options.should eq({})
+        expect(query.options).to eq({})
       end
     end
 
@@ -84,7 +84,7 @@ describe Origin::Query do
       end
 
       it "yields to the block" do
-        query.selector.should eq({ "field" => "value" })
+        expect(query.selector).to eq({ "field" => "value" })
       end
     end
   end
@@ -107,31 +107,31 @@ describe Origin::Query do
     end
 
     it "returns a query" do
-      cloned.should be_a(Origin::Query)
+      expect(cloned).to be_a(Origin::Query)
     end
 
     it "returns a new instance" do
-      cloned.should_not equal(query)
+      expect(cloned).to_not equal(query)
     end
 
     it "retains the selector values" do
-      cloned.selector.should eq({ "field" => "value" })
+      expect(cloned.selector).to eq({ "field" => "value" })
     end
 
     it "retains the option values" do
-      cloned.options.should eq({ "sort" => { "field" => sort }})
+      expect(cloned.options).to eq({ "sort" => { "field" => sort }})
     end
 
     it "deep copies the selector" do
-      cloned.selector.should_not equal(query.selector)
+      expect(cloned.selector).to_not equal(query.selector)
     end
 
     it "deep copies the options" do
-      cloned.options.should_not equal(query.options)
+      expect(cloned.options).to_not equal(query.options)
     end
 
     it "deep copies n levels deep" do
-      cloned.options["sort"]["field"].should_not equal(sort)
+      expect(cloned.options["sort"]["field"]).to_not equal(sort)
     end
   end
 end

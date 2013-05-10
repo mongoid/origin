@@ -13,7 +13,7 @@ describe Origin::Mergeable do
     end
 
     it "sets the strategy to intersect" do
-      query.strategy.should eq(:__intersect__)
+      expect(query.strategy).to eq(:__intersect__)
     end
   end
 
@@ -28,7 +28,7 @@ describe Origin::Mergeable do
     end
 
     it "sets the strategy to override" do
-      query.strategy.should eq(:__override__)
+      expect(query.strategy).to eq(:__override__)
     end
   end
 
@@ -43,7 +43,7 @@ describe Origin::Mergeable do
     end
 
     it "sets the strategy to union" do
-      query.strategy.should eq(:__union__)
+      expect(query.strategy).to eq(:__union__)
     end
   end
 end

@@ -21,11 +21,11 @@ describe Time do
         end
 
         it "returns the same time" do
-          evolved.should eq(expected)
+          expect(evolved).to eq(expected)
         end
 
         it "returns the time in utc" do
-          evolved.utc_offset.should eq(0)
+          expect(evolved.utc_offset).to eq(0)
         end
       end
 
@@ -44,11 +44,11 @@ describe Time do
         end
 
         it "returns the same time" do
-          evolved.should eq(expected)
+          expect(evolved).to eq(expected)
         end
 
         it "returns the time in utc" do
-          evolved.utc_offset.should eq(0)
+          expect(evolved.utc_offset).to eq(0)
         end
       end
     end
@@ -70,11 +70,11 @@ describe Time do
         end
 
         it "returns the array with evolved times" do
-          evolved.should eq([ expected ])
+          expect(evolved).to eq([ expected ])
         end
 
         it "returns utc times" do
-          evolved.first.utc_offset.should eq(0)
+          expect(evolved.first.utc_offset).to eq(0)
         end
       end
 
@@ -89,11 +89,11 @@ describe Time do
         end
 
         it "returns the strings as a times" do
-          evolved.should eq([ date.to_time ])
+          expect(evolved).to eq([ date.to_time ])
         end
 
         it "returns the times in utc" do
-          evolved.first.utc_offset.should eq(0)
+          expect(evolved.first.utc_offset).to eq(0)
         end
       end
 
@@ -112,11 +112,11 @@ describe Time do
         end
 
         it "returns the integers as times" do
-          evolved.should eq([ expected ])
+          expect(evolved).to eq([ expected ])
         end
 
         it "returns the times in utc" do
-          evolved.first.utc_offset.should eq(0)
+          expect(evolved.first.utc_offset).to eq(0)
         end
       end
 
@@ -135,11 +135,11 @@ describe Time do
         end
 
         it "returns the floats as times" do
-          evolved.should eq([ expected ])
+          expect(evolved).to eq([ expected ])
         end
 
         it "returns the times in utc" do
-          evolved.first.utc_offset.should eq(0)
+          expect(evolved.first.utc_offset).to eq(0)
         end
       end
     end
@@ -169,13 +169,13 @@ describe Time do
         end
 
         it "returns a selection of times" do
-          evolved.should eq(
+          expect(evolved).to eq(
             { "$gte" => expected_min, "$lte" => expected_max }
           )
         end
 
         it "returns the times in utc" do
-          evolved["$gte"].utc_offset.should eq(0)
+          expect(evolved["$gte"].utc_offset).to eq(0)
         end
       end
 
@@ -194,13 +194,13 @@ describe Time do
         end
 
         it "returns a selection of times" do
-          evolved.should eq(
+          expect(evolved).to eq(
             { "$gte" => min.to_time, "$lte" => max.to_time }
           )
         end
 
         it "returns the times in utc" do
-          evolved["$gte"].utc_offset.should eq(0)
+          expect(evolved["$gte"].utc_offset).to eq(0)
         end
       end
 
@@ -227,13 +227,13 @@ describe Time do
         end
 
         it "returns a selection of times" do
-          evolved.should eq(
+          expect(evolved).to eq(
             { "$gte" => expected_min, "$lte" => expected_max }
           )
         end
 
         it "returns the times in utc" do
-          evolved["$gte"].utc_offset.should eq(0)
+          expect(evolved["$gte"].utc_offset).to eq(0)
         end
       end
 
@@ -260,13 +260,13 @@ describe Time do
         end
 
         it "returns a selection of times" do
-          evolved.should eq(
+          expect(evolved).to eq(
             { "$gte" => expected_min, "$lte" => expected_max }
           )
         end
 
         it "returns the times in utc" do
-          evolved["$gte"].utc_offset.should eq(0)
+          expect(evolved["$gte"].utc_offset).to eq(0)
         end
       end
     end
@@ -282,11 +282,11 @@ describe Time do
       end
 
       it "returns the string as a time" do
-        evolved.should eq(date.to_time)
+        expect(evolved).to eq(date.to_time)
       end
 
       it "returns the time in utc" do
-        evolved.utc_offset.should eq(0)
+        expect(evolved.utc_offset).to eq(0)
       end
     end
 
@@ -305,11 +305,11 @@ describe Time do
       end
 
       it "returns the float as a time" do
-        evolved.should eq(expected)
+        expect(evolved).to eq(expected)
       end
 
       it "returns the time in utc" do
-        evolved.utc_offset.should eq(0)
+        expect(evolved.utc_offset).to eq(0)
       end
     end
 
@@ -328,18 +328,18 @@ describe Time do
       end
 
       it "returns the integer as a time" do
-        evolved.should eq(expected)
+        expect(evolved).to eq(expected)
       end
 
       it "returns the time in utc" do
-        evolved.utc_offset.should eq(0)
+        expect(evolved.utc_offset).to eq(0)
       end
     end
 
     context "when provided nil" do
 
       it "returns nil" do
-        described_class.evolve(nil).should be_nil
+        expect(described_class.evolve(nil)).to be_nil
       end
     end
   end
@@ -355,7 +355,7 @@ describe Time do
     end
 
     it "returns midnight utc" do
-      evolved.should eq(Time.utc(2010, 1, 1, 0, 0, 0))
+      expect(evolved).to eq(Time.utc(2010, 1, 1, 0, 0, 0))
     end
   end
 
@@ -370,7 +370,7 @@ describe Time do
     end
 
     it "returns self as utc" do
-      evolved.should eq(Time.new(2010, 1, 1, 12, 0, 0).utc)
+      expect(evolved).to eq(Time.new(2010, 1, 1, 12, 0, 0).utc)
     end
   end
 end

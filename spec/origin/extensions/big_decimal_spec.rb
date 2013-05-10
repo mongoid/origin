@@ -11,14 +11,14 @@ describe BigDecimal do
       end
 
       it "returns the decimal as a string" do
-        described_class.evolve(big_decimal).should eq(big_decimal.to_s)
+        expect(described_class.evolve(big_decimal)).to eq(big_decimal.to_s)
       end
     end
 
     context "when provided a non big decimal" do
 
       it "returns the object as a string" do
-        described_class.evolve("testing").should eq("testing")
+        expect(described_class.evolve("testing")).to eq("testing")
       end
     end
 
@@ -37,14 +37,14 @@ describe BigDecimal do
       end
 
       it "returns the array as strings" do
-        evolved.should eq([ bd_one.to_s, bd_two.to_s ])
+        expect(evolved).to eq([ bd_one.to_s, bd_two.to_s ])
       end
     end
 
     context "when provided nil" do
 
       it "returns nil" do
-        described_class.evolve(nil).should be_nil
+        expect(described_class.evolve(nil)).to be_nil
       end
     end
   end

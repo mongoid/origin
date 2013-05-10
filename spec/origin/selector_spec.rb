@@ -26,7 +26,7 @@ describe Origin::Selector do
         end
 
         it "deep merges" do
-          selector['field'].should eq({"$lt"=>50, "$gt" => 20})
+          expect(selector['field']).to eq({"$lt"=>50, "$gt" => 20})
         end
       end
 
@@ -37,7 +37,7 @@ describe Origin::Selector do
         end
 
         it "merges" do
-          selector['field'].should eq(10)
+          expect(selector['field']).to eq(10)
         end
       end
     end
@@ -58,7 +58,7 @@ describe Origin::Selector do
       end
 
       it "merges" do
-        selector['field'].should eq({ "$gt" => 20 })
+        expect(selector['field']).to eq({ "$gt" => 20 })
       end
     end
 
@@ -83,7 +83,7 @@ describe Origin::Selector do
         end
 
         it "combines the two $or queries into one" do
-          selector.should eq({
+          expect(selector).to eq({
             "$or" => [{ "value" => 1 }, { "value" => 2 }]
           })
         end
@@ -111,7 +111,7 @@ describe Origin::Selector do
         end
 
         it "combines the two $and queries into one" do
-          selector.should eq({
+          expect(selector).to eq({
             "$and" => [{ "value" => 1 }, { "value" => 2 }]
           })
         end
@@ -142,15 +142,15 @@ describe Origin::Selector do
     end
 
     it "returns an equal copy" do
-      cloned.should eq(selector)
+      expect(cloned).to eq(selector)
     end
 
     it "performs a deep copy" do
-      cloned["field"].should_not equal(selection)
+      expect(cloned["field"]).to_not equal(selection)
     end
 
     it "clones n levels deep" do
-      cloned["field"]["$in"].should_not equal(value)
+      expect(cloned["field"]["$in"]).to_not equal(value)
     end
   end
 
@@ -171,7 +171,7 @@ describe Origin::Selector do
           end
 
           it "stores the field in the selector by database name" do
-            selector["_id"].should eq(1)
+            expect(selector["_id"]).to eq(1)
           end
         end
 
@@ -201,12 +201,12 @@ describe Origin::Selector do
 
           it "stores the serialized field in the selector by database name" do
             selector.send(method, "id", "1")
-            selector["_id"].should eq(1)
+            expect(selector["_id"]).to eq(1)
           end
 
           it "stores the serialized field when selector is deeply nested" do
             selector.send(method, "$or", [{'$and' => [{'_id' => '5'}]}])
-            selector['$or'][0]['$and'][0]['_id'].should eq(5)
+            expect(selector['$or'][0]['$and'][0]['_id']).to eq(5)
           end
         end
       end
@@ -222,14 +222,14 @@ describe Origin::Selector do
           context "when the keys are strings" do
 
             it "does not serialize values" do
-              selector.send(method, "key", "5").should eq("5")
+              expect(selector.send(method, "key", "5")).to eq("5")
             end
           end
 
           context "when the keys are symbols" do
 
             it "does not serialize values" do
-              selector.send(method, :key, "5").should eq("5")
+              expect(selector.send(method, :key, "5")).to eq("5")
             end
           end
         end
@@ -241,7 +241,7 @@ describe Origin::Selector do
           end
 
           it "serializes the range" do
-            selector["key"].should eq({ "$gte" => 1, "$lte" => 3 })
+            expect(selector["key"]).to eq({ "$gte" => 1, "$lte" => 3 })
           end
         end
 
@@ -264,7 +264,7 @@ describe Origin::Selector do
           end
 
           it "serializes each element in the array" do
-            selector["key"].should eq([ big_one.to_s, big_two.to_s ])
+            expect(selector["key"]).to eq([ big_one.to_s, big_two.to_s ])
           end
         end
       end
@@ -302,7 +302,7 @@ describe Origin::Selector do
               end
 
               it "serializes the value" do
-                selector["key"].should eq(5)
+                expect(selector["key"]).to eq(5)
               end
             end
 
@@ -313,7 +313,7 @@ describe Origin::Selector do
               end
 
               it "serializes the value" do
-                selector["key"].should eq(5)
+                expect(selector["key"]).to eq(5)
               end
             end
           end
@@ -331,7 +331,7 @@ describe Origin::Selector do
                   end
 
                   it "serializes the value" do
-                    selector["key"].should eq([ 1, 2 ])
+                    expect(selector["key"]).to eq([ 1, 2 ])
                   end
                 end
 
@@ -342,7 +342,7 @@ describe Origin::Selector do
                   end
 
                   it "serializes the value" do
-                    selector["key"].should eq([ 1, 2 ])
+                    expect(selector["key"]).to eq([ 1, 2 ])
                   end
                 end
               end
@@ -358,7 +358,7 @@ describe Origin::Selector do
                     end
 
                     it "serializes the value" do
-                      selector["key"].should eq({ "$gt" => 5 })
+                      expect(selector["key"]).to eq({ "$gt" => 5 })
                     end
                   end
 
@@ -369,7 +369,7 @@ describe Origin::Selector do
                     end
 
                     it "serializes the value" do
-                      selector["key"].should eq({ "$gt" => 5 })
+                      expect(selector["key"]).to eq({ "$gt" => 5 })
                     end
                   end
                 end
@@ -383,7 +383,7 @@ describe Origin::Selector do
                     end
 
                     it "serializes the value" do
-                      selector["key"].should eq({ "$in" => [ 1, 2 ] })
+                      expect(selector["key"]).to eq({ "$in" => [ 1, 2 ] })
                     end
                   end
 
@@ -394,7 +394,7 @@ describe Origin::Selector do
                     end
 
                     it "serializes the value" do
-                      selector["key"].should eq({ "$in" => [ 1, 2 ] })
+                      expect(selector["key"]).to eq({ "$in" => [ 1, 2 ] })
                     end
                   end
                 end
@@ -412,7 +412,7 @@ describe Origin::Selector do
                         end
 
                         it "serializes the values" do
-                          selector[operator].should eq([{ "key" => 1 }])
+                          expect(selector[operator]).to eq([{ "key" => 1 }])
                         end
                       end
 
@@ -423,7 +423,7 @@ describe Origin::Selector do
                         end
 
                         it "serializes the values" do
-                          selector[operator].should eq([{ "key" => 1 }])
+                          expect(selector[operator]).to eq([{ "key" => 1 }])
                         end
                       end
                     end
@@ -441,7 +441,7 @@ describe Origin::Selector do
                         end
 
                         it "serializes the values" do
-                          selector[operator].should eq(
+                          expect(selector[operator]).to eq(
                             [{ "field" => "1" }, { "key" => { "$gt" => 2 }}]
                           )
                         end
@@ -458,7 +458,7 @@ describe Origin::Selector do
                         end
 
                         it "serializes the values" do
-                          selector[operator].should eq(
+                          expect(selector[operator]).to eq(
                             [{ "field" => "1" }, { "key" => { "$gt" => 2 }}]
                           )
                         end
@@ -506,7 +506,7 @@ describe Origin::Selector do
               end
 
               it "serializes the value" do
-                selector["key.de"].should eq(5)
+                expect(selector["key.de"]).to eq(5)
               end
             end
 
@@ -517,7 +517,7 @@ describe Origin::Selector do
               end
 
               it "serializes the value" do
-                selector["key.de"].should eq(5)
+                expect(selector["key.de"]).to eq(5)
               end
             end
           end
@@ -535,7 +535,7 @@ describe Origin::Selector do
                   end
 
                   it "serializes the value" do
-                    selector["key.de"].should eq([ 1, 2 ])
+                    expect(selector["key.de"]).to eq([ 1, 2 ])
                   end
                 end
 
@@ -546,7 +546,7 @@ describe Origin::Selector do
                   end
 
                   it "serializes the value" do
-                    selector["key.de"].should eq([ 1, 2 ])
+                    expect(selector["key.de"]).to eq([ 1, 2 ])
                   end
                 end
               end
@@ -566,11 +566,11 @@ describe Origin::Selector do
                     end
 
                     it "serializes the value" do
-                      selector["key.de"].should eq({ "$gt" => 5 })
+                      expect(selector["key.de"]).to eq({ "$gt" => 5 })
                     end
 
                     it "sets the same hash instance" do
-                      selector["key.de"].should equal(hash)
+                      expect(selector["key.de"]).to equal(hash)
                     end
                   end
 
@@ -581,7 +581,7 @@ describe Origin::Selector do
                     end
 
                     it "serializes the value" do
-                      selector["key.de"].should eq({ "$gt" => 5 })
+                      expect(selector["key.de"]).to eq({ "$gt" => 5 })
                     end
                   end
                 end
@@ -595,7 +595,7 @@ describe Origin::Selector do
                     end
 
                     it "serializes the value" do
-                      selector["key.de"].should eq({ "$in" => [ 1, 2 ] })
+                      expect(selector["key.de"]).to eq({ "$in" => [ 1, 2 ] })
                     end
                   end
 
@@ -606,7 +606,7 @@ describe Origin::Selector do
                     end
 
                     it "serializes the value" do
-                      selector["key.de"].should eq({ "$in" => [ 1, 2 ] })
+                      expect(selector["key.de"]).to eq({ "$in" => [ 1, 2 ] })
                     end
                   end
                 end
@@ -624,7 +624,7 @@ describe Origin::Selector do
                         end
 
                         it "serializes the values" do
-                          selector[operator].should eq([{ "key.de" => 1 }])
+                          expect(selector[operator]).to eq([{ "key.de" => 1 }])
                         end
                       end
 
@@ -635,7 +635,7 @@ describe Origin::Selector do
                         end
 
                         it "serializes the values" do
-                          selector[operator].should eq([{ "key.de" => 1 }])
+                          expect(selector[operator]).to eq([{ "key.de" => 1 }])
                         end
                       end
                     end
@@ -653,7 +653,7 @@ describe Origin::Selector do
                         end
 
                         it "serializes the values" do
-                          selector[operator].should eq(
+                          expect(selector[operator]).to eq(
                             [{ "field" => "1" }, { "key.de" => { "$gt" => 2 }}]
                           )
                         end
@@ -670,7 +670,7 @@ describe Origin::Selector do
                         end
 
                         it "serializes the values" do
-                          selector[operator].should eq(
+                          expect(selector[operator]).to eq(
                             [{ "field" => "1" }, { "key.de" => { "$gt" => 2 }}]
                           )
                         end

@@ -26,14 +26,14 @@ describe Origin::Forwardable do
         Origin::Selectable.forwardables.each do |method|
 
           it "forwards #{method} to the provided method name" do
-            Band.should respond_to(method)
+            expect(Band).to respond_to(method)
           end
         end
 
         Origin::Optional.forwardables.each do |method|
 
           it "forwards #{method} to the provided method name" do
-            Band.should respond_to(method)
+            expect(Band).to respond_to(method)
           end
         end
       end
@@ -71,14 +71,14 @@ describe Origin::Forwardable do
         Origin::Selectable.forwardables.each do |method|
 
           it "forwards #{method} to the provided method name" do
-            Band.should respond_to(method)
+            expect(Band).to respond_to(method)
           end
         end
 
         Origin::Optional.forwardables.each do |method|
 
           it "forwards #{method} to the provided method name" do
-            Band.should respond_to(method)
+            expect(Band).to respond_to(method)
           end
         end
       end

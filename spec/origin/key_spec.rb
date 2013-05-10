@@ -9,15 +9,15 @@ describe Origin::Key do
     end
 
     it "sets the name" do
-      key.name.should eq("field")
+      expect(key.name).to eq("field")
     end
 
     it "sets the operator" do
-      key.operator.should eq("$all")
+      expect(key.operator).to eq("$all")
     end
 
     it "sets the strategy" do
-      key.strategy.should eq(:__union__)
+      expect(key.strategy).to eq(:__union__)
     end
   end
 
@@ -32,7 +32,7 @@ describe Origin::Key do
     end
 
     it "returns the name plus operator and value" do
-      specified.should eq({ "field" => { "$all" => [ 1, 2 ] }})
+      expect(specified).to eq({ "field" => { "$all" => [ 1, 2 ] }})
     end
   end
 
@@ -45,8 +45,8 @@ describe Origin::Key do
       described_class.new("field", :__union__, "$all")
     end
 
-    it 'should return the same hash for keys with the same attributes' do
-      key.hash.should eq(other.hash)
+    it "returns the same hash for keys with the same attributes" do
+      expect(key.hash).to eq(other.hash)
     end
   end
 end

@@ -15,7 +15,7 @@ describe String do
       end
 
       it "returns the strings as a times" do
-        evolved.should eq(Time.new(2010, 1, 1, 0, 0, 0, 0).utc)
+        expect(evolved).to eq(Time.new(2010, 1, 1, 0, 0, 0, 0).utc)
       end
     end
 
@@ -30,7 +30,7 @@ describe String do
       end
 
       it "returns the strings as a times" do
-        evolved.should eq(Time.new(2010, 1, 1, 0, 0, 0, 0).utc)
+        expect(evolved).to eq(Time.new(2010, 1, 1, 0, 0, 0, 0).utc)
       end
     end
   end
@@ -48,7 +48,7 @@ describe String do
       end
 
       it "returns the string as a utc time" do
-        evolved.should eq(Time.new(2010, 1, 1, 11, 0, 0, 0).utc)
+        expect(evolved).to eq(Time.new(2010, 1, 1, 11, 0, 0, 0).utc)
       end
     end
 
@@ -63,7 +63,7 @@ describe String do
       end
 
       it "returns the string as a utc time" do
-        evolved.should eq(Time.new(2010, 1, 1, 11, 0, 0, 0).utc)
+        expect(evolved).to eq(Time.new(2010, 1, 1, 11, 0, 0, 0).utc)
       end
     end
   end
@@ -77,7 +77,7 @@ describe String do
       end
 
       it "returns the ascending sort option hash" do
-        option.should eq({ field_one: 1, field_two: 1 })
+        expect(option).to eq({ field_one: 1, field_two: 1 })
       end
     end
 
@@ -88,7 +88,7 @@ describe String do
       end
 
       it "returns the ascending sort option hash" do
-        option.should eq({ field_one: 1, field_two: 1 })
+        expect(option).to eq({ field_one: 1, field_two: 1 })
       end
     end
 
@@ -99,7 +99,7 @@ describe String do
       end
 
       it "returns the ascending sort option hash" do
-        option.should eq({ field_one: 1, field_two: 1 })
+        expect(option).to eq({ field_one: 1, field_two: 1 })
       end
     end
 
@@ -110,7 +110,7 @@ describe String do
       end
 
       it "returns the ascending sort option hash" do
-        option.should eq({ field_one: 1, field_two: 1 })
+        expect(option).to eq({ field_one: 1, field_two: 1 })
       end
     end
 
@@ -121,7 +121,7 @@ describe String do
       end
 
       it "returns the descending sort option hash" do
-        option.should eq({ field_one: -1, field_two: -1 })
+        expect(option).to eq({ field_one: -1, field_two: -1 })
       end
     end
 
@@ -132,7 +132,7 @@ describe String do
       end
 
       it "returns the descending sort option hash" do
-        option.should eq({ field_one: -1, field_two: -1 })
+        expect(option).to eq({ field_one: -1, field_two: -1 })
       end
     end
 
@@ -143,7 +143,7 @@ describe String do
       end
 
       it "returns the descending sort option hash" do
-        option.should eq({ field_one: -1, field_two: -1 })
+        expect(option).to eq({ field_one: -1, field_two: -1 })
       end
     end
 
@@ -154,7 +154,7 @@ describe String do
       end
 
       it "returns the descending sort option hash" do
-        option.should eq({ field_one: -1, field_two: -1 })
+        expect(option).to eq({ field_one: -1, field_two: -1 })
       end
     end
   end
@@ -166,7 +166,7 @@ describe String do
     end
 
     it "returns the string with the value" do
-      specified.should eq({ "field" => 10 })
+      expect(specified).to eq({ "field" => 10 })
     end
 
     context "with a regexp" do
@@ -176,7 +176,7 @@ describe String do
       end
 
       it "returns the symbol with the value" do
-        specified.should eq({ "field" => /test/ })
+        expect(specified).to eq({ "field" => /test/ })
       end
 
     end
@@ -189,7 +189,7 @@ describe String do
         end
 
         it "returns the string with the value negated" do
-          specified.should eq({ "field" => { "$not" => /test/ } })
+          expect(specified).to eq({ "field" => { "$not" => /test/ } })
         end
 
       end
@@ -201,7 +201,7 @@ describe String do
         end
 
         it "returns the string with the value" do
-          specified.should eq({ "field" => 'test' })
+          expect(specified).to eq({ "field" => 'test' })
         end
 
       end
@@ -213,56 +213,56 @@ describe String do
     context "when ascending" do
 
       it "returns 1" do
-        "ascending".to_direction.should eq(1)
+        expect("ascending".to_direction).to eq(1)
       end
     end
 
     context "when asc" do
 
       it "returns 1" do
-        "asc".to_direction.should eq(1)
+        expect("asc".to_direction).to eq(1)
       end
     end
 
     context "when ASCENDING" do
 
       it "returns 1" do
-        "ASCENDING".to_direction.should eq(1)
+        expect("ASCENDING".to_direction).to eq(1)
       end
     end
 
     context "when ASC" do
 
       it "returns 1" do
-        "ASC".to_direction.should eq(1)
+        expect("ASC".to_direction).to eq(1)
       end
     end
 
     context "when descending" do
 
       it "returns -1" do
-        "descending".to_direction.should eq(-1)
+        expect("descending".to_direction).to eq(-1)
       end
     end
 
     context "when desc" do
 
       it "returns -1" do
-        "desc".to_direction.should eq(-1)
+        expect("desc".to_direction).to eq(-1)
       end
     end
 
     context "when DESCENDING" do
 
       it "returns -1" do
-        "DESCENDING".to_direction.should eq(-1)
+        expect("DESCENDING".to_direction).to eq(-1)
       end
     end
 
     context "when DESC" do
 
       it "returns -1" do
-        "DESC".to_direction.should eq(-1)
+        expect("DESC".to_direction).to eq(-1)
       end
     end
   end
@@ -280,7 +280,7 @@ describe String do
       end
 
       it "returns the regex" do
-        evolved.should eq(regex)
+        expect(evolved).to eq(regex)
       end
     end
 
@@ -295,7 +295,7 @@ describe String do
       end
 
       it "returns the object as a string" do
-        evolved.should eq("1234")
+        expect(evolved).to eq("1234")
       end
     end
   end

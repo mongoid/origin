@@ -17,7 +17,7 @@ describe Date do
     end
 
     it "returns the time" do
-      evolved.should eq(expected)
+      expect(evolved).to eq(expected)
     end
   end
 
@@ -36,7 +36,7 @@ describe Date do
     end
 
     it "returns the time" do
-      evolved.should eq(expected)
+      expect(evolved).to eq(expected)
     end
   end
 
@@ -57,7 +57,7 @@ describe Date do
       end
 
       it "returns the time" do
-        evolved.should eq(expected)
+        expect(evolved).to eq(expected)
       end
     end
 
@@ -78,7 +78,7 @@ describe Date do
         end
 
         it "returns the array with evolved times" do
-          evolved.should eq([ expected ])
+          expect(evolved).to eq([ expected ])
         end
       end
 
@@ -93,7 +93,7 @@ describe Date do
         end
 
         it "returns the strings as a times" do
-          evolved.should eq([ Time.new(2010, 1, 1, 0, 0, 0, 0).utc ])
+          expect(evolved).to eq([ Time.new(2010, 1, 1, 0, 0, 0, 0).utc ])
         end
       end
 
@@ -116,7 +116,7 @@ describe Date do
         end
 
         it "returns the integers as times" do
-          evolved.should eq([ time ])
+          expect(evolved).to eq([ time ])
         end
       end
 
@@ -139,7 +139,7 @@ describe Date do
         end
 
         it "returns the floats as times" do
-          evolved.should eq([ time ])
+          expect(evolved).to eq([ time ])
         end
       end
     end
@@ -169,7 +169,7 @@ describe Date do
         end
 
         it "returns a selection of times" do
-          evolved.should eq(
+          expect(evolved).to eq(
             { "$gte" => expected_min, "$lte" => expected_max }
           )
         end
@@ -198,7 +198,7 @@ describe Date do
         end
 
         it "returns a selection of times" do
-          evolved.should eq(
+          expect(evolved).to eq(
             { "$gte" => expected_min, "$lte" => expected_max }
           )
         end
@@ -227,7 +227,7 @@ describe Date do
         end
 
         it "returns a selection of times" do
-          evolved.should eq(
+          expect(evolved).to eq(
             { "$gte" => min_time, "$lte" => max_time }
           )
         end
@@ -256,7 +256,7 @@ describe Date do
         end
 
         it "returns a selection of times" do
-          evolved.should eq(
+          expect(evolved).to eq(
             { "$gte" => min_time, "$lte" => max_time }
           )
         end
@@ -278,7 +278,7 @@ describe Date do
       end
 
       it "returns the string as a time" do
-        evolved.should eq(expected)
+        expect(evolved).to eq(expected)
       end
     end
 
@@ -297,7 +297,7 @@ describe Date do
       end
 
       it "returns the float as a time" do
-        evolved.should eq(time)
+        expect(evolved).to eq(time)
       end
     end
 
@@ -316,14 +316,14 @@ describe Date do
       end
 
       it "returns the integer as a time" do
-        evolved.should eq(time)
+        expect(evolved).to eq(time)
       end
     end
 
     context "when provided nil" do
 
       it "returns nil" do
-        described_class.evolve(nil).should be_nil
+        expect(described_class.evolve(nil)).to be_nil
       end
     end
   end

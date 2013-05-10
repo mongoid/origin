@@ -21,11 +21,11 @@ describe Origin::Options do
     end
 
     it "returns an equal copy" do
-      cloned.should eq(options)
+      expect(cloned).to eq(options)
     end
 
     it "performs a deep copy" do
-      cloned[:sort].should_not equal(sort)
+      expect(cloned[:sort]).to_not equal(sort)
     end
   end
 
@@ -42,14 +42,14 @@ describe Origin::Options do
       end
 
       it "returns the field options" do
-        options.fields.should eq({ "name" => 1 })
+        expect(options.fields).to eq({ "name" => 1 })
       end
     end
 
     context "when field options do not exist" do
 
       it "returns nil" do
-        options.fields.should be_nil
+        expect(options.fields).to be_nil
       end
     end
   end
@@ -67,14 +67,14 @@ describe Origin::Options do
       end
 
       it "returns the limit options" do
-        options.limit.should eq(20)
+        expect(options.limit).to eq(20)
       end
     end
 
     context "when limit options do not exist" do
 
       it "returns nil" do
-        options.limit.should be_nil
+        expect(options.limit).to be_nil
       end
     end
   end
@@ -92,14 +92,14 @@ describe Origin::Options do
       end
 
       it "returns the skip options" do
-        options.skip.should eq(100)
+        expect(options.skip).to eq(100)
       end
     end
 
     context "when skip options do not exist" do
 
       it "returns nil" do
-        options.skip.should be_nil
+        expect(options.skip).to be_nil
       end
     end
   end
@@ -117,14 +117,14 @@ describe Origin::Options do
       end
 
       it "returns the sort options" do
-        options.sort.should eq({ "name" => 1 })
+        expect(options.sort).to eq({ "name" => 1 })
       end
     end
 
     context "when sort options do not exist" do
 
       it "returns nil" do
-        options.sort.should be_nil
+        expect(options.sort).to be_nil
       end
     end
   end
@@ -146,7 +146,7 @@ describe Origin::Options do
           end
 
           it "stores the field in the options by database name" do
-            options[:sort].should eq({ "_id" => 1 })
+            expect(options[:sort]).to eq({ "_id" => 1 })
           end
         end
       end
@@ -162,14 +162,14 @@ describe Origin::Options do
           context "when the keys are strings" do
 
             it "does not serialize values" do
-              options.send(method, "limit", "5").should eq("5")
+              expect(options.send(method, "limit", "5")).to eq("5")
             end
           end
 
           context "when the keys are symbols" do
 
             it "does not serialize values" do
-              options.send(method, :limit, "5").should eq("5")
+              expect(options.send(method, :limit, "5")).to eq("5")
             end
           end
         end
@@ -202,7 +202,7 @@ describe Origin::Options do
             end
 
             it "does not localize the keys" do
-              options[:limit].should eq(1)
+              expect(options[:limit]).to eq(1)
             end
           end
 
@@ -213,7 +213,7 @@ describe Origin::Options do
             end
 
             it "does not localize the keys" do
-              options[:sort].should eq({ "key" => 1 })
+              expect(options[:sort]).to eq({ "key" => 1 })
             end
           end
         end
@@ -247,7 +247,7 @@ describe Origin::Options do
             end
 
             it "does not localize the keys" do
-              options[:limit].should eq(1)
+              expect(options[:limit]).to eq(1)
             end
           end
 
@@ -258,7 +258,7 @@ describe Origin::Options do
             end
 
             it "does not localize the keys" do
-              options[:sort].should eq({ "key.de" => 1 })
+              expect(options[:sort]).to eq({ "key.de" => 1 })
             end
           end
         end

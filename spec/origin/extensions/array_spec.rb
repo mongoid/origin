@@ -9,14 +9,14 @@ describe Array do
       context "when all values are unique" do
 
         it "returns an array of both" do
-          [ 5, 6 ].__add__(7).should eq([ 5, 6, 7 ])
+          expect([ 5, 6 ].__add__(7)).to eq([ 5, 6, 7 ])
         end
       end
 
       context "when values are not unique" do
 
         it "returns a unique array of both" do
-          [ 5, 6 ].__add__(6).should eq([ 5, 6 ])
+          expect([ 5, 6 ].__add__(6)).to eq([ 5, 6 ])
         end
       end
     end
@@ -26,14 +26,14 @@ describe Array do
       context "when all values are unique" do
 
         it "returns an array of both" do
-          [ 4, 5 ].__add__([ 6, 7 ]).should eq([ 4, 5, 6, 7 ])
+          expect([ 4, 5 ].__add__([ 6, 7 ])).to eq([ 4, 5, 6, 7 ])
         end
       end
 
       context "when values are not unique" do
 
         it "returns a unique array of both" do
-          [ 4, 5 ].__add__([ 5, 6, 7 ]).should eq([ 4, 5, 6, 7 ])
+          expect([ 4, 5 ].__add__([ 5, 6, 7 ])).to eq([ 4, 5, 6, 7 ])
         end
       end
     end
@@ -43,7 +43,7 @@ describe Array do
       context "when all values are unique" do
 
         it "returns a hash of both" do
-          [ 4, 5 ].__add__({ "$in" => [ 6, 7 ] }).should eq(
+          expect([ 4, 5 ].__add__({ "$in" => [ 6, 7 ] })).to eq(
             { "$in" => [ 4, 5, 6, 7 ] }
           )
         end
@@ -52,7 +52,7 @@ describe Array do
       context "when values are not unique" do
 
         it "returns a unique array of both" do
-          [ 4, 5 ].__add__({ "$in" => [ 5, 6, 7 ] }).should eq(
+          expect([ 4, 5 ].__add__({ "$in" => [ 5, 6, 7 ] })).to eq(
             { "$in" => [ 4, 5, 6, 7 ] }
           )
         end
@@ -63,7 +63,7 @@ describe Array do
   describe "#__array__" do
 
     it "returns self" do
-      [ 1, 2, 3 ].__array__.should eq([ 1, 2, 3 ])
+      expect([ 1, 2, 3 ].__array__).to eq([ 1, 2, 3 ])
     end
   end
 
@@ -82,15 +82,15 @@ describe Array do
     end
 
     it "returns an equal array" do
-      copy.should eq(array)
+      expect(copy).to eq(array)
     end
 
     it "returns a copy" do
-      copy.should_not equal(array)
+      expect(copy).to_not equal(array)
     end
 
     it "deep copies the elements" do
-      copy[2].should_not equal(inner)
+      expect(copy[2]).to_not equal(inner)
     end
   end
 
@@ -111,7 +111,7 @@ describe Array do
       end
 
       it "returns the array with evolved times" do
-        evolved.should eq([ expected ])
+        expect(evolved).to eq([ expected ])
       end
     end
 
@@ -126,7 +126,7 @@ describe Array do
       end
 
       it "returns the strings as a times" do
-        evolved.should eq([ Time.new(2010, 1, 1, 0, 0, 0, 0).utc ])
+        expect(evolved).to eq([ Time.new(2010, 1, 1, 0, 0, 0, 0).utc ])
       end
     end
 
@@ -149,7 +149,7 @@ describe Array do
       end
 
       it "returns the integers as times" do
-        evolved.should eq([ time ])
+        expect(evolved).to eq([ time ])
       end
     end
 
@@ -172,7 +172,7 @@ describe Array do
       end
 
       it "returns the floats as times" do
-        evolved.should eq([ time ])
+        expect(evolved).to eq([ time ])
       end
     end
   end
@@ -194,11 +194,11 @@ describe Array do
       end
 
       it "returns the array with evolved times" do
-        evolved.should eq([ expected ])
+        expect(evolved).to eq([ expected ])
       end
 
       it "returns utc times" do
-        evolved.first.utc_offset.should eq(0)
+        expect(evolved.first.utc_offset).to eq(0)
       end
     end
 
@@ -213,11 +213,11 @@ describe Array do
       end
 
       it "returns the strings as a times" do
-        evolved.should eq([ date.to_time ])
+        expect(evolved).to eq([ date.to_time ])
       end
 
       it "returns the times in utc" do
-        evolved.first.utc_offset.should eq(0)
+        expect(evolved.first.utc_offset).to eq(0)
       end
     end
 
@@ -236,11 +236,11 @@ describe Array do
       end
 
       it "returns the integers as times" do
-        evolved.should eq([ expected ])
+        expect(evolved).to eq([ expected ])
       end
 
       it "returns the times in utc" do
-        evolved.first.utc_offset.should eq(0)
+        expect(evolved.first.utc_offset).to eq(0)
       end
     end
 
@@ -259,11 +259,11 @@ describe Array do
       end
 
       it "returns the floats as times" do
-        evolved.should eq([ expected ])
+        expect(evolved).to eq([ expected ])
       end
 
       it "returns the times in utc" do
-        evolved.first.utc_offset.should eq(0)
+        expect(evolved.first.utc_offset).to eq(0)
       end
     end
   end
@@ -275,7 +275,7 @@ describe Array do
     end
 
     it "expands all keys inside the array" do
-      array.__expand_complex__.should eq([{ "test" => { "$in" => [ "value" ]}}])
+      expect(array.__expand_complex__).to eq([{ "test" => { "$in" => [ "value" ]}}])
     end
   end
 
@@ -286,14 +286,14 @@ describe Array do
       context "when the values intersect" do
 
         it "returns an intersected array" do
-          [ 5, 6, 7 ].__intersect__(6).should eq([ 6 ])
+          expect([ 5, 6, 7 ].__intersect__(6)).to eq([ 6 ])
         end
       end
 
       context "when the values do not intersect" do
 
         it "returns an empty array" do
-          [ 5, 6, 7 ].__intersect__(8).should be_empty
+          expect([ 5, 6, 7 ].__intersect__(8)).to be_empty
         end
       end
     end
@@ -303,14 +303,14 @@ describe Array do
       context "when the values intersect" do
 
         it "returns an intersected array" do
-          [ 4, 5, 6 ].__intersect__([ 6, 7 ]).should eq([ 6 ])
+          expect([ 4, 5, 6 ].__intersect__([ 6, 7 ])).to eq([ 6 ])
         end
       end
 
       context "when values do not intersect" do
 
         it "returns an empty array" do
-          [ 4, 5 ].__intersect__([ 6, 7 ]).should be_empty
+          expect([ 4, 5 ].__intersect__([ 6, 7 ])).to be_empty
         end
       end
     end
@@ -320,7 +320,7 @@ describe Array do
       context "when the values intersect" do
 
         it "returns a hash of both" do
-          [ 4, 5 ].__intersect__({ "$in" => [ 5, 6 ] }).should eq(
+          expect([ 4, 5 ].__intersect__({ "$in" => [ 5, 6 ] })).to eq(
             { "$in" => [ 5 ] }
           )
         end
@@ -329,7 +329,7 @@ describe Array do
       context "when values do not intersect" do
 
         it "returns an empty array" do
-          [ 4, 5 ].__intersect__({ "$in" => [ 6, 7 ] }).should eq(
+          expect([ 4, 5 ].__intersect__({ "$in" => [ 6, 7 ] })).to eq(
             { "$in" => [] }
           )
         end
@@ -342,14 +342,14 @@ describe Array do
     context "when the array is one dimensional" do
 
       it "returns a hash of sort options" do
-        [ :field, 1 ].__sort_option__.should eq({ field: 1 })
+        expect([ :field, 1 ].__sort_option__).to eq({ field: 1 })
       end
     end
 
     context "when the array is multi dimensional" do
 
       it "returns a hash of sort options" do
-        [[ :field, 1 ]].__sort_option__.should eq({ field: 1 })
+        expect([[ :field, 1 ]].__sort_option__).to eq({ field: 1 })
       end
     end
   end
@@ -359,14 +359,14 @@ describe Array do
     context "when the direction is a symbol" do
 
       it "converts the symbol to an integer" do
-        [ :field, :asc ].__sort_pair__.should eq({ field: 1 })
+        expect([ :field, :asc ].__sort_pair__).to eq({ field: 1 })
       end
     end
 
     context "when the direction is an integer" do
 
       it "returns the array as a hash" do
-        [ :field, 1 ].__sort_pair__.should eq({ field: 1 })
+        expect([ :field, 1 ].__sort_pair__).to eq({ field: 1 })
       end
     end
   end
@@ -376,21 +376,21 @@ describe Array do
     context "when the other object is a non-enumerable" do
 
       it "returns an unioned array" do
-        [ 5, 6, 7 ].__union__(6).should eq([ 5, 6, 7 ])
+        expect([ 5, 6, 7 ].__union__(6)).to eq([ 5, 6, 7 ])
       end
     end
 
     context "when the other object is an array" do
 
       it "returns an unioned array" do
-        [ 4, 5, 6 ].__union__([ 6, 7 ]).should eq([ 4, 5, 6, 7 ])
+        expect([ 4, 5, 6 ].__union__([ 6, 7 ])).to eq([ 4, 5, 6, 7 ])
       end
     end
 
     context "when the other object is a hash" do
 
       it "returns a hash with a unioned array" do
-        [ 4, 5 ].__union__({ "$in" => [ 5, 6 ] }).should eq(
+        expect([ 4, 5 ].__union__({ "$in" => [ 5, 6 ] })).to eq(
           { "$in" => [ 4, 5, 6 ] }
         )
       end
@@ -408,7 +408,7 @@ describe Array do
         end
 
         it "adds the sorting criteria" do
-          selection.__sort_option__.should eq(
+          expect(selection.__sort_option__).to eq(
             { field_one: 1, field_two: -1 }
           )
         end
@@ -421,7 +421,7 @@ describe Array do
         end
 
         it "adds the sorting criteria" do
-          selection.__sort_option__.should eq(
+          expect(selection.__sort_option__).to eq(
             { field_one: 1, field_two: -1 }
           )
         end
@@ -434,7 +434,7 @@ describe Array do
         end
 
         it "adds the sorting criteria" do
-          selection.__sort_option__.should eq(
+          expect(selection.__sort_option__).to eq(
             { field_one: 1, field_two: -1 }
           )
         end
@@ -450,7 +450,7 @@ describe Array do
         end
 
         it "adds the sorting criteria" do
-          selection.__sort_option__.should eq(
+          expect(selection.__sort_option__).to eq(
             { field_one: 1 }
           )
         end
@@ -464,7 +464,7 @@ describe Array do
       end
 
       it "adds the sorting criteria" do
-        selection.__sort_option__.should eq(
+        expect(selection.__sort_option__).to eq(
           { field_one: 1, field_two: -1 }
         )
       end
@@ -482,11 +482,11 @@ describe Array do
     end
 
     it "replaces each of the values with the result of the block" do
-      updated.should eq([ "1", "2", "3" ])
+      expect(updated).to eq([ "1", "2", "3" ])
     end
 
     it "returns the same instance of the array" do
-      updated.should equal(array)
+      expect(updated).to equal(array)
     end
   end
 end

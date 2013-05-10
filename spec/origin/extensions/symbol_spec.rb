@@ -15,27 +15,27 @@ describe Symbol do
     end
 
     it "adds the method to symbol" do
-      fubar.should be_a(Origin::Key)
+      expect(fubar).to be_a(Origin::Key)
     end
 
     it "sets the key name" do
-      fubar.name.should eq(:testing)
+      expect(fubar.name).to eq(:testing)
     end
 
     it "sets the key strategy" do
-      fubar.strategy.should eq(:__union__)
+      expect(fubar.strategy).to eq(:__union__)
     end
 
     it "sets the key operator" do
-      fubar.operator.should eq("$fu")
+      expect(fubar.operator).to eq("$fu")
     end
 
     it "sets the additional key operator" do
-      fubar.expanded.should eq("$bar")
+      expect(fubar.expanded).to eq("$bar")
     end
 
     it "sets the transform block" do
-      fubar.block.should be
+      expect(fubar.block).to be
     end
   end
 
@@ -44,14 +44,14 @@ describe Symbol do
     context "when provided nil" do
 
       it "returns nil" do
-        described_class.evolve(nil).should be_nil
+        expect(described_class.evolve(nil)).to be_nil
       end
     end
 
     context "when provided a string" do
 
       it "returns the string as a symbol" do
-        described_class.evolve("test").should eq(:test)
+        expect(described_class.evolve("test")).to eq(:test)
       end
     end
   end
@@ -63,7 +63,7 @@ describe Symbol do
     end
 
     it "returns the string with the value" do
-      specified.should eq({ field: 10 })
+      expect(specified).to eq({ field: 10 })
     end
 
     context "with a regexp" do
@@ -73,7 +73,7 @@ describe Symbol do
       end
 
       it "returns the symbol with the value" do
-        specified.should eq({ field: /test/ })
+        expect(specified).to eq({ field: /test/ })
       end
 
     end
@@ -86,7 +86,7 @@ describe Symbol do
         end
 
         it "returns the symbol with the value negated" do
-          specified.should eq({ field: { "$not" => /test/ } })
+          expect(specified).to eq({ field: { "$not" => /test/ } })
         end
 
       end
@@ -98,7 +98,7 @@ describe Symbol do
         end
 
         it "returns the symbol with the value" do
-          specified.should eq({ field: 'test' })
+          expect(specified).to eq({ field: 'test' })
         end
 
       end
@@ -110,56 +110,56 @@ describe Symbol do
     context "when ascending" do
 
       it "returns 1" do
-        :ascending.to_direction.should eq(1)
+        expect(:ascending.to_direction).to eq(1)
       end
     end
 
     context "when asc" do
 
       it "returns 1" do
-        :asc.to_direction.should eq(1)
+        expect(:asc.to_direction).to eq(1)
       end
     end
 
     context "when ASCENDING" do
 
       it "returns 1" do
-        :ASCENDING.to_direction.should eq(1)
+        expect(:ASCENDING.to_direction).to eq(1)
       end
     end
 
     context "when ASC" do
 
       it "returns 1" do
-        :ASC.to_direction.should eq(1)
+        expect(:ASC.to_direction).to eq(1)
       end
     end
 
     context "when descending" do
 
       it "returns -1" do
-        :descending.to_direction.should eq(-1)
+        expect(:descending.to_direction).to eq(-1)
       end
     end
 
     context "when desc" do
 
       it "returns -1" do
-        :desc.to_direction.should eq(-1)
+        expect(:desc.to_direction).to eq(-1)
       end
     end
 
     context "when DESCENDING" do
 
       it "returns -1" do
-        :DESCENDING.to_direction.should eq(-1)
+        expect(:DESCENDING.to_direction).to eq(-1)
       end
     end
 
     context "when DESC" do
 
       it "returns -1" do
-        :DESC.to_direction.should eq(-1)
+        expect(:DESC.to_direction).to eq(-1)
       end
     end
   end

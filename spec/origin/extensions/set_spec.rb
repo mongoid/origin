@@ -11,28 +11,28 @@ describe Set do
       end
 
       it "returns an array" do
-        described_class.evolve(set).should eq([ 1, 2, 3 ])
+        expect(described_class.evolve(set)).to eq([ 1, 2, 3 ])
       end
     end
 
     context "when provided an array" do
 
       it "returns an array" do
-        described_class.evolve([ 1, 2, 3 ]).should eq([ 1, 2, 3 ])
+        expect(described_class.evolve([ 1, 2, 3 ])).to eq([ 1, 2, 3 ])
       end
     end
 
     context "when provided another object" do
 
       it "returns the object" do
-        described_class.evolve("testing").should eq("testing")
+        expect(described_class.evolve("testing")).to eq("testing")
       end
     end
 
     context "when provided nil" do
 
       it "returns nil" do
-        described_class.evolve(nil).should be_nil
+        expect(described_class.evolve(nil)).to be_nil
       end
     end
   end

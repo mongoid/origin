@@ -5,7 +5,7 @@ describe Range do
   describe "#__array__" do
 
     it "returns the range as an array" do
-      (1..3).__array__.should eq([ 1, 2, 3 ])
+      expect((1..3).__array__).to eq([ 1, 2, 3 ])
     end
   end
 
@@ -34,7 +34,7 @@ describe Range do
       end
 
       it "returns a selection of times" do
-        evolved.should eq(
+        expect(evolved).to eq(
           { "$gte" => expected_min, "$lte" => expected_max }
         )
       end
@@ -63,7 +63,7 @@ describe Range do
       end
 
       it "returns a selection of times" do
-        evolved.should eq(
+        expect(evolved).to eq(
           { "$gte" => expected_min, "$lte" => expected_max }
         )
       end
@@ -92,7 +92,7 @@ describe Range do
       end
 
       it "returns a selection of times" do
-        evolved.should eq(
+        expect(evolved).to eq(
           { "$gte" => min_time, "$lte" => max_time }
         )
       end
@@ -121,7 +121,7 @@ describe Range do
       end
 
       it "returns a selection of times" do
-        evolved.should eq(
+        expect(evolved).to eq(
           { "$gte" => min_time, "$lte" => max_time }
         )
       end
@@ -153,13 +153,13 @@ describe Range do
       end
 
       it "returns a selection of times" do
-        evolved.should eq(
+        expect(evolved).to eq(
           { "$gte" => expected_min, "$lte" => expected_max }
         )
       end
 
       it "returns the times in utc" do
-        evolved["$gte"].utc_offset.should eq(0)
+        expect(evolved["$gte"].utc_offset).to eq(0)
       end
     end
 
@@ -178,13 +178,13 @@ describe Range do
       end
 
       it "returns a selection of times" do
-        evolved.should eq(
+        expect(evolved).to eq(
           { "$gte" => min.to_time, "$lte" => max.to_time }
         )
       end
 
       it "returns the times in utc" do
-        evolved["$gte"].utc_offset.should eq(0)
+        expect(evolved["$gte"].utc_offset).to eq(0)
       end
     end
 
@@ -211,13 +211,13 @@ describe Range do
       end
 
       it "returns a selection of times" do
-        evolved.should eq(
+        expect(evolved).to eq(
           { "$gte" => expected_min, "$lte" => expected_max }
         )
       end
 
       it "returns the times in utc" do
-        evolved["$gte"].utc_offset.should eq(0)
+        expect(evolved["$gte"].utc_offset).to eq(0)
       end
     end
 
@@ -244,13 +244,13 @@ describe Range do
       end
 
       it "returns a selection of times" do
-        evolved.should eq(
+        expect(evolved).to eq(
           { "$gte" => expected_min, "$lte" => expected_max }
         )
       end
 
       it "returns the times in utc" do
-        evolved["$gte"].utc_offset.should eq(0)
+        expect(evolved["$gte"].utc_offset).to eq(0)
       end
     end
   end
@@ -266,7 +266,7 @@ describe Range do
         end
 
         it "returns the inclusize range criterion" do
-          described_class.evolve(range).should eq(
+          expect(described_class.evolve(range)).to eq(
             { "$gte" => 1, "$lte" => 3 }
           )
         end
@@ -279,7 +279,7 @@ describe Range do
         end
 
         it "returns the non inclusive range criterion" do
-          described_class.evolve(range).should eq(
+          expect(described_class.evolve(range)).to eq(
             { "$gte" => 1, "$lte" => 2 }
           )
         end
@@ -292,7 +292,7 @@ describe Range do
         end
 
         it "returns the character range" do
-          described_class.evolve(range).should eq(
+          expect(described_class.evolve(range)).to eq(
             { "$gte" => "a", "$lte" => "z" }
           )
         end
@@ -302,7 +302,7 @@ describe Range do
     context "when provided a string" do
 
       it "returns the string" do
-        described_class.evolve("testing").should eq("testing")
+        expect(described_class.evolve("testing")).to eq("testing")
       end
     end
   end

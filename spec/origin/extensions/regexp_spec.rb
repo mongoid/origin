@@ -15,7 +15,7 @@ describe Regexp do
       end
 
       it "returns the regexp" do
-        evolved.should eq(regexp)
+        expect(evolved).to eq(regexp)
       end
     end
 
@@ -30,7 +30,7 @@ describe Regexp do
       end
 
       it "returns the converted regexp" do
-        evolved.should eq(/^[123]/)
+        expect(evolved).to eq(/^[123]/)
       end
     end
 
@@ -47,7 +47,7 @@ describe Regexp do
         end
 
         it "returns the regexps" do
-          evolved.should eq([ regexp ])
+          expect(evolved).to eq([ regexp ])
         end
       end
 
@@ -62,7 +62,7 @@ describe Regexp do
         end
 
         it "returns the regexps" do
-          evolved.should eq([ /^[123]/ ])
+          expect(evolved).to eq([ /^[123]/ ])
         end
       end
     end
@@ -75,7 +75,7 @@ describe Regexp do
     end
 
     it "returns true" do
-      regexp.should be_regexp
+      expect(regexp).to be_regexp
     end
   end
 end
