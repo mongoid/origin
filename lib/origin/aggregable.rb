@@ -94,7 +94,7 @@ module Origin
     #
     # @since 2.0.0
     def evolve_aggregation(criterion)
-      aggregate = Selector.new(aliases, serializers)
+      aggregate = Selector.new(aliases)
       criterion.each_pair do |field, value|
         aggregate.merge!(field.to_s => value)
       end
