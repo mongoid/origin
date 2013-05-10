@@ -164,6 +164,24 @@ describe Origin::Aggregable do
 
   describe "#unwind" do
 
+    context "when another pipeline operation exists" do
+
+      let(:aggregation) do
+        query.project(name: 1).unwind(:$author)
+      end
+
+      let!(:pipeline) do
+        aggregation.pipeline
+      end
+
+      it "adds the unwind to the pipeline" do
+        expect(pipeline).to eq([
+          { "$project" => { "name" => 1 }},
+          { "$unwind" => "$author" }
+        ])
+      end
+    end
+
     context "when provided a symbol" do
 
       context "when the symbol begins with $" do
