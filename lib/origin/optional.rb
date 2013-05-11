@@ -168,11 +168,12 @@ module Origin
     #
     # @since 1.0.0
     def order_by(*spec)
-      option(spec) do |options|
+      option(spec) do |options, query|
         spec.compact.each do |criterion|
           criterion.__sort_option__.each_pair do |field, direction|
             add_sort_option(options, field, direction)
           end
+          query.pipeline.push("$sort" => options[:sort]) if aggregating?
         end
       end
     end

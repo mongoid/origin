@@ -805,6 +805,33 @@ describe Origin::Optional do
 
       context "when provided a hash" do
 
+        context "when the query is aggregating" do
+
+          let(:selection) do
+            query.project(name: 1).order_by(field_one: 1, field_two: -1)
+          end
+
+          it "adds the sorting criteria" do
+            expect(selection.options).to eq(
+              { sort: { "field_one" => 1, "field_two" => -1 }}
+            )
+          end
+
+          it "adds the sort to the aggregation" do
+            expect(selection.pipeline).to include(
+              { "$sort" => { "field_one" => 1, "field_two" => -1 }}
+            )
+          end
+
+          it "does not add multiple entries to the pipeline" do
+            expect(selection.pipeline).to_not include(
+              { "$sort" => { "field_one" => 1 }}
+            )
+          end
+
+          it_behaves_like "a cloning option"
+        end
+
         context "when the hash has integer values" do
 
           let(:selection) do
