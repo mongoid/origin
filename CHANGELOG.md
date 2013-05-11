@@ -6,6 +6,9 @@
 
 ### Resolved Issues
 
+* \#61 `only` and `without` can now be used together. It is up to the user
+  to determine when this is valid or not. (Rodrigo Saito)
+
 * \#60 Array evolution no longer modifies in place.
 
 ## 1.1.0
