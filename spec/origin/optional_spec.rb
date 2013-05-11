@@ -1346,6 +1346,23 @@ describe Origin::Optional do
         it_behaves_like "a cloning option"
       end
 
+      context "when the query is aggregating" do
+
+        let(:selection) do
+          query.project(name: 1).skip(10)
+        end
+
+        it "adds the field options" do
+          expect(selection.options).to eq({ skip: 10 })
+        end
+
+        it "adds the skip to the aggregation" do
+          expect(selection.pipeline).to include({ "$skip" => 10 })
+        end
+
+        it_behaves_like "a cloning option"
+      end
+
       context "when provided arguments" do
 
         context "when provided an integer" do

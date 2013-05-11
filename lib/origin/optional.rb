@@ -86,7 +86,7 @@ module Origin
       option(value) do |options, query|
         val = value.to_i
         options.store(:limit, val)
-        query.pipeline.push({ "$limit" => val }) if aggregating?
+        query.pipeline.push("$limit" => val) if aggregating?
       end
     end
 
@@ -188,7 +188,11 @@ module Origin
     #
     # @since 1.0.0
     def skip(value = nil)
-      option(value) { |options| options.store(:skip, value.to_i) }
+      option(value) do |options, query|
+        val = value.to_i
+        options.store(:skip, val)
+        query.pipeline.push("$skip" => val) if aggregating?
+      end
     end
     alias :offset :skip
 
