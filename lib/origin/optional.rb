@@ -312,10 +312,11 @@ module Origin
     #
     # @since 1.0.0
     def sort_with_list(*fields, direction)
-      option(fields) do |options|
+      option(fields) do |options, query|
         fields.flatten.compact.each do |field|
           add_sort_option(options, field, direction)
         end
+        query.pipeline.push("$sort" => options[:sort]) if aggregating?
       end
     end
 
