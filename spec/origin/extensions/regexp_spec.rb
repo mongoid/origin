@@ -42,12 +42,20 @@ describe Regexp do
           /^[123]/
         end
 
+        let(:array) do
+          [ regexp ]
+        end
+
         let(:evolved) do
-          described_class.evolve([ regexp ])
+          described_class.evolve(array)
         end
 
         it "returns the regexps" do
           expect(evolved).to eq([ regexp ])
+        end
+
+        it "does not evolve in place" do
+          expect(evolved).to_not equal(array)
         end
       end
 

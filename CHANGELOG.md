@@ -2,6 +2,12 @@
 
 ## 2.0.0 (branch: master)
 
+### New Features
+
+### Resolved Issues
+
+* \#60 Array evolution no longer modifies in place.
+
 ## 1.1.0
 
 ### Resolved Issues

@@ -32,12 +32,20 @@ describe BigDecimal do
         BigDecimal.new("123333.789")
       end
 
+      let(:array) do
+        [ bd_one, bd_two ]
+      end
+
       let(:evolved) do
-        described_class.evolve([ bd_one, bd_two ])
+        described_class.evolve(array)
       end
 
       it "returns the array as strings" do
         expect(evolved).to eq([ bd_one.to_s, bd_two.to_s ])
+      end
+
+      it "does not evolve in place" do
+        expect(evolved).to_not equal(array)
       end
     end
 

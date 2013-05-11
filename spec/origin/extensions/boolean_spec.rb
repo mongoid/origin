@@ -115,8 +115,20 @@ describe Boolean do
 
       context "when provided true" do
 
+        let(:array) do
+          [ "true" ]
+        end
+
+        let(:evolved) do
+          described_class.evolve(array)
+        end
+
         it "returns true" do
-          expect(described_class.evolve([ "true" ])).to eq([ true ])
+          expect(evolved).to eq([ true ])
+        end
+
+        it "does not evolve in place" do
+          expect(evolved).to_not equal(array)
         end
       end
 

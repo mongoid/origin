@@ -186,7 +186,7 @@ module Origin
           return nil if object.nil?
           case object
           when ::Array
-            object.map!{ |obj| evolve(obj) }
+            object.map{ |obj| evolve(obj) }
           when ::Range
             { "$gte" => evolve(object.min), "$lte" => evolve(object.max) }
           else
