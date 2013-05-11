@@ -6,6 +6,13 @@ describe Origin::Optional do
     Origin::Query.new
   end
 
+  shared_examples_for "a cloning option" do
+
+    it "returns a cloned query" do
+      expect(selection).to_not equal(query)
+    end
+  end
+
   [ :asc, :ascending ].each do |method|
 
     describe "##{method}" do
@@ -24,9 +31,7 @@ describe Origin::Optional do
             )
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
 
         context "when provided an array of symbols" do
@@ -41,9 +46,7 @@ describe Origin::Optional do
             )
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
 
         context "when provided strings" do
@@ -58,9 +61,7 @@ describe Origin::Optional do
             )
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
 
         context "when provided an array of strings" do
@@ -75,9 +76,7 @@ describe Origin::Optional do
             )
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
 
         context "when provided no options" do
@@ -94,9 +93,7 @@ describe Origin::Optional do
             expect(selection).to eq(query)
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
 
         context "when provided nil" do
@@ -113,9 +110,7 @@ describe Origin::Optional do
             expect(selection).to eq(query)
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
       end
 
@@ -137,9 +132,7 @@ describe Origin::Optional do
             )
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
 
         context "when provided an array of symbols" do
@@ -154,9 +147,7 @@ describe Origin::Optional do
             )
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
 
         context "when provided strings" do
@@ -171,9 +162,7 @@ describe Origin::Optional do
             )
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
 
         context "when provided an array of strings" do
@@ -188,9 +177,7 @@ describe Origin::Optional do
             )
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
 
         context "when provided no options" do
@@ -207,9 +194,7 @@ describe Origin::Optional do
             expect(selection).to eq(query)
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
 
         context "when provided nil" do
@@ -226,9 +211,7 @@ describe Origin::Optional do
             expect(selection).to eq(query)
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
       end
     end
@@ -246,13 +229,7 @@ describe Origin::Optional do
         expect(selection.options).to eq({})
       end
 
-      it "returns the query" do
-        expect(selection).to eq(query)
-      end
-
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
-      end
+      it_behaves_like "a cloning option"
     end
 
     context "when provided nil" do
@@ -265,13 +242,7 @@ describe Origin::Optional do
         expect(selection.options).to eq({})
       end
 
-      it "returns the query" do
-        expect(selection).to eq(query)
-      end
-
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
-      end
+      it_behaves_like "a cloning option"
     end
 
     context "when provided arguments" do
@@ -284,9 +255,7 @@ describe Origin::Optional do
         expect(selection.options).to eq({ batch_size: 500 })
       end
 
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
-      end
+      it_behaves_like "a cloning option"
     end
   end
 
@@ -308,9 +277,7 @@ describe Origin::Optional do
             )
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
 
         context "when provided an array of symbols" do
@@ -325,9 +292,7 @@ describe Origin::Optional do
             )
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
 
         context "when provided strings" do
@@ -342,9 +307,7 @@ describe Origin::Optional do
             )
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
 
         context "when provided an array of strings" do
@@ -359,9 +322,7 @@ describe Origin::Optional do
             )
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
 
         context "when provided no options" do
@@ -378,9 +339,7 @@ describe Origin::Optional do
             expect(selection).to eq(query)
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
 
         context "when provided nil" do
@@ -397,9 +356,7 @@ describe Origin::Optional do
             expect(selection).to eq(query)
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
       end
 
@@ -421,9 +378,7 @@ describe Origin::Optional do
             )
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
 
         context "when provided an array of symbols" do
@@ -438,9 +393,7 @@ describe Origin::Optional do
             )
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
 
         context "when provided strings" do
@@ -455,9 +408,7 @@ describe Origin::Optional do
             )
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
 
         context "when provided an array of strings" do
@@ -472,9 +423,7 @@ describe Origin::Optional do
             )
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
 
         context "when provided no options" do
@@ -491,9 +440,7 @@ describe Origin::Optional do
             expect(selection).to eq(query)
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
 
         context "when provided nil" do
@@ -510,9 +457,7 @@ describe Origin::Optional do
             expect(selection).to eq(query)
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
       end
     end
@@ -534,9 +479,7 @@ describe Origin::Optional do
         expect(selection).to eq(query)
       end
 
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
-      end
+      it_behaves_like "a cloning option"
     end
 
     context "when provided nil" do
@@ -553,9 +496,7 @@ describe Origin::Optional do
         expect(selection).to eq(query)
       end
 
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
-      end
+      it_behaves_like "a cloning option"
     end
 
     context "when provided arguments" do
@@ -570,9 +511,7 @@ describe Origin::Optional do
           expect(selection.options).to eq({ hint: { "$natural" => 1 }})
         end
 
-        it "returns a cloned query" do
-          expect(selection).to_not equal(query)
-        end
+        it_behaves_like "a cloning option"
       end
     end
   end
@@ -593,9 +532,7 @@ describe Origin::Optional do
         expect(selection).to eq(query)
       end
 
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
-      end
+      it_behaves_like "a cloning option"
     end
 
     context "when provided nil" do
@@ -612,9 +549,24 @@ describe Origin::Optional do
         expect(selection).to eq(query)
       end
 
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
+      it_behaves_like "a cloning option"
+    end
+
+    context "when the query is aggregating" do
+
+      let(:selection) do
+        query.project(name: 1).limit(10)
       end
+
+      it "adds the field options" do
+        expect(selection.options).to eq({ limit: 10 })
+      end
+
+      it "adds the limit to the aggregation" do
+        expect(selection.pipeline).to include({ "$limit" => 10 })
+      end
+
+      it_behaves_like "a cloning option"
     end
 
     context "when provided arguments" do
@@ -629,9 +581,7 @@ describe Origin::Optional do
           expect(selection.options).to eq({ limit: 10 })
         end
 
-        it "returns a cloned query" do
-          expect(selection).to_not equal(query)
-        end
+        it_behaves_like "a cloning option"
       end
 
       context "when the argument is a float" do
@@ -644,9 +594,7 @@ describe Origin::Optional do
           expect(selection.options).to eq({ limit: 10 })
         end
 
-        it "returns a cloned query" do
-          expect(selection).to_not equal(query)
-        end
+        it_behaves_like "a cloning option"
       end
 
       context "when the argument is a string" do
@@ -659,9 +607,7 @@ describe Origin::Optional do
           expect(selection.options).to eq({ limit: 10 })
         end
 
-        it "returns a cloned query" do
-          expect(selection).to_not equal(query)
-        end
+        it_behaves_like "a cloning option"
       end
     end
   end
@@ -682,9 +628,7 @@ describe Origin::Optional do
         expect(selection).to eq(query)
       end
 
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
-      end
+      it_behaves_like "a cloning option"
     end
 
     context "when provided nil" do
@@ -701,9 +645,7 @@ describe Origin::Optional do
         expect(selection).to eq(query)
       end
 
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
-      end
+      it_behaves_like "a cloning option"
     end
 
     context "when provided arguments" do
@@ -716,9 +658,7 @@ describe Origin::Optional do
         expect(selection.options).to eq({ max_scan: 500 })
       end
 
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
-      end
+      it_behaves_like "a cloning option"
     end
   end
 
@@ -731,6 +671,8 @@ describe Origin::Optional do
     it "adds the timeout option" do
       expect(selection.options).to eq({ timeout: false })
     end
+
+    it_behaves_like "a cloning option"
   end
 
   describe "#only" do
@@ -749,9 +691,7 @@ describe Origin::Optional do
         expect(selection).to eq(query)
       end
 
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
-      end
+      it_behaves_like "a cloning option"
     end
 
     context "when provided nil" do
@@ -768,9 +708,7 @@ describe Origin::Optional do
         expect(selection).to eq(query)
       end
 
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
-      end
+      it_behaves_like "a cloning option"
     end
 
     context "when provided fields" do
@@ -787,9 +725,7 @@ describe Origin::Optional do
           )
         end
 
-        it "returns a cloned query" do
-          expect(selection).to_not equal(query)
-        end
+        it_behaves_like "a cloning option"
       end
 
       context "as one argument - array" do
@@ -804,9 +740,7 @@ describe Origin::Optional do
           )
         end
 
-        it "returns a cloned query" do
-          expect(selection).to_not equal(query)
-        end
+        it_behaves_like "a cloning option"
       end
     end
   end
@@ -829,9 +763,7 @@ describe Origin::Optional do
             )
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
 
         context "when the hash has symbol values" do
@@ -846,9 +778,7 @@ describe Origin::Optional do
             )
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
 
         context "when the hash has string values" do
@@ -863,9 +793,7 @@ describe Origin::Optional do
             )
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
       end
 
@@ -885,9 +813,7 @@ describe Origin::Optional do
               )
             end
 
-            it "returns a cloned query" do
-              expect(selection).to_not equal(query)
-            end
+            it_behaves_like "a cloning option"
           end
 
           context "when the arrays have symbol values" do
@@ -902,9 +828,7 @@ describe Origin::Optional do
               )
             end
 
-            it "returns a cloned query" do
-              expect(selection).to_not equal(query)
-            end
+            it_behaves_like "a cloning option"
           end
 
           context "when the arrays have string values" do
@@ -919,9 +843,7 @@ describe Origin::Optional do
               )
             end
 
-            it "returns a cloned query" do
-              expect(selection).to_not equal(query)
-            end
+            it_behaves_like "a cloning option"
           end
         end
 
@@ -937,9 +859,7 @@ describe Origin::Optional do
             )
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
       end
 
@@ -959,9 +879,7 @@ describe Origin::Optional do
               )
             end
 
-            it "returns a cloned query" do
-              expect(selection).to_not equal(query)
-            end
+            it_behaves_like "a cloning option"
           end
 
           context "when the values have symbol directions" do
@@ -976,9 +894,7 @@ describe Origin::Optional do
               )
             end
 
-            it "returns a cloned query" do
-              expect(selection).to_not equal(query)
-            end
+            it_behaves_like "a cloning option"
           end
 
           context "when the values have string directions" do
@@ -993,9 +909,7 @@ describe Origin::Optional do
               )
             end
 
-            it "returns a cloned query" do
-              expect(selection).to_not equal(query)
-            end
+            it_behaves_like "a cloning option"
           end
         end
 
@@ -1011,9 +925,7 @@ describe Origin::Optional do
             )
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
       end
 
@@ -1033,9 +945,7 @@ describe Origin::Optional do
               )
             end
 
-            it "returns a cloned query" do
-              expect(selection).to_not equal(query)
-            end
+            it_behaves_like "a cloning option"
           end
 
           context "when spelled out" do
@@ -1050,9 +960,7 @@ describe Origin::Optional do
               )
             end
 
-            it "returns a cloned query" do
-              expect(selection).to_not equal(query)
-            end
+            it_behaves_like "a cloning option"
           end
         end
 
@@ -1070,9 +978,7 @@ describe Origin::Optional do
               )
             end
 
-            it "returns a cloned query" do
-              expect(selection).to_not equal(query)
-            end
+            it_behaves_like "a cloning option"
           end
 
           context "when spelled out" do
@@ -1087,9 +993,7 @@ describe Origin::Optional do
               )
             end
 
-            it "returns a cloned query" do
-              expect(selection).to_not equal(query)
-            end
+            it_behaves_like "a cloning option"
           end
         end
       end
@@ -1104,9 +1008,7 @@ describe Origin::Optional do
           expect(selection).to eq(query)
         end
 
-        it "returns a cloned query" do
-          expect(selection).to_not equal(query)
-        end
+        it_behaves_like "a cloning option"
       end
 
       context "when provided nil" do
@@ -1119,9 +1021,7 @@ describe Origin::Optional do
           expect(selection).to eq(query)
         end
 
-        it "returns a cloned query" do
-          expect(selection).to_not equal(query)
-        end
+        it_behaves_like "a cloning option"
       end
     end
 
@@ -1145,9 +1045,7 @@ describe Origin::Optional do
             )
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
 
         context "when the hash has symbol values" do
@@ -1162,9 +1060,7 @@ describe Origin::Optional do
             )
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
 
         context "when the hash has string values" do
@@ -1179,9 +1075,7 @@ describe Origin::Optional do
             )
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
       end
 
@@ -1201,9 +1095,7 @@ describe Origin::Optional do
               )
             end
 
-            it "returns a cloned query" do
-              expect(selection).to_not equal(query)
-            end
+            it_behaves_like "a cloning option"
           end
 
           context "when the arrays have symbol values" do
@@ -1218,9 +1110,7 @@ describe Origin::Optional do
               )
             end
 
-            it "returns a cloned query" do
-              expect(selection).to_not equal(query)
-            end
+            it_behaves_like "a cloning option"
           end
 
           context "when the arrays have string values" do
@@ -1235,9 +1125,7 @@ describe Origin::Optional do
               )
             end
 
-            it "returns a cloned query" do
-              expect(selection).to_not equal(query)
-            end
+            it_behaves_like "a cloning option"
           end
         end
 
@@ -1253,9 +1141,7 @@ describe Origin::Optional do
             )
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
       end
 
@@ -1275,9 +1161,7 @@ describe Origin::Optional do
               )
             end
 
-            it "returns a cloned query" do
-              expect(selection).to_not equal(query)
-            end
+            it_behaves_like "a cloning option"
           end
 
           context "when the values have symbol directions" do
@@ -1292,9 +1176,7 @@ describe Origin::Optional do
               )
             end
 
-            it "returns a cloned query" do
-              expect(selection).to_not equal(query)
-            end
+            it_behaves_like "a cloning option"
           end
 
           context "when the values have string directions" do
@@ -1309,9 +1191,7 @@ describe Origin::Optional do
               )
             end
 
-            it "returns a cloned query" do
-              expect(selection).to_not equal(query)
-            end
+            it_behaves_like "a cloning option"
           end
         end
 
@@ -1327,9 +1207,7 @@ describe Origin::Optional do
             )
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
       end
 
@@ -1349,9 +1227,7 @@ describe Origin::Optional do
               )
             end
 
-            it "returns a cloned query" do
-              expect(selection).to_not equal(query)
-            end
+            it_behaves_like "a cloning option"
           end
 
           context "when spelled out" do
@@ -1366,9 +1242,7 @@ describe Origin::Optional do
               )
             end
 
-            it "returns a cloned query" do
-              expect(selection).to_not equal(query)
-            end
+            it_behaves_like "a cloning option"
           end
         end
 
@@ -1386,9 +1260,7 @@ describe Origin::Optional do
               )
             end
 
-            it "returns a cloned query" do
-              expect(selection).to_not equal(query)
-            end
+            it_behaves_like "a cloning option"
           end
 
           context "when spelled out" do
@@ -1403,9 +1275,7 @@ describe Origin::Optional do
               )
             end
 
-            it "returns a cloned query" do
-              expect(selection).to_not equal(query)
-            end
+            it_behaves_like "a cloning option"
           end
         end
       end
@@ -1420,9 +1290,7 @@ describe Origin::Optional do
           expect(selection).to eq(query)
         end
 
-        it "returns a cloned query" do
-          expect(selection).to_not equal(query)
-        end
+        it_behaves_like "a cloning option"
       end
 
       context "when provided nil" do
@@ -1435,9 +1303,7 @@ describe Origin::Optional do
           expect(selection).to eq(query)
         end
 
-        it "returns a cloned query" do
-          expect(selection).to_not equal(query)
-        end
+        it_behaves_like "a cloning option"
       end
     end
   end
@@ -1460,9 +1326,7 @@ describe Origin::Optional do
           expect(selection).to eq(query)
         end
 
-        it "returns a cloned query" do
-          expect(selection).to_not equal(query)
-        end
+        it_behaves_like "a cloning option"
       end
 
       context "when provided nil" do
@@ -1479,9 +1343,7 @@ describe Origin::Optional do
           expect(selection).to eq(query)
         end
 
-        it "returns a cloned query" do
-          expect(selection).to_not equal(query)
-        end
+        it_behaves_like "a cloning option"
       end
 
       context "when provided arguments" do
@@ -1496,9 +1358,7 @@ describe Origin::Optional do
             expect(selection.options).to eq({ skip: 10 })
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
 
         context "when provided a float" do
@@ -1511,9 +1371,7 @@ describe Origin::Optional do
             expect(selection.options).to eq({ skip: 10 })
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
 
         context "when provided a non number" do
@@ -1526,9 +1384,7 @@ describe Origin::Optional do
             expect(selection.options).to eq({ skip: 10 })
           end
 
-          it "returns a cloned query" do
-            expect(selection).to_not equal(query)
-          end
+          it_behaves_like "a cloning option"
         end
       end
     end
@@ -1550,9 +1406,7 @@ describe Origin::Optional do
         expect(selection).to eq(query)
       end
 
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
-      end
+      it_behaves_like "a cloning option"
     end
 
     context "when provided nil" do
@@ -1569,9 +1423,7 @@ describe Origin::Optional do
         expect(selection).to eq(query)
       end
 
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
-      end
+      it_behaves_like "a cloning option"
     end
 
     context "when provided a single argument" do
@@ -1586,9 +1438,7 @@ describe Origin::Optional do
         )
       end
 
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
-      end
+      it_behaves_like "a cloning option"
     end
 
     context "when provided a multiple arguments" do
@@ -1603,9 +1453,7 @@ describe Origin::Optional do
         })
       end
 
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
-      end
+      it_behaves_like "a cloning option"
     end
 
     context "when existing field arguments exist" do
@@ -1628,9 +1476,7 @@ describe Origin::Optional do
         })
       end
 
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
-      end
+      it_behaves_like "a cloning option"
     end
   end
 
@@ -1643,6 +1489,8 @@ describe Origin::Optional do
     it "adds the snapshot option" do
       expect(selection.options).to eq({ snapshot: true })
     end
+
+    it_behaves_like "a cloning option"
   end
 
   describe "#without" do
@@ -1661,9 +1509,7 @@ describe Origin::Optional do
         expect(selection).to eq(query)
       end
 
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
-      end
+      it_behaves_like "a cloning option"
     end
 
     context "when provided nil" do
@@ -1680,9 +1526,7 @@ describe Origin::Optional do
         expect(selection).to eq(query)
       end
 
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
-      end
+      it_behaves_like "a cloning option"
     end
 
     context "when provided fields" do
@@ -1699,9 +1543,7 @@ describe Origin::Optional do
           )
         end
 
-        it "returns a cloned query" do
-          expect(selection).to_not equal(query)
-        end
+        it_behaves_like "a cloning option"
       end
 
       context "as one argument - array" do
@@ -1716,9 +1558,7 @@ describe Origin::Optional do
           )
         end
 
-        it "returns a cloned query" do
-          expect(selection).to_not equal(query)
-        end
+        it_behaves_like "a cloning option"
       end
     end
   end

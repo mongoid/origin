@@ -83,7 +83,11 @@ module Origin
     #
     # @since 1.0.0
     def limit(value = nil)
-      option(value) { |options| options.store(:limit, value.to_i) }
+      option(value) do |options, query|
+        val = value.to_i
+        options.store(:limit, val)
+        query.pipeline.push({ "$limit" => val }) if aggregating?
+      end
     end
 
     # Adds the option to limit the number of documents scanned in the
@@ -285,7 +289,7 @@ module Origin
     def option(*args)
       clone.tap do |query|
         unless args.compact.empty?
-          yield(query.options)
+          yield(query.options, query)
         end
       end
     end
