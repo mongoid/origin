@@ -93,4 +93,37 @@ describe Origin::Pipeline do
       end
     end
   end
+
+  describe "#project" do
+
+    let(:pipeline) do
+      described_class.new("id" => "_id")
+    end
+
+    context "when the field is not aliased" do
+
+      before do
+        pipeline.project(name: 1)
+      end
+
+      it "sets the aliased projection" do
+        expect(pipeline).to eq([
+          { "$project" => { "name" => 1 }}
+        ])
+      end
+    end
+
+    context "when the field is aliased" do
+
+      before do
+        pipeline.project(id: 1)
+      end
+
+      it "sets the aliased projection" do
+        expect(pipeline).to eq([
+          { "$project" => { "_id" => 1 }}
+        ])
+      end
+    end
+  end
 end
