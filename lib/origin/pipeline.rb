@@ -9,6 +9,15 @@ module Origin
     # @attribute [r] aliases The field aliases.
     attr_reader :aliases
 
+    # Deep copy the aggregation pipeline. Will clone all the values in the
+    # pipeline as well as the pipeline itself.
+    #
+    # @example Deep copy the pipeline.
+    #   pipeline.__deep_copy__
+    #
+    # @return [ Pipeline ] The cloned pipeline.
+    #
+    # @since 2.0.0
     def __deep_copy__
       self.class.new(aliases) do |copy|
         each do |entry|
