@@ -6,6 +6,9 @@
 
 ### Resolved Issues
 
+* \#66 Array evolution now properly coerces non arrays into arrays.
+  (Jared Wyatt)
+
 * \#61 `only` and `without` can now be used together. It is up to the user
   to determine when this is valid or not. (Rodrigo Saito)
 
