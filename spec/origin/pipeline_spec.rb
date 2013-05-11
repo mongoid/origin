@@ -126,4 +126,75 @@ describe Origin::Pipeline do
       end
     end
   end
+
+  describe "#unwind" do
+
+    let(:pipeline) do
+      described_class.new("alias" => "a")
+    end
+
+    context "when provided a symbol" do
+
+      context "when the symbol begins with $" do
+
+        before do
+          pipeline.unwind(:$author)
+        end
+
+        it "converts the symbol to a string" do
+          expect(pipeline).to eq([{ "$unwind" => "$author" }])
+        end
+      end
+
+      context "when the symbol does not begin with $" do
+
+        before do
+          pipeline.unwind(:author)
+        end
+
+        it "converts the symbol to a string and prepends $" do
+          expect(pipeline).to eq([{ "$unwind" => "$author" }])
+        end
+      end
+    end
+
+    context "when provided a string" do
+
+      context "when the string begins with $" do
+
+        before do
+          pipeline.unwind("$author")
+        end
+
+        it "sets the string" do
+          expect(pipeline).to eq([{ "$unwind" => "$author" }])
+        end
+      end
+
+      context "when the string does not begin with $" do
+
+        before do
+          pipeline.unwind(:author)
+        end
+
+        it "prepends $ to the string" do
+          expect(pipeline).to eq([{ "$unwind" => "$author" }])
+        end
+      end
+    end
+
+    context "when provided a string alias" do
+
+      context "when the string does not begin with $" do
+
+        before do
+          pipeline.unwind(:alias)
+        end
+
+        it "prepends $ to the string" do
+          expect(pipeline).to eq([{ "$unwind" => "$a" }])
+        end
+      end
+    end
+  end
 end
