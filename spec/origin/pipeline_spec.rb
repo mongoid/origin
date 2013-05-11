@@ -29,6 +29,42 @@ describe Origin::Pipeline do
     end
   end
 
+  describe "#group" do
+
+    context "when the expression fields are not aliased" do
+
+      let(:pipeline) do
+        described_class.new
+      end
+
+      context "when using full notation" do
+
+        before do
+          pipeline.group(count: { "$sum" => 1 }, max: { "$max" => "likes" })
+        end
+
+        it "adds the group operation to the pipeline" do
+          expect(pipeline).to eq([
+            { "$group" => { "count" => { "$sum" => 1 }, "max" => { "$max" => "likes" }}}
+          ])
+        end
+      end
+
+      context "when using symbol shortcuts" do
+
+        before do
+          pipeline.group(:count.sum => 1, :max.max => "likes")
+        end
+
+        it "adds the group operation to the pipeline" do
+          expect(pipeline).to eq([
+            { "$group" => { "count" => { "$sum" => 1 }, "max" => { "$max" => "likes" }}}
+          ])
+        end
+      end
+    end
+  end
+
   describe "#initialize" do
 
     context "when provided aliases" do
