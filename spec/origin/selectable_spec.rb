@@ -6,6 +6,13 @@ describe Origin::Selectable do
     Origin::Query.new("id" => "_id")
   end
 
+  shared_examples_for "a cloning selection" do
+
+    it "returns a cloned query" do
+      expect(selection).to_not equal(query)
+    end
+  end
+
   describe "#all" do
 
     context "when provided no criterion" do
@@ -935,6 +942,68 @@ describe Origin::Selectable do
         it "returns a cloned query" do
           expect(selection).to_not equal(query)
         end
+      end
+    end
+  end
+
+  describe "#geo_intersects" do
+
+    context "when provided no criterion" do
+
+      let(:selection) do
+        query.geo_intersects
+      end
+
+      it "does not add any criterion" do
+        expect(selection.selector).to be_empty
+      end
+
+      it "returns the query" do
+        expect(selection).to eq(query)
+      end
+
+      it_behaves_like "a cloning selection"
+    end
+
+    context "when provided nil" do
+
+      let(:selection) do
+        query.geo_intersects(nil)
+      end
+
+      it "does not add any criterion" do
+        expect(selection.selector).to be_empty
+      end
+
+      it "returns the query" do
+        expect(selection).to eq(query)
+      end
+
+      it_behaves_like "a cloning selection"
+    end
+
+    context "when provided a criterion" do
+
+      context "when the geometry is a point" do
+
+        let(:selection) do
+          query.geo_intersects(:location.point => [ 1, 10 ])
+        end
+
+        it "adds the $geoIntersects expression" do
+          expect(selection.selector).to eq({
+            "location" => {
+              "$geoIntersects" => {
+                "$geometry" => {
+                  "type" => "Point",
+                  "coordinates" => [ 1, 10 ]
+                }
+              }
+            }
+          })
+        end
+
+        it_behaves_like "a cloning selection"
       end
     end
   end

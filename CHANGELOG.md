@@ -21,6 +21,8 @@
 
 ### New Features
 
+* \#82 Added support for $geoIntersects queries.
+
 ### Resolved Issues
 
 * \#66 Array evolution now properly coerces non arrays into arrays.

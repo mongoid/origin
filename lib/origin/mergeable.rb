@@ -94,6 +94,25 @@ module Origin
       end
     end
 
+    # Perform a straight merge of the criterion into the selection and let the
+    # symbol overrides do all the work.
+    #
+    # @api private
+    #
+    # @example Straight merge the expanded criterion.
+    #   mergeable.__merge__(location: [ 1, 10 ])
+    #
+    # @param [ Hash ] criterion The criteria.
+    #
+    # @return [ Mergeable ] The cloned object.
+    #
+    # @since 2.0.0
+    def __merge__(criterion)
+      selection(criterion) do |selector, field, value|
+        selector.merge!(field.__expr_part__(value))
+      end
+    end
+
     # Adds the criterion to the existing selection.
     #
     # @api private

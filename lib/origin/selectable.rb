@@ -117,6 +117,13 @@ module Origin
       ::Boolean.evolve(value)
     end
 
+    def geo_intersects(criterion = nil)
+      __merge__(criterion)
+    end
+    key :point, :override, "$geoIntersects", "$geometry" do |value|
+      { "type" => "Point", "coordinates" => value }
+    end
+
     # Add the $gt criterion to the selector.
     #
     # @example Add the $gt criterion.
