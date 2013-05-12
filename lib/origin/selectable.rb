@@ -7,6 +7,10 @@ module Origin
   module Selectable
     extend Macroable
 
+    LINE_STRING = "LineString"
+    POINT = "Point"
+    POLYGON = "Polygon"
+
     # @attribute [rw] negating If the next spression is negated.
     # @attribute [rw] selector The query selector.
     attr_accessor :negating, :selector
@@ -120,8 +124,14 @@ module Origin
     def geo_intersects(criterion = nil)
       __merge__(criterion)
     end
+    key :line, :override, "$geoIntersects", "$geometry" do |value|
+      { "type" => LINE_STRING, "coordinates" => value }
+    end
     key :point, :override, "$geoIntersects", "$geometry" do |value|
-      { "type" => "Point", "coordinates" => value }
+      { "type" => POINT, "coordinates" => value }
+    end
+    key :polygon, :override, "$geoIntersects", "$geometry" do |value|
+      { "type" => POLYGON, "coordinates" => value }
     end
 
     # Add the $gt criterion to the selector.

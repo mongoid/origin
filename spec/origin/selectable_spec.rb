@@ -1005,6 +1005,28 @@ describe Origin::Selectable do
 
         it_behaves_like "a cloning selection"
       end
+
+      context "when the geometry is a line" do
+
+        let(:selection) do
+          query.geo_intersects(:location.line => [[ 1, 10 ], [ 2, 10 ]])
+        end
+
+        it "adds the $geoIntersects expression" do
+          expect(selection.selector).to eq({
+            "location" => {
+              "$geoIntersects" => {
+                "$geometry" => {
+                  "type" => "LineString",
+                  "coordinates" => [[ 1, 10 ], [ 2, 10 ]]
+                }
+              }
+            }
+          })
+        end
+
+        it_behaves_like "a cloning selection"
+      end
     end
   end
 
