@@ -6,14 +6,16 @@
 
 * \#60 Array evolution no longer modifies in place.
 
-* \#49 `not` negation no longer ignores parameters without expressions
+* \#48 `not` negation no longer ignores parameters without expressions
   which follow them, but not negates them with `$ne` instead.
 
       Previously:
+
         selection = query.not.where(field: 1)
         selection.selector # { "field" =>  1 }
 
       Now:
+
         selection = query.not.where(field: 1)
         selection.selector # { "field" => { "$ne" =>  1 }}
 
