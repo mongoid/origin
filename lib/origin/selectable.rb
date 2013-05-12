@@ -121,6 +121,26 @@ module Origin
       ::Boolean.evolve(value)
     end
 
+    # Add a $geoIntersects selection. Symbol operators must be used as shown in
+    # the examples to expand the criteria.
+    #
+    # @note The only valid geometry shapes for a $geoIntersects are: :line,
+    #   :point, and :polygon.
+    #
+    # @example Add a geo intersect criterion for a line.
+    #   query.geo_intersects(:location.line => [[ 1, 10 ], [ 2, 10 ]])
+    #
+    # @example Add a geo intersect criterion for a point.
+    #   query.geo_intersects(:location.point => [[ 1, 10 ]])
+    #
+    # @example Add a geo intersect criterion for a polygon.
+    #   query.geo_intersects(:location.point => [[ 1, 10 ], [ 2, 10 ], [ 1, 10 ]])
+    #
+    # @param [ Hash ] criterion The criterion.
+    #
+    # @return [ Selectable ] The cloned selectable.
+    #
+    # @since 2.0.0
     def geo_intersects(criterion = nil)
       __merge__(criterion)
     end
