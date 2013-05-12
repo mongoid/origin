@@ -7,8 +7,19 @@ module Origin
   module Selectable
     extend Macroable
 
+    # Constant for a LineString $geometry.
+    #
+    # @since 2.0.0
     LINE_STRING = "LineString"
+
+    # Constant for a Point $geometry.
+    #
+    # @since 2.0.0
     POINT = "Point"
+
+    # Constant for a Polygon $geometry.
+    #
+    # @since 2.0.0
     POLYGON = "Polygon"
 
     # @attribute [rw] negating If the next spression is negated.
