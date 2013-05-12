@@ -2,6 +2,21 @@
 
 ## 2.0.0 (branch: master)
 
+### Major Changes (Backwards Incompatible)
+
+* \#60 Array evolution no longer modifies in place.
+
+* \#49 `not` negation no longer ignores parameters without expressions
+  which follow them, but not negates them with `$ne` instead.
+
+      Previously:
+        selection = query.not.where(field: 1)
+        selection.selector # { "field" =>  1 }
+
+      Now:
+        selection = query.not.where(field: 1)
+        selection.selector # { "field" => { "$ne" =>  1 }}
+
 ### New Features
 
 ### Resolved Issues
@@ -11,8 +26,6 @@
 
 * \#61 `only` and `without` can now be used together. It is up to the user
   to determine when this is valid or not. (Rodrigo Saito)
-
-* \#60 Array evolution no longer modifies in place.
 
 ## 1.1.0
 

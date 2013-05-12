@@ -8,7 +8,7 @@ module Origin
       # Get the symbol as a specification.
       #
       # @example Get the symbol as a criteria.
-      #   :field.specify(value)
+      #   :field.__expr_part__(value)
       #
       # @param [ Object ] value The value of the criteria.
       # @param [ true, false ] negating If the selection should be negated.
@@ -16,8 +16,8 @@ module Origin
       # @return [ Hash ] The selection.
       #
       # @since 1.0.0
-      def specify(value, negating = false)
-        (negating && value.regexp?) ? { self => { "$not" => value } } : { self => value }
+      def __expr_part__(value, negating = false)
+        ::String.__expr_part__(self, value, negating)
       end
 
       # Get the symbol as a sort direction.

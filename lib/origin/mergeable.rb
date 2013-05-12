@@ -131,7 +131,7 @@ module Origin
           next unless expr
           criteria = sel[operator] || []
           normalized = expr.inject({}) do |hash, (field, value)|
-            hash.merge!(field.specify(value.__expand_complex__))
+            hash.merge!(field.__expr_part__(value.__expand_complex__))
             hash
           end
           sel.store(operator, criteria.push(normalized))

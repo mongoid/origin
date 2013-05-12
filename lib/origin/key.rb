@@ -57,7 +57,7 @@ module Origin
     # Gets the raw selector that would be passed to Mongo from this key.
     #
     # @example Specify the raw selector.
-    #   key.specify(50)
+    #   key.__expr_part__(50)
     #
     # @param [ Object ] object The value to be included.
     # @param [ true, false ] negating If the selection should be negated.
@@ -65,7 +65,7 @@ module Origin
     # @return [ Hash ] The raw MongoDB selector.
     #
     # @since 1.0.0
-    def specify(object, negating = false)
+    def __expr_part__(object, negating = false)
       value = block ? block[object] : object
       expression = { operator => expanded ? { expanded => value } : value }
       { name.to_s => (negating && operator != "$not") ? { "$not" => expression } : expression }

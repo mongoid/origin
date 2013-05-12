@@ -363,7 +363,11 @@ module Origin
     #
     # @since 1.0.0
     def not(*criterion)
-      (criterion.size == 0) ? tap { |query| query.negating = true } : __override__(criterion.first, "$not")
+      if criterion.empty?
+        tap { |query| query.negating = true }
+      else
+        __override__(criterion.first, "$not")
+      end
     end
     key :not, :override, "$not"
 
@@ -542,7 +546,7 @@ module Origin
     # @since 1.0.0
     def expr_query(criterion)
       selection(criterion) do |selector, field, value|
-        selector.merge!(field.specify(value.__expand_complex__, negating?))
+        selector.merge!(field.__expr_part__(value.__expand_complex__, negating?))
       end
     end
 

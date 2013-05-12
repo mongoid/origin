@@ -21,14 +21,14 @@ describe Origin::Key do
     end
   end
 
-  describe "#specify" do
+  describe "#__expr_part__" do
 
     let(:key) do
       described_class.new("field", :__union__, "$all")
     end
 
     let(:specified) do
-      key.specify([ 1, 2 ])
+      key.__expr_part__([ 1, 2 ])
     end
 
     it "returns the name plus operator and value" do

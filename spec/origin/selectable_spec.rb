@@ -2449,6 +2449,7 @@ describe Origin::Selectable do
   end
 
   describe "#not" do
+
     context "when provided no criterion" do
 
       let(:selection) do
@@ -2496,7 +2497,7 @@ describe Origin::Selectable do
 
         it "negates the gt selection" do
           expect(selection.selector).to eq(
-            { "age" => { "$not" => {"$gt"=>50} } }
+            { "age" => { "$not" => { "$gt" => 50 }}}
           )
         end
 
@@ -2517,7 +2518,7 @@ describe Origin::Selectable do
 
         it "negates the selection with an operator" do
           expect(selection.selector).to eq(
-            { "field" => 1, "other" => { "$not" => { "$in" => [ 1, 2 ] }}}
+            { "field" => { "$ne" => 1 }, "other" => { "$not" => { "$in" => [ 1, 2 ] }}}
           )
         end
 
@@ -2538,7 +2539,7 @@ describe Origin::Selectable do
 
         it "negates the selection with an operator" do
           expect(selection.selector).to eq(
-            { "field" => 1, "other" => { "$not" => /test/ } }
+            { "field" => { "$ne" => 1 }, "other" => { "$not" => /test/ } }
           )
         end
 

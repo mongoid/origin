@@ -159,10 +159,10 @@ describe String do
     end
   end
 
-  describe "#specify" do
+  describe "#__expr_part__" do
 
     let(:specified) do
-      "field".specify(10)
+      "field".__expr_part__(10)
     end
 
     it "returns the string with the value" do
@@ -172,7 +172,7 @@ describe String do
     context "with a regexp" do
 
       let(:specified) do
-        "field".specify(/test/)
+        "field".__expr_part__(/test/)
       end
 
       it "returns the symbol with the value" do
@@ -182,10 +182,11 @@ describe String do
     end
 
     context "when negated" do
+
       context "with a regexp" do
 
         let(:specified) do
-          "field".specify(/test/, true)
+          "field".__expr_part__(/test/, true)
         end
 
         it "returns the string with the value negated" do
@@ -197,13 +198,12 @@ describe String do
       context "with anything else" do
 
         let(:specified) do
-          "field".specify('test', true)
+          "field".__expr_part__('test', true)
         end
 
-        it "returns the string with the value" do
-          expect(specified).to eq({ "field" => 'test' })
+        it "returns the string with the value negated" do
+          expect(specified).to eq({ "field" => { "$ne" => "test" }})
         end
-
       end
     end
   end
