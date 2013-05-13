@@ -42,6 +42,10 @@ module Origin
       yield(self) if block_given?
     end
 
+    def [](key)
+      fetch(@aliases[key]) { super }
+    end
+
     private
 
     # Get the normalized value for the key. If localization is in play the
