@@ -43,7 +43,7 @@ module Origin
     end
 
     def [](key)
-      fetch(@aliases[key]) { super }
+      fetch(aliases[key]) { super }
     end
 
     private
