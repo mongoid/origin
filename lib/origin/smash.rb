@@ -42,6 +42,16 @@ module Origin
       yield(self) if block_given?
     end
 
+    # Get an item from the smart hash by the provided key.
+    #
+    # @example Get an item by the key.
+    #   smash["test"]
+    #
+    # @param [ String ] key The key.
+    #
+    # @return [ Object ] The found object.
+    #
+    # @since 2.0.0
     def [](key)
       fetch(aliases[key]) { super }
     end
