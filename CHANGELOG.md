@@ -25,6 +25,9 @@
 
 ### Resolved Issues
 
+* \#83 Internal smart hashes (Smashes) now can get directly by key or alias.
+  (Gosha Arinich)
+
 * \#66 Array evolution now properly coerces non arrays into arrays.
   (Jared Wyatt)
 
