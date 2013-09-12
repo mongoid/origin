@@ -167,7 +167,7 @@ module Origin
         # @since 1.0.0
         def evolve(object)
           if object.is_a?(::Array)
-            object.map!{ |obj| obj.class.evolve(obj) }
+            object.map { |obj| obj.class.evolve(obj) }
           elsif object.nil?
             []
           else

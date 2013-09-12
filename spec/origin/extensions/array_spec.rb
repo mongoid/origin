@@ -1,6 +1,37 @@
 require "spec_helper"
 
 describe Array do
+  describe ".evolve" do
+
+    context "when provided an Array" do
+
+      let(:array) do
+        [ 1, 2, 3 ]
+      end
+
+      it "returns an array" do
+        expect(described_class.evolve(array)).to eq([ 1, 2, 3 ])
+      end
+
+      it "doesn't mutate its argument" do
+        expect(described_class.evolve(array.freeze)).not_to raise_error
+      end
+    end
+
+    context "when provided nil" do
+
+      it "returns an array" do
+        expect(described_class.evolve(nil)).to eq([])
+      end
+    end
+
+    context "when provided another object" do
+
+      it "returns the object" do
+        expect(described_class.evolve("testing")).to eq(["testing"])
+      end
+    end
+  end
 
   describe "#__add__" do
 
