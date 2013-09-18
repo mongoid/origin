@@ -106,7 +106,11 @@ module Origin
       when Hash
         evolve_hash(serializer, value)
       when Array
-        evolve_array(serializer, value)
+        if serializer && serializer.type == Array
+          serializer.evolve(value)
+        else
+          evolve_array(serializer, value)
+        end
       else
         (serializer || value.class).evolve(value)
       end
