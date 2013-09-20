@@ -2251,7 +2251,7 @@ describe Origin::Selectable do
       end
     end
 
-    context "when provided a sningle criterion" do
+    context "when provided a single criterion" do
 
       context "when providing an array" do
 
@@ -2301,6 +2301,35 @@ describe Origin::Selectable do
 
         it "returns a cloned query" do
           expect(selection).to_not equal(query)
+        end
+      end
+    end
+
+    context "when unioning on the same field" do
+
+      context "when the field is not aliased" do
+
+        let(:selection) do
+          query.nin(first: [ 1, 2 ]).union.nin(first: [ 3, 4 ])
+        end
+
+        it "unions the selection on the field" do
+          expect(selection.selector).to eq(
+            { "first" => { "$nin" => [ 1, 2, 3, 4 ]}}
+          )
+        end
+      end
+
+      context "when the field is aliased" do
+
+        let(:selection) do
+          query.nin(id: [ 1, 2 ]).union.nin(id: [ 3, 4 ])
+        end
+
+        it "unions the selection on the field" do
+          expect(selection.selector).to eq(
+            { "_id" => { "$nin" => [ 1, 2, 3, 4 ]}}
+          )
         end
       end
     end
