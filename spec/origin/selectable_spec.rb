@@ -2966,6 +2966,23 @@ describe Origin::Selectable do
           expect(selection).to_not equal(query)
         end
       end
+
+      context "when the criterion are on the same field and selectable key" do
+
+        let(:selection) do
+          query.or({:first.gt => 1, :first.lte => 3},
+            {:first.gt => 20, :first.lte => 30 })
+        end
+
+        it "includes all intervals" do
+          expect(selection.selector).to eq({
+            "$or" => [
+                { "first" => { "$gt" => 1, "$lte" => 3 }},
+                { "first" => { "$gt" => 20, "$lte" => 30 }}
+              ]
+            })
+        end
+      end
     end
 
     context "when chaining the criterion" do
