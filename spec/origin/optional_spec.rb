@@ -805,7 +805,7 @@ describe Origin::Optional do
       end
 
       it "adds both fields to option"  do
-        selection.options.should eq(
+        expect(selection.options).to eq(
           { fields: { "id" => 0, "first" => 1 } }
         )
       end
@@ -1679,7 +1679,7 @@ describe Origin::Optional do
       end
 
       it "adds both fields to options" do
-        selection.options.should eq(
+        expect(selection.options).to eq(
           { fields: { "first" => 1, "id" => 0 } }
         )
       end

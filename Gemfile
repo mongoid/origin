@@ -2,9 +2,9 @@ source "https://rubygems.org"
 gemspec
 
 group :test do
-  gem "activesupport", "~> 3.1"
+  gem "activesupport", "~> 4.0"
   gem "i18n", "~> 0.6"
-  gem "rspec", "~> 2.13"
+  gem "rspec", "~> 3.0.0.beta1"
   gem "tzinfo", "~> 0.3.22"
 
   if ENV["CI"]
