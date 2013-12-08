@@ -152,16 +152,19 @@ module Origin
     # @return [ Selectable ] The cloned selectable.
     #
     # @since 2.0.0
-    def geo_intersects(criterion = nil)
+    def geo_spacial(criterion = nil)
       __merge__(criterion)
     end
-    key :line, :override, "$geoIntersects", "$geometry" do |value|
+    key :intersects_line, :override, "$geoIntersects", "$geometry" do |value|
       { "type" => LINE_STRING, "coordinates" => value }
     end
-    key :point, :override, "$geoIntersects", "$geometry" do |value|
+    key :intersects_point, :override, "$geoIntersects", "$geometry" do |value|
       { "type" => POINT, "coordinates" => value }
     end
-    key :polygon, :override, "$geoIntersects", "$geometry" do |value|
+    key :intersects_polygon, :override, "$geoIntersects", "$geometry" do |value|
+      { "type" => POLYGON, "coordinates" => value }
+    end
+    key :within_polygon, :override, "$geoWithin", "$geometry" do |value|
       { "type" => POLYGON, "coordinates" => value }
     end
 
@@ -501,82 +504,6 @@ module Origin
     def where(criterion = nil)
       criterion.is_a?(String) ? js_query(criterion) : expr_query(criterion)
     end
-
-    # Adds the $within/$box selection to the selectable.
-    #
-    # @example Add the selection.
-    #   selectable.within_box(location: [[ 1, 10 ], [ 10, 1 ]])
-    #
-    # @example Execute an $within/$box in a where query.
-    #   selectable.where(:field.within_box => [[ 1, 10 ], [ 10, 1 ]])
-    #
-    # @param [ Hash ] criterion The field/box corner criterion.
-    #
-    # @return [ Selectable ] The cloned selectable.
-    #
-    # @since 1.0.0
-    def within_box(criterion = nil)
-      __expanded__(criterion, "$geoWithin", "$box")
-    end
-    key :within_box, :expanded, "$geoWithin", "$box"
-
-    # Adds the $geoWithin/$center selection to the selectable.
-    #
-    # @example Add the selection.
-    #   selectable.within_circle(location: [[ 1, 10 ], 25 ])
-    #
-    # @example Execute an $geoWithin/$center in a where query.
-    #   selectable.where(:field.within_circle => [[ 1, 10 ], 25 ])
-    #
-    # @param [ Hash ] criterion The field/radius criterion.
-    #
-    # @return [ Selectable ] The cloned selectable.
-    #
-    # @since 1.0.0
-    def within_circle(criterion = nil)
-      __expanded__(criterion, "$geoWithin", "$center")
-    end
-    key :within_circle, :expanded, "$geoWithin", "$center"
-
-    # Adds the $geoWithin/$polygon selection to the selectable.
-    #
-    # @example Add the selection.
-    #   selectable.within_polygon(
-    #     location: [[ 10, 20 ], [ 10, 40 ], [ 30, 40 ], [ 30, 20 ]]
-    #   )
-    #
-    # @example Execute an $geoWithin/$polygon in a where query.
-    #   selectable.where(
-    #     :field.within_polygon => [[ 10, 20 ], [ 10, 40 ], [ 30, 40 ], [ 30, 20 ]]
-    #   )
-    #
-    # @param [ Hash ] criterion The field/polygon points criterion.
-    #
-    # @return [ Selectable ] The cloned selectable.
-    #
-    # @since 1.0.0
-    def within_polygon(criterion = nil)
-      __expanded__(criterion, "$geoWithin", "$polygon")
-    end
-    key :within_polygon, :expanded, "$geoWithin", "$polygon"
-
-    # Adds the $geoWithin/$centerSphere selection to the selectable.
-    #
-    # @example Add the selection.
-    #   selectable.within_spherical_circle(location: [[ 1, 10 ], 25 ])
-    #
-    # @example Execute an $geoWithin/$centerSphere in a where query.
-    #   selectable.where(:field.within_spherical_circle => [[ 1, 10 ], 25 ])
-    #
-    # @param [ Hash ] criterion The field/distance criterion.
-    #
-    # @return [ Selectable ] The cloned selectable.
-    #
-    # @since 1.0.0
-    def within_spherical_circle(criterion = nil)
-      __expanded__(criterion, "$geoWithin", "$centerSphere")
-    end
-    key :within_spherical_circle, :expanded, "$geoWithin", "$centerSphere"
 
     private
 

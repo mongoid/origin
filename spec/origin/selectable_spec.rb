@@ -946,12 +946,12 @@ describe Origin::Selectable do
     end
   end
 
-  describe "#geo_intersects" do
+  describe "#geo_spacial" do
 
     context "when provided no criterion" do
 
       let(:selection) do
-        query.geo_intersects
+        query.geo_spacial
       end
 
       it "does not add any criterion" do
@@ -968,7 +968,7 @@ describe Origin::Selectable do
     context "when provided nil" do
 
       let(:selection) do
-        query.geo_intersects(nil)
+        query.geo_spacial(nil)
       end
 
       it "does not add any criterion" do
@@ -984,10 +984,10 @@ describe Origin::Selectable do
 
     context "when provided a criterion" do
 
-      context "when the geometry is a point" do
+      context "when the geometry is a point intersection" do
 
         let(:selection) do
-          query.geo_intersects(:location.point => [ 1, 10 ])
+          query.geo_spacial(:location.intersects_point => [ 1, 10 ])
         end
 
         it "adds the $geoIntersects expression" do
@@ -1006,10 +1006,10 @@ describe Origin::Selectable do
         it_behaves_like "a cloning selection"
       end
 
-      context "when the geometry is a line" do
+      context "when the geometry is a line intersection" do
 
         let(:selection) do
-          query.geo_intersects(:location.line => [[ 1, 10 ], [ 2, 10 ]])
+          query.geo_spacial(:location.intersects_line => [[ 1, 10 ], [ 2, 10 ]])
         end
 
         it "adds the $geoIntersects expression" do
@@ -1028,11 +1028,11 @@ describe Origin::Selectable do
         it_behaves_like "a cloning selection"
       end
 
-      context "when the geometry is a polygon" do
+      context "when the geometry is a polygon intersection" do
 
         let(:selection) do
-          query.geo_intersects(
-            :location.polygon => [[ 1, 10 ], [ 2, 10 ], [ 1, 10 ]]
+          query.geo_spacial(
+            :location.intersects_polygon => [[ 1, 10 ], [ 2, 10 ], [ 1, 10 ]]
           )
         end
 
@@ -1040,6 +1040,30 @@ describe Origin::Selectable do
           expect(selection.selector).to eq({
             "location" => {
               "$geoIntersects" => {
+                "$geometry" => {
+                  "type" => "Polygon",
+                  "coordinates" => [[ 1, 10 ], [ 2, 10 ], [ 1, 10 ]]
+                }
+              }
+            }
+          })
+        end
+
+        it_behaves_like "a cloning selection"
+      end
+
+      context "when the geometry is within a polygon" do
+
+        let(:selection) do
+          query.geo_spacial(
+            :location.within_polygon => [[ 1, 10 ], [ 2, 10 ], [ 1, 10 ]]
+          )
+        end
+
+        it "adds the $geoIntersects expression" do
+          expect(selection.selector).to eq({
+            "location" => {
+              "$geoWithin" => {
                 "$geometry" => {
                   "type" => "Polygon",
                   "coordinates" => [[ 1, 10 ], [ 2, 10 ], [ 1, 10 ]]
@@ -3741,483 +3765,6 @@ describe Origin::Selectable do
           expect(selection).to_not eq(query)
         end
       end
-
-      context "when performing a $within" do
-
-        context "when within a circle" do
-
-          let(:selection) do
-            query.where(:field.within_circle => [[ 1, 1 ], 10 ])
-          end
-
-          it "adds the $geoWithin and $center criterion" do
-            expect(selection.selector).to eq(
-              { "field" => { "$geoWithin" => { "$center" => [[ 1, 1 ], 10 ]}}}
-            )
-          end
-
-          it "returns a cloned query" do
-            expect(selection).to_not eq(query)
-          end
-        end
-
-        context "when within a box" do
-
-          let(:selection) do
-            query.where(:field.within_box => [[ 1, 1 ], [ 1, 1 ]])
-          end
-
-          it "adds the $geoWithin and $box criterion" do
-            expect(selection.selector).to eq(
-              { "field" => { "$geoWithin" => { "$box" => [[ 1, 1 ], [ 1, 1 ]]}}}
-            )
-          end
-
-          it "returns a cloned query" do
-            expect(selection).to_not eq(query)
-          end
-        end
-      end
-    end
-  end
-
-  describe "#within_box" do
-
-    context "when provided no criterion" do
-
-      let(:selection) do
-        query.within_box
-      end
-
-      it "does not add any criterion" do
-        expect(selection.selector).to eq({})
-      end
-
-      it "returns the query" do
-        expect(selection).to eq(query)
-      end
-
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
-      end
-    end
-
-    context "when provided nil" do
-
-      let(:selection) do
-        query.within_box(nil)
-      end
-
-      it "does not add any criterion" do
-        expect(selection.selector).to eq({})
-      end
-
-      it "returns the query" do
-        expect(selection).to eq(query)
-      end
-
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
-      end
-    end
-
-    context "when provided a criterion" do
-
-      let(:selection) do
-        query.within_box(location: [[ 1, 10 ], [ 10, 1 ]])
-      end
-
-      it "adds the $geoWithin expression" do
-        expect(selection.selector).to eq({
-          "location" => { "$geoWithin" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }}
-        })
-      end
-
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
-      end
-    end
-
-    context "when providing multiple criteria" do
-
-      context "when the fields differ" do
-
-        let(:selection) do
-          query.within_box(
-            location: [[ 1, 10 ], [ 10, 1 ]],
-            comments: [[ 1, 10 ], [ 10, 1 ]]
-          )
-        end
-
-        it "adds the $geoWithin expression" do
-          expect(selection.selector).to eq({
-            "location" => { "$geoWithin" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }},
-            "comments" => { "$geoWithin" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }}
-          })
-        end
-
-        it "returns a cloned query" do
-          expect(selection).to_not equal(query)
-        end
-      end
-    end
-
-    context "when chaining multiple criteria" do
-
-      context "when the fields differ" do
-
-        let(:selection) do
-          query.
-            within_box(location: [[ 1, 10 ], [ 10, 1 ]]).
-            within_box(comments: [[ 1, 10 ], [ 10, 1 ]])
-        end
-
-        it "adds the $geoWithin expression" do
-          expect(selection.selector).to eq({
-            "location" => { "$geoWithin" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }},
-            "comments" => { "$geoWithin" => { "$box" => [[ 1, 10 ], [ 10, 1 ]] }}
-          })
-        end
-
-        it "returns a cloned query" do
-          expect(selection).to_not equal(query)
-        end
-      end
-    end
-  end
-
-  describe "#within_circle" do
-
-    context "when provided no criterion" do
-
-      let(:selection) do
-        query.within_circle
-      end
-
-      it "does not add any criterion" do
-        expect(selection.selector).to eq({})
-      end
-
-      it "returns the query" do
-        expect(selection).to eq(query)
-      end
-
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
-      end
-    end
-
-    context "when provided nil" do
-
-      let(:selection) do
-        query.within_circle(nil)
-      end
-
-      it "does not add any criterion" do
-        expect(selection.selector).to eq({})
-      end
-
-      it "returns the query" do
-        expect(selection).to eq(query)
-      end
-
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
-      end
-    end
-
-    context "when provided a criterion" do
-
-      let(:selection) do
-        query.within_circle(location: [[ 1, 10 ], 25 ])
-      end
-
-      it "adds the $geoWithin expression" do
-        expect(selection.selector).to eq({
-          "location" => { "$geoWithin" => { "$center" => [[ 1, 10 ], 25 ] }}
-        })
-      end
-
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
-      end
-    end
-
-    context "when providing multiple criteria" do
-
-      context "when the fields differ" do
-
-        let(:selection) do
-          query.within_circle(
-            "location" => [[ 1, 10 ], 25 ],
-            "comments" => [[ 1, 10 ], 25 ]
-          )
-        end
-
-        it "adds the $geoWithin expression" do
-          expect(selection.selector).to eq({
-            "location" => { "$geoWithin" => { "$center" => [[ 1, 10 ], 25 ] }},
-            "comments" => { "$geoWithin" => { "$center" => [[ 1, 10 ], 25 ] }}
-          })
-        end
-
-        it "returns a cloned query" do
-          expect(selection).to_not equal(query)
-        end
-      end
-    end
-
-    context "when chaining multiple criteria" do
-
-      context "when the fields differ" do
-
-        let(:selection) do
-          query.
-            within_circle(location: [[ 1, 10 ], 25 ]).
-            within_circle(comments: [[ 1, 10 ], 25 ])
-        end
-
-        it "adds the $geoWithin expression" do
-          expect(selection.selector).to eq({
-            "location" => { "$geoWithin" => { "$center" => [[ 1, 10 ], 25 ] }},
-            "comments" => { "$geoWithin" => { "$center" => [[ 1, 10 ], 25 ] }}
-          })
-        end
-
-        it "returns a cloned query" do
-          expect(selection).to_not equal(query)
-        end
-      end
-    end
-  end
-
-  describe "#within_polygon" do
-
-    context "when provided no criterion" do
-
-      let(:selection) do
-        query.within_polygon
-      end
-
-      it "does not add any criterion" do
-        expect(selection.selector).to eq({})
-      end
-
-      it "returns the query" do
-        expect(selection).to eq(query)
-      end
-
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
-      end
-    end
-
-    context "when provided nil" do
-
-      let(:selection) do
-        query.within_polygon(nil)
-      end
-
-      it "does not add any criterion" do
-        expect(selection.selector).to eq({})
-      end
-
-      it "returns the query" do
-        expect(selection).to eq(query)
-      end
-
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
-      end
-    end
-
-    context "when provided a criterion" do
-
-      let(:polygon) do
-        [[ 10, 20 ], [ 10, 40 ], [ 30, 40 ], [ 30, 20 ]]
-      end
-
-      let(:selection) do
-        query.within_polygon(location: polygon)
-      end
-
-      it "adds the $geoWithin expression" do
-        expect(selection.selector).to eq({
-          "location" => { "$geoWithin" => { "$polygon" => polygon }}
-        })
-      end
-
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
-      end
-    end
-
-    context "when providing multiple criteria" do
-
-      context "when the fields differ" do
-
-        let(:polygon_one) do
-          [[ 10, 20 ], [ 10, 40 ], [ 30, 40 ], [ 30, 20 ]]
-        end
-
-        let(:polygon_two) do
-          [[ 10, 25 ], [ 10, 45 ], [ 30, 45 ], [ 30, 25 ]]
-        end
-
-        let(:selection) do
-          query.within_polygon(
-            location: polygon_one,
-            comments: polygon_two
-          )
-        end
-
-        it "adds the $geoWithin expression" do
-          expect(selection.selector).to eq({
-            "location" => { "$geoWithin" => { "$polygon" => polygon_one }},
-            "comments" => { "$geoWithin" => { "$polygon" => polygon_two }}
-          })
-        end
-
-        it "returns a cloned query" do
-          expect(selection).to_not equal(query)
-        end
-      end
-    end
-
-    context "when chaining multiple criteria" do
-
-      context "when the fields differ" do
-
-        let(:polygon_one) do
-          [[ 10, 20 ], [ 10, 40 ], [ 30, 40 ], [ 30, 20 ]]
-        end
-
-        let(:polygon_two) do
-          [[ 10, 25 ], [ 10, 45 ], [ 30, 45 ], [ 30, 25 ]]
-        end
-
-        let(:selection) do
-          query.
-            within_polygon(location: polygon_one).
-            within_polygon(comments: polygon_two)
-        end
-
-        it "adds the $geoWithin expression" do
-          expect(selection.selector).to eq({
-            "location" => { "$geoWithin" => { "$polygon" => polygon_one }},
-            "comments" => { "$geoWithin" => { "$polygon" => polygon_two }}
-          })
-        end
-
-        it "returns a cloned query" do
-          expect(selection).to_not equal(query)
-        end
-      end
-    end
-  end
-
-  describe "#within_spherical_circle" do
-
-    context "when provided no criterion" do
-
-      let(:selection) do
-        query.within_spherical_circle
-      end
-
-      it "does not add any criterion" do
-        expect(selection.selector).to eq({})
-      end
-
-      it "returns the query" do
-        expect(selection).to eq(query)
-      end
-
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
-      end
-    end
-
-    context "when provided nil" do
-
-      let(:selection) do
-        query.within_spherical_circle(nil)
-      end
-
-      it "does not add any criterion" do
-        expect(selection.selector).to eq({})
-      end
-
-      it "returns the query" do
-        expect(selection).to eq(query)
-      end
-
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
-      end
-    end
-
-    context "when provided a criterion" do
-
-      let(:selection) do
-        query.within_spherical_circle(location: [[ 1, 10 ], 25 ])
-      end
-
-      it "adds the $geoWithin expression" do
-        expect(selection.selector).to eq({
-          "location" => { "$geoWithin" => { "$centerSphere" => [[ 1, 10 ], 25 ] }}
-        })
-      end
-
-      it "returns a cloned query" do
-        expect(selection).to_not equal(query)
-      end
-    end
-
-    context "when providing multiple criteria" do
-
-      context "when the fields differ" do
-
-        let(:selection) do
-          query.within_spherical_circle(
-            location: [[ 1, 10 ], 25 ],
-            comments: [[ 1, 10 ], 25 ]
-          )
-        end
-
-        it "adds the $geoWithin expression" do
-          expect(selection.selector).to eq({
-            "location" => { "$geoWithin" => { "$centerSphere" => [[ 1, 10 ], 25 ] }},
-            "comments" => { "$geoWithin" => { "$centerSphere" => [[ 1, 10 ], 25 ] }}
-          })
-        end
-
-        it "returns a cloned query" do
-          expect(selection).to_not equal(query)
-        end
-      end
-    end
-
-    context "when chaining multiple criteria" do
-
-      context "when the fields differ" do
-
-        let(:selection) do
-          query.
-            within_spherical_circle(location: [[ 1, 10 ], 25 ]).
-            within_spherical_circle(comments: [[ 1, 10 ], 25 ])
-        end
-
-        it "adds the $geoWithin expression" do
-          expect(selection.selector).to eq({
-            "location" => { "$geoWithin" => { "$centerSphere" => [[ 1, 10 ], 25 ] }},
-            "comments" => { "$geoWithin" => { "$centerSphere" => [[ 1, 10 ], 25 ] }}
-          })
-        end
-
-        it "returns a cloned query" do
-          expect(selection).to_not equal(query)
-        end
-      end
     end
   end
 
@@ -4525,98 +4072,6 @@ describe Origin::Selectable do
 
       it "sets the operator as $type" do
         expect(key.operator).to eq("$type")
-      end
-    end
-
-    describe "#within_box" do
-
-      let(:key) do
-        :field.within_box
-      end
-
-      it "returns a selecton key" do
-        expect(key).to be_a(Origin::Key)
-      end
-
-      it "sets the name as the key" do
-        expect(key.name).to eq(:field)
-      end
-
-      it "sets the operator as $geoWithin" do
-        expect(key.operator).to eq("$geoWithin")
-      end
-
-      it "sets the expanded operator as $box" do
-        expect(key.expanded).to eq("$box")
-      end
-    end
-
-    describe "#within_circle" do
-
-      let(:key) do
-        :field.within_circle
-      end
-
-      it "returns a selecton key" do
-        expect(key).to be_a(Origin::Key)
-      end
-
-      it "sets the name as the key" do
-        expect(key.name).to eq(:field)
-      end
-
-      it "sets the operator as $geoWithin" do
-        expect(key.operator).to eq("$geoWithin")
-      end
-
-      it "sets the expanded operator as $center" do
-        expect(key.expanded).to eq("$center")
-      end
-    end
-
-    describe "#within_polygon" do
-
-      let(:key) do
-        :field.within_polygon
-      end
-
-      it "returns a selecton key" do
-        expect(key).to be_a(Origin::Key)
-      end
-
-      it "sets the name as the key" do
-        expect(key.name).to eq(:field)
-      end
-
-      it "sets the operator as $within" do
-        expect(key.operator).to eq("$geoWithin")
-      end
-
-      it "sets the expanded operator as $polygon" do
-        expect(key.expanded).to eq("$polygon")
-      end
-    end
-
-    describe "#within_spherical_circle" do
-
-      let(:key) do
-        :field.within_spherical_circle
-      end
-
-      it "returns a selecton key" do
-        expect(key).to be_a(Origin::Key)
-      end
-
-      it "sets the name as the key" do
-        expect(key.name).to eq(:field)
-      end
-
-      it "sets the operator as $within" do
-        expect(key.operator).to eq("$geoWithin")
-      end
-
-      it "sets the expanded operator as $centerSphere" do
-        expect(key.expanded).to eq("$centerSphere")
       end
     end
   end
