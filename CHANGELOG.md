@@ -6,6 +6,8 @@
 
 * \#60 Array evolution no longer modifies in place.
 
+* Legacy geo selection has been removed, use geo_spacial now.
+
 * \#48 `not` negation no longer ignores parameters without expressions
   which follow them, but not negates them with `$ne` instead.
 
@@ -21,9 +23,13 @@
 
 ### New Features
 
-* \#82 Added support for $geoIntersects queries.
+* \#82 Added support for $geoIntersects and $geoWithin queries via the
+  geo_spacial method. Examples:
 
-* Adding support for $geoWithin which is new on Mongodb 2.4. (Arthur Neves)
+      query.geo_spacial(:location.intersects_line => [[ 1, 10 ], [ 2, 10 ]])
+      query.geo_spacial(:location.intersects_point => [[ 1, 10 ]])
+      query.geo_spacial(:location.intersects_polygon => [[ 1, 10 ], [ 2, 10 ], [ 1, 10 ]])
+      query.geo_spacial(:location.within_polygon => [[ 1, 10 ], [ 2, 10 ], [ 1, 10 ]])
 
 ### Resolved Issues
 
