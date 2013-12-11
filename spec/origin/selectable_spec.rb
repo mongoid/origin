@@ -1032,7 +1032,7 @@ describe Origin::Selectable do
 
         let(:selection) do
           query.geo_spacial(
-            :location.intersects_polygon => [[ 1, 10 ], [ 2, 10 ], [ 1, 10 ]]
+            :location.intersects_polygon => [[[ 1, 10 ], [ 2, 10 ], [ 1, 10 ]]]
           )
         end
 
@@ -1042,7 +1042,7 @@ describe Origin::Selectable do
               "$geoIntersects" => {
                 "$geometry" => {
                   "type" => "Polygon",
-                  "coordinates" => [[ 1, 10 ], [ 2, 10 ], [ 1, 10 ]]
+                  "coordinates" => [[[ 1, 10 ], [ 2, 10 ], [ 1, 10 ]]]
                 }
               }
             }
@@ -1056,7 +1056,7 @@ describe Origin::Selectable do
 
         let(:selection) do
           query.geo_spacial(
-            :location.within_polygon => [[ 1, 10 ], [ 2, 10 ], [ 1, 10 ]]
+            :location.within_polygon => [[[ 1, 10 ], [ 2, 10 ], [ 1, 10 ]]]
           )
         end
 
@@ -1066,7 +1066,7 @@ describe Origin::Selectable do
               "$geoWithin" => {
                 "$geometry" => {
                   "type" => "Polygon",
-                  "coordinates" => [[ 1, 10 ], [ 2, 10 ], [ 1, 10 ]]
+                  "coordinates" => [[[ 1, 10 ], [ 2, 10 ], [ 1, 10 ]]]
                 }
               }
             }
