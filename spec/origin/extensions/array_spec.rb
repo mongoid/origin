@@ -20,15 +20,15 @@ describe Array do
 
     context "when provided nil" do
 
-      it "returns an array" do
-        expect(described_class.evolve(nil)).to eq([])
+      it "returns nil" do
+        expect(described_class.evolve(nil)).to be_nil
       end
     end
 
     context "when provided another object" do
 
       it "returns the object" do
-        expect(described_class.evolve("testing")).to eq(["testing"])
+        expect(described_class.evolve("testing")).to eq("testing")
       end
     end
   end
