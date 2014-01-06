@@ -1405,6 +1405,21 @@ describe Origin::Optional do
     end
   end
 
+  describe "#reoder" do
+
+    let(:selection) do
+      query.order_by(field_one: 1, field_two: -1)
+    end
+
+    let(:reordered) do
+      selection.reorder(field_three: 1)
+    end
+
+    it "replaces all order options with the new options" do
+      expect(reordered.options).to eq(sort: { "field_three" => 1 })
+    end
+  end
+
   [ :skip, :offset ].each do |method|
 
     describe "\##{method}" do
