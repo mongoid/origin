@@ -812,93 +812,45 @@ describe Origin::Optional do
     end
   end
 
-  describe "#order_by" do
+  [ :order, :order_by ].each do |method|
 
-    context "when using the moped driver syntax" do
+    describe "##{method}" do
 
-      context "when provided a hash" do
+      context "when using the moped driver syntax" do
 
-        context "when the query is aggregating" do
+        context "when provided a hash" do
 
-          let(:selection) do
-            query.project(name: 1).order_by(field_one: 1, field_two: -1)
-          end
-
-          it "adds the sorting criteria" do
-            expect(selection.options).to eq(
-              { sort: { "field_one" => 1, "field_two" => -1 }}
-            )
-          end
-
-          it "adds the sort to the aggregation" do
-            expect(selection.pipeline).to include(
-              { "$sort" => { "field_one" => 1, "field_two" => -1 }}
-            )
-          end
-
-          it "does not add multiple entries to the pipeline" do
-            expect(selection.pipeline).to_not include(
-              { "$sort" => { "field_one" => 1 }}
-            )
-          end
-
-          it_behaves_like "a cloning option"
-        end
-
-        context "when the hash has integer values" do
-
-          let(:selection) do
-            query.order_by(field_one: 1, field_two: -1)
-          end
-
-          it "adds the sorting criteria" do
-            expect(selection.options).to eq(
-              { sort: { "field_one" => 1, "field_two" => -1 }}
-            )
-          end
-
-          it_behaves_like "a cloning option"
-        end
-
-        context "when the hash has symbol values" do
-
-          let(:selection) do
-            query.order_by(field_one: :asc, field_two: :desc)
-          end
-
-          it "adds the sorting criteria" do
-            expect(selection.options).to eq(
-              { sort: { "field_one" => 1, "field_two" => -1 }}
-            )
-          end
-
-          it_behaves_like "a cloning option"
-        end
-
-        context "when the hash has string values" do
-
-          let(:selection) do
-            query.order_by(field_one: "asc", field_two: "desc")
-          end
-
-          it "adds the sorting criteria" do
-            expect(selection.options).to eq(
-              { sort: { "field_one" => 1, "field_two" => -1 }}
-            )
-          end
-
-          it_behaves_like "a cloning option"
-        end
-      end
-
-      context "when provided an array" do
-
-        context "when the array is multi-dimensional" do
-
-          context "when the arrays have integer values" do
+          context "when the query is aggregating" do
 
             let(:selection) do
-              query.order_by([[ :field_one, 1 ],[ :field_two, -1 ]])
+              query.project(name: 1).send("#{method}", field_one: 1, field_two: -1)
+            end
+
+            it "adds the sorting criteria" do
+              expect(selection.options).to eq(
+                { sort: { "field_one" => 1, "field_two" => -1 }}
+              )
+            end
+
+            it "adds the sort to the aggregation" do
+              expect(selection.pipeline).to include(
+                { "$sort" => { "field_one" => 1, "field_two" => -1 }}
+              )
+            end
+
+            it "does not add multiple entries to the pipeline" do
+              expect(selection.pipeline).to_not include(
+                { "$sort" => { "field_one" => 1 }}
+              )
+            end
+
+            it_behaves_like "a cloning option"
+          end
+
+          context "when the hash has integer values" do
+
+            let(:selection) do
+              query.send("#{method}", field_one: 1, field_two: -1)
             end
 
             it "adds the sorting criteria" do
@@ -910,10 +862,10 @@ describe Origin::Optional do
             it_behaves_like "a cloning option"
           end
 
-          context "when the arrays have symbol values" do
+          context "when the hash has symbol values" do
 
             let(:selection) do
-              query.order_by([[ :field_one, :asc ],[ :field_two, :desc ]])
+              query.send("#{method}", field_one: :asc, field_two: :desc)
             end
 
             it "adds the sorting criteria" do
@@ -925,10 +877,10 @@ describe Origin::Optional do
             it_behaves_like "a cloning option"
           end
 
-          context "when the arrays have string values" do
+          context "when the hash has string values" do
 
             let(:selection) do
-              query.order_by([[ :field_one, "asc" ],[ :field_two, "desc" ]])
+              query.send("#{method}", field_one: "asc", field_two: "desc")
             end
 
             it "adds the sorting criteria" do
@@ -941,111 +893,60 @@ describe Origin::Optional do
           end
         end
 
-        context "when the array is selectable keys" do
+        context "when provided an array" do
 
-          let(:selection) do
-            query.order_by([ :field_one.asc, :field_two.desc ])
+          context "when the array is multi-dimensional" do
+
+            context "when the arrays have integer values" do
+
+              let(:selection) do
+                query.send("#{method}", [[ :field_one, 1 ],[ :field_two, -1 ]])
+              end
+
+              it "adds the sorting criteria" do
+                expect(selection.options).to eq(
+                  { sort: { "field_one" => 1, "field_two" => -1 }}
+                )
+              end
+
+              it_behaves_like "a cloning option"
+            end
+
+            context "when the arrays have symbol values" do
+
+              let(:selection) do
+                query.send("#{method}", [[ :field_one, :asc ],[ :field_two, :desc ]])
+              end
+
+              it "adds the sorting criteria" do
+                expect(selection.options).to eq(
+                  { sort: { "field_one" => 1, "field_two" => -1 }}
+                )
+              end
+
+              it_behaves_like "a cloning option"
+            end
+
+            context "when the arrays have string values" do
+
+              let(:selection) do
+                query.send("#{method}", [[ :field_one, "asc" ],[ :field_two, "desc" ]])
+              end
+
+              it "adds the sorting criteria" do
+                expect(selection.options).to eq(
+                  { sort: { "field_one" => 1, "field_two" => -1 }}
+                )
+              end
+
+              it_behaves_like "a cloning option"
+            end
           end
 
-          it "adds the sorting criteria" do
-            expect(selection.options).to eq(
-              { sort: { "field_one" => 1, "field_two" => -1 }}
-            )
-          end
-
-          it_behaves_like "a cloning option"
-        end
-      end
-
-      context "when provided values" do
-
-        context "when the values are arrays" do
-
-          context "when the values have integer directions" do
+          context "when the array is selectable keys" do
 
             let(:selection) do
-              query.order_by([ :field_one, 1 ],[ :field_two, -1 ])
-            end
-
-            it "adds the sorting criteria" do
-              expect(selection.options).to eq(
-                { sort: { "field_one" => 1, "field_two" => -1 }}
-              )
-            end
-
-            it_behaves_like "a cloning option"
-          end
-
-          context "when the values have symbol directions" do
-
-            let(:selection) do
-              query.order_by([ :field_one, :asc ],[ :field_two, :desc ])
-            end
-
-            it "adds the sorting criteria" do
-              expect(selection.options).to eq(
-                { sort: { "field_one" => 1, "field_two" => -1 }}
-              )
-            end
-
-            it_behaves_like "a cloning option"
-          end
-
-          context "when the values have string directions" do
-
-            let(:selection) do
-              query.order_by([ :field_one, "asc" ],[ :field_two, "desc" ])
-            end
-
-            it "adds the sorting criteria" do
-              expect(selection.options).to eq(
-                { sort: { "field_one" => 1, "field_two" => -1 }}
-              )
-            end
-
-            it_behaves_like "a cloning option"
-          end
-        end
-
-        context "when the values are selectable keys" do
-
-          let(:selection) do
-            query.order_by(:field_one.asc, :field_two.desc)
-          end
-
-          it "adds the sorting criteria" do
-            expect(selection.options).to eq(
-              { sort: { "field_one" => 1, "field_two" => -1 }}
-            )
-          end
-
-          it_behaves_like "a cloning option"
-        end
-      end
-
-      context "when provided a string" do
-
-        context "when the direction is lowercase" do
-
-          context "when abbreviated" do
-
-            let(:selection) do
-              query.order_by("field_one asc, field_two desc")
-            end
-
-            it "adds the sorting criteria" do
-              expect(selection.options).to eq(
-                { sort: { "field_one" => 1, "field_two" => -1 }}
-              )
-            end
-
-            it_behaves_like "a cloning option"
-          end
-
-          context "when spelled out" do
-
-            let(:selection) do
-              query.order_by("field_one ascending, field_two descending")
+              query.send("#{method}", [ :field_one.asc, :field_two.desc ])
             end
 
             it "adds the sorting criteria" do
@@ -1058,12 +959,60 @@ describe Origin::Optional do
           end
         end
 
-        context "when the direction is uppercase" do
+        context "when provided values" do
 
-          context "when abbreviated" do
+          context "when the values are arrays" do
+
+            context "when the values have integer directions" do
+
+              let(:selection) do
+                query.send("#{method}", [ :field_one, 1 ],[ :field_two, -1 ])
+              end
+
+              it "adds the sorting criteria" do
+                expect(selection.options).to eq(
+                  { sort: { "field_one" => 1, "field_two" => -1 }}
+                )
+              end
+
+              it_behaves_like "a cloning option"
+            end
+
+            context "when the values have symbol directions" do
+
+              let(:selection) do
+                query.send("#{method}", [ :field_one, :asc ],[ :field_two, :desc ])
+              end
+
+              it "adds the sorting criteria" do
+                expect(selection.options).to eq(
+                  { sort: { "field_one" => 1, "field_two" => -1 }}
+                )
+              end
+
+              it_behaves_like "a cloning option"
+            end
+
+            context "when the values have string directions" do
+
+              let(:selection) do
+                query.send("#{method}", [ :field_one, "asc" ],[ :field_two, "desc" ])
+              end
+
+              it "adds the sorting criteria" do
+                expect(selection.options).to eq(
+                  { sort: { "field_one" => 1, "field_two" => -1 }}
+                )
+              end
+
+              it_behaves_like "a cloning option"
+            end
+          end
+
+          context "when the values are selectable keys" do
 
             let(:selection) do
-              query.order_by("field_one ASC, field_two DESC")
+              query.send("#{method}", :field_one.asc, :field_two.desc)
             end
 
             it "adds the sorting criteria" do
@@ -1074,179 +1023,116 @@ describe Origin::Optional do
 
             it_behaves_like "a cloning option"
           end
+        end
 
-          context "when spelled out" do
+        context "when provided a string" do
 
-            let(:selection) do
-              query.order_by("field_one ASCENDING, field_two DESCENDING")
+          context "when the direction is lowercase" do
+
+            context "when abbreviated" do
+
+              let(:selection) do
+                query.send("#{method}", "field_one asc, field_two desc")
+              end
+
+              it "adds the sorting criteria" do
+                expect(selection.options).to eq(
+                  { sort: { "field_one" => 1, "field_two" => -1 }}
+                )
+              end
+
+              it_behaves_like "a cloning option"
             end
 
-            it "adds the sorting criteria" do
-              expect(selection.options).to eq(
-                { sort: { "field_one" => 1, "field_two" => -1 }}
-              )
+            context "when spelled out" do
+
+              let(:selection) do
+                query.send("#{method}", "field_one ascending, field_two descending")
+              end
+
+              it "adds the sorting criteria" do
+                expect(selection.options).to eq(
+                  { sort: { "field_one" => 1, "field_two" => -1 }}
+                )
+              end
+
+              it_behaves_like "a cloning option"
+            end
+          end
+
+          context "when the direction is uppercase" do
+
+            context "when abbreviated" do
+
+              let(:selection) do
+                query.send("#{method}", "field_one ASC, field_two DESC")
+              end
+
+              it "adds the sorting criteria" do
+                expect(selection.options).to eq(
+                  { sort: { "field_one" => 1, "field_two" => -1 }}
+                )
+              end
+
+              it_behaves_like "a cloning option"
             end
 
-            it_behaves_like "a cloning option"
+            context "when spelled out" do
+
+              let(:selection) do
+                query.send("#{method}", "field_one ASCENDING, field_two DESCENDING")
+              end
+
+              it "adds the sorting criteria" do
+                expect(selection.options).to eq(
+                  { sort: { "field_one" => 1, "field_two" => -1 }}
+                )
+              end
+
+              it_behaves_like "a cloning option"
+            end
           end
         end
-      end
 
-      context "when provided no options" do
-
-        let(:selection) do
-          query.order_by
-        end
-
-        it "returns the query" do
-          expect(selection).to eq(query)
-        end
-
-        it_behaves_like "a cloning option"
-      end
-
-      context "when provided nil" do
-
-        let(:selection) do
-          query.order_by(nil)
-        end
-
-        it "returns the query" do
-          expect(selection).to eq(query)
-        end
-
-        it_behaves_like "a cloning option"
-      end
-    end
-
-    context "when using the mongo driver syntax" do
-
-      let(:query) do
-        Origin::Query.new({}, {}, :mongo)
-      end
-
-      context "when provided a hash" do
-
-        context "when the hash has integer values" do
+        context "when provided no options" do
 
           let(:selection) do
-            query.order_by(field_one: 1, field_two: -1)
+            query.order_by
           end
 
-          it "adds the sorting criteria" do
-            expect(selection.options).to eq(
-              { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
-            )
+          it "returns the query" do
+            expect(selection).to eq(query)
           end
 
           it_behaves_like "a cloning option"
         end
 
-        context "when the hash has symbol values" do
+        context "when provided nil" do
 
           let(:selection) do
-            query.order_by(field_one: :asc, field_two: :desc)
+            query.send("#{method}", nil)
           end
 
-          it "adds the sorting criteria" do
-            expect(selection.options).to eq(
-              { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
-            )
-          end
-
-          it_behaves_like "a cloning option"
-        end
-
-        context "when the hash has string values" do
-
-          let(:selection) do
-            query.order_by(field_one: "asc", field_two: "desc")
-          end
-
-          it "adds the sorting criteria" do
-            expect(selection.options).to eq(
-              { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
-            )
-          end
-
-          it_behaves_like "a cloning option"
-        end
-      end
-
-      context "when provided an array" do
-
-        context "when the array is multi-dimensional" do
-
-          context "when the arrays have integer values" do
-
-            let(:selection) do
-              query.order_by([[ :field_one, 1 ],[ :field_two, -1 ]])
-            end
-
-            it "adds the sorting criteria" do
-              expect(selection.options).to eq(
-                { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
-              )
-            end
-
-            it_behaves_like "a cloning option"
-          end
-
-          context "when the arrays have symbol values" do
-
-            let(:selection) do
-              query.order_by([[ :field_one, :asc ],[ :field_two, :desc ]])
-            end
-
-            it "adds the sorting criteria" do
-              expect(selection.options).to eq(
-                { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
-              )
-            end
-
-            it_behaves_like "a cloning option"
-          end
-
-          context "when the arrays have string values" do
-
-            let(:selection) do
-              query.order_by([[ :field_one, "asc" ],[ :field_two, "desc" ]])
-            end
-
-            it "adds the sorting criteria" do
-              expect(selection.options).to eq(
-                { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
-              )
-            end
-
-            it_behaves_like "a cloning option"
-          end
-        end
-
-        context "when the array is selectable keys" do
-
-          let(:selection) do
-            query.order_by([ :field_one.asc, :field_two.desc ])
-          end
-
-          it "adds the sorting criteria" do
-            expect(selection.options).to eq(
-              { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
-            )
+          it "returns the query" do
+            expect(selection).to eq(query)
           end
 
           it_behaves_like "a cloning option"
         end
       end
 
-      context "when provided values" do
+      context "when using the mongo driver syntax" do
 
-        context "when the values are arrays" do
+        let(:query) do
+          Origin::Query.new({}, {}, :mongo)
+        end
 
-          context "when the values have integer directions" do
+        context "when provided a hash" do
+
+          context "when the hash has integer values" do
 
             let(:selection) do
-              query.order_by([ :field_one, 1 ],[ :field_two, -1 ])
+              query.send("#{method}", field_one: 1, field_two: -1)
             end
 
             it "adds the sorting criteria" do
@@ -1258,10 +1144,10 @@ describe Origin::Optional do
             it_behaves_like "a cloning option"
           end
 
-          context "when the values have symbol directions" do
+          context "when the hash has symbol values" do
 
             let(:selection) do
-              query.order_by([ :field_one, :asc ],[ :field_two, :desc ])
+              query.send("#{method}", field_one: :asc, field_two: :desc)
             end
 
             it "adds the sorting criteria" do
@@ -1273,10 +1159,10 @@ describe Origin::Optional do
             it_behaves_like "a cloning option"
           end
 
-          context "when the values have string directions" do
+          context "when the hash has string values" do
 
             let(:selection) do
-              query.order_by([ :field_one, "asc" ],[ :field_two, "desc" ])
+              query.send("#{method}", field_one: "asc", field_two: "desc")
             end
 
             it "adds the sorting criteria" do
@@ -1289,115 +1175,232 @@ describe Origin::Optional do
           end
         end
 
-        context "when the values are selectable keys" do
+        context "when provided an array" do
 
-          let(:selection) do
-            query.order_by(:field_one.asc, :field_two.desc)
+          context "when the array is multi-dimensional" do
+
+            context "when the arrays have integer values" do
+
+              let(:selection) do
+                query.send("#{method}", [[ :field_one, 1 ],[ :field_two, -1 ]])
+              end
+
+              it "adds the sorting criteria" do
+                expect(selection.options).to eq(
+                  { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
+                )
+              end
+
+              it_behaves_like "a cloning option"
+            end
+
+            context "when the arrays have symbol values" do
+
+              let(:selection) do
+                query.send("#{method}", [[ :field_one, :asc ],[ :field_two, :desc ]])
+              end
+
+              it "adds the sorting criteria" do
+                expect(selection.options).to eq(
+                  { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
+                )
+              end
+
+              it_behaves_like "a cloning option"
+            end
+
+            context "when the arrays have string values" do
+
+              let(:selection) do
+                query.send("#{method}", [[ :field_one, "asc" ],[ :field_two, "desc" ]])
+              end
+
+              it "adds the sorting criteria" do
+                expect(selection.options).to eq(
+                  { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
+                )
+              end
+
+              it_behaves_like "a cloning option"
+            end
           end
 
-          it "adds the sorting criteria" do
-            expect(selection.options).to eq(
-              { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
-            )
+          context "when the array is selectable keys" do
+
+            let(:selection) do
+              query.send("#{method}", [ :field_one.asc, :field_two.desc ])
+            end
+
+            it "adds the sorting criteria" do
+              expect(selection.options).to eq(
+                { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
+              )
+            end
+
+            it_behaves_like "a cloning option"
+          end
+        end
+
+        context "when provided values" do
+
+          context "when the values are arrays" do
+
+            context "when the values have integer directions" do
+
+              let(:selection) do
+                query.send("#{method}", [ :field_one, 1 ],[ :field_two, -1 ])
+              end
+
+              it "adds the sorting criteria" do
+                expect(selection.options).to eq(
+                  { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
+                )
+              end
+
+              it_behaves_like "a cloning option"
+            end
+
+            context "when the values have symbol directions" do
+
+              let(:selection) do
+                query.send("#{method}", [ :field_one, :asc ],[ :field_two, :desc ])
+              end
+
+              it "adds the sorting criteria" do
+                expect(selection.options).to eq(
+                  { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
+                )
+              end
+
+              it_behaves_like "a cloning option"
+            end
+
+            context "when the values have string directions" do
+
+              let(:selection) do
+                query.send("#{method}", [ :field_one, "asc" ],[ :field_two, "desc" ])
+              end
+
+              it "adds the sorting criteria" do
+                expect(selection.options).to eq(
+                  { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
+                )
+              end
+
+              it_behaves_like "a cloning option"
+            end
+          end
+
+          context "when the values are selectable keys" do
+
+            let(:selection) do
+              query.send("#{method}", :field_one.asc, :field_two.desc)
+            end
+
+            it "adds the sorting criteria" do
+              expect(selection.options).to eq(
+                { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
+              )
+            end
+
+            it_behaves_like "a cloning option"
+          end
+        end
+
+        context "when provided a string" do
+
+          context "when the direction is lowercase" do
+
+            context "when abbreviated" do
+
+              let(:selection) do
+                query.send("#{method}", "field_one asc, field_two desc")
+              end
+
+              it "adds the sorting criteria" do
+                expect(selection.options).to eq(
+                  { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
+                )
+              end
+
+              it_behaves_like "a cloning option"
+            end
+
+            context "when spelled out" do
+
+              let(:selection) do
+                query.send("#{method}", "field_one ascending, field_two descending")
+              end
+
+              it "adds the sorting criteria" do
+                expect(selection.options).to eq(
+                  { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
+                )
+              end
+
+              it_behaves_like "a cloning option"
+            end
+          end
+
+          context "when the direction is uppercase" do
+
+            context "when abbreviated" do
+
+              let(:selection) do
+                query.send("#{method}", "field_one ASC, field_two DESC")
+              end
+
+              it "adds the sorting criteria" do
+                expect(selection.options).to eq(
+                  { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
+                )
+              end
+
+              it_behaves_like "a cloning option"
+            end
+
+            context "when spelled out" do
+
+              let(:selection) do
+                query.send("#{method}", "field_one ASCENDING, field_two DESCENDING")
+              end
+
+              it "adds the sorting criteria" do
+                expect(selection.options).to eq(
+                  { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
+                )
+              end
+
+              it_behaves_like "a cloning option"
+            end
+          end
+        end
+
+        context "when provided no options" do
+
+          let(:selection) do
+            query.order_by
+          end
+
+          it "returns the query" do
+            expect(selection).to eq(query)
           end
 
           it_behaves_like "a cloning option"
         end
-      end
 
-      context "when provided a string" do
+        context "when provided nil" do
 
-        context "when the direction is lowercase" do
-
-          context "when abbreviated" do
-
-            let(:selection) do
-              query.order_by("field_one asc, field_two desc")
-            end
-
-            it "adds the sorting criteria" do
-              expect(selection.options).to eq(
-                { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
-              )
-            end
-
-            it_behaves_like "a cloning option"
+          let(:selection) do
+            query.send("#{method}", nil)
           end
 
-          context "when spelled out" do
-
-            let(:selection) do
-              query.order_by("field_one ascending, field_two descending")
-            end
-
-            it "adds the sorting criteria" do
-              expect(selection.options).to eq(
-                { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
-              )
-            end
-
-            it_behaves_like "a cloning option"
-          end
-        end
-
-        context "when the direction is uppercase" do
-
-          context "when abbreviated" do
-
-            let(:selection) do
-              query.order_by("field_one ASC, field_two DESC")
-            end
-
-            it "adds the sorting criteria" do
-              expect(selection.options).to eq(
-                { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
-              )
-            end
-
-            it_behaves_like "a cloning option"
+          it "returns the query" do
+            expect(selection).to eq(query)
           end
 
-          context "when spelled out" do
-
-            let(:selection) do
-              query.order_by("field_one ASCENDING, field_two DESCENDING")
-            end
-
-            it "adds the sorting criteria" do
-              expect(selection.options).to eq(
-                { sort: [[ :field_one, 1 ], [ :field_two, -1 ]]}
-              )
-            end
-
-            it_behaves_like "a cloning option"
-          end
+          it_behaves_like "a cloning option"
         end
-      end
-
-      context "when provided no options" do
-
-        let(:selection) do
-          query.order_by
-        end
-
-        it "returns the query" do
-          expect(selection).to eq(query)
-        end
-
-        it_behaves_like "a cloning option"
-      end
-
-      context "when provided nil" do
-
-        let(:selection) do
-          query.order_by(nil)
-        end
-
-        it "returns the query" do
-          expect(selection).to eq(query)
-        end
-
-        it_behaves_like "a cloning option"
       end
     end
   end

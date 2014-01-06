@@ -177,6 +177,7 @@ module Origin
         end
       end
     end
+    alias :order :order_by
 
     # Add the number of documents to skip.
     #
