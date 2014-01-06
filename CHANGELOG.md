@@ -1,6 +1,16 @@
 # Overview
 
-## 2.0.0 (branch: master)
+## 2.1.0
+
+### New Features
+
+* Aliased `order` to `order_by` for compatibility with AR query methods.
+
+* Added `reorder` to queryables to have a way to completely overwrite existing
+  ordering instead of always having to merge. This takes the same syntax
+  as `order`.
+
+## 2.0.0
 
 ### Major Changes (Backwards Incompatible)
 
