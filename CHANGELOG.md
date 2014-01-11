@@ -14,6 +14,8 @@
 
 ### Major Changes (Backwards Incompatible)
 
+* Origin 2 now only supports MongoDB 2.4.0 and higher.
+
 * \#60 Array evolution no longer modifies in place.
 
 * Legacy geo selection has been removed, use geo_spacial now.
