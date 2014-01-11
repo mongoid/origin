@@ -12,6 +12,7 @@ end
 
 require "i18n"
 require "active_support/time"
+require "action_controller"
 require "origin"
 require "rspec"
 

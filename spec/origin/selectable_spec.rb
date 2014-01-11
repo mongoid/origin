@@ -13,6 +13,27 @@ describe Origin::Selectable do
     end
   end
 
+  shared_examples_for "a secure selectable" do
+
+    let(:params) do
+      ActionController::Parameters.new(email: { "$elemMatch" => { foo: "bar" }})
+    end
+
+    context "when passing params directly" do
+
+      it "does not allow direct passing of action controller parameters" do
+        expect { insecure_params }.to raise_error(Origin::Queryable::Insecure)
+      end
+    end
+
+    context "when a value is a params object" do
+
+      it "does not allow direct passing of action controller parameters" do
+        expect { insecure_value }.to raise_error(Origin::Queryable::Insecure)
+      end
+    end
+  end
+
   describe "#all" do
 
     context "when provided no criterion" do
@@ -391,6 +412,19 @@ describe Origin::Selectable do
   end
 
   describe "#and" do
+
+    context "when provided insecure parameters" do
+
+      let(:insecure_params) do
+        query.and(params)
+      end
+
+      let(:insecure_value) do
+        query.and(email: params[:email])
+      end
+
+      it_behaves_like "a secure selectable"
+    end
 
     context "when provided no criterion" do
 
@@ -2474,6 +2508,19 @@ describe Origin::Selectable do
 
   describe "#nor" do
 
+    context "when provided insecure parameters" do
+
+      let(:insecure_params) do
+        query.nor(params)
+      end
+
+      let(:insecure_value) do
+        query.nor(email: params[:email])
+      end
+
+      it_behaves_like "a secure selectable"
+    end
+
     context "when provided no criterion" do
 
       let(:selection) do
@@ -2837,6 +2884,19 @@ describe Origin::Selectable do
 
   describe "#or" do
 
+    context "when provided insecure parameters" do
+
+      let(:insecure_params) do
+        query.or(params)
+      end
+
+      let(:insecure_value) do
+        query.or(email: params[:email])
+      end
+
+      it_behaves_like "a secure selectable"
+    end
+
     context "when provided no criterion" do
 
       let(:selection) do
@@ -3194,7 +3254,7 @@ describe Origin::Selectable do
     end
   end
 
-  describe "#type" do
+  describe "#with_type" do
 
     context "when provided no criterion" do
 
@@ -3332,6 +3392,19 @@ describe Origin::Selectable do
   end
 
   describe "#where" do
+
+    context "when provided insecure parameters" do
+
+      let(:insecure_params) do
+        query.where(params)
+      end
+
+      let(:insecure_value) do
+        query.where(email: params[:email])
+      end
+
+      it_behaves_like "a secure selectable"
+    end
 
     context "when provided no criterion" do
 

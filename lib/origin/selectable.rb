@@ -583,9 +583,11 @@ module Origin
     #
     # @since 1.0.0
     def selection(criterion = nil)
+      check_security!(criterion)
       clone.tap do |query|
         if criterion
           criterion.each_pair do |field, value|
+            check_security!(value)
             yield(query.selector, field.is_a?(Key) ? field : field.to_s, value)
           end
         end

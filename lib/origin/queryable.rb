@@ -79,5 +79,55 @@ module Origin
       @selector = other.selector.__deep_copy__
       @pipeline = other.pipeline.__deep_copy__
     end
+
+    # Raised when ActionController::Parameters are passed directly or as a
+    # value to a selection. This is a security measure to ensure users
+    # explicity build their own hashes to pass to query methods.
+    #
+    # @see https://jira.mongodb.org/browse/SECURITY-90
+    #
+    # @since 2.2.0
+    class Insecure < RuntimeError
+
+      # @attribute [r] selection The bad selection.
+      attr_reader :selection
+
+      # Create the new insecure exception.
+      #
+      # @example Create the new exception.
+      #   Insecure.new(email: "testing")
+      #
+      # @param [ ActionController::Parameters ] selection The selction direct
+      #   from the params.
+      #
+      # @since 2.2.0
+      def initialize(selection)
+        @selection = selection
+        super(
+          "Passing the request parameters #{selection} directly into criteria " +
+          "is insecure. If you meant to do this please call #to_hash on the " +
+          "parameters to get the raw selection."
+        )
+      end
+    end
+
+    private
+
+    # Check if the value is secure (not passed directly from the request
+    # parameters).
+    #
+    # @api private
+    #
+    # @example Check the value's security.
+    #   selectable.check_security!(email: "testing")
+    #
+    # @param [ Object ] value The value to check.
+    #
+    # @raise [ Insecure ] If the value is params.
+    #
+    # @since 2.2.0
+    def check_security!(value)
+      raise Insecure.new(value) if value.is_a?(ActionController::Parameters)
+    end
   end
 end
