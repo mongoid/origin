@@ -1,5 +1,12 @@
 # Overview
 
+## 2.1.1
+
+### Resolved Issues
+
+* Fixed integer evolution when a trailing "." existed but no fraction provided,
+  ie "7.1"
+
 ## 2.1.0
 
 ### New Features
