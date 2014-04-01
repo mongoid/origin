@@ -21,6 +21,13 @@ describe Integer do
             expect(described_class.evolve("2.23")).to eq(2.23)
           end
         end
+
+        context "when the string ends in ." do
+
+          it "returns an integer" do
+            expect(described_class.evolve("2.")).to eq(2)
+          end
+        end
       end
 
       context "when the string is not a number" do
