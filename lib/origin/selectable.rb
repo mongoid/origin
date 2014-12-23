@@ -138,8 +138,6 @@ module Origin
     # @note The only valid geometry shapes for a $geoIntersects are:
     #   :intersects_line, :intersects_point, and :intersects_polygon.
     #
-    # @note The only valid geometry shape for a $geoWithin is :within_polygon
-    #
     # @example Add a geo intersect criterion for a line.
     #   query.geo_spacial(:location.intersects_line => [[ 1, 10 ], [ 2, 10 ]])
     #
@@ -151,6 +149,12 @@ module Origin
     #
     # @example Add a geo within criterion for a polygon.
     #   query.geo_spacial(:location.within_polygon => [[ 1, 10 ], [ 2, 10 ], [ 1, 10 ]])
+    #
+    # @example Add a geo within criterian for a circle.
+    #   query.geo_spacial(:location.within_circle => [[x, y], radius])
+    #
+    # @example Add a geo within criterian for a sphere. Radius specified in radians.
+    #   query.geo_spacial(:location.within_sphere => [[x, y], radius])
     #
     # @param [ Hash ] criterion The criterion.
     #
@@ -172,6 +176,8 @@ module Origin
     key :within_polygon, :override, "$geoWithin", "$geometry" do |value|
       { "type" => POLYGON, "coordinates" => value }
     end
+    key :within_circle, :override, "$geoWithin", "$center"
+    key :within_sphere, :override, "$geoWithin", "$centerSphere"
 
     # Add the $gt criterion to the selector.
     #
