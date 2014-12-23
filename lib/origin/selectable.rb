@@ -145,10 +145,10 @@ module Origin
     #   query.geo_spacial(:location.intersects_point => [[ 1, 10 ]])
     #
     # @example Add a geo intersect criterion for a polygon.
-    #   query.geo_spacial(:location.intersects_polygon => [[ 1, 10 ], [ 2, 10 ], [ 1, 10 ]])
+    #   query.geo_spacial(:location.intersects_polygon => [[[ 1, 10 ], [ 2, 10 ], [ 1, 10 ]]])
     #
     # @example Add a geo within criterion for a polygon.
-    #   query.geo_spacial(:location.within_polygon => [[ 1, 10 ], [ 2, 10 ], [ 1, 10 ]])
+    #   query.geo_spacial(:location.within_polygon => [[[ 1, 10 ], [ 2, 10 ], [ 1, 10 ]]])
     #
     # @example Add a geo within criterian for a circle.
     #   query.geo_spacial(:location.within_circle => [[x, y], radius])
