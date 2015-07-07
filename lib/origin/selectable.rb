@@ -527,6 +527,26 @@ module Origin
     end
     key :within_spherical_circle, :expanded, "$within", "$centerSphere"
 
+    # Adds the $geoIntersects selection to the selectable.
+    #
+    # @example Add the selection.
+    #   selectable.geo_intersects(location: {"$geometry" => {:type => "Point", :coordinates => [ 1, 2 ]}})
+    #
+    # @example Execute an $geoIntersects in a where query.
+    #   selectable.where(
+    #     :location.geo_intersects => {"$geometry" => {:type => "Point", :coordinates => [ 1, 2 ]}}
+    #   )
+    #
+    # @param [ Hash ] criterion The geoIntersects criterion.
+    #
+    # @return [ Selectable ] The cloned selectable.
+    #
+    # @since 1.2.0
+    def geo_intersects(criterion = nil)
+       __override__(criterion, "$geoIntersects")
+    end
+    key :geo_intersects, :override, "$geoIntersects"
+
     private
 
     # Create the standard expression query.
