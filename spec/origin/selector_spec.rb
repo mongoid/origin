@@ -42,6 +42,34 @@ describe Origin::Selector do
       end
     end
 
+    context "when selector contains a $nin" do
+
+      let(:initial) do
+        { "$nin" => ["foo"] }
+      end
+
+      before do
+        selector["field"] = initial
+      end
+
+      context "when merging in a new $nin" do
+
+        let(:other) do
+          { "field" => { "$nin" => ["bar"] } }
+        end
+
+        before do
+          selector.merge!(other)
+        end
+
+        it "combines the two $nin queries into one" do
+          expect(selector).to eq({
+            "field" => { "$nin" => ["foo", "bar"] }
+          })
+        end
+      end
+    end
+
     context "when selector is not nested" do
 
       before do
@@ -113,6 +141,34 @@ describe Origin::Selector do
         it "combines the two $and queries into one" do
           expect(selector).to eq({
             "$and" => [{ "value" => 1 }, { "value" => 2 }]
+          })
+        end
+      end
+    end
+
+    context "when the selector contains a $nor" do
+
+      let(:initial) do
+        [{ "value" => 1 }]
+      end
+
+      before do
+        selector["$nor"] = initial
+      end
+
+      context "when merging in a new $nor" do
+
+        let(:other) do
+          [{ "value" => 2 }]
+        end
+
+        before do
+          selector.merge!({ "$nor" => other })
+        end
+
+        it "combines the two $nor queries into one" do
+          expect(selector).to eq({
+            "$nor" => initial + other
           })
         end
       end

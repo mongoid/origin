@@ -18,7 +18,9 @@ module Origin
     def merge!(other)
       other.each_pair do |key, value|
         if value.is_a?(Hash) && self[key.to_s].is_a?(Hash)
-          value = self[key.to_s].merge(value)
+          value = self[key.to_s].merge(value) do |_key, old_val, new_val|
+            multi_value?(_key) ? (old_val + new_val).uniq : new_val
+          end
         end
         if multi_selection?(key)
           value = (self[key.to_s] || []).concat(value)
@@ -154,7 +156,7 @@ module Origin
       end
     end
 
-    # Determines if the selection is a multi-select, like an $and or $or
+    # Determines if the selection is a multi-select, like an $and or $or or $nor
     # selection.
     #
     # @api private
@@ -168,7 +170,23 @@ module Origin
     #
     # @since 1.0.0
     def multi_selection?(key)
-      key =~ /\$and|\$or/
+      key =~ /\$and|\$or|\$nor/
+    end
+
+    # Determines if the selection operator takes a list. Returns true for $in and $nin.
+    #
+    # @api private
+    #
+    # @example Does the selection operator take multiple values?
+    #   selector.multi_value?("$nin")
+    #
+    # @param [ String ] key The key to check.
+    #
+    # @return [ true, false ] If the key is $in or $nin.
+    #
+    # @since 2.1.1
+    def multi_value?(key)
+      key =~ /\$nin|\$in/
     end
   end
 end
