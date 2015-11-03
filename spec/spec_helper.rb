@@ -18,3 +18,5 @@ require "rspec"
 class Origin::Query
   include Origin::Queryable
 end
+
+I18n.config.enforce_available_locales = false

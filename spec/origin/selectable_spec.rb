@@ -2520,7 +2520,7 @@ describe Origin::Selectable do
 
       it "adds the $nor selector" do
         expect(selection.selector).to eq({
-          "$nor" => [{ field: [ 1, 2 ] }]
+          "$nor" => [{"field" => [ 1, 2 ] }]
         })
       end
 
@@ -2540,8 +2540,8 @@ describe Origin::Selectable do
         it "adds the $nor selector" do
           expect(selection.selector).to eq({
             "$nor" => [
-              { first: [ 1, 2 ] },
-              { second: [ 3, 4 ] }
+              { "first" => [ 1, 2 ] },
+              { "second" => [ 3, 4 ] }
             ]
           })
         end
@@ -2560,8 +2560,8 @@ describe Origin::Selectable do
         it "appends both $nor expressions" do
           expect(selection.selector).to eq({
             "$nor" => [
-              { first: [ 1, 2 ] },
-              { first: [ 3, 4 ] }
+              { "first" => [ 1, 2 ] },
+              { "first" => [ 3, 4 ] }
             ]
           })
         end
@@ -2583,8 +2583,8 @@ describe Origin::Selectable do
         it "adds the $nor selectors" do
           expect(selection.selector).to eq({
             "$nor" => [
-              { first: [ 1, 2 ] },
-              { second: [ 3, 4 ] }
+              { "first" => [ 1, 2 ] },
+              { "second" => [ 3, 4 ] }
             ]
           })
         end
@@ -2603,8 +2603,8 @@ describe Origin::Selectable do
         it "appends both $nor expressions" do
           expect(selection.selector).to eq({
             "$nor" => [
-              { first: [ 1, 2 ] },
-              { first: [ 3, 4 ] }
+              { "first" => [ 1, 2 ] },
+              { "first" => [ 3, 4 ] }
             ]
           })
         end
