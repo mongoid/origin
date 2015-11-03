@@ -14,7 +14,7 @@ describe Array do
       end
 
       it "doesn't mutate its argument" do
-        expect(described_class.evolve(array.freeze)).not_to raise_error
+        expect{ described_class.evolve(array.freeze) }.not_to raise_error
       end
     end
 

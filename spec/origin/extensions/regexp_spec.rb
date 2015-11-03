@@ -1,6 +1,7 @@
 require "spec_helper"
 
-describe Regexp do
+
+describe Origin::Extensions::Regexp do
 
   describe ".evolve" do
 
@@ -11,7 +12,7 @@ describe Regexp do
       end
 
       let(:evolved) do
-        described_class.evolve(regexp)
+        Regexp.evolve(regexp)
       end
 
       it "returns the regexp" do
@@ -26,7 +27,7 @@ describe Regexp do
       end
 
       let(:evolved) do
-        described_class.evolve(regexp)
+        Regexp.evolve(regexp)
       end
 
       it "returns the converted regexp" do
@@ -47,7 +48,7 @@ describe Regexp do
         end
 
         let(:evolved) do
-          described_class.evolve(array)
+          Regexp.evolve(array)
         end
 
         it "returns the regexps" do
@@ -66,7 +67,7 @@ describe Regexp do
         end
 
         let(:evolved) do
-          described_class.evolve([ regexp ])
+          Regexp.evolve([ regexp ])
         end
 
         it "returns the regexps" do
