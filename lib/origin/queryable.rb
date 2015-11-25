@@ -58,7 +58,7 @@ module Origin
     # @param [ Symbol ] driver The driver being used.
     #
     # @since 1.0.0
-    def initialize(aliases = {}, serializers = {}, driver = :moped)
+    def initialize(aliases = {}, serializers = {}, driver = :mongo)
       @aliases, @driver, @serializers = aliases, driver.to_sym, serializers
       @options = Options.new(aliases, serializers)
       @selector = Selector.new(aliases, serializers)
