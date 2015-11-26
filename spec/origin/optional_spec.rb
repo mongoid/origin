@@ -1622,6 +1622,19 @@ describe Origin::Optional do
     it_behaves_like "a cloning option"
   end
 
+  describe "#comment" do
+
+    let(:selection) do
+      query.comment('slow query')
+    end
+
+    it "adds the comment option" do
+      expect(selection.options).to eq({ comment: 'slow query' })
+    end
+
+    it_behaves_like "a cloning option"
+  end
+
   describe "#without" do
 
     context "when provided no options" do
