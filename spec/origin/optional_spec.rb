@@ -17,7 +17,7 @@ describe Origin::Optional do
 
     describe "##{method}" do
 
-      context "when using the moped driver syntax" do
+      context "when using the official mongodb driver syntax" do
 
         context "when the query is aggregating" do
 
@@ -141,10 +141,10 @@ describe Origin::Optional do
         end
       end
 
-      context "when using the mongo driver syntax" do
+      context "when using the mongo-1.x driver syntax" do
 
         let(:query) do
-          Origin::Query.new({}, {}, :mongo)
+          Origin::Query.new({}, {}, :mongo1x)
         end
 
         context "when provided symbols" do
@@ -290,7 +290,7 @@ describe Origin::Optional do
 
     describe "##{method}" do
 
-      context "when using the moped driver syntax" do
+      context "when using the official mongodb driver syntax" do
 
         context "when the query is aggregating" do
 
@@ -414,10 +414,10 @@ describe Origin::Optional do
         end
       end
 
-      context "when using the mongo driver syntax" do
+      context "when using the mongo-1.x driver syntax" do
 
         let(:query) do
-          Origin::Query.new({}, {}, :mongo)
+          Origin::Query.new({}, {}, :mongo1x)
         end
 
         context "when provided symbols" do
@@ -816,7 +816,7 @@ describe Origin::Optional do
 
     describe "##{method}" do
 
-      context "when using the moped driver syntax" do
+      context "when using the official mongodb driver syntax" do
 
         context "when provided a hash" do
 
@@ -1121,10 +1121,10 @@ describe Origin::Optional do
         end
       end
 
-      context "when using the mongo driver syntax" do
+      context "when using the mongo-1.x driver syntax" do
 
         let(:query) do
-          Origin::Query.new({}, {}, :mongo)
+          Origin::Query.new({}, {}, :mongo1x)
         end
 
         context "when provided a hash" do

@@ -284,7 +284,7 @@ module Origin
     #
     # @since 1.0.0
     def add_sort_option(options, field, direction)
-      if driver == :mongo
+      if driver == :mongo1x
         sorting = (options[:sort] || []).dup
         sorting.push([ field, direction ])
         options.store(:sort, sorting)
