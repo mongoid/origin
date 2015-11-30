@@ -267,6 +267,25 @@ module Origin
       end
     end
 
+    # Associate a comment with the query.
+    #
+    # @example Add a comment.
+    #   optional.comment('slow query')
+    #
+    # @note Set profilingLevel to 2 and the comment will be logged in the profile
+    #   collection along with the query.
+    #
+    # @param [ String ] comment The comment to be associated with the query.
+    #
+    # @return [ Optional ] The cloned optional.
+    #
+    # @since 2.2.0
+    def comment(comment = nil)
+      clone.tap do |query|
+        query.options.store(:comment, comment)
+      end
+    end
+
     private
 
     # Add a single sort option.
