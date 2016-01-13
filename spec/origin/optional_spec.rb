@@ -1635,6 +1635,19 @@ describe Origin::Optional do
     it_behaves_like "a cloning option"
   end
 
+  describe "#cursor_type" do
+
+    let(:selection) do
+      query.cursor_type(:tailable)
+    end
+
+    it "adds the cursor type option" do
+      expect(selection.options).to eq({ cursor_type: :tailable })
+    end
+
+    it_behaves_like "a cloning option"
+  end
+
   describe "#without" do
 
     context "when provided no options" do

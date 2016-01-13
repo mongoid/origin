@@ -286,6 +286,23 @@ module Origin
       end
     end
 
+    # Set the cursor type.
+    #
+    # @example Set the cursor type.
+    #   optional.cursor_type(:tailable)
+    #   optional.cursor_type(:tailable_await)
+    #
+    # @note The cursor can be type :tailable or :tailable_await.
+    #
+    # @param [ Symbol ] type The type of cursor to create.
+    #
+    # @return [ Optional ] The cloned optional.
+    #
+    # @since 2.2.0
+    def cursor_type(type)
+      clone.tap { |query| query.options.store(:cursor_type, type) }
+    end
+
     private
 
     # Add a single sort option.
