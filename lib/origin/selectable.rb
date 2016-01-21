@@ -491,6 +491,32 @@ module Origin
       ::Integer.evolve(value)
     end
 
+    # Construct a text search selector.
+    #
+    # @example Construct a text search selector.
+    #   selectable.text_search("testing")
+    #
+    # @example Construct a text search selector with options.
+    #   selectable.text_search("testing", :$language => "fr")
+    #
+    # @param [ String, Symbol ] terms A string of terms that MongoDB parses
+    #   and uses to query the text index.
+    # @param [ Hash ] opts Text search options. See MongoDB documentation
+    #   for options.
+    #
+    # @return [ Selectable ] The cloned selectable.
+    #
+    # @since 2.2.0
+    def text_search(terms, opts = nil)
+      clone.tap do |query|
+        if terms
+          criterion = { :$text => { :$search => terms } }
+          criterion[:$text].merge!(opts) if opts
+          query.selector = criterion
+        end
+      end
+    end
+
     # This is the general entry point for most MongoDB queries. This either
     # creates a standard field: value selection, and expanded selection with
     # the use of hash methods, or a $where selection if a string is provided.
