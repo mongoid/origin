@@ -3331,6 +3331,41 @@ describe Origin::Selectable do
     end
   end
 
+  describe "#text_search" do
+
+    context "when providing a search string" do
+
+      let(:selection) do
+        query.text_search("testing")
+      end
+
+      it "constructs a text search document" do
+        expect(selection.selector).to eq({ :$text => { :$search => "testing" }})
+      end
+
+      it "returns the cloned selectable" do
+        expect(selection).to be_a(Origin::Selectable)
+      end
+
+      context "when providing text search options" do
+
+        let(:selection) do
+          query.text_search("essais", { :$language => "fr" })
+        end
+
+        it "constructs a text search document" do
+          expect(selection.selector[:$text][:$search]).to eq("essais")
+        end
+
+        it "add the options to the text search document" do
+          expect(selection.selector[:$text][:$language]).to eq("fr")
+        end
+
+        it_behaves_like "a cloning selection"
+      end
+    end
+  end
+
   describe "#where" do
 
     context "when provided no criterion" do
