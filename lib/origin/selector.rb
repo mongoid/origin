@@ -19,7 +19,13 @@ module Origin
       other.each_pair do |key, value|
         if value.is_a?(Hash) && self[key.to_s].is_a?(Hash)
           value = self[key.to_s].merge(value) do |_key, old_val, new_val|
-            _key == '$in' ? new_val & old_val : old_val | new_val
+            if in?(_key)
+              new_val & old_val
+            elsif nin?(_key)
+              (old_val + new_val).uniq
+            else
+              new_val
+            end
           end
         end
         if multi_selection?(key)
@@ -187,6 +193,16 @@ module Origin
     # @since 2.1.1
     def multi_value?(key)
       key =~ /\$nin|\$in/
+    end
+
+    private
+
+    def in?(key)
+      key =~ /\$in/
+    end
+
+    def nin?(key)
+      key =~ /\$nin/
     end
   end
 end
