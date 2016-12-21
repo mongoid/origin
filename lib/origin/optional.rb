@@ -303,6 +303,20 @@ module Origin
       clone.tap { |query| query.options.store(:cursor_type, type) }
     end
 
+    # Set the collation. Can only be used with server versions >= 3.4.
+    #
+    # @example Set the collation.
+    #   optional.collation(locale: 'fr', strength: 2)
+    #
+    # @param [ Hash ] collation_doc The document describing the collation to use.
+    #
+    # @return [ Optional ] The cloned optional.
+    #
+    # @since 2.3.0
+    def collation(collation_doc)
+      clone.tap { |query| query.options.store(:collation, collation_doc) }
+    end
+
     private
 
     # Add a single sort option.
