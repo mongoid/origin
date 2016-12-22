@@ -6,6 +6,8 @@ group :test do
   gem "i18n", "~> 0.6"
   gem "rspec", "~> 3.1.0"
   gem "tzinfo", "~> 0.3.22"
+  gem "json", "1.8.3"
+  gem "listen", "2.10.1"
 
   if ENV["CI"]
     gem "coveralls", :require => false
