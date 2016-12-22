@@ -8,13 +8,6 @@ group :test do
   gem "tzinfo", "~> 0.3.22"
   gem "json", "1.8.3"
   gem "listen", "2.10.1"
-
-  if ENV["CI"]
-    gem "coveralls", :require => false
-  else
-    gem "guard-rspec"
-    gem "rb-fsevent"
-  end
 end
 
 gem "rake"
