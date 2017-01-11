@@ -2678,6 +2678,27 @@ describe Origin::Selectable do
         end
       end
 
+      context "when the following criteria is a gt method" do
+
+        let(:selection) do
+          query.not.gt(age: 50)
+        end
+
+        it "negates the gt selection" do
+          selection.selector.should eq(
+            { "age" => { "$not" => {"$gt"=>50} } }
+          )
+        end
+
+        it "returns a coned query" do
+          selection.should_not eq(query)
+        end
+
+        it "removes the negation on the clone" do
+          selection.should_not be_negating
+        end
+      end
+
       context "when the following criteria is a where" do
 
         let(:selection) do
