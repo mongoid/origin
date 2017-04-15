@@ -148,8 +148,10 @@ module Origin
         sel = query.selector
         criterion.flatten.each do |expr|
           next unless expr
+          check_security!(expr)
           criteria = sel[operator] || []
           normalized = expr.inject({}) do |hash, (field, value)|
+            check_security!(value)
             hash.merge!(field.__expr_part__(value.__expand_complex__))
             hash
           end

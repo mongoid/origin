@@ -3,6 +3,7 @@ gemspec
 
 group :test do
   gem "activesupport", "~> 4.0"
+  gem "actionpack", "~> 4.0"
   gem "i18n", "~> 0.6"
   gem "rspec", "~> 3.4.0"
   gem "tzinfo", "~> 0.3.22"
