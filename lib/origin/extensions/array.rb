@@ -153,6 +153,18 @@ module Origin
         first.is_a?(::Symbol) || first.is_a?(::String) ? [ self ] : self
       end
 
+      # Get the object as expanded.
+      #
+      # @example Get the object expanded.
+      #   obj.__expand_complex__
+      #
+      # @return [ Array ] The expanded array.
+      def __expand_complex__
+        map do |value|
+          value.__expand_complex__
+        end
+      end
+
       module ClassMethods
 
         # Evolve the object when the serializer is defined as an array.
