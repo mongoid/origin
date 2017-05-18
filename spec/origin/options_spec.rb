@@ -27,6 +27,29 @@ describe Origin::Options do
     it "performs a deep copy" do
       expect(cloned[:sort]).to_not equal(sort)
     end
+
+    context 'does not convert keys to strings' do
+
+      before do
+        options.merge!(read: { mode: :secondary })
+      end
+
+      let(:cloned) do
+        options.__deep_copy__
+      end
+
+      it 'does not change the key to a String from a Symbol' do
+        expect(cloned[:read]).to eq(mode: :secondary)
+      end
+
+      it "returns an equal copy" do
+        expect(cloned).to eq(options)
+      end
+
+      it "performs a deep copy" do
+        expect(cloned[:read]).to_not equal(options[:read])
+      end
+    end
   end
 
   describe "#fields" do
