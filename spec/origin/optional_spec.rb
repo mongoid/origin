@@ -716,10 +716,10 @@ describe Origin::Optional do
     end
   end
 
-  describe "#no_timeout" do
+  describe "#no_cursor_timeout" do
 
     let(:selection) do
-      query.no_timeout
+      query.no_cursor_timeout
     end
 
     it "adds the timeout option" do

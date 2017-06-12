@@ -108,12 +108,12 @@ module Origin
     # Tell the query not to timeout.
     #
     # @example Tell the query not to timeout.
-    #   optional.no_timeout
+    #   optional.no_cursor_timeout
     #
     # @return [ Optional ] The cloned optional.
     #
     # @since 1.0.0
-    def no_timeout
+    def no_cursor_timeout
       clone.tap { |query| query.options.store(:timeout, false) }
     end
 
