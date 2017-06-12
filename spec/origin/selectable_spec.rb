@@ -1075,6 +1075,46 @@ describe Origin::Selectable do
 
         it_behaves_like "a cloning selection"
       end
+
+
+      context "when the geometry is a circle" do
+
+        let(:selection) do
+          query.geo_spacial(:location.within_circle => [[ 1, 10 ], 200])
+        end
+
+        it "adds the $center expression" do
+          expect(selection.selector).to eq({
+            "location" => {
+              "$geoWithin" => {
+                "$center" => [[1,10], 200]
+              }
+            }
+          })
+        end
+
+        it_behaves_like "a cloning selection"
+      end
+
+      context "when the geometry is a spherical circle" do
+
+        let(:selection) do
+          query.geo_spacial(:location.within_sphere => [[ 1, 10 ], 200])
+        end
+
+        it "adds the $center expression" do
+          expect(selection.selector).to eq({
+            "location" => {
+              "$geoWithin" => {
+                "$centerSphere" => [[1,10], 200]
+              }
+            }
+          })
+        end
+
+        it_behaves_like "a cloning selection"
+      end
+
     end
   end
 
